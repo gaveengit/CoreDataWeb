@@ -1,12 +1,56 @@
+/*start styles for breadcrumb */
+.breadcrumb{
+	border-radius: 0px !important;
+	margin-bottom: 0px !important;
+}
+.breadcrumb-main-container{
+	background-color: lightskyblue;
+}
+ul.breadcrumb {
+	padding: 10px 0px;
+	list-style: none;
+	background-color: lightskyblue;
+}
+ul.breadcrumb li {
+	display: inline;
+	font-size: 18px;
+}
+ul.breadcrumb li+li:before {
+	padding: 8px;
+	color: black;
+	content: "/\00a0";
+}
+ul.breadcrumb li a {
+	color: #ffffff;
+	text-decoration: none;
+	cursor: pointer;
+}
+ul.breadcrumb li a.selected {
+	color: #000000;
+	cursor: initial;
+}
+ul.breadcrumb li a:hover {
+	color: #01447e;
+	text-decoration: underline;
+}
+ul.breadcrumb li a.selected:hover {
+	text-decoration: none;
+	cursor: initial;
+}
+/* end styles for breadcrumb */
+
+/* start main menu styles */
+
 .main-menu-main-section{
 	color: green;
 }
-.main-menu-main-section .home-header-main{
+.home-header-main{
 	background-color: lightgrey;
 	padding-top: 20px;
 	padding-bottom: 20px;
+	color: green;
 }
-.main-menu-main-section .home-header .logo-container{
+.home-header .logo-container{
 	background-image: url("http://localhost/CoreDataWeb/CoreDataWeb/assets/images/wmp-logo.png");
 	height: 50px;
 	width: 120px;
@@ -14,23 +58,23 @@
 	background-size: cover;
 	float: left;
 }
-.main-menu-main-section .home-header .logout-container-main{
+.home-header .logout-container-main{
 	float: right;
 }
-.main-menu-main-section .home-header .logout-container-secondary{
+.home-header .logout-container-secondary{
 	float: right;
 	padding: 15px 0px;
 }
-.main-menu-main-section .home-header .logout-container-secondary .user-name-container{
+.home-header .logout-container-secondary .user-name-container{
 	float: left;
 	margin-right: 25px;
 	cursor: pointer;
 }
-.main-menu-main-section .home-header .logout-container-secondary .seperator-container{
+.home-header .logout-container-secondary .seperator-container{
 	float: left;
 	margin-right: 25px;
 }
-.main-menu-main-section .home-header .logout-container-secondary .logout-text-container{
+.home-header .logout-container-secondary .logout-text-container{
 	float: left;
 	cursor: pointer;
 }
@@ -41,4 +85,39 @@
 	margin: 30px 0px;
 	border-radius: 6px;
 	cursor: pointer;
+}
+/* end styles of main menu */
+
+.spatial-data-main-section{
+
+}
+.spatial-data-main-section .title-button-main-container .title-button-secondary-container .title-container .title{
+	color: #000000;
+}
+.spatial-data-main-section .title-button-main-container .title-button-secondary-container .button-container .add-btn{
+	border-radius: 10px;
+}
+.spatial-data-main-section .title-button-main-container .title-button-secondary-container .button-container{
+	float: right;
+	padding-top: 25px;
+}
+.spatial-data-main-section .title-button-main-container .title-button-secondary-container .title-container{
+	float: left;
+}
+.spatial-data-main-section .maps-list-container-main .map-name-checkbox-container .map-label{
+	margin-left: 10px;
+	color: cornflowerblue;
+}
+.spatial-data-main-section .maps-list-container-main .map-name-checkbox-container{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.spatial-data-main-section .maps-list-container-main .map-name-checkbox-container .map-checkbox{
+	margin-left: 10px;
+}
+.spatial-data-main-section .maps-list-container-main .map-name-checkbox-container.grey-background{
+	background-color: lightgrey;
+}
+.spatial-data-main-section .maps-list-container-main .map-name-checkbox-container.white-background{
+	background-color: #ffffff;
 }
