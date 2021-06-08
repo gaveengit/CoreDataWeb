@@ -18,7 +18,15 @@ class SpatialDataController extends CI_Controller
 	}
 	public function addNewMap()
 	{
-		$this->load->view('spatial_data');
+		$this->load->view('add_new_map');
+	}
+	public function updateMap()
+	{
+		$this->load->view('update_map');
+	}
+	public function mapView()
+	{
+		$this->load->view('map_view');
 	}
 
 }

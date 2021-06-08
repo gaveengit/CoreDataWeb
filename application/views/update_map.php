@@ -39,7 +39,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<ul class="breadcrumb">
 					<li><a href="#">Home</a></li>
 					<li><a class="#">Spatial Data</a></li>
-					<li><a class="selected">Add New Map Layer</a></li>
+					<li><a class="selected">Update Map Layer</a></li>
 				</ul>
 			</div>
 		</div>
@@ -49,7 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-container">
 					<h3 class="title">
-						Add New Map Layer
+						Update Map Layer
 					</h3>
 				</div>
 			</div>
@@ -95,3 +95,4 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+

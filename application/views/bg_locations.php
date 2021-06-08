@@ -10,7 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 </head>
 <body>
-<div class="field-runs-list-main-container">
+<div class="bg-locations-list-main-container">
 	<div class="home-header-main">
 		<div class="container">
 			<div class="row">
@@ -38,7 +38,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<ul class="breadcrumb">
 					<li><a href="#">Home</a></li>
-					<li><a class="selected">Spatial List</a></li>
+					<li><a class="#">Field Activities</a></li>
+					<li><a class="selected">BG Locations</a></li>
 				</ul>
 			</div>
 		</div>
@@ -48,40 +49,52 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Map Layers</h3>
+						<h3 class="title">BG Locations</h3>
 					</div>
 					<div class="button-container">
 						<button type="submit" class="btn btn-success add-btn">
-							Add New Map Layer
+							Add New BG Location
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="field-runs-table-main-container">
+	<div class="bg-locations-table-main-container">
 		<div class="container">
 			<div class="row">
 				<div class="table-container">
 					<table>
 						<thead>
 						<tr class="grey-background">
-							<th>Map Layer Name</th>
-							<th></th>
+							<th>Trap Id</th>
+							<th>Run Name</th>
+							<th>Status</th>
+							<th>Contact Person</th>
+							<th>Address</th>
 						</tr>
 						</thead>
 						<tbody>
 						<tr class="white-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
+							<td class="run-name-cell">BGA1a</td>
+							<td>BG_Run_Nug1</td>
+							<td>Proposed</td>
+							<td>Kamal Fernando</td>
+							<td>No.20, Colombo 10</td>
 						</tr>
 						<tr class="grey-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
+							<td class="run-name-cell">BGA1a</td>
+							<td>BG_Run_Nug1</td>
+							<td>Proposed</td>
+							<td>Kamal Fernando</td>
+							<td>No.20, Colombo 10</td>
 						</tr>
 						<tr class="white-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
+							<td class="run-name-cell">BGA1a</td>
+							<td>BG_Run_Nug1</td>
+							<td>Proposed</td>
+							<td>Kamal Fernando</td>
+							<td>No.20, Colombo 10</td>
 						</tr>
 						</tbody>
 					</table>
@@ -90,5 +103,3 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
-</body>
-</html>

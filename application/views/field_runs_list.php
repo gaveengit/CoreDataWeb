@@ -38,7 +38,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<ul class="breadcrumb">
 					<li><a href="#">Home</a></li>
-					<li><a class="selected">Spatial List</a></li>
+					<li><a class="selected">Field Planning</a></li>
 				</ul>
 			</div>
 		</div>
@@ -48,11 +48,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Map Layers</h3>
+						<h3 class="title">Field Runs List</h3>
 					</div>
 					<div class="button-container">
 						<button type="submit" class="btn btn-success add-btn">
-							Add New Map Layer
+							Add New Field Run
 						</button>
 					</div>
 				</div>
@@ -60,34 +60,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 	<div class="field-runs-table-main-container">
-		<div class="container">
-			<div class="row">
-				<div class="table-container">
-					<table>
-						<thead>
+	<div class="container">
+		<div class="row">
+			<div class="table-container">
+				<table>
+					<thead>
 						<tr class="grey-background">
-							<th>Map Layer Name</th>
+							<th>Run Name</th>
+							<th>Run Date</th>
+							<th>Run Type</th>
+							<th>Run Status</th>
 							<th></th>
 						</tr>
-						</thead>
-						<tbody>
-						<tr class="white-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
+					</thead>
+					<tbody>
+					<tr class="white-background">
+						<td class="run-name-cell">BG_Run_Nug1</td>
+						<td>2020-01-23</td>
+						<td>BG Run</td>
+						<td>Active</td>
+						<td class="run-name-cell">Map View</td>
+					</tr>
+					<tr class="grey-background">
+						<td class="run-name-cell">OV_Run_Nug1</td>
+						<td>2020-01-25</td>
+						<td>OV Run</td>
+						<td>Completed</td>
+						<td class="run-name-cell">Map View</td>
+					</tr>
+					<tr class="white-background">
+						<td class="run-name-cell">MRC_Run_Nug1</td>
+						<td>2020-01-24</td>
+						<td>MRC Run</td>
+						<td>Active</td>
+						<td class="run-name-cell">Map View</td>
+					</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
+	</div>
 	</div>
 </div>
 </body>
