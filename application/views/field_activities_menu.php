@@ -65,6 +65,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="item-container white-background">
 						<span class="menu-item">MRC Releases</span>
 					</div>
+					<div class="item-container grey-background">
+						<span class="menu-item">Persons</span>
+					</div>
+					<div class="item-container white-background">
+						<span class="menu-item">Addresses</span>
+					</div>
 				</div>
 			</div>
 		</div>

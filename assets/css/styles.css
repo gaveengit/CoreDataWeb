@@ -311,3 +311,38 @@ ul.breadcrumb li a.selected:hover {
 }
 
 /* end update bg container */
+
+/* update bg collection start */
+.update-bg-Collection-main-container{
+	padding-bottom: 15px;
+}
+.update-ov-Collection-main-container{
+	padding-bottom: 15px;
+}
+.update-persons-main-container{
+	padding-bottom: 20px;
+}
+.update-addresses-main-container{
+	padding-bottom: 15px;
+}
+.update-identification-main-container{
+	padding-bottom: 15px;
+}
+.add-screening-main-container{
+	padding-bottom: 15px;
+}
+.update-screening-main-container{
+	padding-bottom: 15px;
+}
+/* end of bg */
+.add-identification-main-container{
+	padding-bottom: 15px;
+}
+.add-identification-main-container table{
+	margin-bottom: 10px;
+}
+.update-identification-main-container .delete-link{
+	cursor: pointer;
+	color: dodgerblue;
+	text-decoration: underline;
+}
