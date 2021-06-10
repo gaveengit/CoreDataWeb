@@ -14,7 +14,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 </head>
 <body>
-<div class="add-identification-main-container">
+<div class="add-export-main-container">
 	<div class="home-header-main">
 		<div class="container">
 			<div class="row">
@@ -42,8 +42,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<ul class="breadcrumb">
 					<li><a href="#">Home</a></li>
-					<li><a class="#">Mosquito Diagnostics</a></li>
-					<li><a class="selected">Add New Mosquito Diagnostic</a></li>
+					<li><a class="#">Bio Banking Exports</a></li>
+					<li><a class="selected">Add New Bio Banking Export</a></li>
 				</ul>
 			</div>
 		</div>
@@ -54,7 +54,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Add New Mosquito Diagnostic</h3>
+						<h3 class="title">Add New Bio Banking Export</h3>
 					</div>
 				</div>
 			</div>
@@ -65,34 +65,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="element-row clearfix">
 					<div class="col-md-2">
-						<label class="control-label">Diagnostic Id(*):</label>
+						<label class="control-label">Export Id(*):</label>
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
 							   name="trap-id">
 					</div>
 				</div>
-
 				<div class="element-row clearfix">
 					<div class="col-md-2">
-						<label class="control-label">Collection Id:</label>
-					</div>
-					<div class="col-md-6">
-						<select class="form-control">
-							<option>Select From Here</option>
-						</select>
+						<label class="control-label">OVI Eggs Count:</label>
 					</div>
 				</div>
 
 				<div class="element-row clearfix">
 					<div class="col-md-2">
-						<label class="control-label">Diagnostic Count:</label>
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Species(*):</label>
+						<label class="control-label">OVI Trap Id:</label>
 					</div>
 					<div class="col-md-6">
 						<select class="form-control">
@@ -102,19 +90,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</div>
 				<div class="element-row clearfix">
 					<div class="col-md-2">
-						<label class="control-label">Sex (*):</label>
-					</div>
-					<div class="col-md-6">
-						<select class="form-control">
-							<option>Select From Here</option>
-							<option>Male</option>
-							<option>Female</option>
-						</select>
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Quantity (*):</label>
+						<label class="control-label">Selected Quantity (*):</label>
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
@@ -125,7 +101,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<div class="element-row clearfix">
 					<div class="col-md-2">
 						<button class="btn btn-primary add-qty-btn">
-							Add Identification
+							Add Count Details
 						</button>
 					</div>
 				</div>
@@ -135,35 +111,38 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<table>
 							<thead>
 							<tr class="grey-background">
-								<th>Species</th>
-								<th>Sex</th>
-								<th>Quantity</th>
+								<th>OVI Trap Id</th>
+								<th>Selected Quantity</th>
 							</tr>
 							</thead>
 							<tbody>
 							<tr class="white-background">
 								<td class="run-name-cell">BG_Run_Nug1</td>
 								<td>Proposed</td>
-								<td>Kamal Fernando</td>
 							</tr>
 							<tr class="grey-background">
 								<td class="run-name-cell">BG_Run_Nug1</td>
 								<td>Proposed</td>
-								<td>Kamal Fernando</td>
 							</tr>
 							<tr class="white-background">
 								<td class="run-name-cell">BG_Run_Nug1</td>
 								<td>Proposed</td>
-								<td>Kamal Fernando</td>
 							</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
-
 				<div class="element-row clearfix">
 					<div class="col-md-2">
-						<label class="control-label">Identified Date(*):</label>
+						<label class="control-label">Description(*):</label>
+					</div>
+					<div class="col-md-6">
+						<input type="text" id="description" name="description" class="form-control">
+					</div>
+				</div>
+				<div class="element-row clearfix">
+					<div class="col-md-2">
+						<label class="control-label">Export Date(*):</label>
 					</div>
 					<div class="col-md-6">
 						<input type="date" id="collect_date" name="collect_date" class="form-control">
@@ -171,7 +150,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</div>
 				<div class="element-row clearfix">
 					<div class="col-md-2">
-						<label class="control-label">Identified Time(*):</label>
+						<label class="control-label">Export Time(*):</label>
 					</div>
 					<div class="col-md-6">
 						<input type="time" id="collect_time" name="collect_time" class="form-control">

@@ -343,7 +343,7 @@ ul.breadcrumb li a.selected:hover {
 }
 .update-identification-main-container .delete-link{
 	cursor: pointer;
-	color: dodgerblue;
+	color: red;
 	text-decoration: underline;
 }
 .add-incident-main-container{
@@ -357,4 +357,12 @@ ul.breadcrumb li a.selected:hover {
 }
 .update-incident-main-container #mapid{
 	height: 500px;
+}
+.add-export-main-container{
+	padding-bottom: 15px;
+}
+.remove-link{
+	cursor: pointer;
+	color: red;
+	text-decoration: underline;
 }

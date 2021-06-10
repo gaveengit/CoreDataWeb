@@ -34,43 +34,43 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="menu-item-secondary">
-					<div class="item-record clearfix">
+					<div class="item-record clearfix" onclick="">
 						<div class="col-md-4">
-							<div class="item-container">
+							<div class="item-container" onclick="location.href='<?php echo site_url('SpatialDataController/index');?>'">
 								<span class="item">Spatial Data</span>
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="item-container">
+							<div class="item-container" onclick="location.href='<?php echo site_url('FieldPlanningController/index');?>'">
 								<span class="item">Field Planning</span>
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="item-container">
+							<div class="item-container" onclick="location.href='<?php echo site_url('FieldActivitiesController/index');?>'">
 								<span class="item">Field Activities</span>
 							</div>
 						</div>
 					</div>
 					<div class="item-record clearfix">
 						<div class="col-md-4">
-							<div class="item-container">
+							<div class="item-container" onclick="location.href='<?php echo site_url('IncidentController/index');?>'">
 								<span class="item">Field Incidents</span>
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="item-container">
+							<div class="item-container" onclick="location.href='<?php echo site_url('DiagnosticsController/index');?>'">
 								<span class="item">Mosquito Diagnostics</span>
 							</div>
 						</div>
 						<div class="col-md-4">
-							<div class="item-container">
+							<div class="item-container" onclick="location.href='<?php echo site_url('ScreeningController/index');?>'">
 								<span class="item">Screening Results</span>
 							</div>
 						</div>
 					</div>
 					<div class="item-record clearfix">
 						<div class="col-md-4">
-							<div class="item-container">
+							<div class="item-container" onclick="location.href='<?php echo site_url('ExportController/index');?>'">
 								<span class="item">Bio-Banking Exports</span>
 							</div>
 						</div>
