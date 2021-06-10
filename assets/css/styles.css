@@ -346,3 +346,15 @@ ul.breadcrumb li a.selected:hover {
 	color: dodgerblue;
 	text-decoration: underline;
 }
+.add-incident-main-container{
+	padding-bottom: 15px;
+}
+.add-incident-main-container #mapid{
+	height: 500px;
+}
+.update-incident-main-container{
+	padding-bottom: 15px;
+}
+.update-incident-main-container #mapid{
+	height: 500px;
+}
