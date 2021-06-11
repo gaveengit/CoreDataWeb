@@ -37,7 +37,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
+					<li><a onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
 					<li><a class="selected">Spatial List</a></li>
 				</ul>
 			</div>
@@ -72,15 +72,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</thead>
 						<tbody>
 						<tr class="white-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
+							<td class="run-name-cell"><span>Mattakkuliya Map</span></td>
 							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
 						</tr>
 						<tr class="grey-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
+							<td class="run-name-cell"><span>Mattakkuliya Map</span></td>
 							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
 						</tr>
 						<tr class="white-background">
-							<td class="run-name-cell">Mattakkuliya Map</td>
+							<td class="run-name-cell"><span>Mattakkuliya Map</span></td>
 							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
 						</tr>
 						</tbody>

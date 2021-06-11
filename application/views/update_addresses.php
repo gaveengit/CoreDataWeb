@@ -41,8 +41,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a class="#">Addresses</a></li>
+					<li><a onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/addresses');?>'">Address</a></li>
 					<li><a class="selected">Update Address</a></li>
 				</ul>
 			</div>

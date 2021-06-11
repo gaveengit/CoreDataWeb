@@ -37,7 +37,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
 					<li><a class="selected">Mosquito Diagnostics</a></li>
 				</ul>
 			</div>

@@ -37,8 +37,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a class="selected">Field Activities</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
+					<li><a class="selected" >Field Activities</a></li>
 				</ul>
 			</div>
 		</div>
@@ -47,28 +47,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="menu-container-secondary">
-					<div class="item-container grey-background">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/bgLocations');?>'">
 						<span class="menu-item">BG Locations</span>
 					</div>
-					<div class="item-container white-background">
+					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/bgCollections');?>'">
 						<span class="menu-item">BG Collections</span>
 					</div>
-					<div class="item-container grey-background">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/ovLocations');?>'">
 						<span class="menu-item">OVI Locations</span>
 					</div>
-					<div class="item-container white-background">
+					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/ovCollections');?>'">
 						<span class="menu-item">OVI Collections</span>
 					</div>
-					<div class="item-container grey-background">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcLocations');?>'">
 						<span class="menu-item">MRC Locations</span>
 					</div>
-					<div class="item-container white-background">
+					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcReleases');?>'">
 						<span class="menu-item">MRC Releases</span>
 					</div>
-					<div class="item-container grey-background">
+					<div class="item-container grey-background"  onclick="location.href='<?php echo site_url('FieldActivitiesController/Persons');?>'">
 						<span class="menu-item">Persons</span>
 					</div>
-					<div class="item-container white-background">
+					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/Addresses');?>'">
 						<span class="menu-item">Addresses</span>
 					</div>
 				</div>

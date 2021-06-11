@@ -41,8 +41,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a class="#">Bio Banking Exports</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('ExportController');?>'">Bio Banking Exports</a></li>
 					<li><a class="selected">Add New Bio Banking Export</a></li>
 				</ul>
 			</div>

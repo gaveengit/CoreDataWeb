@@ -203,8 +203,10 @@ ul.breadcrumb li a.selected:hover {
 }
 
 .table-container tbody .run-name-cell {
-	cursor: pointer;
 	color: dodgerblue;
+}
+.table-container tbody .run-name-cell span{
+	cursor: pointer;
 }
 
 .table-container table td, tr, th {

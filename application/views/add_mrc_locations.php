@@ -41,9 +41,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a class="#">Field Activities</a></li>
-					<li><a class="#">MRC Locations</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcLocations');?>'">MRC Locations</a></li>
 					<li><a class="selected">Add MRC Location</a></li>
 				</ul>
 			</div>
