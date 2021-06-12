@@ -1,3 +1,9 @@
+
+/* errors */
+.error-msg{
+	color: red;
+}
+/* end error */
 /*start styles for breadcrumb */
 .breadcrumb {
 	border-radius: 0px !important;

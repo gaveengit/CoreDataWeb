@@ -74,22 +74,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background" onclick="location.href='<?php echo
-						site_url('FieldActivitiesController/updatePersons');?>'">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-						</tr>
+						<?php
+  						$i=1;
+  						foreach($data as $row)
+  						{
+  							if(($i%2)!=0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updatePersons/') .$row->Person_id."'" . ">" . "<span value=".$row->Person_id.">" . $row->Full_name . "</span></td>";
+								echo "<td>" . $row->Contact_number . "</td>";
+								echo "<td>" . $row->Person_status . "</td>";
+								echo "</tr>";
+								$i++;
+							}
+  							else{
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updatePersons/') .$row->Person_id. "'" . ">" . "<span>" . $row->Full_name . "</span></td>";
+								echo "<td>" . $row->Contact_number . "</td>";
+								echo "<td>" . $row->Person_status . "</td>";
+								echo "</tr>";
+								$i++;
+							}
+  						}
+  						?>
 						</tbody>
 					</table>
 				</div>

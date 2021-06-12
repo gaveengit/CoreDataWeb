@@ -68,14 +68,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="form-main-container">
 		<div class="container">
 			<div class="row">
-				<form role="form" method="post" action="" onSubmit="">
+				<form role="form" method="post" action="<?php echo
+				site_url('FieldActivitiesController/savePerson');?>" onSubmit="return formValidation()">
 					<div class="element-row clearfix">
 						<div class="col-md-2">
 							<label class="control-label">Full Name(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="trap-id" placeholder="Enter Full Name"
-								   name="trap-id">
+							<input type="text" class="form-control" id="full-name" placeholder="Enter Full Name"
+								   name="full-name">
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -83,8 +84,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Contact Number(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="trap-id" placeholder="Enter Contact Number"
-								   name="trap-id">
+							<input type="number" class="form-control" id="contact-number"
+								   placeholder="Enter Contact Number"
+								   name="contact-number">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-6">
+							<div class="error-msg" id="error-msg"></div>
 						</div>
 					</div>
 					<div class="button-container clearfix">
@@ -100,6 +109,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	document.getElementById("error-msg").innerHTML = "";
+	function formValidation() {
+		document.getElementById("error-msg").innerHTML = "";
+		var full_name = document.getElementById("full-name").value;
+		var contact_number = document.getElementById("contact-number").value;
+		if (full_name.length == 0 || contact_number.length == 0) {
+			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
+			return false;
+		} else {
+			document.getElementById("error-msg").classList.add("error-msg-invisible");
+			return true;
+		}
+	}
+</script>
 </body>
 </html>
 
