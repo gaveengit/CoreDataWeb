@@ -52,7 +52,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<h3 class="title">BG Collections</h3>
 					</div>
 					<div class="button-container">
-						<button type="submit" class="btn btn-success add-btn">
+						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo
+						site_url('FieldActivitiesController/addBgCollection');?>'">
 							Add New BG Collection
 						</button>
 					</div>
@@ -79,8 +80,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background">
-							<td class="run-name-cell">BGA1a</td>
+						<tr class="white-background" onclick="location.href='<?php echo
+						site_url('FieldActivitiesController/updateBgCollection');?>'">
+							<td class="run-name-cell"><span>BGA1a</span></td>
 							<td>BG_Run_Nug1</td>
 							<td>Proposed</td>
 							<td>Kamal Fernando</td>
@@ -90,7 +92,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<td>No.20, Colombo 10</td>
 						</tr>
 						<tr class="grey-background">
-							<td class="run-name-cell">BGA1a</td>
+							<td class="run-name-cell"><span>BGA1a</span></td>
 							<td>BG_Run_Nug1</td>
 							<td>Proposed</td>
 							<td>Kamal Fernando</td>
@@ -100,7 +102,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<td>No.20, Colombo 10</td>
 						</tr>
 						<tr class="white-background">
-							<td class="run-name-cell">BGA1a</td>
+							<td class="run-name-cell"><span>BGA1a</span></td>
 							<td>BG_Run_Nug1</td>
 							<td>Proposed</td>
 							<td>Kamal Fernando</td>

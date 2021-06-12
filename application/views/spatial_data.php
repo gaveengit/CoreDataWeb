@@ -51,7 +51,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<h3 class="title">Map Layers</h3>
 					</div>
 					<div class="button-container">
-						<button type="submit" class="btn btn-success add-btn">
+						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo
+						site_url('SpatialDataController/addNewMap');?>'">
 							Add New Map Layer
 						</button>
 					</div>
@@ -72,8 +73,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</thead>
 						<tbody>
 						<tr class="white-background">
-							<td class="run-name-cell"><span>Mattakkuliya Map</span></td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
+							<td class="run-name-cell"><span onclick="location.href='<?php echo
+								site_url('SpatialDataController/updateMap');?>'">Mattakkuliya Map</span></td>
+							<td class="map-view-link"><u><span class="link" onclick="location.href='<?php echo
+									site_url('SpatialDataController/mapView');?>'">Map View</span></u></td>
 						</tr>
 						<tr class="grey-background">
 							<td class="run-name-cell"><span>Mattakkuliya Map</span></td>

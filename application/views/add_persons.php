@@ -41,9 +41,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/persons');?>'">Persons</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
+					</li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
+							Activities</a></li>
+					<li><a class="#"
+						   onclick="location.href='<?php echo site_url('FieldActivitiesController/persons'); ?>'">Persons</a>
+					</li>
 					<li><a class="selected">Add New Person</a></li>
 				</ul>
 			</div>
@@ -64,33 +68,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="form-main-container">
 		<div class="container">
 			<div class="row">
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Full Name(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Full Name"
-							   name="trap-id">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Contact Number(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Contact Number"
-							   name="trap-id">
-					</div>
-				</div>
-				<div class="button-container clearfix">
-					<div class="col-md-7">
-						<div class="footer-button-container">
-							<button class="btn btn-success save-btn">Save</button>
-							<button class="btn btn-primary cancel-btn">Cancel</button>
+				<form role="form" method="post" action="" onSubmit="">
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Full Name(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="trap-id" placeholder="Enter Full Name"
+								   name="trap-id">
 						</div>
 					</div>
-				</div>
-
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Contact Number(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="trap-id" placeholder="Enter Contact Number"
+								   name="trap-id">
+						</div>
+					</div>
+					<div class="button-container clearfix">
+						<div class="col-md-7">
+							<div class="footer-button-container">
+								<button class="btn btn-success save-btn" type="submit">Save</button>
+								<button class="btn btn-primary cancel-btn" type="reset">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

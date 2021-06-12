@@ -51,7 +51,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<h3 class="title">Field Runs List</h3>
 					</div>
 					<div class="button-container">
-						<button type="submit" class="btn btn-success add-btn">
+						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo site_url('FieldPlanningController/addNewRun');?>'">
 							Add New Field Run
 						</button>
 					</div>
@@ -75,21 +75,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</thead>
 					<tbody>
 					<tr class="white-background">
-						<td class="run-name-cell">BG_Run_Nug1</td>
+						<td class="run-name-cell"><span onclick="location.href='<?php echo site_url('FieldPlanningController/updateRun');?>'">BG_Run_Nug1</span></td>
 						<td>2020-01-23</td>
 						<td>BG Run</td>
 						<td>Active</td>
-						<td class="run-name-cell">Map View</td>
+						<td class="run-name-cell"><span onclick="location.href='<?php echo site_url('FieldPlanningController/viewRunMap');?>'">Map View</span></td>
 					</tr>
 					<tr class="grey-background">
-						<td class="run-name-cell">OV_Run_Nug1</td>
+						<td class="run-name-cell"><span>BGA1a</span></td>
 						<td>2020-01-25</td>
 						<td>OV Run</td>
 						<td>Completed</td>
 						<td class="run-name-cell">Map View</td>
 					</tr>
 					<tr class="white-background">
-						<td class="run-name-cell">MRC_Run_Nug1</td>
+						<td class="run-name-cell"><span>BGA1a</span></td>
 						<td>2020-01-24</td>
 						<td>MRC Run</td>
 						<td>Active</td>
