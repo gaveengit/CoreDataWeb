@@ -68,24 +68,40 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<thead>
 						<tr class="grey-background">
 							<th>Map Layer Name</th>
+							<th>Description</th>
+							<th>Status</th>
 							<th></th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background">
-							<td class="run-name-cell"><span onclick="location.href='<?php echo
-								site_url('SpatialDataController/updateMap');?>'">Mattakkuliya Map</span></td>
-							<td class="map-view-link"><u><span class="link" onclick="location.href='<?php echo
-									site_url('SpatialDataController/mapView');?>'">Map View</span></u></td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>Mattakkuliya Map</span></td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>Mattakkuliya Map</span></td>
-							<td class="map-view-link"><u><span class="link">Map View</span></u></td>
-						</tr>
+						<?php
+						$i=1;
+						foreach($data as $row)
+						{
+							if(($i%2)!=0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . $row->name . "</span></td>";
+								echo "<td>" . $row->description . "</td>";
+								echo "<td>" . $row->map_status . "</td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . $row->name . "</span></td>";
+								echo "</tr>";
+								$i++;
+							}
+							else{
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . $row->name . "</span></td>";
+								echo "<td>" . $row->description . "</td>";
+								echo "<td>" . $row->map_status . "</td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . $row->name . "</span></td>";
+								echo "</tr>";
+								$i++;
+							}
+						}
+						?>
 						</tbody>
 					</table>
 				</div>

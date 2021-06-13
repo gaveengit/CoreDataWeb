@@ -187,7 +187,8 @@ class FieldActivitiesController extends CI_Controller
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
 			</script>";
-				updatePersons($data['Person_id']);
+				$result['data'] = $this->Persons_model->display_records_individual($data['Person_id']);
+				$this->load->view('update_persons', $result);
 			}
 		} else {
 			echo "<script type='text/javascript'>alert('another person with same contact number is already ' +

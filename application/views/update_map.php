@@ -37,8 +37,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('SpatialDataController');?>'">Spatial Data</a></li>
+					<li><a onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('SpatialDataController'); ?>'">Spatial
+							Data</a></li>
 					<li><a class="selected">Update Map Layer</a></li>
 				</ul>
 			</div>
@@ -59,40 +60,85 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="form-container">
-					<div class="form-group clearfix">
-						<label class="control-label col-md-2" for="email">Name:</label>
-						<div class="col-md-5">
-							<input type="text" class="form-control" id="map-name" placeholder="Enter Map Name"
-								   name="map-name">
+					<form role="form" method="post" action="<?php echo
+					site_url('SpatialDataController/saveUpdateMap'); ?>" onSubmit="return formValidation()">
+						<div class="form-group clearfix">
+							<label class="control-label col-md-2" for="email">Name:(*)</label>
+							<div class="col-md-5">
+								<input type="text" class="form-control" id="map-name" placeholder="Enter Map Name"
+									   name="map-name" value="<?php echo $data[0]->name ?>">
+							</div>
+
 						</div>
 
-					</div>
-
-					<div class="form-group clearfix">
-						<label class="control-label col-md-2" for="email">Description:</label>
-						<div class="col-md-5">
+						<div class="form-group clearfix">
+							<label class="control-label col-md-2" for="email">Description:(*)</label>
+							<div class="col-md-5">
 							<textarea class="form-control map-description" id="map-description"
 									  placeholder="Enter Map Description"
-									  name="map-description"></textarea>
-						</div>
+									  name="map-description"><?php echo $data[0]->description ?></textarea>
+							</div>
 
-					</div>
-					<div class="form-group clearfix">
-						<label class="control-label col-md-2" for="email">Upload File Here:</label>
-						<div class="col-md-5">
-							<input type="file" class="form-control" name="file-upload" id="file-upload">
 						</div>
-
-					</div>
-					<div class="button-container clearfix">
-						<div class="col-md-7">
-							<button class="btn btn-success save-btn">Save</button>
-							<button class="btn btn-primary cancel-btn">Cancel</button>
+						<div class="form-group clearfix">
+							<label class="control-label col-md-2" for="email">Include geoJson Content Here:(*)</label>
+							<div class="col-md-5">
+						<textarea class="form-control map-description" id="geojson-content"
+								  placeholder="Enter Map Description"
+								  name="geojson-content"><?php echo $data[0]->geojson_content ?></textarea>
+							</div>
 						</div>
-					</div>
+						<div class="element-row clearfix">
+							<div class="col-md-2">
+								<label class="control-label">Status:(*)</label>
+							</div>
+							<div class="col-md-6">
+								<select class="form-control" id="map-status" name="map-status">
+									<option <?php if ($data[0]->map_status == 'Active'): ?> selected="selected"<?php endif; ?>>
+										Active
+									</option>
+									<option <?php if ($data[0]->map_status == 'Inactive'): ?> selected="selected"<?php endif; ?>>
+										Inactive
+									</option>
+								</select>
+							</div>
+						</div>
+						<div class="element-row clearfix">
+							<div class="col-md-2">
+							</div>
+							<div class="col-md-6">
+								<div class="error-msg" id="error-msg"></div>
+							</div>
+						</div>
+						<div class="button-container clearfix">
+							<div class="col-md-7">
+								<button class="btn btn-success save-btn" name="save-btn"
+								value="<?php echo $data[0]->map_id ?>">Save</button>
+								<button class="btn btn-primary cancel-btn">Cancel</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	document.getElementById("error-msg").innerHTML = "";
+	function formValidation() {
+		document.getElementById("error-msg").innerHTML = "";
+		var map_name = document.getElementById("map-name").value;
+		var map_description = document.getElementById("map-description").value;
+		var file = document.getElementById("geojson-content").value;
+		if (map_name.length == 0 || map_description.length == 0 || file.length==0) {
+			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
+			return false;
+		} else {
+			document.getElementById("error-msg").classList.add("error-msg-invisible");
+			return true;
+		}
+	}
+</script>
+</body>
+</html>
 

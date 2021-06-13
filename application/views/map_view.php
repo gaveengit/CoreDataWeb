@@ -56,7 +56,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						Map View
 					</h3>
 					<h4 class="title-map-name">
-						Map Layer Name:
+						Map Layer Name: <?php echo $data[0]->name ;?>
 					</h4>
 				</div>
 			</div>
@@ -72,7 +72,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 </div>
 <script type="text/javascript">
-	var mymap = L.map('mapid').setView([51.505, -0.09],2);
+	var mymap = L.map('mapid').setView([6.978811162056818,79.87119047695289],10);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoiZ2F2ZWVua2l0aCIsImEiOi' +
 			'Jja3BubWx0NjIwdG81MnBxcXg2dmsxcXFyIn0.O7EZAp4PvrWygKz44f8c3A', {
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -83,6 +83,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		zoomOffset: -1,
 		accessToken: 'your.mapbox.access.token'
 	}).addTo(mymap);
+	var myGeoJSON = <?php echo $data[0]->geojson_content ;?>;
+	L.geoJSON(myGeoJSON).addTo(mymap);
+
 </script>
 </body>
 </html>
