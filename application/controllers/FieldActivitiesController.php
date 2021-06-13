@@ -11,6 +11,7 @@ class FieldActivitiesController extends CI_Controller
 // Load url helper
 		$this->load->helper('url');
 		$this->load->model('Persons_model');
+		$this->load->model('Address_model');
 	}
 
 	public function index()
@@ -110,9 +111,10 @@ class FieldActivitiesController extends CI_Controller
 
 	public function persons()
 	{
-		$result['data']=$this->Persons_model->display_records();
-		$this->load->view('persons_list',$result);
+		$result['data'] = $this->Persons_model->display_records();
+		$this->load->view('persons_list', $result);
 	}
+
 	public function addPersons()
 	{
 		$this->load->view('add_persons');
@@ -120,7 +122,8 @@ class FieldActivitiesController extends CI_Controller
 
 	public function addresses()
 	{
-		$this->load->view('address_list');
+		$result['data'] = $this->Address_model->display_records();
+		$this->load->view('address_list',$result);
 	}
 
 	public function addAddresses()
@@ -128,9 +131,11 @@ class FieldActivitiesController extends CI_Controller
 		$this->load->view('add_addresses');
 	}
 
-	public function updateAddresses()
+	public function updateAddresses($Address_id)
 	{
-		$this->load->view('update_addresses');
+		$result['data'] = $this->Address_model->display_records_individual($Address_id);
+		$this->load->view('update_addresses',$result);
+
 	}
 
 	public function savePerson()
@@ -143,7 +148,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['Person_status'] = "Active";
 
 		$response_check['check_data_count'] = $this->Persons_model->checkPersons($data);
-		if($response_check['check_data_count']==0) {
+		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Persons_model->saveRecords($data);
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
@@ -151,16 +156,16 @@ class FieldActivitiesController extends CI_Controller
 			} else {
 				$this->session->set_flashdata('error', "Failure. Please try again.");
 			}
-		}
-		else{
+		} else {
 			echo "<script type='text/javascript'>alert('Person is already existing');
 			</script>";
 		}
 	}
+
 	public function updatePersons($Person_id)
 	{
-		$result['data']=$this->Persons_model->display_records_individual($Person_id);
-		$this->load->view('update_persons',$result);
+		$result['data'] = $this->Persons_model->display_records_individual($Person_id);
+		$this->load->view('update_persons', $result);
 	}
 
 	public function saveUpdatePerson()
@@ -172,29 +177,86 @@ class FieldActivitiesController extends CI_Controller
 		$data['Person_status'] = $this->input->post('person-status');
 		$data['Person_id'] = $this->input->post('save-btn');
 		$response_check['check_data_count'] = $this->Persons_model->checkUpdatePersons($data);
-		if($response_check['check_data_count']==0) {
+		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Persons_model->updateRecords($data);
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data']=$this->Persons_model->display_records();
-				$this->load->view('persons_list',$result);
+				$result['data'] = $this->Persons_model->display_records();
+				$this->load->view('persons_list', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
 			</script>";
 				updatePersons($data['Person_id']);
 			}
-		}
-		else{
+		} else {
 			echo "<script type='text/javascript'>alert('another person with same contact number is already ' +
  				'existing');
 			</script>";
-			$result['data']=$this->Persons_model->display_records_individual($data['Person_id']);
-			$this->load->view('update_persons',$result);
+			$result['data'] = $this->Persons_model->display_records_individual($data['Person_id']);
+			$this->load->view('update_persons', $result);
+			//updatePersons($data['Person_id']);
+		}
+	}
+	public function saveUpdateAddress()
+	{
+		/*load registration view form*/
+
+		$data['add_line1'] = $this->input->post('add-line1');
+		$data['add_line2'] = $this->input->post('add-line2');
+		$data['location_description'] = $this->input->post('location-description');
+		$data['location_status'] = $this->input->post('location-status');
+		$data['address_id'] = $this->input->post('save-btn');
+		$response_check['check_data_count'] = $this->Address_model->checkUpdateAddress($data);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Address_model->updateRecords($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->Address_model->display_records();
+				$this->load->view('address_list', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Record not updated successfully');
+			</script>";
+				updateAddress($data['address_id']);
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Duplicate address is already ' +
+ 				'existing');
+			</script>";
+			$result['data'] = $this->Address_model->display_records_individual($data['address_id']);
+			$this->load->view('update_address', $result);
 			//updatePersons($data['Person_id']);
 		}
 	}
 
+	public function saveAddress()
+	{
+		/*load registration view form*/
+
+		$data['add_line1'] = $this->input->post('add-line1');
+		$data['add_line2'] = $this->input->post('add-line2');
+		$data['location_description'] = $this->input->post('location-description');
+		$data['location_status'] = "Active";
+
+		$response_check['check_data_count'] = $this->Address_model->checkAddress($data);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Address_model->saveRecords($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record added successfully');
+			</script>";
+				$this->load->view('address_list');
+
+			} else {
+				echo "<script type='text/javascript'>alert('Failure. Please try again.');
+			</script>";
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Address is already existing');
+			</script>";
+			$this->load->view('add_address');
+		}
+	}
 }
 
 

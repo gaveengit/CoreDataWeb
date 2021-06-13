@@ -68,28 +68,40 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<table>
 						<thead>
 						<tr class="grey-background">
-							<th>Full Address</th>
+							<th>Address Line1</th>
+							<th>Address Line2</th>
 							<th>Location Description</th>
 							<th>Status</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background" onclick="location.href='<?php echo
-						site_url('FieldActivitiesController/updateAddresses');?>'">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-						</tr>
+						<?php
+						$i=1;
+						foreach($data as $row)
+						{
+							if(($i%2)!=0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateAddresses/') .$row->address_id."'" . ">" . "<span value=".$row->address_id.">" . $row->add_line1 . "</span></td>";
+								echo "<td>" . $row->add_line2 . "</td>";
+								echo "<td>" . $row->location_description . "</td>";
+								echo "<td>" . $row->location_status . "</td>";
+								echo "</tr>";
+								$i++;
+							}
+							else{
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateAddresses/') .$row->address_id."'" . ">" . "<span value=".$row->address_id.">" . $row->add_line1 . "</span></td>";
+								echo "<td>" . $row->add_line2 . "</td>";
+								echo "<td>" . $row->location_description . "</td>";
+								echo "<td>" . $row->location_status . "</td>";
+								echo "</tr>";
+								$i++;
+							}
+						}
+						?>
+
 						</tbody>
 					</table>
 				</div>

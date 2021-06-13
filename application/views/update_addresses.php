@@ -41,9 +41,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/addresses');?>'">Address</a></li>
+					<li><a onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
+							Activities</a></li>
+					<li><a class="#"
+						   onclick="location.href='<?php echo site_url('FieldActivitiesController/addresses'); ?>'">Address</a>
+					</li>
 					<li><a class="selected">Update Address</a></li>
 				</ul>
 			</div>
@@ -64,186 +67,217 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="form-main-container">
 		<div class="container">
 			<div class="row">
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Address Line1(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Full Name"
-							   name="trap-id">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Address Line2(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Contact Number"
-							   name="trap-id">
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Location Description:</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Contact Number"
-							   name="trap-id">
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Status:</label>
-					</div>
-					<div class="col-md-6">
-						<select class="form-control" id="status" name="status">
-							<option>Active</option>
-							<option>Inactive</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="mrc-details-container">
-					<div class="title-container">
-						<h4>MRC Details</h4>
-					</div>
-					<div class="table-container">
-						<table>
-							<thead>
-							<tr class="grey-background">
-								<th>Collection Id</th>
-								<th>Set Date</th>
-								<th>Collected Date</th>
-								<th>Trap Position</th>
-								<th>Person</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="grey-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="bg-details-container">
-					<div class="title-container">
-						<h4>BG Details</h4>
-					</div>
-					<div class="table-container">
-						<table>
-							<thead>
-							<tr class="grey-background">
-								<th>Collection Id</th>
-								<th>Set Date</th>
-								<th>Collected Date</th>
-								<th>Trap Position</th>
-								<th>Person</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="grey-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="mrc-details-container">
-					<div class="title-container">
-						<h4>OVI Details</h4>
-					</div>
-					<div class="table-container">
-						<table>
-							<thead>
-							<tr class="grey-background">
-								<th>Collection Id</th>
-								<th>Set Date</th>
-								<th>Collected Date</th>
-								<th>Trap Position</th>
-								<th>Person</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="grey-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="button-container clearfix">
-					<div class="col-md-7">
-						<div class="footer-button-container">
-							<button class="btn btn-success save-btn">Save</button>
-							<button class="btn btn-primary cancel-btn">Cancel</button>
+				<form role="form" method="post" action="<?php echo
+				site_url('FieldActivitiesController/saveUpdateAddress'); ?>" onSubmit="return formValidation()">
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Address Line1(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="add-line1" placeholder="Enter Full Name"
+								   name="add-line1" value="<?php echo $data[0]->add_line1 ?>">
 						</div>
 					</div>
-				</div>
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Address Line2(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="add-line2" placeholder="Enter Contact Number"
+								   name="add-line2" value="<?php echo $data[0]->add_line2 ?>">
+						</div>
+					</div>
 
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Location Description:</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="location-description"
+								   placeholder="Enter Contact Number"
+								   name="location-description" value="<?php echo $data[0]->location_description ?>">
+						</div>
+					</div>
+
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Status:</label>
+						</div>
+						<div class="col-md-6">
+							<select class="form-control" id="location-status" name="location-status">
+								<option <?php if ($data[0]->location_status == 'Active'): ?> selected="selected"<?php endif; ?>>
+									Active
+								</option>
+								<option <?php if ($data[0]->location_status == 'Inactive'): ?> selected="selected"<?php endif; ?>>
+									Inactive
+								</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="mrc-details-container">
+						<div class="title-container">
+							<h4>MRC Details</h4>
+						</div>
+						<div class="table-container">
+							<table>
+								<thead>
+								<tr class="grey-background">
+									<th>Collection Id</th>
+									<th>Set Date</th>
+									<th>Collected Date</th>
+									<th>Trap Position</th>
+									<th>Person</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="white-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								<tr class="grey-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								<tr class="white-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="bg-details-container">
+						<div class="title-container">
+							<h4>BG Details</h4>
+						</div>
+						<div class="table-container">
+							<table>
+								<thead>
+								<tr class="grey-background">
+									<th>Collection Id</th>
+									<th>Set Date</th>
+									<th>Collected Date</th>
+									<th>Trap Position</th>
+									<th>Person</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="white-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								<tr class="grey-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								<tr class="white-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="mrc-details-container">
+						<div class="title-container">
+							<h4>OVI Details</h4>
+						</div>
+						<div class="table-container">
+							<table>
+								<thead>
+								<tr class="grey-background">
+									<th>Collection Id</th>
+									<th>Set Date</th>
+									<th>Collected Date</th>
+									<th>Trap Position</th>
+									<th>Person</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="white-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								<tr class="grey-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								<tr class="white-background">
+									<td class="run-name-cell">BG_Run_Nug1</td>
+									<td>Proposed</td>
+									<td>Kamal Fernando</td>
+									<td>No.20, Colombo 10</td>
+									<td>No.20, Colombo 10</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-6">
+							<div class="error-msg" id="error-msg"></div>
+						</div>
+					</div>
+					<div class="button-container clearfix">
+						<div class="col-md-7">
+							<div class="footer-button-container">
+								<button class="btn btn-success save-btn"  type="submit" name="save-btn" class="btn btn-success save-btn"
+										value="<?php echo $data[0]->address_id ?>">Save</button>
+								<button class="btn btn-primary cancel-btn" type="reset">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	document.getElementById("error-msg").innerHTML = "";
+
+	function formValidation() {
+		document.getElementById("error-msg").innerHTML = "";
+		var add_line1 = document.getElementById("add-line1").value;
+		var add_line2 = document.getElementById("add-line2").value;
+
+		if (add_line1.length == 0 || add_line2.length == 0) {
+			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
+			return false;
+		} else {
+			document.getElementById("error-msg").classList.add("error-msg-invisible");
+			return true;
+		}
+	}
+</script>
 </body>
 </html>
 

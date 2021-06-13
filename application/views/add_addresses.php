@@ -65,13 +65,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="form-main-container">
 		<div class="container">
 			<div class="row">
+				<form role="form" method="post" action="<?php echo
+				site_url('FieldActivitiesController/saveAddress');?>" onSubmit="return formValidation()">
 				<div class="element-row clearfix">
 					<div class="col-md-2">
 						<label class="control-label">Address Line 1(*):</label>
 					</div>
 					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Full Name"
-							   name="trap-id">
+						<input type="text" class="form-control" id="add-line1" placeholder="Enter Address Line1"
+							   name="add-line1">
 					</div>
 				</div>
 				<div class="element-row clearfix">
@@ -79,8 +81,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<label class="control-label">Address Line 2(*):</label>
 					</div>
 					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Full Name"
-							   name="trap-id">
+						<input type="text" class="form-control" id="add-line2" placeholder="Enter Address Line2"
+							   name="add-line2">
 					</div>
 				</div>
 				<div class="element-row clearfix">
@@ -88,15 +90,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<label class="control-label">Location Description:</label>
 					</div>
 					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Contact Number"
-							   name="trap-id">
+						<input type="text" class="form-control" id="location-description" placeholder="Location Description"
+							   name="location-description">
+					</div>
+				</div>
+				<div class="element-row clearfix">
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-6">
+						<div class="error-msg" id="error-msg"></div>
 					</div>
 				</div>
 				<div class="button-container clearfix">
 					<div class="col-md-7">
 						<div class="footer-button-container">
-							<button class="btn btn-success save-btn">Save</button>
-							<button class="btn btn-primary cancel-btn">Cancel</button>
+							<button class="btn btn-success save-btn" type="submit">Save</button>
+							<button class="btn btn-primary cancel-btn" type="reset">Cancel</button>
 						</div>
 					</div>
 				</div>
@@ -105,6 +114,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	document.getElementById("error-msg").innerHTML = "";
+	function formValidation() {
+		document.getElementById("error-msg").innerHTML = "";
+		var add_line1 = document.getElementById("add-line1").value;
+		var add_line2 = document.getElementById("add-line2").value;
+		var location_description = document.getElementById("location-description").value;
+
+		if (add_line1.length == 0 || add_line2.length == 0) {
+			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
+			return false;
+		} else {
+			document.getElementById("error-msg").classList.add("error-msg-invisible");
+			return true;
+		}
+	}
+</script>
 </body>
 </html>
 
