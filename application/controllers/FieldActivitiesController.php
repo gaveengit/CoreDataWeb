@@ -246,7 +246,9 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
-				$this->load->view('address_list');
+
+				$result['data'] = $this->Address_model->display_records();
+				$this->load->view('address_list',$result);
 
 			} else {
 				echo "<script type='text/javascript'>alert('Failure. Please try again.');

@@ -67,44 +67,66 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<table>
 						<thead>
 						<tr class="grey-background">
-							<th>Incident Id</th>
-							<th>Community Member</th>
+							<th>Member</th>
 							<th>Type</th>
 							<th>Priority</th>
-							<th>Date and Time</th>
+							<th>Incident Date</th>
+							<th>Incident Time</th>
 							<th>Full Address</th>
 							<th>Action Status</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background" onclick="location.href='<?php echo
-						site_url('IncidentController/updateIncident');?>'">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>Action</td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>Action</td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>Action</td>
-						</tr>
+						<tbody>
+						<?php
+						$i=1;
+						foreach($data as $row)
+						{
+							if(($i%2)!=0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('IncidentController/updateIncident/') .$row->incident_id."'" . ">" . "<span value=".$row->incident_id.">" . $row->member_name . "</span></td>";
+								if($row->incident_type=='1') {
+									echo "<td>" . "Community Complaint" . "</td>";
+								}
+								if($row->incident_type=='2') {
+									echo "<td>" . "Community Enquiry" . "</td>";
+								}
+								if($row->incident_type=='3') {
+									echo "<td>" . "Operational Incident" . "</td>";
+								}
+								if($row->incident_priority=='1') {
+									echo "<td>" . "High" . "</td>";
+								}
+								if($row->incident_priority=='2') {
+									echo "<td>" . "Medium" . "</td>";
+								}
+								if($row->incident_priority=='3') {
+									echo "<td>" . "Low" . "</td>";
+								}
+								echo "<td>" . $row->incident_date . "</td>";
+								echo "<td>" . $row->incident_time . "</td>";
+								echo "<td>" . $row->full_address . "</td>";
+								echo "<td>" . $row->incident_status . "</td>";
+								echo "</tr>";
+								$i++;
+							}
+							else{
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('IncidentController/updateIncident/') .$row->incident_id."'" . ">" . "<span value=".$row->incident_id.">" . $row->member_name . "</span></td>";
+								echo "<td>" . $row->incident_type . "</td>";
+								echo "<td>" . $row->incident_priority . "</td>";
+								echo "<td>" . $row->incident_date . "</td>";
+								echo "<td>" . $row->incident_time . "</td>";
+								echo "<td>" . $row->full_address . "</td>";
+								echo "<td>" . $row->incident_status . "</td>";
+								echo "</tr>";
+								$i++;
+							}
+						}
+						?>
+						</tbody>
 						</tbody>
 					</table>
 				</div>
