@@ -220,7 +220,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 <script type="text/javascript">
 
-	var mymap = L.map('mapid').setView([51.505, -0.09], 2);
+	var mymap = L.map('mapid').setView([6.9122,79.8829], 10);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoiZ2F2ZWVua2l0aCIsImEiOi' +
 			'Jja3BubWx0NjIwdG81MnBxcXg2dmsxcXFyIn0.O7EZAp4PvrWygKz44f8c3A', {
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +

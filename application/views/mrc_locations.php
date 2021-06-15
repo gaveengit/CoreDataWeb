@@ -68,36 +68,56 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<table>
 						<thead>
 						<tr class="grey-background">
-							<th>MRC Identifier</th>
-							<th>Run Name</th>
+							<th>Mrc Identifier</th>
 							<th>Status</th>
 							<th>Contact Person</th>
+							<th>Contact Number</th>
 							<th>Address</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background">
-							<td class="run-name-cell" onclick="location.href='<?php echo
-							site_url('FieldActivitiesController/updateMrcLocations');?>'"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
+						<?php
+						$i=1;
+						foreach($data as $row)
+						{
+							if(($i%2)!=0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateMrcLocations/') .$row->trap_id."'" . ">" . "<span value=".$row->trap_id.">" . $row->trap_id . "</span></td>";
+
+								if($row->trap_status=='1') {
+									echo "<td>" . "Proposed" . "</td>";
+								}
+								if($row->trap_status=='2') {
+									echo "<td>" . "Deployed" . "</td>";
+								}
+
+								echo "<td>" . $row->person_name . "</td>";
+								echo "<td>" . $row->contact_number . "</td>";
+								echo "<td>" . $row->add_line1 ." ".$row->add_line2. "</td>";
+								echo "</tr>";
+								$i++;
+							}
+							else{
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateMrcLocations/') .$row->trap_id."'" . ">" . "<span value=".$row->trap_id.">" . $row->trap_id . "</span></td>";
+
+								if($row->trap_status=='1') {
+									echo "<td>" . "Proposed" . "</td>";
+								}
+								if($row->trap_status=='2') {
+									echo "<td>" . "Deployed" . "</td>";
+								}
+
+								echo "<td>" . $row->person_name . "</td>";
+								echo "<td>" . $row->contact_number . "</td>";
+								echo "<td>" . $row->add_line1 ." ".$row->add_line2. "</td>";
+								echo "</tr>";
+								$i++;
+							}
+						}
+						?>
 						</tbody>
 					</table>
 				</div>

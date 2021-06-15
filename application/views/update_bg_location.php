@@ -70,7 +70,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-							   name="trap-id">
+							   name="trap-id" value="<?php echo $data[0]->trap_id ?>">
 					</div>
 				</div>
 				<div class="element-row clearfix">
@@ -80,8 +80,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="col-md-6">
 						<select class="form-control" id="address"
 								name="address">
-							<option>Select From Here</option>
+							<option value="<?php echo $data[0]->trap_status ?>" <?php if ($data[0]->trap_status == '1'): ?> selected="selected"<?php endif; ?>>
+								Proposed
+							</option>
+							<option value="<?php echo $data[0]->trap_status ?>" <?php if ($data[0]->trap_status == '2'): ?> selected="selected"<?php endif; ?>>
+								Set
+							</option>
 						</select>
+					</div>
+				</div>
+				<div class="element-row clearfix">
+					<div class="col-md-2">
+						<label class="control-label">Trap Position(*):</label>
+					</div>
+					<div class="col-md-6">
+						<input type="text" class="form-control" id="position" placeholder="Enter trap position"
+							   name="position" value="<?php echo $data[0]->trap_position ?>">
 					</div>
 				</div>
 				<div class="element-row clearfix">
@@ -98,7 +112,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control" id="coordinates" placeholder="Enter coordinates"
-							   name="coordinates">
+							   name="coordinates" value="<?php echo $data[0]->coordinates ?>">
 					</div>
 				</div>
 				<div class="element-row clearfix">
@@ -108,7 +122,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="col-md-6">
 						<select class="form-control" id="person-name"
 								name="person-name">
-							<option>Select From Here</option>
+							<option value="<?php echo $data[0]->person_id ?>">
+								<?php echo $data[0]->person_name .",".$data[0]->contact_number ?>
+							</option>
+							<?php
+							foreach ($persondata as $row) {
+								echo '
+							<option value="' . $row->Person_id . '">' . $row->Full_name . ' , ' . $row->Contact_number . '</option>
+							';
+							}
+							?>
 						</select>
 					</div>
 				</div>
@@ -119,28 +142,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="col-md-6">
 						<select class="form-control" id="address"
 								name="address">
-							<option>Select From Here</option>
+							<option  value="<?php echo $data[0]->address_id ?>">
+								<?php echo $data[0]->add_line1 .",".$data[0]->add_line2 ?>
+							</option>
+							<?php
+							foreach ($addressdata as $row) {
+								echo '
+							<option value="' . $row->address_id . '">' . $row->add_line1 . ' ' . $row->add_line2 . '</option>
+							';
+							}
+							?>
 						</select>
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Location Description:</label>
-					</div>
-					<div class="col-md-6">
-						<textarea class="form-control" id="location-description"
-								  name="location-description" style="height:100px;">
-
-						</textarea>
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Run Name(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="run-name"
-							   name="run-name" readonly>
 					</div>
 				</div>
 				<div class="table-container">
@@ -205,6 +217,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		zoomOffset: -1,
 		accessToken: 'your.mapbox.access.token'
 	}).addTo(mymap);
+	var marker_def = new L.marker([<?php echo $data[0]->coordinates ?>]).addTo(mymap);
+	var marker;
+	mymap.on('click', function(e) {
+		if(marker!=null){
+			mymap.removeLayer(marker);
+		}
+		if(marker_def!=null){
+			mymap.removeLayer(marker_def);
+		}
+		document.getElementById("coordinates").value = e.latlng.lat + "," + e.latlng.lng;
+		marker = new L.marker(e.latlng).addTo(mymap);
+	});
 </script>
 </body>
 </html>

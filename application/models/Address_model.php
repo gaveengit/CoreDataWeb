@@ -62,6 +62,18 @@ class Address_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_records_active()
+	{
+		try {
+			$array = array('location_status' => "Active");
+			$this->db->where($array);
+			$query=$this->db->get("address");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 
 	function display_records_individual($data)
 	{
