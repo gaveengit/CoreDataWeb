@@ -12,11 +12,11 @@ class Mrc_model extends CI_Model
 			return false;
 		}
 	}
-	function updateRecords($data)
+	function updateRecords($data,$old_data)
 	{
 		try {
-			$this->db->where('address_id', $data['address_id']);
-			$this->db->update('address', $data);
+			$this->db->where('mrc_identifier', $old_data['mrc_identifier_old']);
+			$this->db->update('mrc', $data);
 			return true;
 		}
 		catch(Exception $e)
@@ -38,13 +38,12 @@ class Mrc_model extends CI_Model
 		}
 	}
 
-	function checkUpdateAddress($data)
+	function checkUpdateMrc($data_old)
 	{
 		try {
-			$array = array('add_line1' => $data["add_line1"], 'add_line2' => $data["add_line2"],
-				'address_id !=' => $data["address_id"],'location_status'=>$data["location_status"]);
+			$array = array('mrc_identifier' => $data_old["mrc_identifier_new"], 'mrc_identifier !=' => $data_old["mrc_identifier_old"]);
 			$this->db->where($array);
-			$query = $this->db->get('address');
+			$query = $this->db->get('mrc');
 			return $query->num_rows();
 		}
 		catch(Exception $e){
@@ -91,8 +90,10 @@ class Mrc_model extends CI_Model
 	{
 		try {
 			$this->db->select('mrc.mrc_identifier as trap_id, 
-                   mrc.mrc_status as trap_status, 
+                   mrc.mrc_status as mrc_status, 
                    mrc.coordinates as coordinates,
+                   mrc.mrc_date as mrc_date,
+                   mrc.mrc_time as mrc_time,
                    person.person_id as person_id,
                    person.full_name as person_name,
                    person.contact_number as contact_number,

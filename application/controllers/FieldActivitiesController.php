@@ -25,14 +25,14 @@ class FieldActivitiesController extends CI_Controller
 	public function bgLocations()
 	{
 		$result['data'] = $this->BgTrap_model->display_records();
-		$this->load->view('bg_locations',$result);
+		$this->load->view('bg_locations', $result);
 	}
 
 	public function addBgLocations()
 	{
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
-		$this->load->view('add_bg_locations',$result);
+		$this->load->view('add_bg_locations', $result);
 
 	}
 
@@ -41,20 +41,20 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->BgTrap_model->display_records_individual($data);
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
-		$this->load->view('update_bg_location',$result);
+		$this->load->view('update_bg_location', $result);
 	}
 
 	public function ovLocations()
 	{
 		$result['data'] = $this->OvTrap_model->display_records();
-		$this->load->view('ov_locations',$result);
+		$this->load->view('ov_locations', $result);
 	}
 
 	public function addOviLocations()
 	{
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
-		$this->load->view('add_ov_locations',$result);
+		$this->load->view('add_ov_locations', $result);
 	}
 
 	public function updateOvLocations($data)
@@ -62,21 +62,21 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->OvTrap_model->display_records_individual($data);
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
-		$this->load->view('update_ov_location',$result);
+		$this->load->view('update_ov_location', $result);
 
 	}
 
 	public function mrcLocations()
 	{
 		$result['data'] = $this->Mrc_model->display_records();
-		$this->load->view('mrc_locations',$result);
+		$this->load->view('mrc_locations', $result);
 	}
 
 	public function addMrcLocations()
 	{
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
-		$this->load->view('add_mrc_locations',$result);
+		$this->load->view('add_mrc_locations', $result);
 	}
 
 	public function updateMRCLocations($data)
@@ -84,7 +84,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->Mrc_model->display_records_individual($data);
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
-		$this->load->view('update_mrc_location',$result);
+		$this->load->view('update_mrc_location', $result);
 	}
 
 	public function bgCollections()
@@ -148,7 +148,7 @@ class FieldActivitiesController extends CI_Controller
 	public function addresses()
 	{
 		$result['data'] = $this->Address_model->display_records();
-		$this->load->view('address_list',$result);
+		$this->load->view('address_list', $result);
 	}
 
 	public function addAddresses()
@@ -159,7 +159,7 @@ class FieldActivitiesController extends CI_Controller
 	public function updateAddresses($Address_id)
 	{
 		$result['data'] = $this->Address_model->display_records_individual($Address_id);
-		$this->load->view('update_addresses',$result);
+		$this->load->view('update_addresses', $result);
 
 	}
 
@@ -224,6 +224,7 @@ class FieldActivitiesController extends CI_Controller
 			//updatePersons($data['Person_id']);
 		}
 	}
+
 	public function saveUpdateAddress()
 	{
 		/*load registration view form*/
@@ -273,7 +274,7 @@ class FieldActivitiesController extends CI_Controller
 			</script>";
 
 				$result['data'] = $this->Address_model->display_records();
-				$this->load->view('address_list',$result);
+				$this->load->view('address_list', $result);
 
 			} else {
 				echo "<script type='text/javascript'>alert('Failure. Please try again.');
@@ -285,6 +286,7 @@ class FieldActivitiesController extends CI_Controller
 			$this->load->view('add_address');
 		}
 	}
+
 	public function saveBg()
 	{
 		$data['trap_id'] = $this->input->post('trap-id');
@@ -302,7 +304,8 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
-				$this->load->view('bg_locations');
+				$result['data'] = $this->BgTrap_model->display_records();
+				$this->load->view('bg_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -315,6 +318,48 @@ class FieldActivitiesController extends CI_Controller
 		}
 
 	}
+
+	public function saveUpdateBg()
+	{
+		$data['trap_id'] = $this->input->post('trap-id');
+		$data['trap_status'] = $this->input->post('status');
+		$data['trap_position'] = $this->input->post('position');
+		$data['coordinates'] = $this->input->post('coordinates');
+		$data['bg_date'] = $this->input->post('bg-date');
+		$data['bg_time'] = $this->input->post('bg-time');
+		$data['person_id'] = $this->input->post('person-name');
+		$data['address_id'] = $this->input->post('address');
+		$old_data['trap_id_old'] = $this->input->post('save-btn');
+		$old_data['trap_id_new'] = $this->input->post('trap-id');
+
+		$response_check['check_data_count'] = $this->BgTrap_model->checkUpdateBgTrap($old_data);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->BgTrap_model->updateRecords($data, $old_data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->BgTrap_model->display_records();
+				$this->load->view('bg_locations', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Failure in updating record. Please try again.');
+				</script>";
+				$result['data'] = $this->BgTrap_model->display_records_individual($old_data['trap_id_old']);
+				$result['persondata'] = $this->Persons_model->display_records_active();
+				$result['addressdata'] = $this->Address_model->display_records_active();
+				$this->load->view('update_bg_location', $result);
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('New BG trap id is already existing. Please try again.');
+				</script>";
+
+			$result['data'] = $this->BgTrap_model->display_records_individual($old_data['trap_id_old']);
+			$result['persondata'] = $this->Persons_model->display_records_active();
+			$result['addressdata'] = $this->Address_model->display_records_active();
+			$this->load->view('update_bg_location', $result);
+		}
+
+	}
+
 	public function saveOvi()
 	{
 		$data['trap_id'] = $this->input->post('trap-id');
@@ -332,7 +377,8 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
-				$this->load->view('ov_locations');
+				$result['data'] = $this->OvTrap_model->display_records();
+				$this->load->view('ov_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -343,6 +389,47 @@ class FieldActivitiesController extends CI_Controller
 				</script>";
 			$this->load->view('add_ov_locations');
 		}
+	}
+
+	public function saveUpdateOv()
+	{
+		$data['trap_id'] = $this->input->post('trap-id');
+		$data['trap_status'] = $this->input->post('status');
+		$data['trap_position'] = $this->input->post('position');
+		$data['coordinates'] = $this->input->post('coordinates');
+		$data['ovi_date'] = $this->input->post('bg-date');
+		$data['ovi_time'] = $this->input->post('bg-time');
+		$data['person_id'] = $this->input->post('person-name');
+		$data['address_id'] = $this->input->post('address');
+		$old_data['trap_id_old'] = $this->input->post('save-btn');
+		$old_data['trap_id_new'] = $this->input->post('trap-id');
+
+		$response_check['check_data_count'] = $this->OvTrap_model->checkUpdateOvTrap($old_data);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->OvTrap_model->updateRecords($data, $old_data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->OvTrap_model->display_records();
+				$this->load->view('ov_locations', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Failure in updating record. Please try again.');
+				</script>";
+				$this->load->view('update_ov_location');
+				$result['data'] = $this->OvTrap_model->display_records_individual($old_data['trap_id_old']);
+				$result['persondata'] = $this->Persons_model->display_records_active();
+				$result['addressdata'] = $this->Address_model->display_records_active();
+				$this->load->view('update_ov_location', $result);
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('New Ovi trap id is already existing. Please try again.');
+				</script>";
+			$result['data'] = $this->OvTrap_model->display_records_individual($old_data['trap_id_old']);
+			$result['persondata'] = $this->Persons_model->display_records_active();
+			$result['addressdata'] = $this->Address_model->display_records_active();
+			$this->load->view('update_ov_location', $result);
+		}
+
 	}
 
 	public function saveMrc()
@@ -361,7 +448,8 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
-				$this->load->view('mrc_locations');
+				$result['data'] = $this->Mrc_model->display_records();
+				$this->load->view('mrc_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -371,6 +459,46 @@ class FieldActivitiesController extends CI_Controller
 			echo "<script type='text/javascript'>alert('Mrc is already existing. Please try again.');
 				</script>";
 			$this->load->view('add_mrc_locations');
+		}
+
+	}
+
+	public function saveUpdateMrc()
+	{
+		$data['mrc_identifier'] = $this->input->post('trap-id');
+		$data['mrc_status'] = $this->input->post('status');
+		$data['coordinates'] = $this->input->post('coordinates');
+		$data['mrc_date'] = $this->input->post('mrc-date');
+		$data['mrc_time'] = $this->input->post('mrc-time');
+		$data['person_id'] = $this->input->post('person-name');
+		$data['address_id'] = $this->input->post('address');
+		$old_data['mrc_identifier_old'] = $this->input->post('save-btn');
+		$old_data['mrc_identifier_new'] = $this->input->post('trap-id');
+
+		$response_check['check_data_count'] = $this->Mrc_model->checkUpdateMrc($old_data);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Mrc_model->updateRecords($data, $old_data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->Mrc_model->display_records();
+				$this->load->view('mrc_locations', $result);
+
+			} else {
+				echo "<script type='text/javascript'>alert('Failure in updating record. Please try again.');
+				</script>";
+				$result['data'] = $this->Mrc_model->display_records_individual($old_data['mrc_identifier_old']);
+				$result['persondata'] = $this->Mrc_model->display_records_active();
+				$result['addressdata'] = $this->Mrc_model->display_records_active();
+				$this->load->view('update_mrc_location', $result);
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('New Mrc identifier is already existing. Please try again.');
+				</script>";
+			$result['data'] = $this->Mrc_model->display_records_individual($old_data['mrc_identifier_old']);
+			$result['persondata'] = $this->Mrc_model->display_records_active();
+			$result['addressdata'] = $this->Mrc_model->display_records_active();
+			$this->load->view('update_mrc_location', $result);
 		}
 
 	}

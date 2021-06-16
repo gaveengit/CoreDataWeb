@@ -12,11 +12,11 @@ class BgTrap_model extends CI_Model
 			return false;
 		}
 	}
-	function updateRecords($data)
+	function updateRecords($data,$old_data)
 	{
 		try {
-			$this->db->where('address_id', $data['address_id']);
-			$this->db->update('address', $data);
+			$this->db->where('trap_id', $old_data['trap_id_old']);
+			$this->db->update('bg_trap', $data);
 			return true;
 		}
 		catch(Exception $e)
@@ -38,13 +38,12 @@ class BgTrap_model extends CI_Model
 		}
 	}
 
-	function checkUpdateAddress($data)
+	function checkUpdateBgTrap($data_old)
 	{
 		try {
-			$array = array('add_line1' => $data["add_line1"], 'add_line2' => $data["add_line2"],
-				'address_id !=' => $data["address_id"],'location_status'=>$data["location_status"]);
+			$array = array('trap_id' => $data_old["trap_id_new"], 'trap_id !=' => $data_old["trap_id_old"]);
 			$this->db->where($array);
-			$query = $this->db->get('address');
+			$query = $this->db->get('bg_trap');
 			return $query->num_rows();
 		}
 		catch(Exception $e){
@@ -62,7 +61,9 @@ class BgTrap_model extends CI_Model
 			$this->db->select('bg_trap.trap_id as trap_id, 
                    bg_trap.trap_status as trap_status, 
                    bg_trap.trap_position as trap_position, 
-                   bg_trap.coordinates as coordinates,  
+                   bg_trap.coordinates as coordinates,
+                   bg_trap.bg_date as bg_date,
+                   bg_trap.bg_time as bg_time,  
                    person.full_name as person_name,
                    person.contact_number as contact_number,
                    address.add_line1 as add_line1,
@@ -99,6 +100,8 @@ class BgTrap_model extends CI_Model
                    bg_trap.trap_status as trap_status, 
                    bg_trap.coordinates as coordinates,
                    bg_trap.trap_position as trap_position,
+                   bg_trap.bg_date as bg_date,
+                   bg_trap.bg_time as bg_time,  
                    person.person_id as person_id,
                    person.full_name as person_name,
                    person.contact_number as contact_number,

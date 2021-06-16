@@ -12,11 +12,11 @@ class OvTrap_model extends CI_Model
 			return false;
 		}
 	}
-	function updateRecords($data)
+	function updateRecords($data,$old_data)
 	{
 		try {
-			$this->db->where('address_id', $data['address_id']);
-			$this->db->update('address', $data);
+			$this->db->where('trap_id', $old_data['trap_id_old']);
+			$this->db->update('ovi_trap', $data);
 			return true;
 		}
 		catch(Exception $e)
@@ -38,13 +38,12 @@ class OvTrap_model extends CI_Model
 		}
 	}
 
-	function checkUpdateAddress($data)
+	function checkUpdateOvTrap($data_old)
 	{
 		try {
-			$array = array('add_line1' => $data["add_line1"], 'add_line2' => $data["add_line2"],
-				'address_id !=' => $data["address_id"],'location_status'=>$data["location_status"]);
+			$array = array('trap_id' => $data_old["trap_id_new"], 'trap_id !=' => $data_old["trap_id_old"]);
 			$this->db->where($array);
-			$query = $this->db->get('address');
+			$query = $this->db->get('ovi_trap');
 			return $query->num_rows();
 		}
 		catch(Exception $e){
@@ -95,6 +94,8 @@ class OvTrap_model extends CI_Model
                    ovi_trap.trap_status as trap_status, 
                    ovi_trap.coordinates as coordinates,
                    ovi_trap.trap_position as trap_position,
+                   ovi_trap.ovi_date as ovi_date,
+                   ovi_trap.ovi_time as ovi_time,
                    person.person_id as person_id,
                    person.full_name as person_name,
                    person.contact_number as contact_number,
