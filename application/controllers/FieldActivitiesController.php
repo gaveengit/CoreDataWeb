@@ -15,6 +15,7 @@ class FieldActivitiesController extends CI_Controller
 		$this->load->model('BgTrap_model');
 		$this->load->model('OvTrap_model');
 		$this->load->model('Mrc_model');
+		$this->load->model('Collection_model');
 	}
 
 	public function index()
@@ -89,12 +90,14 @@ class FieldActivitiesController extends CI_Controller
 
 	public function bgCollections()
 	{
+
 		$this->load->view('bg_collections');
 	}
 
 	public function addBgCollection()
 	{
-		$this->load->view('add_bg_collection');
+		$result['trap_data'] = $this->Collection_model->loadBgTraps();
+		$this->load->view('add_bg_collection',$result);
 	}
 
 	public function updateBgCollection()
@@ -397,8 +400,8 @@ class FieldActivitiesController extends CI_Controller
 		$data['trap_status'] = $this->input->post('status');
 		$data['trap_position'] = $this->input->post('position');
 		$data['coordinates'] = $this->input->post('coordinates');
-		$data['ovi_date'] = $this->input->post('bg-date');
-		$data['ovi_time'] = $this->input->post('bg-time');
+		$data['ovi_date'] = $this->input->post('ov-date');
+		$data['ovi_time'] = $this->input->post('ov-time');
 		$data['person_id'] = $this->input->post('person-name');
 		$data['address_id'] = $this->input->post('address');
 		$old_data['trap_id_old'] = $this->input->post('save-btn');

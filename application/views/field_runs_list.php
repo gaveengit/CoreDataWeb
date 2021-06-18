@@ -37,7 +37,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
+					</li>
 					<li><a class="selected">Field Planning</a></li>
 				</ul>
 			</div>
@@ -51,7 +52,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<h3 class="title">Field Runs List</h3>
 					</div>
 					<div class="button-container">
-						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo site_url('FieldPlanningController/addNewRun');?>'">
+						<button type="submit" class="btn btn-success add-btn"
+								onclick="location.href='<?php echo site_url('FieldPlanningController/addNewRun'); ?>'">
 							Add New Field Run
 						</button>
 					</div>
@@ -60,46 +62,160 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 	<div class="field-runs-table-main-container">
-	<div class="container">
-		<div class="row">
-			<div class="table-container">
-				<table>
-					<thead>
+		<div class="container">
+			<div class="row">
+				<div class="table-container">
+					<table>
+						<thead>
 						<tr class="grey-background">
 							<th>Run Name</th>
 							<th>Run Date</th>
 							<th>Run Type</th>
 							<th>Run Status</th>
-							<th></th>
 						</tr>
-					</thead>
-					<tbody>
-					<tr class="white-background">
-						<td class="run-name-cell"><span onclick="location.href='<?php echo site_url('FieldPlanningController/updateRun');?>'">BG_Run_Nug1</span></td>
-						<td>2020-01-23</td>
-						<td>BG Run</td>
-						<td>Active</td>
-						<td class="run-name-cell"><span onclick="location.href='<?php echo site_url('FieldPlanningController/viewRunMap');?>'">Map View</span></td>
-					</tr>
-					<tr class="grey-background">
-						<td class="run-name-cell"><span>BGA1a</span></td>
-						<td>2020-01-25</td>
-						<td>OV Run</td>
-						<td>Completed</td>
-						<td class="run-name-cell">Map View</td>
-					</tr>
-					<tr class="white-background">
-						<td class="run-name-cell"><span>BGA1a</span></td>
-						<td>2020-01-24</td>
-						<td>MRC Run</td>
-						<td>Active</td>
-						<td class="run-name-cell">Map View</td>
-					</tr>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+						<?php
+						$i = 1;
+						foreach ($ovi_data as $row) {
+							if (($i % 2) != 0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->run_date . "</td>";
+								if ($row->ovi_run_type == '1') {
+									echo "<td>" . "OVI Service" . "</td>";
+								}
+								if ($row->ovi_run_type == '2') {
+									echo "<td>" . "OVI Collection" . "</td>";
+								}
+								if ($row->run_status == '1') {
+									echo "<td>" . "Pending" . "</td>";
+								}
+								if ($row->run_status == '2') {
+									echo "<td>" . "Completed" . "</td>";
+								}
+
+								echo "</tr>";
+								$i++;
+							} else {
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->run_date . "</td>";
+								if ($row->ovi_run_type == '1') {
+									echo "<td>" . "OVI Service" . "</td>";
+								}
+								if ($row->ovi_run_type == '2') {
+									echo "<td>" . "OVI Collection" . "</td>";
+								}
+								if ($row->run_status == '1') {
+									echo "<td>" . "Pending" . "</td>";
+								}
+								if ($row->run_status == '2') {
+									echo "<td>" . "Completed" . "</td>";
+								}
+
+								echo "</tr>";
+								$i++;
+							}
+						}
+						foreach ($bg_data as $row) {
+							if (($i % 2) != 0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->run_date . "</td>";
+								if ($row->bg_run_type == '1') {
+									echo "<td>" . "BG Service" . "</td>";
+								}
+								if ($row->bg_run_type == '2') {
+									echo "<td>" . "BG Collection" . "</td>";
+								}
+								if ($row->run_status == '1') {
+									echo "<td>" . "Pending" . "</td>";
+								}
+								if ($row->run_status == '2') {
+									echo "<td>" . "Completed" . "</td>";
+								}
+
+								echo "</tr>";
+								$i++;
+							} else {
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->run_date . "</td>";
+								if ($row->bg_run_type == '1') {
+									echo "<td>" . "BG Service" . "</td>";
+								}
+								if ($row->bg_run_type == '2') {
+									echo "<td>" . "BG Collection" . "</td>";
+								}
+								if ($row->run_status == '1') {
+									echo "<td>" . "Pending" . "</td>";
+								}
+								if ($row->run_status == '2') {
+									echo "<td>" . "Completed" . "</td>";
+								}
+
+								echo "</tr>";
+								$i++;
+							}
+						}
+
+
+						foreach ($mrc_data as $row) {
+							if (($i % 2) != 0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->run_date . "</td>";
+								if ($row->mrc_run_type == '1') {
+									echo "<td>" . "MRC Service" . "</td>";
+								}
+								if ($row->mrc_run_type == '2') {
+									echo "<td>" . "MRC Release" . "</td>";
+								}
+								if ($row->run_status == '1') {
+									echo "<td>" . "Pending" . "</td>";
+								}
+								if ($row->run_status == '2') {
+									echo "<td>" . "Completed" . "</td>";
+								}
+
+								echo "</tr>";
+								$i++;
+							} else {
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->run_date . "</td>";
+								if ($row->mrc_run_type == '1') {
+									echo "<td>" . "MRC Service" . "</td>";
+								}
+								if ($row->mrc_run_type == '2') {
+									echo "<td>" . "MRC Release" . "</td>";
+								}
+								if ($row->run_status == '1') {
+									echo "<td>" . "Pending" . "</td>";
+								}
+								if ($row->run_status == '2') {
+									echo "<td>" . "Completed" . "</td>";
+								}
+
+								echo "</tr>";
+								$i++;
+							}
+						}
+
+
+						?>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </div>
 </body>

@@ -179,13 +179,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								   name="bg-time" value="<?php echo $data[0]->bg_time ?>">
 						</div>
 					</div>
-					<div class="element-row clearfix">
-						<div class="col-md-2">
-						</div>
-						<div class="col-md-6">
-							<div class="error-msg" id="error-msg"></div>
-						</div>
-					</div>
 					<div class="table-container">
 						<table>
 							<thead>

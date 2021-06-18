@@ -37,8 +37,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldPlanningController');?>'">Field Planning</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
+					</li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldPlanningController'); ?>'">Field
+							Planning</a></li>
 					<li><a class="selected">Update Field Run</a></li>
 				</ul>
 			</div>
@@ -61,40 +63,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<div class="col-md-9">
 					<div class="form-main-container">
 						<div class="form-container">
-							<div class="form-group clearfix">
-								<label class="control-label col-md-4" for="email">Name:</label>
-								<div class="col-md-8">
-									<input type="text" class="form-control" id="run-name"
-										   name="run-name" readonly>
-								</div>
-							</div>
-
-							<div class="form-group clearfix">
-								<label class="control-label col-md-4" for="type">Type:</label>
-								<div class="col-md-8">
-									<input type="text" class="form-control" id="run-type"
-										   name="run-type" readonly>
-								</div>
-
-							</div>
-
-							<div class="form-group clearfix">
-								<label class="control-label col-md-4" for="email">Run Description:</label>
-								<div class="col-md-8">
-							<textarea class="form-control" id="run_description" style="height:200px;"
-							></textarea>
-								</div>
-
-							</div>
-
-							<div class="button-container clearfix">
-								<div class="col-md-12">
-									<div class="footer-button-container">
-										<button class="btn btn-success save-btn">Save</button>
-										<button class="btn btn-primary cancel-btn">Cancel</button>
+							<form method="post" action="<?php echo
+							site_url('FieldRunsController/saveUpdateRun'); ?>">
+								<div class="form-group clearfix">
+									<label class="control-label col-md-4" for="email">Name:</label>
+									<div class="col-md-8">
+										<input type="text" class="form-control" id="run-name"
+											   name="run-name" value="<?php echo $main_data[0]->field_run_id ?>"
+											   readonly>
 									</div>
 								</div>
-							</div>
+
+								<div class="form-group clearfix">
+									<label class="control-label col-md-4" for="type">Type:</label>
+									<div class="col-md-8">
+
+										<input type="text" class="form-control" id="run-type"
+											   name="run-type" value="<?php echo $run_type[0]['type'] ?>" readonly>
+
+									</div>
+
+								</div>
+
+								<div class="form-group clearfix">
+									<label class="control-label col-md-4" for="email">Run Description:</label>
+									<div class="col-md-8">
+							<textarea class="form-control" id="run_description" style="height:200px;" name="description"
+							><?php echo $main_data[0]->description ?></textarea>
+									</div>
+
+								</div>
+
+								<div class="button-container clearfix">
+									<div class="col-md-12">
+										<div class="footer-button-container">
+											<button class="btn btn-success save-btn" type="submit">Save</button>
+											<button class="btn btn-primary cancel-btn" type="reset">Cancel</button>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -103,12 +111,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<h4>Field Locations</h4>
 					</div>
 					<div class="locations-list-container">
-						<ul>
-							<li>B01a</li>
-							<li>B02a</li>
-							<li>B03a</li>
-							<li>B04a</li>
-						</ul>
+						<?php
+						if (isset($ovi_points)) {
+							echo "<ul>";
+							foreach ($ovi_points as $row) {
+								echo "<li>" . $row->ovi_trap_id . "</li>";
+							}
+							echo "</ul>";
+						}
+						if (isset($bg_points)) {
+							echo "<ul>";
+							foreach ($bg_points as $row) {
+								echo "<li>" . $row->bg_trap_id . "</li>";
+							}
+							echo "</ul>";
+						}
+						if (isset($mrc_points)) {
+							echo "<ul>";
+							foreach ($mrc_points as $row) {
+								echo "<li>" . $row->mrc_trap_id . "</li>";
+							}
+							echo "</ul>";
+						}
+						?>
 					</div>
 				</div>
 			</div>

@@ -69,7 +69,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<label class="control-label">Collection Id(*):</label>
 					</div>
 					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
+						<input type="text" class="form-control" id="trap-id" placeholder="Enter Collection Id"
 							   name="trap-id">
 					</div>
 				</div>
@@ -81,34 +81,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="col-md-6">
 						<select class="form-control" id="person-name"
 								name="person-name">
-							<option>Select From Here</option>
+							<option value="-1">Select From Here</option>
+							<?php
+							foreach ($trap_data as $row) {
+								echo '
+							<option value="' . $row->bg_trap_id . '">' . $row->bg_trap_id . '</option>
+							';
+							}
+							?>
 						</select>
 					</div>
 				</div>
 				<div class="element-row clearfix">
 					<div class="col-md-2">
-						<label class="control-label">Set Date(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="date" id="set_date" name="set_date">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Set Time(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="time" id="set_time" name="set_time">
-					</div>
-				</div>
-
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
 						<label class="control-label">Collect Date(*):</label>
 					</div>
 					<div class="col-md-6">
-						<input type="date" id="collect_date" name="collect_date">
+						<input type="date" id="collect_date" name="collect_date" class="form-control">
 					</div>
 				</div>
 				<div class="element-row clearfix">
@@ -116,7 +105,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<label class="control-label">Collect Time(*):</label>
 					</div>
 					<div class="col-md-6">
-						<input type="time" id="collect_time" name="collect_time">
+						<input type="time" id="collect_time" name="collect_time" class="form-control">
 					</div>
 				</div>
 

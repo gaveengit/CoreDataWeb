@@ -170,6 +170,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								   name="mrc-time" value="<?php echo $data[0]->mrc_time ?>">
 						</div>
 					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-6">
+							<div class="error-msg" id="error-msg"></div>
+						</div>
+					</div>
 					<div class="table-container">
 						<table>
 							<thead>
@@ -247,6 +254,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		document.getElementById("coordinates").value = e.latlng.lat + "," + e.latlng.lng;
 		marker = new L.marker(e.latlng).addTo(mymap);
 	});
+	function formValidation() {
+		document.getElementById("error-msg").innerHTML = "";
+		var trap_id = document.getElementById("trap-id").value;
+		var status = document.getElementById("status").value;
+		var position = document.getElementById("position").value;
+		var coordinates = document.getElementById("coordinates").value;
+		var person_name = document.getElementById("person-name").value;
+		var address = document.getElementById("address").value;
+		var mrc_date = document.getElementById("mrc-date").value;
+		var mrc_time = document.getElementById("mrc-time").value;
+		if (trap_id.length == 0 || status == '0' || position.length == 0 || coordinates.length == 0 ||
+				person_name == '0' || address == '0' || mrc_date.length == 0 || mrc_time.length == 0) {
+			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
+			return false;
+		} else {
+			document.getElementById("error-msg").classList.add("error-msg-invisible");
+			return true;
+		}
+	}
 </script>
 </body>
 </html>
