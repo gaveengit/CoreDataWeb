@@ -103,9 +103,46 @@ class Collection_model extends CI_Model
 			echo $e;
 		}
 	}
-	function checkBgCollectionId($data,$data_old){
+	function checkUpdateBgCollectionId($data,$data_old){
 		try {
 			$array = array('collection_id' => $data["collection_id"], 'collection_id !=' => $data_old["collection_id_old"]);
+			$this->db->where($array);
+			$query = $this->db->get('bg_collection');
+			return $query->num_rows();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
+	function checkUpdateOviCollectionId($data,$data_old){
+		try {
+			$array = array('collection_id' => $data["collection_id"], 'collection_id !=' => $data_old["collection_id_old"]);
+			$this->db->where($array);
+			$query = $this->db->get('ovi_collection');
+			return $query->num_rows();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
+	function checkUpdateMrcReleaseId($data,$data_old){
+		try {
+			$array = array('release_id' => $data["release_id"], 'release_id !=' => $data_old["release_id_old"]);
+			$this->db->where($array);
+			$query = $this->db->get('mrc_release');
+			return $query->num_rows();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
+
+	function checkBgCollectionId($data){
+		try {
+			$array = array('collection_id' => $data["collection_id"]);
 			$this->db->where($array);
 			$query = $this->db->get('bg_collection');
 			return $query->num_rows();
@@ -146,6 +183,32 @@ class Collection_model extends CI_Model
 		try {
 			$this->db->where('collection_id', $data['collection_id']);
 			$this->db->update('bg_collection', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
+
+	function updateRecordsOviCollection($data)
+	{
+		try {
+			$this->db->where('collection_id', $data['collection_id']);
+			$this->db->update('ovi_collection', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
+
+	function updateRecordsMrcRelease($data)
+	{
+		try {
+			$this->db->where('release_id', $data['release_id']);
+			$this->db->update('mrc_release', $data);
 			return true;
 		}
 		catch(Exception $e)

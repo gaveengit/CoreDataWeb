@@ -640,7 +640,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['collect_status'] = $this->input->post('collect_status');
 		$data_old['collection_id_old'] = $this->input->post('save-btn');
 
-		$response_check['check_data_count'] = $this->Collection_model->checkBgCollectionId($data,$data_old);
+		$response_check['check_data_count'] = $this->Collection_model->checkUpdateBgCollectionId($data,$data_old);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Collection_model->updateRecordsBgCollection($data);
 			if ($response == true) {
@@ -664,6 +664,79 @@ class FieldActivitiesController extends CI_Controller
 
 		}
 	}
+
+	public function saveUpdateOviCollection()
+	{
+		/*load registration view form*/
+
+		$data['collection_id'] = $this->input->post('collection-id');
+		$data['trap_id'] = $this->input->post('trap-id');
+		$data['collect_date'] = $this->input->post('collect_date');
+		$data['collect_time'] = $this->input->post('collect_time');
+		$data['collect_status'] = $this->input->post('collect_status');
+		$data_old['collection_id_old'] = $this->input->post('save-btn');
+
+		$response_check['check_data_count'] = $this->Collection_model->checkUpdateOviCollectionId($data,$data_old);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Collection_model->updateRecordsOviCollection($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->Collection_model->display_ovi_collection();
+				$this->load->view('ov_collections', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Record not updated successfully');
+			</script>";
+				$result['data'] = $this->Collection_model->display_records_individual_ovi_collection($data['collection_id']);
+				$this->load->view('update_ov_collection', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Duplicate collection id is already ' +
+ 				'existing');
+			</script>";
+			$result['data'] = $this->Collection_model->display_records_individual_ovi_collection($data['collection_id']);
+			$this->load->view('update_ov_collection', $result);
+
+		}
+	}
+
+	public function saveUpdateMrcRelease()
+	{
+		/*load registration view form*/
+
+		$data['release_id'] = $this->input->post('release-id');
+		$data['identifier'] = $this->input->post('mrc-identifier');
+		$data['released_date'] = $this->input->post('release_date');
+		$data['released_time'] = $this->input->post('release_time');
+		$data['released_status'] = $this->input->post('release_status');
+		$data_old['release_id_old'] = $this->input->post('save-btn');
+
+		$response_check['check_data_count'] = $this->Collection_model->checkUpdateMrcReleaseId($data,$data_old);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Collection_model->updateRecordsMrcRelease($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->Collection_model->display_mrc_releases();
+				$this->load->view('mrc_releases', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Record not updated successfully');
+			</script>";
+				$result['data'] = $this->Collection_model->display_records_individual_mrc_release($data['release_id']);
+				$this->load->view('update_mrc_release', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Duplicate collection id is already ' +
+ 				'existing');
+			</script>";
+			$result['data'] = $this->Collection_model->display_records_individual_mrc_release($data['release_id']);
+			$this->load->view('update_mrc_release', $result);
+
+		}
+	}
+
 
 
 }
