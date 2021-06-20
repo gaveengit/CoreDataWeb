@@ -90,52 +90,57 @@ class FieldActivitiesController extends CI_Controller
 
 	public function bgCollections()
 	{
-
-		$this->load->view('bg_collections');
+		$result['data'] = $this->Collection_model->display_bg_collection();
+		$this->load->view('bg_collections', $result);
 	}
 
 	public function addBgCollection()
 	{
 		$result['trap_data'] = $this->Collection_model->loadBgTraps();
-		$this->load->view('add_bg_collection',$result);
+		$this->load->view('add_bg_collection', $result);
 	}
 
-	public function updateBgCollection()
+	public function updateBgCollection($bg_collection_id)
 	{
-		$this->load->view('update_bg_collection');
+		$result['data'] = $this->Collection_model->display_records_individual_bg_collection($bg_collection_id);
+		$this->load->view('update_bg_collection', $result);
 	}
 
 	public function ovCollections()
 	{
-		$this->load->view('ov_collections');
+		$result['data'] = $this->Collection_model->display_ovi_collection();
+		$this->load->view('ov_collections', $result);
 	}
 
 	public function addOvCollection()
 	{
 		$result['trap_data'] = $this->Collection_model->loadOviTraps();
-		$this->load->view('add_ov_collection',$result);
+		$this->load->view('add_ov_collection', $result);
 	}
 
-	public function updateOvCollection()
+	public function updateOvCollection($ov_collection_id)
 	{
-		$this->load->view('update_ov_collection');
+		$result['data'] = $this->Collection_model->display_records_individual_ovi_collection($ov_collection_id);
+		$this->load->view('update_ov_collection', $result);
 
 	}
 
 	public function mrcReleases()
 	{
-		$this->load->view('mrc_releases');
+		$result['data'] = $this->Collection_model->display_mrc_releases();
+		$this->load->view('mrc_releases', $result);
 	}
 
 	public function addMrcRelease()
 	{
 		$result['trap_data'] = $this->Collection_model->loadMrcTraps();
-		$this->load->view('add_mrc_release',$result);
+		$this->load->view('add_mrc_release', $result);
 	}
 
-	public function updateMrcRelease()
+	public function updateMrcRelease($release_id)
 	{
-		$this->load->view('update_mrc_release');
+		$result['data'] = $this->Collection_model->display_records_individual_mrc_release($release_id);
+		$this->load->view('update_mrc_release', $result);
 	}
 
 	public function persons()
@@ -323,7 +328,8 @@ class FieldActivitiesController extends CI_Controller
 
 	}
 
-	public function saveBgCollection(){
+	public function saveBgCollection()
+	{
 		$data['collection_id'] = $this->input->post('collection-id');
 		$data['trap_id'] = $this->input->post('bg-trap-id');
 		$data['collect_date'] = $this->input->post('collect-date');
@@ -337,9 +343,9 @@ class FieldActivitiesController extends CI_Controller
 			$response = $this->Collection_model->saveRecordsBgCollection($data);
 			if ($response == true) {
 				$response_check['check_trap_count'] = $this->Collection_model->checkRunPendingBgPoints($data['run_id']);
-				if($response_check['check_trap_count']==0){
+				if ($response_check['check_trap_count'] == 0) {
 					$response = $this->Collection_model->updateRunStatus($data['run_id']);
-					if($response==true){
+					if ($response == true) {
 						echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
 					}
@@ -349,19 +355,20 @@ class FieldActivitiesController extends CI_Controller
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
 				$result['trap_data'] = $this->Collection_model->loadBgTraps();
-				$this->load->view('add_bg_collection',$result);
+				$this->load->view('add_bg_collection', $result);
 
 			}
 		} else {
 			echo "<script type='text/javascript'>alert('Collection id is already existing. Please try again.');
 				</script>";
 			$result['trap_data'] = $this->Collection_model->loadBgTraps();
-			$this->load->view('add_bg_collection',$result);
+			$this->load->view('add_bg_collection', $result);
 		}
 	}
 
 
-	public function saveOviCollection(){
+	public function saveOviCollection()
+	{
 		$data['collection_id'] = $this->input->post('collection-id');
 		$data['trap_id'] = $this->input->post('ovi-trap-id');
 		$data['collect_date'] = $this->input->post('collect-date');
@@ -375,9 +382,9 @@ class FieldActivitiesController extends CI_Controller
 			$response = $this->Collection_model->saveRecordsOviCollection($data);
 			if ($response == true) {
 				$response_check['check_trap_count'] = $this->Collection_model->checkRunPendingOviPoints($data['run_id']);
-				if($response_check['check_trap_count']==0){
+				if ($response_check['check_trap_count'] == 0) {
 					$response = $this->Collection_model->updateRunStatus($data['run_id']);
-					if($response==true){
+					if ($response == true) {
 						echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
 					}
@@ -387,17 +394,19 @@ class FieldActivitiesController extends CI_Controller
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
 				$result['trap_data'] = $this->Collection_model->loadOviTraps();
-				$this->load->view('add_ov_collection',$result);
+				$this->load->view('add_ov_collection', $result);
 
 			}
 		} else {
 			echo "<script type='text/javascript'>alert('Collection id is already existing. Please try again.');
 				</script>";
 			$result['trap_data'] = $this->Collection_model->loadOviTraps();
-			$this->load->view('add_ov_collection',$result);
+			$this->load->view('add_ov_collection', $result);
 		}
 	}
-	public function saveMrcRelease(){
+
+	public function saveMrcRelease()
+	{
 		$data['release_id'] = $this->input->post('release-id');
 		$data['identifier'] = $this->input->post('identifier');
 		$data['released_date'] = $this->input->post('released-date');
@@ -411,29 +420,29 @@ class FieldActivitiesController extends CI_Controller
 			$response = $this->Collection_model->saveRecordsMrcRelease($data);
 			if ($response == true) {
 				$response_check['check_trap_count'] = $this->Collection_model->checkRunPendingMrcPoints($data['run_id']);
-				if($response_check['check_trap_count']==0){
+				if ($response_check['check_trap_count'] == 0) {
 					$response = $this->Collection_model->updateRunStatus($data['run_id']);
-					if($response==true){
+					if ($response == true) {
 						echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
 					}
 				}
-				$this->mrcReleases();
+				$result_view['data'] = $this->Collection_model->display_mrc_releases();
+				$this->load->view('mrc_releases', $result_view);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
 				$result['trap_data'] = $this->Collection_model->loadMrcTraps();
-				$this->load->view('add_mrc_release',$result);
+				$this->load->view('add_mrc_release', $result);
 
 			}
 		} else {
 			echo "<script type='text/javascript'>alert('Release id is already existing. Please try again.');
 				</script>";
 			$result['trap_data'] = $this->Collection_model->loadMrcTraps();
-			$this->load->view('add_mrc_release',$result);
+			$this->load->view('add_mrc_release', $result);
 		}
 	}
-
 
 
 	public function saveUpdateBg()
@@ -618,6 +627,42 @@ class FieldActivitiesController extends CI_Controller
 			$this->load->view('update_mrc_location', $result);
 		}
 
+	}
+
+	public function saveUpdateBgCollection()
+	{
+		/*load registration view form*/
+
+		$data['collection_id'] = $this->input->post('collection-id');
+		$data['trap_id'] = $this->input->post('trap-id');
+		$data['collect_date'] = $this->input->post('collect_date');
+		$data['collect_time'] = $this->input->post('collect_time');
+		$data['collect_status'] = $this->input->post('collect_status');
+		$data_old['collection_id_old'] = $this->input->post('save-btn');
+
+		$response_check['check_data_count'] = $this->Collection_model->checkBgCollectionId($data,$data_old);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Collection_model->updateRecordsBgCollection($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->Collection_model->display_bg_collection();
+				$this->load->view('bg_collections', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Record not updated successfully');
+			</script>";
+				$result['data'] = $this->Collection_model->display_records_individual_bg_collection($data['collection_id']);
+				$this->load->view('update_bg_collection', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Duplicate collection id is already ' +
+ 				'existing');
+			</script>";
+			$result['data'] = $this->Collection_model->display_records_individual_bg_collection($data['collection_id']);
+			$this->load->view('update_bg_collection', $result);
+
+		}
 	}
 
 

@@ -103,9 +103,9 @@ class Collection_model extends CI_Model
 			echo $e;
 		}
 	}
-	function checkBgCollectionId($data){
+	function checkBgCollectionId($data,$data_old){
 		try {
-			$array = array('collection_id' => $data["collection_id"]);
+			$array = array('collection_id' => $data["collection_id"], 'collection_id !=' => $data_old["collection_id_old"]);
 			$this->db->where($array);
 			$query = $this->db->get('bg_collection');
 			return $query->num_rows();
@@ -141,11 +141,11 @@ class Collection_model extends CI_Model
 
 
 
-	function updateRecords($data)
+	function updateRecordsBgCollection($data)
 	{
 		try {
-			$this->db->where('incident_id', $data['incident_id']);
-			$this->db->update('incident', $data);
+			$this->db->where('collection_id', $data['collection_id']);
+			$this->db->update('bg_collection', $data);
 			return true;
 		}
 		catch(Exception $e)
@@ -181,10 +181,30 @@ class Collection_model extends CI_Model
 		}
 	}
 
-	function display_records()
+	function display_mrc_releases()
 	{
 		try {
-			$query=$this->db->get("incident");
+			$query=$this->db->get("mrc_release");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_ovi_collection()
+	{
+		try {
+			$query=$this->db->get("ovi_collection");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_bg_collection()
+	{
+		try {
+			$query=$this->db->get("bg_collection");
 			return $query->result();
 		}
 		catch(Exception $e){
@@ -192,18 +212,46 @@ class Collection_model extends CI_Model
 		}
 	}
 
-	function display_records_individual($data)
+
+	function display_records_individual_bg_collection($data)
 	{
 		try {
-			$array = array('incident_id' => $data);
+			$array = array('collection_id' => $data);
 			$this->db->where($array);
-			$query = $this->db->get("incident");
+			$query = $this->db->get("bg_collection");
 			return $query->result();
 		}
 		catch(Exception $e){
 			echo $e;
 		}
 	}
+
+	function display_records_individual_ovi_collection($data)
+	{
+		try {
+			$array = array('collection_id' => $data);
+			$this->db->where($array);
+			$query = $this->db->get("ovi_collection");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_records_individual_mrc_release($data)
+	{
+		try {
+			$array = array('release_id' => $data);
+			$this->db->where($array);
+			$query = $this->db->get("mrc_release");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
+
 
 	function loadBgTraps()
 	{

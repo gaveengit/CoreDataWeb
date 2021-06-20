@@ -71,33 +71,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Release Id</th>
 							<th>MRC Id</th>
 							<th>Run Name</th>
-							<th>Release Status</th>
 							<th>Released Date</th>
+							<th>Release Status</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background" onclick="location.href='<?php echo
-						site_url('FieldActivitiesController/updateMrcRelease');?>'">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
+						<?php
+						$i=1;
+						foreach($data as $row)
+						{
+							if(($i%2)!=0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateMrcRelease/') .$row->release_id."'" . ">" . "<span value=".$row->release_id.">" . $row->release_id . "</span></td>";
+
+								echo "<td>" . $row->identifier . "</td>";
+								echo "<td>" . $row->run_id . "</td>";
+								echo "<td>" . $row->released_date ."</td>";
+								if($row->released_status=='1') {
+									echo "<td>" . "Released" . "</td>";
+								}
+								if($row->released_status=='2') {
+									echo "<td>" . "Not Released" . "</td>";
+								}
+								echo "</tr>";
+								$i++;
+							}
+							else{
+								echo "<tr class='grey-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateMrcRelease/') .$row->release_id."'" . ">" . "<span value=".$row->release_id.">" . $row->release_id . "</span></td>";
+
+								echo "<td>" . $row->identifier . "</td>";
+								echo "<td>" . $row->run_id . "</td>";
+								echo "<td>" . $row->released_date ."</td>";
+								if($row->released_status=='1') {
+									echo "<td>" . "Released" . "</td>";
+								}
+								if($row->released_status=='2') {
+									echo "<td>" . "Not Released" . "</td>";
+								}
+								echo "</tr>";
+								$i++;
+							}
+						}
+						?>
 						</tbody>
 					</table>
 				</div>
