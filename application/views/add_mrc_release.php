@@ -41,9 +41,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcReleases');?>'">MRC Releases</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
+					</li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
+							Activities</a></li>
+					<li><a class="#"
+						   onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcReleases'); ?>'">MRC
+							Releases</a></li>
 					<li><a class="selected">Add MRC Release</a></li>
 				</ul>
 			</div>
@@ -64,65 +68,76 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="form-main-container">
 		<div class="container">
 			<div class="row">
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Release Id(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-							   name="trap-id">
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">MRC Identifier(*):</label>
-					</div>
-					<div class="col-md-6">
-						<select class="form-control" id="person-name"
-								name="person-name">
-							<option>Select From Here</option>
-						</select>
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Released Date(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="date" id="set_date" name="set_date">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Released Time(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="time" id="set_time" name="set_time">
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Release Status(*):</label>
-					</div>
-					<div class="col-md-6">
-						<select class="form-control" id="address"
-								name="address">
-							<option>Select From Here</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="button-container clearfix">
-					<div class="col-md-7">
-						<div class="footer-button-container">
-							<button class="btn btn-success save-btn">Save</button>
-							<button class="btn btn-primary cancel-btn">Cancel</button>
+				<form method="post" action="<?php echo
+				site_url('FieldActivitiesController/saveMrcRelease'); ?>">
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Release Id(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="release-id" placeholder="Enter Release Id"
+								   name="release-id">
 						</div>
 					</div>
-				</div>
 
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">MRC Identifier(*):</label>
+						</div>
+						<div class="col-md-6">
+							<select class="form-control" id="identifier"
+									name="identifier">
+								<option value="-1">Select From Here</option>
+								<?php
+								foreach ($trap_data as $row) {
+									echo '
+							<option value="' . $row->mrc_trap_id . '">' . $row->mrc_trap_id . '</option>
+							';
+								}
+								?>
+							</select>
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Released Date(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="date" id="released-date" name="released-date" class="form-control">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Released Time(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="time" id="released-time" name="released-time" class="form-control">
+						</div>
+					</div>
+
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Release Status(*):</label>
+						</div>
+						<div class="col-md-6">
+							<select class="form-control" id="release-status"
+									name="release-status">
+								<option value="1">Released</option>
+								<option value="2">Not Released</option>
+
+							</select>
+						</div>
+					</div>
+
+					<div class="button-container clearfix">
+						<div class="col-md-7">
+							<div class="footer-button-container">
+								<button class="btn btn-success save-btn" type="submit">Save</button>
+								<button class="btn btn-primary cancel-btn" type="reset">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

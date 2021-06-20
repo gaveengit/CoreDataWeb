@@ -41,9 +41,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/bgCollections');?>'">BG Collections</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
+					</li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
+							Activities</a></li>
+					<li><a class="#"
+						   onclick="location.href='<?php echo site_url('FieldActivitiesController/bgCollections'); ?>'">BG
+							Collections</a></li>
 					<li><a class="selected">Add BG Collection</a></li>
 				</ul>
 			</div>
@@ -64,71 +68,74 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="form-main-container">
 		<div class="container">
 			<div class="row">
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Collection Id(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Collection Id"
-							   name="trap-id">
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">BG Trap Id(*):</label>
-					</div>
-					<div class="col-md-6">
-						<select class="form-control" id="person-name"
-								name="person-name">
-							<option value="-1">Select From Here</option>
-							<?php
-							foreach ($trap_data as $row) {
-								echo '
-							<option value="' . $row->bg_trap_id . '">' . $row->bg_trap_id . '</option>
-							';
-							}
-							?>
-						</select>
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Collect Date(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="date" id="collect_date" name="collect_date" class="form-control">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Collect Time(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="time" id="collect_time" name="collect_time" class="form-control">
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Collection Status(*):</label>
-					</div>
-					<div class="col-md-6">
-						<select class="form-control" id="address"
-								name="address">
-							<option>Select From Here</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="button-container clearfix">
-					<div class="col-md-7">
-						<div class="footer-button-container">
-							<button class="btn btn-success save-btn">Save</button>
-							<button class="btn btn-primary cancel-btn">Cancel</button>
+				<form method="post" action="<?php echo
+				site_url('FieldActivitiesController/saveBgCollection'); ?>">
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Collection Id(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="collection-id" placeholder="Enter Collection Id"
+								   name="collection-id">
 						</div>
 					</div>
-				</div>
+
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">BG Trap Id(*):</label>
+						</div>
+						<div class="col-md-6">
+							<select class="form-control" id="bg-trap-id"
+									name="bg-trap-id">
+								<option value="-1">Select From Here</option>
+								<?php
+								foreach ($trap_data as $row) {
+									echo '
+							<option value="' . $row->bg_trap_id . '">' . $row->bg_trap_id . '</option>
+							';
+								}
+								?>
+							</select>
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Collect Date(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="date" id="collect_date" name="collect-date" class="form-control">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Collect Time(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="time" id="collect_time" name="collect-time" class="form-control">
+						</div>
+					</div>
+
+					<div class="element-row clearfix">
+						<div class="col-md-2">
+							<label class="control-label">Collection Status(*):</label>
+						</div>
+						<div class="col-md-6">
+							<select class="form-control" id="collection-status"
+									name="collection-status">
+								<option value="1">Collected</option>
+								<option value="2">Not Collected</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="button-container clearfix">
+						<div class="col-md-7">
+							<div class="footer-button-container">
+								<button class="btn btn-success save-btn" type="submit">Save</button>
+								<button class="btn btn-primary cancel-btn" type="reset">Cancel</button>
+							</div>
+						</div>
+					</div>
 
 			</div>
 		</div>
