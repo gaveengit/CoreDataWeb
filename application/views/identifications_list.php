@@ -69,38 +69,64 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<tr class="grey-background">
 							<th>Diagnostic Id</th>
 							<th>Collection Id</th>
-							<th>Sex</th>
-							<th>Mosquito Quantity</th>
-							<th>Identified At</th>
-							<th>Screening</th>
+							<th>Male Aygypti</th>
+							<th>Female Aygypti</th>
+							<th>Male Anopheles</th>
+							<th>Female Anopheles</th>
+							<th>Male Culex</th>
+							<th>Female Culex</th>
+							<th>Status</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background" onclick="location.href='<?php echo
-						site_url('DiagnosticsController/updateIdentifications');?>'">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
+						<?php
+						$i=1;
+						foreach($data as $row) {
+							if (($i % 2) != 0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('DiagnosticsController/updateIdentifications/') . $row->identification_id . "'" . ">" . "<span value=" . $row->identification_id . ">" . $row->identification_id . "</span></td>";
+
+								echo "<td>" . $row->collection_id . "</td>";
+								echo "<td>" . $row->male_aedes_aegypti_count . "</td>";
+								echo "<td>" . $row->female_aedes_aegypti_count . "</td>";
+								echo "<td>" . $row->male_anopheles_count . "</td>";
+								echo "<td>" . $row->female_anopheles_count . "</td>";
+								echo "<td>" . $row->male_culex_count . "</td>";
+								echo "<td>" . $row->female_culex_count . "</td>";
+								if ($row->status == '1') {
+									echo "<td>" . "Unsuccess" . "</td>";
+								}
+								if ($row->status == '2') {
+									echo "<td>" . "Success" . "</td>";
+								}
+								echo "</tr>";
+								$i++;
+							} else {
+								if (($i % 2) != 0) {
+									echo "<tr class='white-background'>";
+									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+											site_url('DiagnosticsController/updateIdentifications/') . $row->identification_id . "'" . ">" . "<span value=" . $row->identification_id . ">" . $row->identification_id . "</span></td>";
+
+									echo "<td>" . $row->collection_id . "</td>";
+									echo "<td>" . $row->male_aedes_aegypti_count . "</td>";
+									echo "<td>" . $row->female_aedes_aegypti_count . "</td>";
+									echo "<td>" . $row->male_anopheles_count . "</td>";
+									echo "<td>" . $row->female_anopheles_count . "</td>";
+									echo "<td>" . $row->male_culex_count . "</td>";
+									echo "<td>" . $row->female_culex_count . "</td>";
+									if ($row->status == '1') {
+										echo "<td>" . "Unsuccess" . "</td>";
+									}
+									if ($row->status == '2') {
+										echo "<td>" . "Success" . "</td>";
+									}
+									echo "</tr>";
+									$i++;
+								}
+							}
+						}
+						?>
 						</tbody>
 					</table>
 				</div>
@@ -108,4 +134,5 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
-
+</body>
+</html>

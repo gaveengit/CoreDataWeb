@@ -289,6 +289,18 @@ class Collection_model extends CI_Model
 		}
 	}
 
+	function display_records_individual_bg_collection_collected_identification(){
+		try {
+			$sql="select collection_id from bg_collection where collect_status='1' and collection_id not in (select collection_id from identification_result)";
+			$query=$this->db->query($sql);
+			return $query->result();
+
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
 	function display_records_individual_ovi_collection($data)
 	{
 		try {
