@@ -53,11 +53,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/bgCollections');?>'">
 						<span class="menu-item">BG Collections</span>
 					</div>
-					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/ovLocations');?>'">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/bgServices');?>'">
+						<span class="menu-item">BG Services</span>
+					</div>
+					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/ovLocations');?>'">
 						<span class="menu-item">OVI Locations</span>
 					</div>
-					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/ovCollections');?>'">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/ovCollections');?>'">
 						<span class="menu-item">OVI Collections</span>
+					</div>
+					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/oviServices');?>'">
+						<span class="menu-item">OVI Services</span>
 					</div>
 					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcLocations');?>'">
 						<span class="menu-item">MRC Locations</span>
@@ -65,10 +71,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcReleases');?>'">
 						<span class="menu-item">MRC Releases</span>
 					</div>
-					<div class="item-container grey-background"  onclick="location.href='<?php echo site_url('FieldActivitiesController/Persons');?>'">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcService');?>'">
+						<span class="menu-item">MRC Services</span>
+					</div>
+					<div class="item-container white-background"  onclick="location.href='<?php echo site_url('FieldActivitiesController/Persons');?>'">
 						<span class="menu-item">Persons</span>
 					</div>
-					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/Addresses');?>'">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/Addresses');?>'">
 						<span class="menu-item">Addresses</span>
 					</div>
 				</div>

@@ -10,7 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 </head>
 <body>
-<div class="field-runs-list-main-container">
+<div class="bg-locations-list-main-container">
 	<div class="home-header-main">
 		<div class="container">
 			<div class="row">
@@ -37,8 +37,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="selected">Spatial List</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
+					<li><a class="selected">BG Services</a></li>
 				</ul>
 			</div>
 		</div>
@@ -48,29 +49,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Map Layers</h3>
+						<h3 class="title">BG Services</h3>
 					</div>
 					<div class="button-container">
 						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo
-						site_url('SpatialDataController/addNewMap');?>'">
-							Add New Map Layer
+						site_url('FieldActivitiesController/addBgService');?>'">
+							Add New BG Service
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="field-runs-table-main-container">
+	<div class="bg-locations-table-main-container">
 		<div class="container">
 			<div class="row">
 				<div class="table-container">
 					<table>
 						<thead>
 						<tr class="grey-background">
-							<th>Map Layer Name</th>
-							<th>Description</th>
-							<th>Status</th>
-							<th></th>
+							<th>Service Id</th>
+							<th>Trap Id</th>
+							<th>Run Name</th>
+							<th>Service Date</th>
+							<th>Service Status</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -81,22 +83,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							if(($i%2)!=0) {
 								echo "<tr class='white-background'>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . $row->name . "</span></td>";
-								echo "<td>" . $row->description . "</td>";
-								echo "<td>" . $row->map_status . "</td>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" .  "Map View"  . "</span></td>";
+										site_url('FieldActivitiesController/updateBgService/') .$row->service_id."'" . ">" . "<span value=".$row->service_id.">" . $row->service_id . "</span></td>";
+
+								echo "<td>" . $row->trap_id . "</td>";
+								echo "<td>" . $row->run_id . "</td>";
+								echo "<td>" . $row->service_date ."</td>";
+								if($row->service_status=='1') {
+									echo "<td>" . "Serviced" . "</td>";
+								}
+								if($row->service_status=='2') {
+									echo "<td>" . "Not Serviced" . "</td>";
+								}
 								echo "</tr>";
 								$i++;
 							}
 							else{
 								echo "<tr class='grey-background'>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . $row->name . "</span></td>";
-								echo "<td>" . $row->description . "</td>";
-								echo "<td>" . $row->map_status . "</td>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . "Map View" . "</span></td>";
+										site_url('FieldActivitiesController/updateBgService/') .$row->service_id."'" . ">" . "<span value=".$row->service_id.">" . $row->service_id . "</span></td>";
+
+								echo "<td>" . $row->trap_id . "</td>";
+								echo "<td>" . $row->run_id . "</td>";
+								echo "<td>" . $row->service_date ."</td>";
+								if($row->service_status=='1') {
+									echo "<td>" . "Serviced" . "</td>";
+								}
+								if($row->service_status=='2') {
+									echo "<td>" . "Not Serviced" . "</td>";
+								}
 								echo "</tr>";
 								$i++;
 							}
@@ -109,5 +123,4 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
-</body>
-</html>
+

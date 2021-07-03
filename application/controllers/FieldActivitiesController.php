@@ -16,6 +16,7 @@ class FieldActivitiesController extends CI_Controller
 		$this->load->model('OvTrap_model');
 		$this->load->model('Mrc_model');
 		$this->load->model('Collection_model');
+		$this->load->model('Service_model');
 	}
 
 	public function index()
@@ -94,10 +95,22 @@ class FieldActivitiesController extends CI_Controller
 		$this->load->view('bg_collections', $result);
 	}
 
+	public function bgServices()
+	{
+		$result['data'] = $this->Service_model->display_bg_service();
+		$this->load->view('bg_service',$result);
+	}
+
+
 	public function addBgCollection()
 	{
 		$result['trap_data'] = $this->Collection_model->loadBgTraps();
 		$this->load->view('add_bg_collection', $result);
+	}
+	public function addBgService()
+	{
+		$result['trap_data'] = $this->Service_model->loadBgTraps();
+		$this->load->view('add_bg_service',$result);
 	}
 
 	public function updateBgCollection($bg_collection_id)
@@ -105,24 +118,45 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->Collection_model->display_records_individual_bg_collection($bg_collection_id);
 		$this->load->view('update_bg_collection', $result);
 	}
+	public function updateBgService($bg_service_id)
+	{
+		$result['data'] = $this->Service_model->display_records_individual_bg_service($bg_service_id);
+		$this->load->view('update_bg_service', $result);
+	}
 
 	public function ovCollections()
 	{
 		$result['data'] = $this->Collection_model->display_ovi_collection();
 		$this->load->view('ov_collections', $result);
 	}
+	public function oviServices()
+	{
+		$result['data'] = $this->Service_model->display_ovi_service();
+		$this->load->view('ovi_service',$result);
+	}
+
 
 	public function addOvCollection()
 	{
 		$result['trap_data'] = $this->Collection_model->loadOviTraps();
 		$this->load->view('add_ov_collection', $result);
 	}
+	public function addOvService()
+	{
+		$result['trap_data'] = $this->Service_model->loadOviTraps();
+		$this->load->view('add_ovi_service',$result);
+	}
 
 	public function updateOvCollection($ov_collection_id)
 	{
 		$result['data'] = $this->Collection_model->display_records_individual_ovi_collection($ov_collection_id);
 		$this->load->view('update_ov_collection', $result);
+	}
 
+	public function updateOvService($ov_service_id)
+	{
+		$result['data'] = $this->Service_model->display_records_individual_ovi_service($ov_service_id);
+		$this->load->view('update_ov_service', $result);
 	}
 
 	public function mrcReleases()
@@ -130,17 +164,33 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->Collection_model->display_mrc_releases();
 		$this->load->view('mrc_releases', $result);
 	}
+	public function mrcService()
+	{
+		$result['data'] = $this->Service_model->display_mrc_service();
+		$this->load->view('mrc_service',$result);
+	}
 
 	public function addMrcRelease()
 	{
 		$result['trap_data'] = $this->Collection_model->loadMrcTraps();
 		$this->load->view('add_mrc_release', $result);
 	}
+	public function addMrcService()
+	{
+		$result['trap_data'] = $this->Service_model->loadMrcTraps();
+		$this->load->view('add_mrc_service', $result);
+	}
 
 	public function updateMrcRelease($release_id)
 	{
 		$result['data'] = $this->Collection_model->display_records_individual_mrc_release($release_id);
 		$this->load->view('update_mrc_release', $result);
+	}
+
+	public function updateMrcService($service_id)
+	{
+		$result['data'] = $this->Service_model->display_records_individual_mrc_service($service_id);
+		$this->load->view('update_mrc_service', $result);
 	}
 
 	public function persons()
@@ -366,6 +416,42 @@ class FieldActivitiesController extends CI_Controller
 		}
 	}
 
+	public function saveBgService()
+	{
+		$data['service_id'] = $this->input->post('service-id');
+		$data['trap_id'] = $this->input->post('bg-trap-id');
+		$data['service_date'] = $this->input->post('service_date');
+		$data['service_time'] = $this->input->post('service_time');
+		$data['service_status'] = $this->input->post('service-status');
+
+		$response_check['check_data_count'] = $this->Service_model->checkBgServiceId($data);
+		if ($response_check['check_data_count'] == 0) {
+			$runs['run_id'] = $this->Service_model->findBgRunId($data['trap_id']);
+			$data['run_id'] = $runs['run_id'][0]->bg_run_id;
+			$response = $this->Service_model->saveRecordsBgService($data);
+			if ($response == true) {
+				$response_check['check_trap_count'] = $this->Service_model->checkRunPendingBgPoints($data['run_id']);
+				if ($response_check['check_trap_count'] == 0) {
+					$response = $this->Service_model->updateRunStatus($data['run_id']);
+				}
+				echo "<script type='text/javascript'>alert('Record added successfully');
+					</script>";
+				$this->load->view('bg_service');
+			} else {
+				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
+				</script>";
+				$result['trap_data'] = $this->Service_model->loadBgTraps();
+				$this->load->view('add_bg_service', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Service id is already existing. Please try again.');
+				</script>";
+			$result['trap_data'] = $this->Service_model->loadBgTraps();
+			$this->load->view('add_bg_service', $result);
+		}
+	}
+
 
 	public function saveOviCollection()
 	{
@@ -384,11 +470,10 @@ class FieldActivitiesController extends CI_Controller
 				$response_check['check_trap_count'] = $this->Collection_model->checkRunPendingOviPoints($data['run_id']);
 				if ($response_check['check_trap_count'] == 0) {
 					$response = $this->Collection_model->updateRunStatus($data['run_id']);
-					if ($response == true) {
-						echo "<script type='text/javascript'>alert('Record added successfully');
-					</script>";
-					}
+
 				}
+				echo "<script type='text/javascript'>alert('Record added successfully');
+					</script>";
 				$this->load->view('ov_collections');
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
@@ -404,6 +489,44 @@ class FieldActivitiesController extends CI_Controller
 			$this->load->view('add_ov_collection', $result);
 		}
 	}
+
+	public function saveOviService()
+	{
+		$data['service_id'] = $this->input->post('service-id');
+		$data['trap_id'] = $this->input->post('bg-trap-id');
+		$data['service_date'] = $this->input->post('service_date');
+		$data['service_time'] = $this->input->post('service_time');
+		$data['service_status'] = $this->input->post('service-status');
+
+		$response_check['check_data_count'] = $this->Service_model->checkOviServiceId($data);
+		if ($response_check['check_data_count'] == 0) {
+			$runs['run_id'] = $this->Service_model->findOviRunId($data['trap_id']);
+			$data['run_id'] = $runs['run_id'][0]->ovi_run_id;
+			$response = $this->Service_model->saveRecordsOviService($data);
+			if ($response == true) {
+				$response_check['check_trap_count'] = $this->Service_model->checkRunPendingOviPoints($data['run_id']);
+				if ($response_check['check_trap_count'] == 0) {
+					$response = $this->Service_model->updateRunStatus($data['run_id']);
+				}
+				echo "<script type='text/javascript'>alert('Record added successfully');
+					</script>";
+				$this->load->view('ovi_service');
+			} else {
+				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
+				</script>";
+				$result['trap_data'] = $this->Service_model->loadOviTraps();
+				$this->load->view('add_ovi_service', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Service id is already existing. Please try again.');
+				</script>";
+			$result['trap_data'] = $this->Service_model->loadBgTraps();
+			$this->load->view('add_bg_service', $result);
+		}
+	}
+
+
 
 	public function saveMrcRelease()
 	{
@@ -441,6 +564,42 @@ class FieldActivitiesController extends CI_Controller
 				</script>";
 			$result['trap_data'] = $this->Collection_model->loadMrcTraps();
 			$this->load->view('add_mrc_release', $result);
+		}
+	}
+
+	public function saveMrcService()
+	{
+		$data['service_id'] = $this->input->post('service-id');
+		$data['trap_id'] = $this->input->post('identifier');
+		$data['service_date'] = $this->input->post('service-date');
+		$data['service_time'] = $this->input->post('service-time');
+		$data['service_status'] = $this->input->post('service-status');
+
+		$response_check['check_data_count'] = $this->Service_model->checkMrcServiceId($data);
+		if ($response_check['check_data_count'] == 0) {
+			$runs['run_id'] = $this->Service_model->findMrcRunId($data['trap_id']);
+			$data['run_id'] = $runs['run_id'][0]->mrc_run_id;
+			$response = $this->Service_model->saveRecordsMrcService($data);
+			if ($response == true) {
+				$response_check['check_trap_count'] = $this->Service_model->checkRunPendingMrcPoints($data['run_id']);
+				if ($response_check['check_trap_count'] == 0) {
+					$response = $this->Service_model->updateRunStatus($data['run_id']);
+				}
+				echo "<script type='text/javascript'>alert('Record added successfully');
+					</script>";
+				$this->load->view('mrc_service');
+			} else {
+				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
+				</script>";
+				$result['trap_data'] = $this->Service_model->loadMrcTraps();
+				$this->load->view('add_mrc_service', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Service id is already existing. Please try again.');
+				</script>";
+			$result['trap_data'] = $this->Service_model->loadMrcTraps();
+			$this->load->view('add_mrc_service', $result);
 		}
 	}
 
@@ -665,6 +824,43 @@ class FieldActivitiesController extends CI_Controller
 		}
 	}
 
+	public function saveUpdateBgService()
+	{
+		/*load registration view form*/
+
+		$data['service_id'] = $this->input->post('service-id');
+		$data['trap_id'] = $this->input->post('trap-id');
+		$data['service_date'] = $this->input->post('service_date');
+		$data['service_time'] = $this->input->post('service_time');
+		$data['service_status'] = $this->input->post('service_status');
+		$data_old['service_id_old'] = $this->input->post('save-btn');
+
+		$response_check['check_data_count'] = $this->Service_model->checkUpdateBgServiceId($data,$data_old);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Service_model->updateRecordsBgService($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->Service_model->display_bg_service();
+				$this->load->view('bg_service', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Record not updated successfully');
+			</script>";
+				$result['data'] = $this->Service_model->display_records_individual_bg_service($data['service_id']);
+				$this->load->view('update_bg_service', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Duplicate service id is already ' +
+ 				'existing');
+			</script>";
+			$result['data'] = $this->Service_model->display_records_individual_bg_service($data['service_id']);
+			$this->load->view('update_bg_service', $result);
+
+		}
+	}
+
+
 	public function saveUpdateOviCollection()
 	{
 		/*load registration view form*/
@@ -697,6 +893,42 @@ class FieldActivitiesController extends CI_Controller
 			</script>";
 			$result['data'] = $this->Collection_model->display_records_individual_ovi_collection($data['collection_id']);
 			$this->load->view('update_ov_collection', $result);
+
+		}
+	}
+
+	public function saveUpdateOviService()
+	{
+		/*load registration view form*/
+
+		$data['service_id'] = $this->input->post('service-id');
+		$data['trap_id'] = $this->input->post('trap-id');
+		$data['service_date'] = $this->input->post('service_date');
+		$data['service_time'] = $this->input->post('service_time');
+		$data['service_status'] = $this->input->post('service_status');
+		$data_old['service_id_old'] = $this->input->post('save-btn');
+
+		$response_check['check_data_count'] = $this->Service_model->checkUpdateOviServiceId($data,$data_old);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Service_model->updateRecordsOviService($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->Service_model->display_ovi_service();
+				$this->load->view('ovi_service', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Record not updated successfully');
+			</script>";
+				$result['data'] = $this->Service_model->display_records_individual_ovi_service($data['service_id']);
+				$this->load->view('update_ov_service', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Duplicate service id is already ' +
+ 				'existing');
+			</script>";
+			$result['data'] = $this->Service_model->display_records_individual_ovi_service($data['service_id']);
+			$this->load->view('update_ov_service', $result);
 
 		}
 	}
@@ -736,7 +968,41 @@ class FieldActivitiesController extends CI_Controller
 
 		}
 	}
+	public function saveUpdateMrcService()
+	{
+		/*load registration view form*/
 
+		$data['service_id'] = $this->input->post('service-id');
+		$data['trap_id'] = $this->input->post('trap-id');
+		$data['service_date'] = $this->input->post('service_date');
+		$data['service_time'] = $this->input->post('service_time');
+		$data['service_status'] = $this->input->post('service_status');
+		$data_old['service_id_old'] = $this->input->post('save-btn');
+
+		$response_check['check_data_count'] = $this->Service_model->checkUpdateMrcServiceId($data,$data_old);
+		if ($response_check['check_data_count'] == 0) {
+			$response = $this->Service_model->updateRecordsMrcService($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record updated successfully');
+			</script>";
+				$result['data'] = $this->Service_model->display_mrc_service();
+				$this->load->view('mrc_service', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Record not updated successfully');
+			</script>";
+				$result['data'] = $this->Service_model->display_records_individual_mrc_service($data['service_id']);
+				$this->load->view('update_mrc_service', $result);
+
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Duplicate service id is already ' +
+ 				'existing');
+			</script>";
+			$result['data'] = $this->Service_model->display_records_individual_mrc_service($data['release_id']);
+			$this->load->view('update_mrc_service', $result);
+
+		}
+	}
 
 
 }
