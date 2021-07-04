@@ -95,15 +95,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								echo "<td>" . $row->male_culex_count . "</td>";
 								echo "<td>" . $row->female_culex_count . "</td>";
 								if ($row->status == '1') {
-									echo "<td>" . "Unsuccess" . "</td>";
+									echo "<td>" . "Success" . "</td>";
 								}
 								if ($row->status == '2') {
-									echo "<td>" . "Success" . "</td>";
+									echo "<td>" . "Unsuccess" . "</td>";
 								}
 								echo "</tr>";
 								$i++;
 							} else {
-								if (($i % 2) != 0) {
+								if (($i % 2) == 0) {
 									echo "<tr class='white-background'>";
 									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
 											site_url('DiagnosticsController/updateIdentifications/') . $row->identification_id . "'" . ">" . "<span value=" . $row->identification_id . ">" . $row->identification_id . "</span></td>";
@@ -116,10 +116,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									echo "<td>" . $row->male_culex_count . "</td>";
 									echo "<td>" . $row->female_culex_count . "</td>";
 									if ($row->status == '1') {
-										echo "<td>" . "Unsuccess" . "</td>";
+										echo "<td>" . "Success" . "</td>";
 									}
 									if ($row->status == '2') {
-										echo "<td>" . "Success" . "</td>";
+										echo "<td>" . "Unsuccess" . "</td>";
 									}
 									echo "</tr>";
 									$i++;

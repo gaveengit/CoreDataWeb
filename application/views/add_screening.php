@@ -63,99 +63,141 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="form-main-container">
 		<div class="container">
 			<div class="row">
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Screening Id(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-							   name="trap-id">
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Collection Id:</label>
-					</div>
-					<div class="col-md-6">
-						<select class="form-control" id="collection-id">
-							<option>Select From Here</option>
-						</select>
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Screened Date(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="date" id="collect_date" name="collect_date">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Screened Time(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="time" id="collect_time" name="collect_time">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Total Screened(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-							   name="trap-id">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Aegypti Count(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-							   name="trap-id">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Wmel Count(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-							   name="trap-id">
-					</div>
-				</div>
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Equivocal Count(*):</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-							   name="trap-id">
-					</div>
-				</div>
-
-				<div class="element-row clearfix">
-					<div class="col-md-2">
-						<label class="control-label">Screening Result:</label>
-					</div>
-					<div class="col-md-6">
-						<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-							   name="trap-id">
-					</div>
-				</div>
-
-				<div class="button-container clearfix">
-					<div class="col-md-7">
-						<div class="footer-button-container">
-							<button class="btn btn-success save-btn">Save</button>
-							<button class="btn btn-primary cancel-btn">Cancel</button>
+				<form method="post" action="<?php echo
+				site_url('ScreeningController/saveScreening'); ?>">
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Screening Id(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="text" class="form-control" id="screening_id"
+								   placeholder="Enter Screening Id"
+								   name="screening_id">
 						</div>
 					</div>
-				</div>
 
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Diagnostic Id:</label>
+						</div>
+						<div class="col-md-6">
+							<select class="form-control" name="identification_id" id="identification_id">
+								<option value="-1">Select From Here</option>
+								<?php
+								foreach ($identification_data as $row) {
+									echo '
+							<option value="' . $row->identification_id . '">' . $row->identification_id . '</option>
+							';
+								}
+								?>
+							</select>
+						</div>
+					</div>
+
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Screening Results:</label>
+						</div>
+					</div>
+
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Male Aedes Aegypti Result(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="number" class="form-control" id="aedes_male_result"
+								   placeholder="Enter Male Aedes Aegypti Result"
+								   name="aedes_male_result" value="0">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Female Aedes Aegypti Result(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="number" class="form-control" id="aedes_female_result"
+								   placeholder="Enter female Aedes Aegypti Result"
+								   name="aedes_female_result" value="0">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Male Anopheles Result(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="number" class="form-control" id="male_anopheles_result"
+								   placeholder="Enter Female Anopheles Result"
+								   name="male_anopheles_result" value="0">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Female Anopheles Result(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="number" class="form-control" id="female_anopheles_result"
+								   placeholder="Enter Female Anopheles Result"
+								   name="female_anopheles_result" value="0">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Male Culex Result(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="number" class="form-control" id="culex_male_result"
+								   placeholder="Enter Male Culex Result"
+								   name="culex_male_result" value="0">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Female Culex Result(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="number" class="form-control" id="culex_female_result"
+								   placeholder="Enter Female Culex Result"
+								   name="culex_female_result" value="0">
+						</div>
+					</div>
+
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Final Result(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="number" class="form-control" id="final_result"
+								   placeholder="Enter Final Result"
+								   name="final_result" value="0">
+						</div>
+					</div>
+
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Screened Date(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="date" id="screened_date" name="screened_date" class="form-control">
+						</div>
+					</div>
+					<div class="element-row clearfix">
+						<div class="col-md-3">
+							<label class="control-label">Screened Time(*):</label>
+						</div>
+						<div class="col-md-6">
+							<input type="time" id="screened_time" name="screened_time" class="form-control">
+						</div>
+					</div>
+
+					<div class="button-container clearfix">
+						<div class="col-md-7">
+							<div class="footer-button-container">
+								<button class="btn btn-success save-btn" type="submit" name="save-btn">Save</button>
+								<button class="btn btn-primary cancel-btn" type="reset" name="cancel-btn">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

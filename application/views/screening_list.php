@@ -38,7 +38,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<ul class="breadcrumb">
 					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="selected">Screening</a></li>
+					<li><a class="selected">Screening Results</a></li>
 				</ul>
 			</div>
 		</div>
@@ -48,7 +48,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Screening</h3>
+						<h3 class="title">Screening Results</h3>
 					</div>
 					<div class="button-container">
 						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo
@@ -67,48 +67,68 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<table>
 						<thead>
 						<tr class="grey-background">
-							<th>Screening Id</th>
+						<tr class="grey-background">
 							<th>Diagnostic Id</th>
-							<th>Screened Date</th>
-							<th>Total Screened</th>
-							<th>Aegypti</th>
-							<th>Wmel</th>
-							<th>Equivocal</th>
-							<th>Screening Result</th>
+							<th>Identification Id</th>
+							<th>Male Aygypti</th>
+							<th>Female Aygypti</th>
+							<th>Male Anopheles</th>
+							<th>Female Anopheles</th>
+							<th>Male Culex</th>
+							<th>Female Culex</th>
+							<th>Status</th>
+						</tr>
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background" onclick="location.href='<?php echo
-						site_url('ScreeningController/updateScreening');?>'">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-							<td>No.20, Colombo 10</td>
-						</tr>
+						<?php
+						$i=1;
+						foreach($data as $row) {
+							if (($i % 2) != 0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('ScreeningController/updateScreening/') . $row->screening_id . "'" . ">" . "<span value=" . $row->screening_id . ">" . $row->screening_id . "</span></td>";
+
+								echo "<td>" . $row->identification_id . "</td>";
+								echo "<td>" . $row->male_aedes_aegypti_result . "</td>";
+								echo "<td>" . $row->female_aedes_aegypti_result . "</td>";
+								echo "<td>" . $row->male_anopheles_result . "</td>";
+								echo "<td>" . $row->female_anopheles_result . "</td>";
+								echo "<td>" . $row->male_culex_result . "</td>";
+								echo "<td>" . $row->female_culex_result . "</td>";
+								if ($row->status == '1') {
+									echo "<td>" . "Success" . "</td>";
+								}
+								if ($row->status == '2') {
+									echo "<td>" . "Unsuccess" . "</td>";
+								}
+								echo "</tr>";
+								$i++;
+							} else {
+								if (($i % 2) == 0) {
+									echo "<tr class='white-background'>";
+									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+											site_url('ScreeningController/updateScreening/') . $row->screening_id . "'" . ">" . "<span value=" . $row->screening_id . ">" . $row->screening_id . "</span></td>";
+
+									echo "<td>" . $row->identification_id . "</td>";
+									echo "<td>" . $row->male_aedes_aegypti_result . "</td>";
+									echo "<td>" . $row->female_aedes_aegypti_result . "</td>";
+									echo "<td>" . $row->male_anopheles_result . "</td>";
+									echo "<td>" . $row->female_anopheles_result . "</td>";
+									echo "<td>" . $row->male_culex_result . "</td>";
+									echo "<td>" . $row->female_culex_result . "</td>";
+									if ($row->status == '1') {
+										echo "<td>" . "Success" . "</td>";
+									}
+									if ($row->status == '2') {
+										echo "<td>" . "Unsuccess" . "</td>";
+									}
+									echo "</tr>";
+									$i++;
+								}
+							}
+						}
+						?>
 						</tbody>
 					</table>
 				</div>

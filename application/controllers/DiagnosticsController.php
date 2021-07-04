@@ -45,10 +45,10 @@ class DiagnosticsController extends CI_Controller
 		$data['identified_time'] = $this->input->post('identified_time');
 		if($data['male_aedes_aegypti_count']>0 || $data['female_aedes_aegypti_count']>0)
 		{
-			$data['status'] = '2';
+			$data['status'] = '1';
 		}
 		else{
-			$data['status'] = '1';
+			$data['status'] = '2';
 		}
 
 		$response_check['check_data_count'] = $this->Identification_model->checkIdentificationId($data);
@@ -86,10 +86,10 @@ class DiagnosticsController extends CI_Controller
 
 		if($data['male_aedes_aegypti_count']>0 || $data['female_aedes_aegypti_count']>0)
 		{
-			$data['status'] = '2';
+			$data['status'] = '1';
 		}
 		else{
-			$data['status'] = '1';
+			$data['status'] = '2';
 		}
 
 		$response_check['check_data_count'] = $this->Identification_model->checkUpdateIdentification($data_old);

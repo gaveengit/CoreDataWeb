@@ -64,14 +64,21 @@ class Identification_model extends CI_Model
 	function display_records_active()
 	{
 		try {
-			$array = array('location_status' => "Active");
+			$array = array('status' => "1");
 			$this->db->where($array);
-			$query=$this->db->get("address");
+			$query=$this->db->get("identification_result");
 			return $query->result();
 		}
 		catch(Exception $e){
 			echo $e;
 		}
+	}
+
+	function display_records_active_for_screening(){
+		$sql="select * from identification_result where status='1' and identification_id not in (select identification_id 
+    from screening_result)";
+		$query=$this->db->query($sql);
+		return $query->result();
 	}
 
 	function display_records_individual($data)
