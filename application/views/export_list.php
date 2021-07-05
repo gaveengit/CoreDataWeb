@@ -68,31 +68,56 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<thead>
 						<tr class="grey-background">
 							<th>Export Id</th>
-							<th>Description</th>
+							<th>Ovi Collection Id</th>
+							<th>Qty</th>
 							<th>Date</th>
 							<th>Time</th>
+							<th>Status</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr class="white-background" onclick="location.href='<?php echo
-						site_url('ExportController/updateExport');?>'">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-						</tr>
-						<tr class="grey-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-						</tr>
-						<tr class="white-background">
-							<td class="run-name-cell"><span>BGA1a</span></td>
-							<td>BG_Run_Nug1</td>
-							<td>Proposed</td>
-							<td>Kamal Fernando</td>
-						</tr>
+						<?php
+						$i=1;
+						foreach($data as $row) {
+							if (($i % 2) != 0) {
+								echo "<tr class='white-background'>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . $row->export_id . "</span></td>";
+
+								echo "<td>" . $row->ovi_collection_id . "</td>";
+								echo "<td>" . $row->qty . "</td>";
+								echo "<td>" . $row->export_date . "</td>";
+								echo "<td>" . $row->export_time . "</td>";
+								if ($row->export_status == '1') {
+									echo "<td>" . "Eligible" . "</td>";
+								}
+								if ($row->export_status == '2') {
+									echo "<td>" . "Not Eligible" . "</td>";
+								}
+								echo "</tr>";
+								$i++;
+							} else {
+								if (($i % 2) == 0) {
+									echo "<tr class='white-background'>";
+									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+											site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . $row->export_id . "</span></td>";
+
+									echo "<td>" . $row->ovi_collection_id . "</td>";
+									echo "<td>" . $row->qty . "</td>";
+									echo "<td>" . $row->export_date . "</td>";
+									echo "<td>" . $row->export_time . "</td>";
+									if ($row->export_status == '1') {
+										echo "<td>" . "Eligible" . "</td>";
+									}
+									if ($row->export_status == '2') {
+										echo "<td>" . "Not Eligible" . "</td>";
+									}
+									echo "</tr>";
+									$i++;
+								}
+							}
+						}
+						?>
 						</tbody>
 					</table>
 				</div>

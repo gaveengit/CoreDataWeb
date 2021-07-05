@@ -325,9 +325,12 @@ class Collection_model extends CI_Model
 			echo $e;
 		}
 	}
-
-
-
+	function display_records_active_for_exports(){
+		$sql="select * from ovi_collection where collect_status='1' and collection_id not in (select collection_id 
+    from biobank_export)";
+		$query=$this->db->query($sql);
+		return $query->result();
+	}
 	function loadBgTraps()
 	{
 		$sql="SELECT a.bg_trap_id from bg_run_traps a,field_run b, bg_field_run d
