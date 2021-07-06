@@ -98,7 +98,7 @@ class FieldActivitiesController extends CI_Controller
 	public function bgServices()
 	{
 		$result['data'] = $this->Service_model->display_bg_service();
-		$this->load->view('bg_service',$result);
+		$this->load->view('bg_service', $result);
 	}
 
 
@@ -107,10 +107,11 @@ class FieldActivitiesController extends CI_Controller
 		$result['trap_data'] = $this->Collection_model->loadBgTraps();
 		$this->load->view('add_bg_collection', $result);
 	}
+
 	public function addBgService()
 	{
 		$result['trap_data'] = $this->Service_model->loadBgTraps();
-		$this->load->view('add_bg_service',$result);
+		$this->load->view('add_bg_service', $result);
 	}
 
 	public function updateBgCollection($bg_collection_id)
@@ -118,6 +119,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->Collection_model->display_records_individual_bg_collection($bg_collection_id);
 		$this->load->view('update_bg_collection', $result);
 	}
+
 	public function updateBgService($bg_service_id)
 	{
 		$result['data'] = $this->Service_model->display_records_individual_bg_service($bg_service_id);
@@ -129,10 +131,11 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->Collection_model->display_ovi_collection();
 		$this->load->view('ov_collections', $result);
 	}
+
 	public function oviServices()
 	{
 		$result['data'] = $this->Service_model->display_ovi_service();
-		$this->load->view('ovi_service',$result);
+		$this->load->view('ovi_service', $result);
 	}
 
 
@@ -141,10 +144,11 @@ class FieldActivitiesController extends CI_Controller
 		$result['trap_data'] = $this->Collection_model->loadOviTraps();
 		$this->load->view('add_ov_collection', $result);
 	}
+
 	public function addOvService()
 	{
 		$result['trap_data'] = $this->Service_model->loadOviTraps();
-		$this->load->view('add_ovi_service',$result);
+		$this->load->view('add_ovi_service', $result);
 	}
 
 	public function updateOvCollection($ov_collection_id)
@@ -164,10 +168,11 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->Collection_model->display_mrc_releases();
 		$this->load->view('mrc_releases', $result);
 	}
+
 	public function mrcService()
 	{
 		$result['data'] = $this->Service_model->display_mrc_service();
-		$this->load->view('mrc_service',$result);
+		$this->load->view('mrc_service', $result);
 	}
 
 	public function addMrcRelease()
@@ -175,6 +180,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['trap_data'] = $this->Collection_model->loadMrcTraps();
 		$this->load->view('add_mrc_release', $result);
 	}
+
 	public function addMrcService()
 	{
 		$result['trap_data'] = $this->Service_model->loadMrcTraps();
@@ -282,6 +288,24 @@ class FieldActivitiesController extends CI_Controller
 			$this->load->view('update_persons', $result);
 			//updatePersons($data['Person_id']);
 		}
+	}
+
+	public function deletePerson($person_id)
+	{
+		$data['Person_status'] = "-2";
+		$data['Person_id'] = $person_id;
+			$response = $this->Persons_model->deleteRecord($data);
+			if ($response == true) {
+				echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+				$result['data'] = $this->Persons_model->display_records();
+				$this->load->view('persons_list', $result);
+			} else {
+				echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+				$result['data'] = $this->Persons_model->display_records();
+				$this->load->view('persons_list', $result);
+			}
 	}
 
 	public function saveUpdateAddress()
@@ -525,7 +549,6 @@ class FieldActivitiesController extends CI_Controller
 			$this->load->view('add_bg_service', $result);
 		}
 	}
-
 
 
 	public function saveMrcRelease()
@@ -799,7 +822,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['collect_status'] = $this->input->post('collect_status');
 		$data_old['collection_id_old'] = $this->input->post('save-btn');
 
-		$response_check['check_data_count'] = $this->Collection_model->checkUpdateBgCollectionId($data,$data_old);
+		$response_check['check_data_count'] = $this->Collection_model->checkUpdateBgCollectionId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Collection_model->updateRecordsBgCollection($data);
 			if ($response == true) {
@@ -835,7 +858,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_status'] = $this->input->post('service_status');
 		$data_old['service_id_old'] = $this->input->post('save-btn');
 
-		$response_check['check_data_count'] = $this->Service_model->checkUpdateBgServiceId($data,$data_old);
+		$response_check['check_data_count'] = $this->Service_model->checkUpdateBgServiceId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Service_model->updateRecordsBgService($data);
 			if ($response == true) {
@@ -872,7 +895,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['collect_status'] = $this->input->post('collect_status');
 		$data_old['collection_id_old'] = $this->input->post('save-btn');
 
-		$response_check['check_data_count'] = $this->Collection_model->checkUpdateOviCollectionId($data,$data_old);
+		$response_check['check_data_count'] = $this->Collection_model->checkUpdateOviCollectionId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Collection_model->updateRecordsOviCollection($data);
 			if ($response == true) {
@@ -908,7 +931,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_status'] = $this->input->post('service_status');
 		$data_old['service_id_old'] = $this->input->post('save-btn');
 
-		$response_check['check_data_count'] = $this->Service_model->checkUpdateOviServiceId($data,$data_old);
+		$response_check['check_data_count'] = $this->Service_model->checkUpdateOviServiceId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Service_model->updateRecordsOviService($data);
 			if ($response == true) {
@@ -944,7 +967,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['released_status'] = $this->input->post('release_status');
 		$data_old['release_id_old'] = $this->input->post('save-btn');
 
-		$response_check['check_data_count'] = $this->Collection_model->checkUpdateMrcReleaseId($data,$data_old);
+		$response_check['check_data_count'] = $this->Collection_model->checkUpdateMrcReleaseId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Collection_model->updateRecordsMrcRelease($data);
 			if ($response == true) {
@@ -968,6 +991,7 @@ class FieldActivitiesController extends CI_Controller
 
 		}
 	}
+
 	public function saveUpdateMrcService()
 	{
 		/*load registration view form*/
@@ -979,7 +1003,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_status'] = $this->input->post('service_status');
 		$data_old['service_id_old'] = $this->input->post('save-btn');
 
-		$response_check['check_data_count'] = $this->Service_model->checkUpdateMrcServiceId($data,$data_old);
+		$response_check['check_data_count'] = $this->Service_model->checkUpdateMrcServiceId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Service_model->updateRecordsMrcService($data);
 			if ($response == true) {

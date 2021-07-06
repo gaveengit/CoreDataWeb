@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message="Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="persons-list-main-container">
@@ -71,6 +74,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Full Name</th>
 							<th>Contact Number</th>
 							<th>Status</th>
+							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -80,19 +85,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
   						{
   							if(($i%2)!=0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updatePersons/') .$row->Person_id."'" . ">" . "<span value=".$row->Person_id.">" . $row->Full_name . "</span></td>";
+								echo "<td>" . $row->Full_name . "</td>";
 								echo "<td>" . $row->Contact_number . "</td>";
 								echo "<td>" . $row->Person_status . "</td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updatePersons/') .$row->Person_id."'" . ">" . "<span value=".$row->Person_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deletePerson/') .$row->Person_id."'" . ">" . "<span value=".$row->Person_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
   							else{
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updatePersons/') .$row->Person_id. "'" . ">" . "<span>" . $row->Full_name . "</span></td>";
+								echo "<td>" . $row->Full_name . "</td>";
 								echo "<td>" . $row->Contact_number . "</td>";
 								echo "<td>" . $row->Person_status . "</td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updatePersons/') .$row->Person_id."'" . ">" . "<span value=".$row->Person_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deletePerson/') .$row->Person_id."'" . ">" . "<span value=".$row->Person_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}

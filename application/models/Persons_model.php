@@ -24,6 +24,17 @@ class Persons_model extends CI_Model
 			return false;
 		}
 	}
+	function deleteRecord($data){
+		try {
+			$this->db->where('Person_id', $data['Person_id']);
+			$this->db->update('person', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 	function checkPersons($data)
 	{
 		try {
@@ -54,6 +65,8 @@ class Persons_model extends CI_Model
 	function display_records()
 	{
 		try {
+			$array = array('Person_status !='=>'-2');
+			$this->db->where($array);
 			$query=$this->db->get("person");
 			return $query->result();
 		}
