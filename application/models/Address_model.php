@@ -24,6 +24,18 @@ class Address_model extends CI_Model
 			return false;
 		}
 	}
+	function deleteRecords($data)
+	{
+		try {
+			$this->db->where('address_id', $data['address_id']);
+			$this->db->update('address', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 
 	function checkAddress($data)
 	{
@@ -55,6 +67,8 @@ class Address_model extends CI_Model
 	function display_records()
 	{
 		try {
+			$array = array('location_status !=' => "-2");
+			$this->db->where($array);
 			$query=$this->db->get("address");
 			return $query->result();
 		}

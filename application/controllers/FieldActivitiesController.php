@@ -340,6 +340,24 @@ class FieldActivitiesController extends CI_Controller
 		}
 	}
 
+	public function deleteAddress($address_id)
+	{
+		$data['location_status'] = "-2";
+		$data['address_id'] = $address_id;
+		$response = $this->Address_model->deleteRecords($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Address_model->display_records();
+			$this->load->view('address_list', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Address_model->display_records();
+			$this->load->view('address_list', $result);
+		}
+	}
+
 	public function saveAddress()
 	{
 		/*load registration view form*/
