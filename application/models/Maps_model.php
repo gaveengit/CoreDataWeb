@@ -24,6 +24,18 @@ class Maps_model extends CI_Model
 			return false;
 		}
 	}
+	function deleteRecords($data)
+	{
+		try {
+			$this->db->where('map_id', $data['map_id']);
+			$this->db->update('map_layer', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 
 	function checkMap($data)
 	{
@@ -55,6 +67,8 @@ class Maps_model extends CI_Model
 	function display_records()
 	{
 		try {
+			$array = array('map_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get("map_layer");
 			return $query->result();
 		}

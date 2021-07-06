@@ -71,6 +71,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Description</th>
 							<th>Status</th>
 							<th></th>
+							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -80,23 +82,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						{
 							if(($i%2)!=0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . $row->name . "</span></td>";
+								echo "<td>" . $row->name . "</td>";
 								echo "<td>" . $row->description . "</td>";
 								echo "<td>" . $row->map_status . "</td>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
 										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" .  "Map View"  . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" ."Update Map" ."</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('SpatialDataController/deleteMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . "Delete Map" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
 							else{
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . $row->name . "</span></td>";
+								echo "<td>" . $row->name . "</td>";
 								echo "<td>" . $row->description . "</td>";
 								echo "<td>" . $row->map_status . "</td>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . "Map View" . "</span></td>";
+										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" .  "Map View"  . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" ."Update Map" ."</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('SpatialDataController/deleteMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . "Delete Map" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}

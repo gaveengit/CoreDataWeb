@@ -92,6 +92,24 @@ class SpatialDataController extends CI_Controller
 			//updatePersons($data['Person_id']);
 		}
 	}
+
+	public function deleteMap($map_id)
+	{
+		$data['map_status'] = "-2";
+		$data['map_id'] = $map_id;
+		$response = $this->Maps_model->deleteRecords($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Maps_model->display_records();
+			$this->load->view('spatial_data', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Maps_model->display_records();
+			$this->load->view('spatial_data', $result);
+		}
+	}
 }
 
 
