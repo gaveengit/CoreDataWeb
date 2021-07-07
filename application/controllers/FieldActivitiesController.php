@@ -685,6 +685,162 @@ class FieldActivitiesController extends CI_Controller
 		}
 
 	}
+	public function deleteBgLocation($trap_id)
+	{
+		$data['trap_status'] = "-2";
+		$data['trap_id'] = $trap_id;
+		$response = $this->BgTrap_model->deleteRecords($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->BgTrap_model->display_records();
+			$this->load->view('bg_locations', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->BgTrap_model->display_records();
+			$this->load->view('bg_locations', $result);
+		}
+	}
+
+	public function deleteOviLocation($trap_id)
+	{
+		$data['trap_status'] = "-2";
+		$data['trap_id'] = $trap_id;
+		$response = $this->OvTrap_model->deleteOviLocation($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->OvTrap_model->display_records();
+			$this->load->view('ov_locations', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->OvTrap_model->display_records();
+			$this->load->view('ov_locations', $result);
+		}
+	}
+
+	public function deleteBgCollection($collection_id)
+	{
+		$data['collect_status'] = "-2";
+		$data['collection_id'] = $collection_id;
+		$response = $this->Collection_model->deleteBgCollection($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Collection_model->display_bg_collection();
+			$this->load->view('bg_collections', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Collection_model->display_bg_collection();
+			$this->load->view('bg_collections', $result);
+		}
+	}
+	public function deleteBgService($service_id)
+	{
+		$data['service_status'] = "-2";
+		$data['service_id'] = $service_id;
+		$response = $this->Service_model->deleteBgService($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Service_model->display_bg_service();
+			$this->load->view('bg_service', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Service_model->display_bg_service();
+			$this->load->view('bg_service', $result);
+		}
+	}
+	public function deleteOviCollection($collection_id)
+	{
+		$data['collect_status'] = "-2";
+		$data['collection_id'] = $collection_id;
+		$response = $this->Collection_model->deleteOviCollection($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Collection_model->display_ovi_collection();
+			$this->load->view('ov_collections', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Collection_model->display_ovi_collection();
+			$this->load->view('ov_collections', $result);
+		}
+	}
+	public function deleteOviService($service_id)
+	{
+		$data['service_status'] = "-2";
+		$data['service_id'] = $service_id;
+		$response = $this->Service_model->deleteOvService($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Service_model->display_ovi_service();
+			$this->load->view('ovi_service', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Service_model->display_ovi_service();
+			$this->load->view('ovi_service', $result);
+		}
+	}
+	public function deleteMrcLocation($mrc_id)
+	{
+		$data['mrc_status'] = "-2";
+		$data['mrc_identifier'] = $mrc_id;
+		$response = $this->Mrc_model->deleteMrcLocation($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Mrc_model->display_records();
+			$this->load->view('mrc_locations', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Mrc_model->display_records();
+			$this->load->view('mrc_locations', $result);
+		}
+	}
+
+	public function deleteMrcRelease($release_id)
+	{
+		$data['released_status'] = "-2";
+		$data['release_id'] = $release_id;
+		$response = $this->Collection_model->deleteMrcRelease($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Collection_model->display_mrc_releases();
+			$this->load->view('mrc_releases', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Collection_model->display_mrc_releases();
+			$this->load->view('mrc_releases', $result);
+		}
+	}
+	public function deleteMrcService($service_id)
+	{
+		$data['service_status'] = "-2";
+		$data['service_id'] = $service_id;
+		$response = $this->Service_model->deleteMrcService($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Service_model->display_mrc_service();
+			$this->load->view('mrc_service', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Service_model->display_mrc_service();
+			$this->load->view('mrc_service', $result);
+		}
+	}
 
 	public function saveOvi()
 	{
@@ -842,7 +998,7 @@ class FieldActivitiesController extends CI_Controller
 
 		$response_check['check_data_count'] = $this->Collection_model->checkUpdateBgCollectionId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
-			$response = $this->Collection_model->updateRecordsBgCollection($data);
+			$response = $this->Collection_model->updateRecordsBgCollection($data,$data_old);
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
@@ -915,11 +1071,11 @@ class FieldActivitiesController extends CI_Controller
 
 		$response_check['check_data_count'] = $this->Collection_model->checkUpdateOviCollectionId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
-			$response = $this->Collection_model->updateRecordsOviCollection($data);
+			$response = $this->Collection_model->updateRecordsOviCollection($data,$data_old);
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Collection_model->display_ovi_collection();
+				$result['data'] = $this->Collection_model->display_ovi_collection($data,$data_old);
 				$this->load->view('ov_collections', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
@@ -987,7 +1143,7 @@ class FieldActivitiesController extends CI_Controller
 
 		$response_check['check_data_count'] = $this->Collection_model->checkUpdateMrcReleaseId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
-			$response = $this->Collection_model->updateRecordsMrcRelease($data);
+			$response = $this->Collection_model->updateRecordsMrcRelease($data,$data_old);
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";

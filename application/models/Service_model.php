@@ -228,10 +228,23 @@ class Service_model extends CI_Model
 			return false;
 		}
 	}
-
+	function deleteMrcService($data)
+	{
+		try {
+			$this->db->where('service_id', $data['service_id']);
+			$this->db->update('mrc_service', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 	function display_mrc_service()
 	{
 		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get("mrc_service");
 			return $query->result();
 		}
@@ -242,6 +255,8 @@ class Service_model extends CI_Model
 	function display_ovi_service()
 	{
 		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get("ovi_service");
 			return $query->result();
 		}
@@ -252,6 +267,8 @@ class Service_model extends CI_Model
 	function display_bg_service()
 	{
 		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get("bg_service");
 			return $query->result();
 		}
@@ -273,6 +290,32 @@ class Service_model extends CI_Model
 			echo $e;
 		}
 	}
+
+	function deleteBgService($data)
+	{
+		try {
+			$this->db->where('service_id', $data['service_id']);
+			$this->db->update('bg_service', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
+	function deleteOvService($data)
+	{
+		try {
+			$this->db->where('service_id', $data['service_id']);
+			$this->db->update('ovi_service', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
+
 
 	function display_records_individual_ovi_service($data)
 	{

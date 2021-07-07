@@ -88,6 +88,23 @@ class IncidentController extends CI_Controller
 			$this->load->view('update_incident',$result);
 		}
 	}
+	public function deleteIncident($incident_id)
+	{
+		$data['incident_status'] = "-2";
+		$data['incident_id'] = $incident_id;
+		$response = $this->Incident_model->deleteRecords($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Incident_model->display_records();
+			$this->load->view('incident_list', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Incident_model->display_records();
+			$this->load->view('incident_list', $result);
+		}
+	}
 }
 
 

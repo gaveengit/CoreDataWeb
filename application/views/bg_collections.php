@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message="Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="bg-locations-list-main-container">
@@ -73,6 +76,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Run Name</th>
 							<th>Collected Date</th>
 							<th>Collection Status</th>
+							<th></th>
+							<th></th>
 
 						</tr>
 						</thead>
@@ -83,9 +88,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						{
 							if(($i%2)!=0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updateBgCollection/') .$row->collection_id."'" . ">" . "<span value=".$row->collection_id.">" . $row->collection_id . "</span></td>";
-
+								echo "<td>" . $row->collection_id . "</td>";
 								echo "<td>" . $row->trap_id . "</td>";
 								echo "<td>" . $row->run_id . "</td>";
 								echo "<td>" . $row->collect_date ."</td>";
@@ -95,14 +98,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if($row->collect_status=='2') {
 									echo "<td>" . "Not Collected" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateBgCollection/') .$row->collection_id."'" . ">" . "<span value=".$row->collection_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteBgCollection/') .$row->collection_id."'" . ">" . "<span value=".$row->collection_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
 							else{
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updateBgCollection/') .$row->collection_id."'" . ">" . "<span value=".$row->collection_id.">" . $row->collection_id . "</span></td>";
-
+								echo "<td>" . $row->collection_id . "</td>";
 								echo "<td>" . $row->trap_id . "</td>";
 								echo "<td>" . $row->run_id . "</td>";
 								echo "<td>" . $row->collect_date ."</td>";
@@ -112,6 +117,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if($row->collect_status=='2') {
 									echo "<td>" . "Not Collected" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateBgCollection/') .$row->collection_id."'" . ">" . "<span value=".$row->collection_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteBgCollection/') .$row->collection_id."'" . ">" . "<span value=".$row->collection_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}

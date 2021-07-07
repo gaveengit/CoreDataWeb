@@ -24,6 +24,18 @@ class BgTrap_model extends CI_Model
 			return false;
 		}
 	}
+	function deleteRecords($data)
+	{
+		try {
+			$this->db->where('trap_id', $data['trap_id']);
+			$this->db->update('bg_trap', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 
 	function checkBgId($data)
 	{
@@ -73,6 +85,8 @@ class BgTrap_model extends CI_Model
 			$this->db->from('bg_trap');
 			$this->db->join('person', 'bg_trap.person_id= person.person_id');
 			$this->db->join('address', 'bg_trap.address_id= address.address_id');
+			$array = array('bg_trap.trap_status !=' => "-2");
+			$this->db->where($array);
 			$query=$this->db->get();
 			return $query->result();
 		}

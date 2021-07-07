@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message="Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="bg-locations-list-main-container">
@@ -73,6 +76,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Contact Person</th>
 							<th>Contact Number</th>
 							<th>Address</th>
+							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -82,9 +87,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						{
 							if(($i%2)!=0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updateBgLocations/') .$row->trap_id."'" . ">" . "<span value=".$row->trap_id.">" . $row->trap_id . "</span></td>";
-
+								echo "<td>" . $row->trap_id . "</td>";
 								if($row->trap_status=='1') {
 									echo "<td>" . "Proposed" . "</td>";
 								}
@@ -95,14 +98,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								echo "<td>" . $row->person_name . "</td>";
 								echo "<td>" . $row->contact_number . "</td>";
 								echo "<td>" . $row->add_line1 ." ".$row->add_line2. "</td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateBgLocations/') .$row->trap_id."'" . ">" . "<span value=".$row->trap_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteBgLocation/') .$row->trap_id."'" . ">" . "<span value=".$row->trap_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
 							else{
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updateBgLocations/') .$row->trap_id."'" . ">" . "<span value=".$row->trap_id.">" . $row->trap_id . "</span></td>";
-
+								echo "<td>" . $row->trap_id . "</td>";
 								if($row->trap_status=='1') {
 									echo "<td>" . "Proposed" . "</td>";
 								}
@@ -113,6 +118,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								echo "<td>" . $row->person_name . "</td>";
 								echo "<td>" . $row->contact_number . "</td>";
 								echo "<td>" . $row->add_line1 ." ".$row->add_line2. "</td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateBgLocations/') .$row->trap_id."'" . ">" . "<span value=".$row->trap_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteBgLocation/') .$row->trap_id."'" . ">" . "<span value=".$row->trap_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}

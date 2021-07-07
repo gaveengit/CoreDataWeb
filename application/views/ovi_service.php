@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message="Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="bg-locations-list-main-container">
@@ -75,6 +78,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Run Name</th>
 							<th>Service Date</th>
 							<th>Service Status</th>
+							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -83,9 +88,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						foreach ($data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updateOvService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . $row->service_id . "</span></td>";
-
+								echo "<td>" . $row->service_id . "</td>";
 								echo "<td>" . $row->trap_id . "</td>";
 								echo "<td>" . $row->run_id . "</td>";
 								echo "<td>" . $row->service_date . "</td>";
@@ -95,13 +98,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->service_status == '2') {
 									echo "<td>" . "Not Serviced" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateOvService/') .$row->service_id."'" . ">" . "<span value=".$row->service_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteOviService/') .$row->service_id."'" . ">" . "<span value=".$row->service_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							} else {
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updateOvService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . $row->service_id . "</span></td>";
-
+								echo "<td>" . $row->service_id . "</td>";
 								echo "<td>" . $row->trap_id . "</td>";
 								echo "<td>" . $row->run_id . "</td>";
 								echo "<td>" . $row->service_date . "</td>";
@@ -111,6 +116,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->service_status == '2') {
 									echo "<td>" . "Not Serviced" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateOvService/') .$row->service_id."'" . ">" . "<span value=".$row->service_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteOviService/') .$row->service_id."'" . ">" . "<span value=".$row->service_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}

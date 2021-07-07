@@ -24,6 +24,20 @@ class Mrc_model extends CI_Model
 			return false;
 		}
 	}
+	function deleteMrcLocation($data)
+	{
+		try {
+			$this->db->where('mrc_identifier', $data['mrc_identifier']);
+			$this->db->update('mrc', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
+
+
 
 	function checkMrcIdentifier($data)
 	{
@@ -66,6 +80,8 @@ class Mrc_model extends CI_Model
 			$this->db->from('mrc');
 			$this->db->join('person', 'mrc.person_id= person.person_id');
 			$this->db->join('address', 'mrc.address_id= address.address_id');
+			$array = array('mrc_status !=' => "-2");
+			$this->db->where($array);
 			$query=$this->db->get();
 			return $query->result();
 		}

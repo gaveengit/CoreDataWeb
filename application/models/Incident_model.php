@@ -24,6 +24,18 @@ class Incident_model extends CI_Model
 			return false;
 		}
 	}
+	function deleteRecords($data)
+	{
+		try {
+			$this->db->where('incident_id', $data['incident_id']);
+			$this->db->update('incident', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 
 	function checkMap($data)
 	{
@@ -55,6 +67,8 @@ class Incident_model extends CI_Model
 	function display_records()
 	{
 		try {
+			$array = array('incident_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get("incident");
 			return $query->result();
 		}

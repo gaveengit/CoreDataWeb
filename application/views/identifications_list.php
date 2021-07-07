@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message="Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="identifications-list-main-container">
@@ -76,6 +79,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Male Culex</th>
 							<th>Female Culex</th>
 							<th>Status</th>
+							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -84,9 +89,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						foreach($data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('DiagnosticsController/updateIdentifications/') . $row->identification_id . "'" . ">" . "<span value=" . $row->identification_id . ">" . $row->identification_id . "</span></td>";
-
+								echo "<td>" . $row->identification_id . "</td>";
 								echo "<td>" . $row->collection_id . "</td>";
 								echo "<td>" . $row->male_aedes_aegypti_count . "</td>";
 								echo "<td>" . $row->female_aedes_aegypti_count . "</td>";
@@ -100,14 +103,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->status == '2') {
 									echo "<td>" . "Unsuccess" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('DiagnosticsController/updateIdentifications/') . $row->identification_id . "'" . ">" . "<span value=" . $row->identification_id . ">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('DiagnosticsController/deleteIdentifications/') .$row->identification_id."'" . ">" . "<span value=".$row->identification_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							} else {
 								if (($i % 2) == 0) {
 									echo "<tr class='white-background'>";
-									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-											site_url('DiagnosticsController/updateIdentifications/') . $row->identification_id . "'" . ">" . "<span value=" . $row->identification_id . ">" . $row->identification_id . "</span></td>";
-
+									echo "<td>" . $row->identification_id . "</td>";
 									echo "<td>" . $row->collection_id . "</td>";
 									echo "<td>" . $row->male_aedes_aegypti_count . "</td>";
 									echo "<td>" . $row->female_aedes_aegypti_count . "</td>";
@@ -121,6 +126,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									if ($row->status == '2') {
 										echo "<td>" . "Unsuccess" . "</td>";
 									}
+									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+											site_url('DiagnosticsController/updateIdentifications/') . $row->identification_id . "'" . ">" . "<span value=" . $row->identification_id . ">" . "View" . "</span></td>";
+									echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+											site_url('DiagnosticsController/deleteIdentifications/') .$row->identification_id."'" . ">" . "<span value=".$row->identification_id.">" . "Delete" . "</span></td>";
 									echo "</tr>";
 									$i++;
 								}

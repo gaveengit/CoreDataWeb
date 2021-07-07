@@ -112,4 +112,21 @@ class DiagnosticsController extends CI_Controller
 			$this->load->view('update_identification',$result);
 		}
 		}
+	public function deleteIdentifications($identification_id)
+	{
+		$data['status'] = "-2";
+		$data['identification_id'] = $identification_id;
+		$response = $this->Identification_model->deleteRecords($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Identification_model->display_records();
+			$this->load->view('identifications_list', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Identification_model->display_records();
+			$this->load->view('identifications_list', $result);
+		}
+	}
 }

@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message="Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="bg-locations-list-main-container">
@@ -73,6 +76,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Run Name</th>
 							<th>Released Date</th>
 							<th>Release Status</th>
+							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -94,6 +99,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if($row->released_status=='2') {
 									echo "<td>" . "Not Released" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateMrcRelease/') .$row->release_id."'" . ">" . "<span value=".$row->release_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteMrcRelease/') .$row->release_id."'" . ">" . "<span value=".$row->release_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
@@ -111,6 +120,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if($row->released_status=='2') {
 									echo "<td>" . "Not Released" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateMrcRelease/') .$row->release_id."'" . ">" . "<span value=".$row->release_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteMrcRelease/') .$row->release_id."'" . ">" . "<span value=".$row->release_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}

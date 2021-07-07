@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message = "Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="bg-locations-list-main-container">
@@ -37,8 +40,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
+					</li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
+							Activities</a></li>
 					<li><a class="selected">MRC Services</a></li>
 				</ul>
 			</div>
@@ -53,7 +58,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="button-container">
 						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo
-						site_url('FieldActivitiesController/addMrcService');?>'">
+						site_url('FieldActivitiesController/addMrcService'); ?>'">
 							Add New MRC Service
 						</button>
 					</div>
@@ -73,6 +78,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Run Name</th>
 							<th>Service Date</th>
 							<th>Service Status</th>
+							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -81,9 +88,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						foreach ($data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updateMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . $row->service_id . "</span></td>";
-
+								echo "<td>" . $row->service_id . "</td>";
 								echo "<td>" . $row->trap_id . "</td>";
 								echo "<td>" . $row->run_id . "</td>";
 								echo "<td>" . $row->service_date . "</td>";
@@ -93,13 +98,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->service_status == '2') {
 									echo "<td>" . "Not Serviced" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							} else {
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/updateMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . $row->service_id . "</span></td>";
-
+								echo "<td>" . $row->service_id . "</td>";
 								echo "<td>" . $row->trap_id . "</td>";
 								echo "<td>" . $row->run_id . "</td>";
 								echo "<td>" . $row->service_date . "</td>";
@@ -109,6 +116,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->service_status == '2') {
 									echo "<td>" . "Not Serviced" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/updateMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
+										site_url('FieldActivitiesController/deleteMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
@@ -121,5 +132,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
-
+</body>
+</html>
 

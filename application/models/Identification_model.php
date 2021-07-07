@@ -25,6 +25,19 @@ class Identification_model extends CI_Model
 		}
 	}
 
+	function deleteRecords($data)
+	{
+		try {
+			$this->db->where('identification_id', $data['identification_id']);
+			$this->db->update('identification_result', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
+
 	function checkIdentificationId($data)
 	{
 		try {
@@ -54,6 +67,8 @@ class Identification_model extends CI_Model
 	function display_records()
 	{
 		try {
+			$array = array('status !=' => "-2");
+			$this->db->where($array);
 			$query=$this->db->get("identification_result");
 			return $query->result();
 		}

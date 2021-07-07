@@ -178,7 +178,20 @@ class Collection_model extends CI_Model
 
 
 
-	function updateRecordsBgCollection($data)
+	function updateRecordsBgCollection($data,$data_old)
+	{
+		try {
+			$this->db->where('collection_id', $data_old['collection_id_old']);
+			$this->db->update('bg_collection', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
+
+	function deleteBgCollection($data)
 	{
 		try {
 			$this->db->where('collection_id', $data['collection_id']);
@@ -191,7 +204,7 @@ class Collection_model extends CI_Model
 		}
 	}
 
-	function updateRecordsOviCollection($data)
+	function deleteOviCollection($data)
 	{
 		try {
 			$this->db->where('collection_id', $data['collection_id']);
@@ -204,10 +217,24 @@ class Collection_model extends CI_Model
 		}
 	}
 
-	function updateRecordsMrcRelease($data)
+
+	function updateRecordsOviCollection($data,$data_old)
 	{
 		try {
-			$this->db->where('release_id', $data['release_id']);
+			$this->db->where('collection_id', $data_old['collection_id_old']);
+			$this->db->update('ovi_collection', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
+
+	function updateRecordsMrcRelease($data,$data_old)
+	{
+		try {
+			$this->db->where('release_id', $data_old['release_id_old']);
 			$this->db->update('mrc_release', $data);
 			return true;
 		}
@@ -243,10 +270,23 @@ class Collection_model extends CI_Model
 			echo $e;
 		}
 	}
-
+	function deleteMrcRelease($data)
+	{
+		try {
+			$this->db->where('release_id', $data['release_id']);
+			$this->db->update('mrc_release', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 	function display_mrc_releases()
 	{
 		try {
+			$array = array('released_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get("mrc_release");
 			return $query->result();
 		}
@@ -257,6 +297,8 @@ class Collection_model extends CI_Model
 	function display_ovi_collection()
 	{
 		try {
+			$array = array('collect_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get("ovi_collection");
 			return $query->result();
 		}
@@ -267,6 +309,8 @@ class Collection_model extends CI_Model
 	function display_bg_collection()
 	{
 		try {
+			$array = array('collect_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get("bg_collection");
 			return $query->result();
 		}

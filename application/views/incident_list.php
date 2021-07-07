@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message="Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="screening-list-main-container">
@@ -74,6 +77,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Incident Time</th>
 							<th>Full Address</th>
 							<th>Action Status</th>
+							<th></th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -84,8 +89,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						{
 							if(($i%2)!=0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('IncidentController/updateIncident/') .$row->incident_id."'" . ">" . "<span value=".$row->incident_id.">" . $row->member_name . "</span></td>";
+								echo "<td>" . $row->member_name . "</td>";
 								if($row->incident_type=='1') {
 									echo "<td>" . "Community Complaint" . "</td>";
 								}
@@ -108,19 +112,42 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								echo "<td>" . $row->incident_time . "</td>";
 								echo "<td>" . $row->full_address . "</td>";
 								echo "<td>" . $row->incident_status . "</td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('IncidentController/updateIncident/') .$row->incident_id."'" . ">" . "<span value=".$row->incident_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('IncidentController/deleteIncident/') .$row->incident_id."'" . ">" . "<span value=".$row->incident_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
 							else{
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('IncidentController/updateIncident/') .$row->incident_id."'" . ">" . "<span value=".$row->incident_id.">" . $row->member_name . "</span></td>";
-								echo "<td>" . $row->incident_type . "</td>";
-								echo "<td>" . $row->incident_priority . "</td>";
+								echo "<td>" . $row->member_name . "</td>";
+								if($row->incident_type=='1') {
+									echo "<td>" . "Community Complaint" . "</td>";
+								}
+								if($row->incident_type=='2') {
+									echo "<td>" . "Community Enquiry" . "</td>";
+								}
+								if($row->incident_type=='3') {
+									echo "<td>" . "Operational Incident" . "</td>";
+								}
+								if($row->incident_priority=='1') {
+									echo "<td>" . "High" . "</td>";
+								}
+								if($row->incident_priority=='2') {
+									echo "<td>" . "Medium" . "</td>";
+								}
+								if($row->incident_priority=='3') {
+									echo "<td>" . "Low" . "</td>";
+								}
 								echo "<td>" . $row->incident_date . "</td>";
 								echo "<td>" . $row->incident_time . "</td>";
 								echo "<td>" . $row->full_address . "</td>";
 								echo "<td>" . $row->incident_status . "</td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('IncidentController/updateIncident/') .$row->incident_id."'" . ">" . "<span value=".$row->incident_id.">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
+										site_url('IncidentController/deleteIncident/') .$row->incident_id."'" . ">" . "<span value=".$row->incident_id.">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
