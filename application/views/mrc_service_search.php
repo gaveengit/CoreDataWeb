@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</script>
 </head>
 <body>
-<div class="export-list-main-container">
+<div class="bg-locations-list-main-container">
 	<div class="home-header-main">
 		<div class="container">
 			<div class="row">
@@ -42,7 +42,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<ul class="breadcrumb">
 					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
 					</li>
-					<li><a class="selected">Bio Banking Exports</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
+							Activities</a></li>
+					<li><a class="selected">MRC Services</a></li>
 				</ul>
 			</div>
 		</div>
@@ -52,12 +54,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Bio Banking Exports</h3>
+						<h3 class="title">MRC Services</h3>
 					</div>
 					<div class="button-container">
 						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo
-						site_url('ExportController/addExport'); ?>'">
-							Add New Bio Banking Export
+						site_url('FieldActivitiesController/addMrcService'); ?>'">
+							Add New MRC Service
 						</button>
 					</div>
 				</div>
@@ -71,7 +73,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="col-md-8">
 						<div class="row">
 							<input type="text" class="form-control search-bar" name="search_bar"
-								   placeholder="Search by export id or collection id"/>
+								   placeholder="Search by service id, mrc identifier"/>
 						</div>
 					</div>
 					<div class="col-md-2">
@@ -88,12 +90,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<table>
 						<thead>
 						<tr class="grey-background">
-							<th>Export Id</th>
-							<th>Ovi Collection Id</th>
-							<th>Qty</th>
-							<th>Date</th>
-							<th>Time</th>
-							<th>Status</th>
+							<th>Service Id</th>
+							<th>MRC Id</th>
+							<th>Run Name</th>
+							<th>Service Date</th>
+							<th>Service Status</th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -104,46 +105,40 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						foreach ($data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
-								echo "<td>" . $row->export_id . "</td>";
-								echo "<td>" . $row->ovi_collection_id . "</td>";
-								echo "<td>" . $row->qty . "</td>";
-								echo "<td>" . $row->export_date . "</td>";
-								echo "<td>" . $row->export_time . "</td>";
-								if ($row->export_status == '1') {
-									echo "<td>" . "Eligible" . "</td>";
+								echo "<td>" . $row->service_id . "</td>";
+								echo "<td>" . $row->trap_id . "</td>";
+								echo "<td>" . $row->run_id . "</td>";
+								echo "<td>" . $row->service_date . "</td>";
+								if ($row->service_status == '1') {
+									echo "<td>" . "Serviced" . "</td>";
 								}
-								if ($row->export_status == '2') {
-									echo "<td>" . "Not Eligible" . "</td>";
+								if ($row->service_status == '2') {
+									echo "<td>" . "Not Serviced" . "</td>";
 								}
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
+									site_url('FieldActivitiesController/updateMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . "View" . "</span></td>";
 								echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-										site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
+									site_url('FieldActivitiesController/deleteMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							} else {
-								if (($i % 2) == 0) {
-									echo "<tr class='white-background'>";
-									echo "<td>" . $row->export_id . "</td>";
-									echo "<td>" . $row->ovi_collection_id . "</td>";
-									echo "<td>" . $row->qty . "</td>";
-									echo "<td>" . $row->export_date . "</td>";
-									echo "<td>" . $row->export_time . "</td>";
-									if ($row->export_status == '1') {
-										echo "<td>" . "Eligible" . "</td>";
-									}
-									if ($row->export_status == '2') {
-										echo "<td>" . "Not Eligible" . "</td>";
-									}
-									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-											site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
-									echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-											site_url('FieldActivitiesController/deleteBgLocation/') . $row->trap_id . "'" . ">" . "<span value=" . $row->trap_id . ">" . "Delete" . "</span></td>";
-									echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-											site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
-									echo "</tr>";
-									$i++;
+								echo "<tr class='grey-background'>";
+								echo "<td>" . $row->service_id . "</td>";
+								echo "<td>" . $row->trap_id . "</td>";
+								echo "<td>" . $row->run_id . "</td>";
+								echo "<td>" . $row->service_date . "</td>";
+								if ($row->service_status == '1') {
+									echo "<td>" . "Serviced" . "</td>";
 								}
+								if ($row->service_status == '2') {
+									echo "<td>" . "Not Serviced" . "</td>";
+								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+									site_url('FieldActivitiesController/updateMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . "View" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
+									site_url('FieldActivitiesController/deleteMrcService/') . $row->service_id . "'" . ">" . "<span value=" . $row->service_id . ">" . "Delete" . "</span></td>";
+								echo "</tr>";
+								$i++;
 							}
 						}
 						?>
@@ -156,4 +151,5 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 </body>
 </html>
+
 

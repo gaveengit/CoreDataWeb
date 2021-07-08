@@ -116,9 +116,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									echo "<td>" . "Not Eligible" . "</td>";
 								}
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
+									site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
 								echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-										site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
+									site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							} else {
@@ -136,11 +136,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										echo "<td>" . "Not Eligible" . "</td>";
 									}
 									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-											site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
+										site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
 									echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-											site_url('FieldActivitiesController/deleteBgLocation/') . $row->trap_id . "'" . ">" . "<span value=" . $row->trap_id . ">" . "Delete" . "</span></td>";
+										site_url('FieldActivitiesController/deleteBgLocation/') . $row->trap_id . "'" . ">" . "<span value=" . $row->trap_id . ">" . "Delete" . "</span></td>";
 									echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-											site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
+										site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
 									echo "</tr>";
 									$i++;
 								}
@@ -156,4 +156,5 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 </body>
 </html>
+
 
