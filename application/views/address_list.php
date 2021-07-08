@@ -64,6 +64,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 		</div>
 	</div>
+	<div class="search-bar-main-container">
+		<div class="container">
+			<div class="row">
+				<div class="search-bar-secondary-container clearfix">
+					<div class="col-md-8">
+						<div class="row">
+							<input type="text" class="form-control search-bar" name="search_bar"
+								   placeholder="Search by address"/>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary search-btn">Search</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="bg-locations-table-main-container">
 		<div class="container">
 			<div class="row">

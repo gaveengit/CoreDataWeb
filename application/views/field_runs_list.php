@@ -61,6 +61,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 		</div>
 	</div>
+	<div class="search-bar-main-container">
+		<div class="container">
+			<div class="row">
+				<div class="search-bar-secondary-container clearfix">
+					<div class="col-md-8">
+						<div class="row">
+							<input type="text" class="form-control search-bar" name="search_bar"
+								   placeholder="Search by run name, date"/>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary search-btn">Search</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="field-runs-table-main-container">
 		<div class="container">
 			<div class="row">
@@ -72,6 +89,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Run Date</th>
 							<th>Run Type</th>
 							<th>Run Status</th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -80,8 +98,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						foreach ($ovi_data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
 								if ($row->ovi_run_type == '1') {
 									echo "<td>" . "OVI Service" . "</td>";
@@ -95,13 +112,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->run_status == '2') {
 									echo "<td>" . "Completed" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
 
 								echo "</tr>";
 								$i++;
 							} else {
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
 								if ($row->ovi_run_type == '1') {
 									echo "<td>" . "OVI Service" . "</td>";
@@ -115,7 +133,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->run_status == '2') {
 									echo "<td>" . "Completed" . "</td>";
 								}
-
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							}
@@ -123,8 +142,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						foreach ($bg_data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
 								if ($row->bg_run_type == '1') {
 									echo "<td>" . "BG Service" . "</td>";
@@ -138,13 +156,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->run_status == '2') {
 									echo "<td>" . "Completed" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
 
 								echo "</tr>";
 								$i++;
 							} else {
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
 								if ($row->bg_run_type == '1') {
 									echo "<td>" . "BG Service" . "</td>";
@@ -158,6 +177,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->run_status == '2') {
 									echo "<td>" . "Completed" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
 
 								echo "</tr>";
 								$i++;
@@ -168,8 +189,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						foreach ($mrc_data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
 								if ($row->mrc_run_type == '1') {
 									echo "<td>" . "MRC Service" . "</td>";
@@ -183,13 +203,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->run_status == '2') {
 									echo "<td>" . "Completed" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
 
 								echo "</tr>";
 								$i++;
 							} else {
 								echo "<tr class='grey-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . $row->field_run_id . "</span></td>";
+								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
 								if ($row->mrc_run_type == '1') {
 									echo "<td>" . "MRC Service" . "</td>";
@@ -203,6 +224,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->run_status == '2') {
 									echo "<td>" . "Completed" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
 
 								echo "</tr>";
 								$i++;

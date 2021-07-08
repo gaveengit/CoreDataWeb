@@ -8,6 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
+	<script>
+		var confirm_delete_message="Are you sure to delete this record?";
+	</script>
 </head>
 <body>
 <div class="screening-list-main-container">
@@ -60,6 +63,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 		</div>
 	</div>
+	<div class="search-bar-main-container">
+		<div class="container">
+			<div class="row">
+				<div class="search-bar-secondary-container clearfix">
+					<div class="col-md-8">
+						<div class="row">
+							<input type="text" class="form-control search-bar" name="search_bar"
+								   placeholder="Search by screening id or diagnostic id"/>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary search-btn">Search</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="bg-locations-table-main-container">
 		<div class="container">
 			<div class="row">
@@ -68,7 +88,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<thead>
 						<tr class="grey-background">
 						<tr class="grey-background">
-							<th>Diagnostic Id</th>
+							<th>Screening Id</th>
 							<th>Identification Id</th>
 							<th>Male Aygypti</th>
 							<th>Female Aygypti</th>
@@ -77,6 +97,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<th>Male Culex</th>
 							<th>Female Culex</th>
 							<th>Status</th>
+							<th></th>
+							<th></th>
 						</tr>
 						</tr>
 						</thead>
@@ -86,9 +108,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						foreach($data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('ScreeningController/updateScreening/') . $row->screening_id . "'" . ">" . "<span value=" . $row->screening_id . ">" . $row->screening_id . "</span></td>";
-
+								echo "<td>" . $row->screening_id . "</td>";
 								echo "<td>" . $row->identification_id . "</td>";
 								echo "<td>" . $row->male_aedes_aegypti_result . "</td>";
 								echo "<td>" . $row->female_aedes_aegypti_result . "</td>";
@@ -102,14 +122,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->status == '2') {
 									echo "<td>" . "Unsuccess" . "</td>";
 								}
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('ScreeningController/updateScreening/') . $row->screening_id . "'" . ">" . "<span value=" . $row->screening_id . ">" ."View". "</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+										site_url('ScreeningController/deleteScreening/') . $row->screening_id . "'" . ">" . "<span value=" . $row->screening_id . ">" ."Delete". "</span></td>";
 								echo "</tr>";
 								$i++;
 							} else {
 								if (($i % 2) == 0) {
 									echo "<tr class='white-background'>";
-									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-											site_url('ScreeningController/updateScreening/') . $row->screening_id . "'" . ">" . "<span value=" . $row->screening_id . ">" . $row->screening_id . "</span></td>";
-
+									echo "<td>" . $row->screening_id . "</td>";
 									echo "<td>" . $row->identification_id . "</td>";
 									echo "<td>" . $row->male_aedes_aegypti_result . "</td>";
 									echo "<td>" . $row->female_aedes_aegypti_result . "</td>";
@@ -123,6 +145,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									if ($row->status == '2') {
 										echo "<td>" . "Unsuccess" . "</td>";
 									}
+									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+											site_url('ScreeningController/updateScreening/') . $row->screening_id . "'" . ">" . "<span value=" . $row->screening_id . ">" ."View". "</span></td>";
+									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
+											site_url('ScreeningController/deleteScreening/') . $row->screening_id . "'" . ">" . "<span value=" . $row->screening_id . ">" ."Delete". "</span></td>";
 									echo "</tr>";
 									$i++;
 								}

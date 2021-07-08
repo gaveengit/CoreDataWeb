@@ -110,5 +110,23 @@ class ScreeningController extends CI_Controller
 		}
 	}
 
+	public function deleteScreening($screening_id)
+	{
+		$data['status'] = "-2";
+		$data['screening_id'] = $screening_id;
+		$response = $this->Screening_model->deleteRecord($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Screening_model->display_records();
+			$this->load->view('screening_list', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Screening_model->display_records();
+			$this->load->view('screening_list', $result);
+		}
+	}
+
 }
 

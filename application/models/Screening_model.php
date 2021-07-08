@@ -54,6 +54,8 @@ class Screening_model extends CI_Model
 	function display_records()
 	{
 		try {
+			$array = array('status !=' => "-2");
+			$this->db->where($array);
 			$query=$this->db->get("screening_result");
 			return $query->result();
 		}
@@ -84,6 +86,17 @@ class Screening_model extends CI_Model
 		}
 		catch(Exception $e){
 			echo $e;
+		}
+	}
+	function deleteRecord($data){
+		try {
+			$this->db->where('screening_id', $data['screening_id']);
+			$this->db->update('screening_result', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
 		}
 	}
 

@@ -92,6 +92,24 @@ class ExportController extends CI_Controller
 		}
 	}
 
+	public function deleteExport($export_id)
+	{
+		$data['export_status'] = "-2";
+		$data['export_id'] = $export_id;
+		$response = $this->Export_model->deleteRecords($data);
+		if ($response == true) {
+			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			</script>";
+			$result['data'] = $this->Export_model->display_records();
+			$this->load->view('export_list', $result);
+		} else {
+			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			</script>";
+			$result['data'] = $this->Export_model->display_records();
+			$this->load->view('export_list', $result);
+		}
+	}
+
 
 }
 

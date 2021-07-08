@@ -50,10 +50,23 @@ class Export_model extends CI_Model
 			echo $e;
 		}
 	}
-
+	function deleteRecords($data)
+	{
+		try {
+			$this->db->where('export_id', $data['export_id']);
+			$this->db->update('biobank_export', $data);
+			return true;
+		}
+		catch(Exception $e)
+		{
+			return false;
+		}
+	}
 	function display_records()
 	{
 		try {
+			$array = array('export_status !=' => "-2");
+			$this->db->where($array);
 			$query=$this->db->get("biobank_export");
 			return $query->result();
 		}
