@@ -41,7 +41,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<ul class="breadcrumb">
 					<li><a onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="selected">Spatial List</a></li>
+					<li><a onclick="location.href='<?php echo site_url('SpatialDataController');?>'">Spatial List</a></li>
+					<li><a class="selected">Spatial search</a></li>
 				</ul>
 			</div>
 		</div>
@@ -67,15 +68,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="search-bar-secondary-container clearfix">
-					<div class="col-md-8">
-						<div class="row">
-							<input type="text" class="form-control search-bar" name="search_bar"
-								   placeholder="Search by layer name"/>
+					<form method="post" action="<?php echo
+					site_url('SpatialDataController/search'); ?>">
+						<div class="col-md-8">
+							<div class="row">
+								<input type="text" class="form-control search-bar" name="search_bar"
+									   placeholder="Search by layer name"/>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-2">
-						<button class="btn btn-primary search-btn">Search</button>
-					</div>
+						<div class="col-md-2">
+							<button class="btn btn-primary search-btn" type="submit">Search</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

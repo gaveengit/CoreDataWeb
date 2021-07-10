@@ -294,6 +294,20 @@ class Collection_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_mrc_releases_search($mrc)
+	{
+		try {
+			$array = array('released_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->like('release_id', $mrc, 'both');
+			$this->db->or_like('identifier', $mrc, 'both');
+			$query=$this->db->get("mrc_release");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 	function display_ovi_collection()
 	{
 		try {
@@ -312,6 +326,36 @@ class Collection_model extends CI_Model
 			$array = array('collect_status !=' => '-2');
 			$this->db->where($array);
 			$query=$this->db->get("bg_collection");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
+	function display_bg_collection_search($bg_collection)
+	{
+		try {
+			$array = array('collect_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->like('collection_id', $bg_collection, 'both');
+			$this->db->or_like('trap_id', $bg_collection, 'both');
+			$query=$this->db->get("bg_collection");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
+	function display_ovi_collection_search($ovi_collection)
+	{
+		try {
+			$array = array('collect_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->like('collection_id', $ovi_collection, 'both');
+			$this->db->or_like('trap_id', $ovi_collection, 'both');
+			$query=$this->db->get("ovi_collection");
 			return $query->result();
 		}
 		catch(Exception $e){

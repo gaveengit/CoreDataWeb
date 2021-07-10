@@ -63,6 +63,20 @@ class Screening_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_records_search($screening)
+	{
+		try {
+			$array = array('status !=' => "-2");
+			$this->db->where($array);
+			$this->db->like('screening_id', $screening, 'both');
+			$this->db->or_like('identification_id', $screening, 'both');
+			$query=$this->db->get("screening_result");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 	function display_records_active()
 	{
 		try {

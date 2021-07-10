@@ -42,7 +42,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<ul class="breadcrumb">
 					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
 					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController');?>'">Field Activities</a></li>
-					<li><a class="selected">Persons</a></li>
+					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/Persons');?>'">Persons</a></li>
+					<li><a class="selected">Search Persons</a></li>
 				</ul>
 			</div>
 		</div>
@@ -68,15 +69,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="search-bar-secondary-container clearfix">
-					<div class="col-md-8">
-						<div class="row">
-							<input type="text" class="form-control search-bar" name="search_bar"
-								   placeholder="Search by full name, contact number"/>
+					<form method="post" action="<?php echo
+					site_url('FieldActivitiesController/searchPerson'); ?>">
+						<div class="col-md-8">
+							<div class="row">
+								<input type="text" class="form-control search-bar" name="search_bar"
+									   placeholder="Search by full name, contact number"/>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-2">
-						<button class="btn btn-primary search-btn">Search</button>
-					</div>
+						<div class="col-md-2">
+							<button class="btn btn-primary search-btn" type="submit">Search</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -94,6 +94,43 @@ class BgTrap_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_records_search($trap)
+	{
+		try {
+			/*
+			$query=$this->db->get("bg_trap");
+			return $query->result();
+			*/
+			$this->db->select('bg_trap.trap_id as trap_id, 
+                   bg_trap.trap_status as trap_status, 
+                   bg_trap.trap_position as trap_position, 
+                   bg_trap.coordinates as coordinates,
+                   bg_trap.bg_date as bg_date,
+                   bg_trap.bg_time as bg_time,  
+                   person.full_name as person_name,
+                   person.contact_number as contact_number,
+                   address.add_line1 as add_line1,
+                   address.add_line2 as add_line2
+                   '
+			);
+			$this->db->from('bg_trap');
+			$this->db->join('person', 'bg_trap.person_id= person.person_id');
+			$this->db->join('address', 'bg_trap.address_id= address.address_id');
+			$array = array('bg_trap.trap_status !=' => "-2");
+			$this->db->where($array);
+
+			$this->db->like('bg_trap.trap_id', $trap, 'both');
+			$this->db->or_like('person.full_name', $trap, 'both');
+			$this->db->or_like('address.add_line1', $trap, 'both');
+			$this->db->or_like('address.add_line2', $trap, 'both');
+
+			$query=$this->db->get();
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 	function display_records_active()
 	{
 		try {

@@ -19,6 +19,12 @@ class DiagnosticsController extends CI_Controller
 		$result['data'] = $this->Identification_model->display_records();
 		$this->load->view('identifications_list',$result);
 	}
+	public function identificationSearch()
+	{
+		$identification = $this->input->post('search_bar');
+		$result['data'] = $this->Identification_model->display_records_search($identification);
+		$this->load->view('identifications_list_search',$result);
+	}
 	public function addIdentifications()
 	{
 		$result['bg_data'] = $this->Collection_model->display_records_individual_bg_collection_collected_identification();

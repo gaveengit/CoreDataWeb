@@ -42,7 +42,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<ul class="breadcrumb">
 					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
 					</li>
-					<li><a class="selected">Bio Banking Exports</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('ExportController'); ?>'">Bio Banking
+							Exports</a>
+					</li>
+					<li><a class="selected">Bio Banking Exports Search</a></li>
 				</ul>
 			</div>
 		</div>
@@ -68,15 +71,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="search-bar-secondary-container clearfix">
-					<div class="col-md-8">
-						<div class="row">
-							<input type="text" class="form-control search-bar" name="search_bar"
-								   placeholder="Search by export id or collection id"/>
+					<form method="post" action="<?php echo
+					site_url('ExportController/exportSearch'); ?>">
+						<div class="col-md-8">
+							<div class="row">
+								<input type="text" class="form-control search-bar" name="search_bar"
+									   placeholder="Search by export id or collection id"/>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-2">
-						<button class="btn btn-primary search-btn">Search</button>
-					</div>
+						<div class="col-md-2">
+							<button class="btn btn-primary search-btn" type="submit">Search</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -116,9 +122,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									echo "<td>" . "Not Eligible" . "</td>";
 								}
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-									site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
+										site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
 								echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-									site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
+										site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
 							} else {
@@ -136,11 +142,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										echo "<td>" . "Not Eligible" . "</td>";
 									}
 									echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
+											site_url('ExportController/updateExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "View" . "</span></td>";
 									echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-										site_url('FieldActivitiesController/deleteBgLocation/') . $row->trap_id . "'" . ">" . "<span value=" . $row->trap_id . ">" . "Delete" . "</span></td>";
+											site_url('FieldActivitiesController/deleteBgLocation/') . $row->trap_id . "'" . ">" . "<span value=" . $row->trap_id . ">" . "Delete" . "</span></td>";
 									echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
-										site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
+											site_url('ExportController/deleteExport/') . $row->export_id . "'" . ">" . "<span value=" . $row->export_id . ">" . "Delete" . "</span></td>";
 									echo "</tr>";
 									$i++;
 								}

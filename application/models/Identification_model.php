@@ -76,6 +76,22 @@ class Identification_model extends CI_Model
 			echo $e;
 		}
 	}
+
+	function display_records_search($identification)
+	{
+		try {
+			$array = array('status !=' => "-2");
+			$this->db->where($array);
+			$this->db->like('identification_id', $identification, 'both');
+			$this->db->or_like('collection_id', $identification, 'both');
+			$query=$this->db->get("identification_result");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
 	function display_records_active()
 	{
 		try {

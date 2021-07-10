@@ -37,6 +37,21 @@ class Incident_model extends CI_Model
 		}
 	}
 
+	function display_records_search($incident){
+		try{
+			$this->db->like('member_name', $incident, 'both');
+			$this->db->or_like('full_address', $incident, 'both');
+			$array = array('incident_status !='=>'-2');
+			$this->db->where($array);
+			$query=$this->db->get("incident");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
+
 	function checkMap($data)
 	{
 		try {

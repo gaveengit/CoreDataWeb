@@ -76,6 +76,18 @@ class Maps_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_records_search($map_name){
+		try{
+			$this->db->like('name', $map_name, 'both');
+			$array = array('map_status !=' => '-2');
+			$this->db->where($array);
+			$query=$this->db->get("map_layer");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 
 	function display_records_individual($data)
 	{

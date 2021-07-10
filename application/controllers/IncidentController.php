@@ -18,6 +18,13 @@ class IncidentController extends CI_Controller
 		$result['data'] = $this->Incident_model->display_records();
 		$this->load->view('incident_list',$result);
 	}
+	public function incidentSearch()
+	{
+		$incident_name = $this->input->post('search_bar');
+		$result['data'] = $this->Incident_model->display_records_search($incident_name);
+		$this->load->view('incident_list_search',$result);
+	}
+
 	public function addIncident()
 	{
 		$this->load->view('add_incident');
@@ -47,7 +54,8 @@ class IncidentController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record added successfully.');
 			</script>";
-			$this->load->view('incident_list');
+			$result['data'] = $this->Incident_model->display_records();
+			$this->load->view('incident_list',$result);
 		} else {
 			echo "<script type='text/javascript'>alert('Fail to add record.');
 			</script>";

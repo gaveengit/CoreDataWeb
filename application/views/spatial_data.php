@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 	<script>
-		var confirm_delete_message="Are you sure to delete this record?";
+		var confirm_delete_message = "Are you sure to delete this record?";
 	</script>
 </head>
 <body>
@@ -40,7 +40,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
+					<li><a onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a></li>
 					<li><a class="selected">Spatial List</a></li>
 				</ul>
 			</div>
@@ -55,7 +55,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="button-container">
 						<button type="submit" class="btn btn-success add-btn" onclick="location.href='<?php echo
-						site_url('SpatialDataController/addNewMap');?>'">
+						site_url('SpatialDataController/addNewMap'); ?>'">
 							Add New Map Layer
 						</button>
 					</div>
@@ -67,15 +67,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="search-bar-secondary-container clearfix">
-					<div class="col-md-8">
-						<div class="row">
-							<input type="text" class="form-control search-bar" name="search_bar"
-								   placeholder="Search by layer name"/>
+					<form method="post" action="<?php echo
+					site_url('SpatialDataController/search'); ?>">
+						<div class="col-md-8">
+							<div class="row">
+								<input type="text" class="form-control search-bar" name="search_bar"
+									   placeholder="Search by layer name"/>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-2">
-						<button class="btn btn-primary search-btn">Search</button>
-					</div>
+						<div class="col-md-2">
+							<button class="btn btn-primary search-btn" type="submit">Search</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -97,34 +100,32 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</thead>
 						<tbody>
 						<?php
-						$i=1;
-						foreach($data as $row)
-						{
-							if(($i%2)!=0) {
+						$i = 1;
+						foreach ($data as $row) {
+							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
 								echo "<td>" . $row->name . "</td>";
 								echo "<td>" . $row->description . "</td>";
 								echo "<td>" . $row->map_status . "</td>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" .  "Map View"  . "</span></td>";
+										site_url('SpatialDataController/mapView/') . $row->map_id . "'" . ">" . "<span value=" . $row->map_id . ">" . "Map View" . "</span></td>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" ."Update Map" ."</span></td>";
-								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
-										site_url('SpatialDataController/deleteMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . "Delete" . "</span></td>";
+										site_url('SpatialDataController/updateMap/') . $row->map_id . "'" . ">" . "<span value=" . $row->map_id . ">" . "Update Map" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
+										site_url('SpatialDataController/deleteMap/') . $row->map_id . "'" . ">" . "<span value=" . $row->map_id . ">" . "Delete" . "</span></td>";
 								echo "</tr>";
 								$i++;
-							}
-							else{
+							} else {
 								echo "<tr class='grey-background'>";
 								echo "<td>" . $row->name . "</td>";
 								echo "<td>" . $row->description . "</td>";
 								echo "<td>" . $row->map_status . "</td>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/mapView/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" .  "Map View"  . "</span></td>";
+										site_url('SpatialDataController/mapView/') . $row->map_id . "'" . ">" . "<span value=" . $row->map_id . ">" . "Map View" . "</span></td>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('SpatialDataController/updateMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" ."Update Map" ."</span></td>";
-								echo "<td class='run-name-cell' onclick=" ."if(confirm(confirm_delete_message))". "location.href=" . "'" .
-										site_url('SpatialDataController/deleteMap/') .$row->map_id."'" . ">" . "<span value=".$row->map_id.">" . "Delete" . "</span></td>";
+										site_url('SpatialDataController/updateMap/') . $row->map_id . "'" . ">" . "<span value=" . $row->map_id . ">" . "Update Map" . "</span></td>";
+								echo "<td class='run-name-cell' onclick=" . "if(confirm(confirm_delete_message))" . "location.href=" . "'" .
+										site_url('SpatialDataController/deleteMap/') . $row->map_id . "'" . ">" . "<span value=" . $row->map_id . ">" . "Delete" . "</span></td>";
 
 								echo "</tr>";
 								$i++;

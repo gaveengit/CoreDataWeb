@@ -20,6 +20,12 @@ class ExportController extends CI_Controller
 		$result['data'] = $this->Export_model->display_records();
 		$this->load->view('export_list', $result);
 	}
+	public function exportSearch()
+	{
+		$export = $this->input->post('search_bar');
+		$result['data'] = $this->Export_model->display_records_search($export);
+		$this->load->view('export_list_search',$result);
+	}
 
 	public function addExport()
 	{

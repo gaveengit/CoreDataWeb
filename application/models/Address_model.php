@@ -36,6 +36,20 @@ class Address_model extends CI_Model
 			return false;
 		}
 	}
+	function display_records_search($address){
+		try{
+			$this->db->like('add_line1', $address, 'both');
+			$this->db->or_like('add_line2', $address, 'both');
+			$this->db->or_like('location_description', $address, 'both');
+			$array = array('location_status !='=>'-2');
+			$this->db->where($array);
+			$query=$this->db->get("address");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 
 	function checkAddress($data)
 	{
