@@ -23,6 +23,7 @@ class SpatialDataController extends CI_Controller
 	{
 		$map_name = $this->input->post('search_bar');
 		$result['data'] = $this->Maps_model->display_records_search($map_name);
+		$result['search_key'][0]=$map_name;
 		$this->load->view('spatial_data_search', $result);
 	}
 

@@ -22,6 +22,7 @@ class IncidentController extends CI_Controller
 	{
 		$incident_name = $this->input->post('search_bar');
 		$result['data'] = $this->Incident_model->display_records_search($incident_name);
+		$result['search_key'][0]=$incident_name;
 		$this->load->view('incident_list_search',$result);
 	}
 

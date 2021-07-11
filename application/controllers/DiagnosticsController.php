@@ -23,6 +23,7 @@ class DiagnosticsController extends CI_Controller
 	{
 		$identification = $this->input->post('search_bar');
 		$result['data'] = $this->Identification_model->display_records_search($identification);
+		$result['search_key'][0]=$identification;
 		$this->load->view('identifications_list_search',$result);
 	}
 	public function addIdentifications()

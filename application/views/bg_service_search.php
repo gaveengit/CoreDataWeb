@@ -44,7 +44,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</li>
 					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
 							Activities</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/bgServices'); ?>'">BG Services</a></li>
+					<li><a class="#"
+						   onclick="location.href='<?php echo site_url('FieldActivitiesController/bgServices'); ?>'">BG
+							Services</a></li>
 					<li><a class="selected">BG Services Search</a></li>
 				</ul>
 			</div>
@@ -76,7 +78,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-8">
 							<div class="row">
 								<input type="text" class="form-control search-bar" name="search_bar"
-									   placeholder="Search by service id, trap id"/>
+									   placeholder="Search by service id, trap id"
+									   value="<?php echo $search_key[0] ?>"/>
 							</div>
 						</div>
 						<div class="col-md-2">

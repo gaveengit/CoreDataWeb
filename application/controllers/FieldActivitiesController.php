@@ -34,6 +34,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$trap = $this->input->post('search_bar');
 		$result['data'] = $this->BgTrap_model->display_records_search($trap);
+		$result['search_key'][0]=$trap;
 		$this->load->view('bg_locations_search', $result);
 	}
 
@@ -63,6 +64,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$trap = $this->input->post('search_bar');
 		$result['data'] = $this->OvTrap_model->display_records_search($trap);
+		$result['search_key'][0]=$trap;
 		$this->load->view('ov_locations_search', $result);
 	}
 	public function addOviLocations()
@@ -90,6 +92,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$mrc = $this->input->post('search_bar');
 		$result['data'] = $this->Mrc_model->display_records_search($mrc);
+		$result['search_key'][0]=$mrc;
 		$this->load->view('mrc_locations_search', $result);
 	}
 	public function addMrcLocations()
@@ -116,6 +119,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$bg_collection = $this->input->post('search_bar');
 		$result['data'] = $this->Collection_model->display_bg_collection_search($bg_collection);
+		$result['search_key'][0]=$bg_collection;
 		$this->load->view('bg_collections_search', $result);
 	}
 
@@ -129,6 +133,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$bg_service = $this->input->post('search_bar');
 		$result['data'] = $this->Service_model->display_bg_service_search($bg_service);
+		$result['search_key'][0]=$bg_service;
 		$this->load->view('bg_service_search', $result);
 	}
 
@@ -168,6 +173,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$ovi_collection = $this->input->post('search_bar');
 		$result['data'] = $this->Collection_model->display_ovi_collection_search($ovi_collection);
+		$result['search_key'][0]=$ovi_collection;
 		$this->load->view('ov_collections_search', $result);
 	}
 
@@ -180,6 +186,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$ovi_service = $this->input->post('search_bar');
 		$result['data'] = $this->Service_model->display_ovi_service_search($ovi_service);
+		$result['search_key'][0]=$ovi_service;
 		$this->load->view('ovi_service_search', $result);
 	}
 
@@ -216,12 +223,14 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$mrc_release = $this->input->post('search_bar');
 		$result['data'] = $this->Collection_model->display_mrc_releases_search($mrc_release);
+		$result['search_key'][0]=$mrc_release;
 		$this->load->view('mrc_releases_search', $result);
 	}
 	public function searchMrcServices()
 	{
 		$mrc_service = $this->input->post('search_bar');
 		$result['data'] = $this->Service_model->display_mrc_service_search($mrc_service);
+		$result['search_key'][0]=$mrc_service;
 		$this->load->view('mrc_service_search', $result);
 	}
 
@@ -815,12 +824,14 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$name = $this->input->post('search_bar');
 		$result['data'] = $this->Persons_model->display_records_search($name);
+		$result['search_key'][0]=$name;
 		$this->load->view('persons_list_search', $result);
 	}
 	public function searchAddress()
 	{
 		$name = $this->input->post('search_bar');
 		$result['data'] = $this->Address_model->display_records_search($name);
+		$result['search_key'][0]=$name;
 		$this->load->view('address_list_search', $result);
 	}
 	public function deleteOviCollection($collection_id)

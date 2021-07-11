@@ -24,6 +24,7 @@ class ExportController extends CI_Controller
 	{
 		$export = $this->input->post('search_bar');
 		$result['data'] = $this->Export_model->display_records_search($export);
+		$result['search_key'][0]=$export;
 		$this->load->view('export_list_search',$result);
 	}
 

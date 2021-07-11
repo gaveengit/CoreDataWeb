@@ -23,6 +23,7 @@ class ScreeningController extends CI_Controller
 	{
 		$screening = $this->input->post('search_bar');
 		$result['data'] = $this->Screening_model->display_records_search($screening);
+		$result['search_key'][0]=$screening;
 		$this->load->view('screening_list_search',$result);
 	}
 	public function addScreening()
