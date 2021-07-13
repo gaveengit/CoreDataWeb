@@ -16,6 +16,7 @@ class FieldRunsController extends CI_Controller
 		$this->load->model('OvTrap_model');
 		$this->load->model('Mrc_model');
 		$this->load->model('Run_model');
+		$this->load->library("pagination");
 	}
 
 	public function errorLog()
@@ -73,9 +74,15 @@ class FieldRunsController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-			$result['ovi_data'] = $this->Run_model->display_records_ovi();
-			$result['bg_data'] = $this->Run_model->display_records_bg();
-			$result['mrc_data'] = $this->Run_model->display_records_mrc();
+			$config = array();
+			$config["base_url"] = site_url('FieldPlanningController/index');
+			$config["total_rows"] = $this->Run_model->display_all_records_count();
+			$config["per_page"] = 4;
+			$config["uri_segment"] = 3;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Run_model->display_all_records($config["per_page"], $page);
 			$this->load->view('field_runs_list', $result);
 
 		} else {

@@ -52,7 +52,14 @@ ul.breadcrumb li a.selected:hover {
 	text-decoration: none;
 	cursor: initial;
 }
-
+.pagination-paragraph{
+	text-align: center;
+	font-size: 20px;
+	padding-top: 15px;
+}
+.pagination-paragraph a,strong{
+	margin-left: 10px;
+}
 /* end styles for breadcrumb */
 
 /* start main menu styles */

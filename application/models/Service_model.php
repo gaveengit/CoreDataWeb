@@ -240,13 +240,26 @@ class Service_model extends CI_Model
 			return false;
 		}
 	}
-	function display_mrc_service()
+	function display_mrc_service($limit, $start)
+	{
+		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("mrc_service");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_mrc_service_count()
 	{
 		try {
 			$array = array('service_status !=' => '-2');
 			$this->db->where($array);
 			$query=$this->db->get("mrc_service");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;
@@ -267,13 +280,26 @@ class Service_model extends CI_Model
 		}
 	}
 
-	function display_ovi_service()
+	function display_ovi_service($limit, $start)
+	{
+		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("ovi_service");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_ovi_service_count()
 	{
 		try {
 			$array = array('service_status !=' => '-2');
 			$this->db->where($array);
 			$query=$this->db->get("ovi_service");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;
@@ -293,13 +319,26 @@ class Service_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_bg_service()
+	function display_bg_service($limit, $start)
+	{
+		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("bg_service");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_bg_service_count()
 	{
 		try {
 			$array = array('service_status !=' => '-2');
 			$this->db->where($array);
 			$query=$this->db->get("bg_service");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;

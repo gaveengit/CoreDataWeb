@@ -47,14 +47,28 @@ class Persons_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_records_search($person_name){
+	function display_records_search($person_name,$limit,$start){
+		try{
+			$this->db->like('Full_name', $person_name, 'both');
+			$this->db->or_like('Contact_number', $person_name, 'both');
+			$array = array('Person_status !='=>'-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("person");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_records_search_count($person_name){
 		try{
 			$this->db->like('Full_name', $person_name, 'both');
 			$this->db->or_like('Contact_number', $person_name, 'both');
 			$array = array('Person_status !='=>'-2');
 			$this->db->where($array);
 			$query=$this->db->get("person");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;
@@ -75,13 +89,26 @@ class Persons_model extends CI_Model
 		}
 	}
 
-	function display_records()
+	function display_records($limit,$start)
+	{
+		try {
+			$array = array('Person_status !='=>'-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("person");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_records_count()
 	{
 		try {
 			$array = array('Person_status !='=>'-2');
 			$this->db->where($array);
 			$query=$this->db->get("person");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;

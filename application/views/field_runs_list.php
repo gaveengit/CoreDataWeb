@@ -65,15 +65,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="search-bar-secondary-container clearfix">
-					<div class="col-md-8">
-						<div class="row">
-							<input type="text" class="form-control search-bar" name="search_bar"
-								   placeholder="Search by run name, date"/>
+					<form method="post" action="<?php echo
+					site_url('FieldPlanningController/runsSearch'); ?>">
+						<div class="col-md-8">
+							<div class="row">
+								<input type="text" class="form-control search-bar" name="search_bar"
+									   placeholder="Search by run name, date"/>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-2">
-						<button class="btn btn-primary search-btn">Search</button>
-					</div>
+						<div class="col-md-2">
+							<button class="btn btn-primary search-btn" type="submit">Search</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -95,15 +98,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<tbody>
 						<?php
 						$i = 1;
-						foreach ($ovi_data as $row) {
+						foreach ($data as $row) {
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
 								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
-								if ($row->ovi_run_type == '1') {
+								if ($row->run_type == '1') {
 									echo "<td>" . "OVI Service" . "</td>";
 								}
-								if ($row->ovi_run_type == '2') {
+								if ($row->run_type == '2') {
 									echo "<td>" . "OVI Collection" . "</td>";
 								}
 								if ($row->run_status == '1') {
@@ -121,10 +124,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								echo "<tr class='grey-background'>";
 								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
-								if ($row->ovi_run_type == '1') {
+								if ($row->run_type == '1') {
 									echo "<td>" . "OVI Service" . "</td>";
 								}
-								if ($row->ovi_run_type == '2') {
+								if ($row->run_type == '2') {
 									echo "<td>" . "OVI Collection" . "</td>";
 								}
 								if ($row->run_status == '1') {
@@ -138,104 +141,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								echo "</tr>";
 								$i++;
 							}
+
+
 						}
-						foreach ($bg_data as $row) {
-							if (($i % 2) != 0) {
-								echo "<tr class='white-background'>";
-								echo "<td>" . $row->field_run_id . "</td>";
-								echo "<td>" . $row->run_date . "</td>";
-								if ($row->bg_run_type == '1') {
-									echo "<td>" . "BG Service" . "</td>";
-								}
-								if ($row->bg_run_type == '2') {
-									echo "<td>" . "BG Collection" . "</td>";
-								}
-								if ($row->run_status == '1') {
-									echo "<td>" . "Pending" . "</td>";
-								}
-								if ($row->run_status == '2') {
-									echo "<td>" . "Completed" . "</td>";
-								}
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
-
-								echo "</tr>";
-								$i++;
-							} else {
-								echo "<tr class='grey-background'>";
-								echo "<td>" . $row->field_run_id . "</td>";
-								echo "<td>" . $row->run_date . "</td>";
-								if ($row->bg_run_type == '1') {
-									echo "<td>" . "BG Service" . "</td>";
-								}
-								if ($row->bg_run_type == '2') {
-									echo "<td>" . "BG Collection" . "</td>";
-								}
-								if ($row->run_status == '1') {
-									echo "<td>" . "Pending" . "</td>";
-								}
-								if ($row->run_status == '2') {
-									echo "<td>" . "Completed" . "</td>";
-								}
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
-
-								echo "</tr>";
-								$i++;
-							}
-						}
-
-
-						foreach ($mrc_data as $row) {
-							if (($i % 2) != 0) {
-								echo "<tr class='white-background'>";
-								echo "<td>" . $row->field_run_id . "</td>";
-								echo "<td>" . $row->run_date . "</td>";
-								if ($row->mrc_run_type == '1') {
-									echo "<td>" . "MRC Service" . "</td>";
-								}
-								if ($row->mrc_run_type == '2') {
-									echo "<td>" . "MRC Release" . "</td>";
-								}
-								if ($row->run_status == '1') {
-									echo "<td>" . "Pending" . "</td>";
-								}
-								if ($row->run_status == '2') {
-									echo "<td>" . "Completed" . "</td>";
-								}
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
-
-								echo "</tr>";
-								$i++;
-							} else {
-								echo "<tr class='grey-background'>";
-								echo "<td>" . $row->field_run_id . "</td>";
-								echo "<td>" . $row->run_date . "</td>";
-								if ($row->mrc_run_type == '1') {
-									echo "<td>" . "MRC Service" . "</td>";
-								}
-								if ($row->mrc_run_type == '2') {
-									echo "<td>" . "MRC Release" . "</td>";
-								}
-								if ($row->run_status == '1') {
-									echo "<td>" . "Pending" . "</td>";
-								}
-								if ($row->run_status == '2') {
-									echo "<td>" . "Completed" . "</td>";
-								}
-								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
-										site_url('FieldPlanningController/updateRun/') . $row->field_run_id . "'" . ">" . "<span value=" . $row->field_run_id . ">" . "View" . "</span></td>";
-
-								echo "</tr>";
-								$i++;
-							}
-						}
-
 
 						?>
 						</tbody>
 					</table>
+					<p class="pagination-paragraph"><?php echo $links; ?></p>
 				</div>
 			</div>
 		</div>

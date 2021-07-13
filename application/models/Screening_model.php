@@ -51,13 +51,26 @@ class Screening_model extends CI_Model
 		}
 	}
 
-	function display_records()
+	function display_records($limit,$start)
+	{
+		try {
+			$array = array('status !=' => "-2");
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("screening_result");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_records_count()
 	{
 		try {
 			$array = array('status !=' => "-2");
 			$this->db->where($array);
 			$query=$this->db->get("screening_result");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;

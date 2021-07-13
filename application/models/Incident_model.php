@@ -37,12 +37,13 @@ class Incident_model extends CI_Model
 		}
 	}
 
-	function display_records_search($incident){
+	function display_records_search($incident,$limit, $start){
 		try{
 			$this->db->like('member_name', $incident, 'both');
 			$this->db->or_like('full_address', $incident, 'both');
 			$array = array('incident_status !='=>'-2');
 			$this->db->where($array);
+			$this->db->limit($limit, $start);
 			$query=$this->db->get("incident");
 			return $query->result();
 		}
@@ -79,13 +80,26 @@ class Incident_model extends CI_Model
 		}
 	}
 
-	function display_records()
+	function display_records($limit, $start)
+	{
+		try {
+			$array = array('incident_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("incident");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_records_count()
 	{
 		try {
 			$array = array('incident_status !=' => '-2');
 			$this->db->where($array);
 			$query=$this->db->get("incident");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;

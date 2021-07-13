@@ -12,11 +12,27 @@ class ScreeningController extends CI_Controller
 		$this->load->helper('url');
 		$this->load->model('Identification_model');
 		$this->load->model('Screening_model');
+		$this->load->library("pagination");
 	}
 
 	public function index()
 	{
-		$result['data'] = $this->Screening_model->display_records();
+
+		$config = array();
+		$config["base_url"] = site_url('ScreeningController/index');
+		$config["total_rows"] = $this->Screening_model->display_records_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 3;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Screening_model->display_records($config["per_page"], $page);
 		$this->load->view('screening_list', $result);
 	}
 	public function screeningSearch()
@@ -64,7 +80,22 @@ class ScreeningController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
-				$this->load->view('screening_list');
+				$config = array();
+				$config["base_url"] = site_url('ScreeningController/index');
+				$config["total_rows"] = $this->Screening_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 3;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Screening_model->display_records($config["per_page"], $page);
+				$this->load->view('screening_list', $result);
 			} else {
 				$this->session->set_flashdata('error', "Failure. Please try again.");
 			}
@@ -102,7 +133,21 @@ class ScreeningController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Screening_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('ScreeningController/index');
+				$config["total_rows"] = $this->Screening_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 3;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Screening_model->display_records($config["per_page"], $page);
 				$this->load->view('screening_list', $result);
 			} else {
 				$this->session->set_flashdata('error', "Failure. Please try again.");
@@ -124,12 +169,40 @@ class ScreeningController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Screening_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('ScreeningController/index');
+			$config["total_rows"] = $this->Screening_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Screening_model->display_records($config["per_page"], $page);
 			$this->load->view('screening_list', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Screening_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('ScreeningController/index');
+			$config["total_rows"] = $this->Screening_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Screening_model->display_records($config["per_page"], $page);
 			$this->load->view('screening_list', $result);
 		}
 	}

@@ -282,13 +282,26 @@ class Collection_model extends CI_Model
 			return false;
 		}
 	}
-	function display_mrc_releases()
+	function display_mrc_releases($limit, $start)
+	{
+		try {
+			$array = array('released_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("mrc_release");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_mrc_releases_count()
 	{
 		try {
 			$array = array('released_status !=' => '-2');
 			$this->db->where($array);
 			$query=$this->db->get("mrc_release");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;
@@ -308,11 +321,12 @@ class Collection_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_ovi_collection()
+	function display_ovi_collection($limit, $start)
 	{
 		try {
 			$array = array('collect_status !=' => '-2');
 			$this->db->where($array);
+			$this->db->limit($limit, $start);
 			$query=$this->db->get("ovi_collection");
 			return $query->result();
 		}
@@ -320,13 +334,38 @@ class Collection_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_bg_collection()
+	function display_ovi_collection_count()
+	{
+		try {
+			$array = array('collect_status !=' => '-2');
+			$this->db->where($array);
+			$query=$this->db->get("ovi_collection");
+			return $query->num_rows();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_bg_collection($limit, $start)
+	{
+		try {
+			$array = array('collect_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("bg_collection");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_bg_collection_count()
 	{
 		try {
 			$array = array('collect_status !=' => '-2');
 			$this->db->where($array);
 			$query=$this->db->get("bg_collection");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;

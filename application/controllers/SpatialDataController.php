@@ -11,11 +11,21 @@ class SpatialDataController extends CI_Controller
 // Load url helper
 		$this->load->helper('url');
 		$this->load->model('Maps_model');
+		$this->load->library("pagination");
 	}
 
 	public function index()
 	{
-		$result['data'] = $this->Maps_model->display_records();
+
+		$config = array();
+		$config["base_url"] = site_url('SpatialDataController/index');
+		$config["total_rows"] = $this->Maps_model->display_records_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 3;
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Maps_model->display_records($config["per_page"], $page);
 		$this->load->view('spatial_data', $result);
 	}
 
@@ -55,7 +65,15 @@ class SpatialDataController extends CI_Controller
 					if ($response == true) {
 						echo "<script type='text/javascript'>alert('Record added successfully');
 								</script>";
-						$result['data'] = $this->Maps_model->display_records();
+						$config = array();
+						$config["base_url"] = site_url('SpatialDataController/index');
+						$config["total_rows"] = $this->Maps_model->display_records_count();
+						$config["per_page"] = 10;
+						$config["uri_segment"] = 3;
+						$this->pagination->initialize($config);
+						$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+						$result["links"] = $this->pagination->create_links();
+						$result['data'] = $this->Maps_model->display_records($config["per_page"], $page);
 						$this->load->view('spatial_data', $result);
 					} else {
 						$this->session->set_flashdata('error', "Failure. Please try again.");
@@ -84,7 +102,15 @@ class SpatialDataController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Maps_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('SpatialDataController/index');
+				$config["total_rows"] = $this->Maps_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 3;
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+				$result["links"] = $this->pagination->create_links();
+				$result['data'] = $this->Maps_model->display_records($config["per_page"], $page);
 				$this->load->view('spatial_data', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
@@ -110,13 +136,35 @@ class SpatialDataController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Maps_model->display_records();
+
+			$config = array();
+			$config["base_url"] = site_url('SpatialDataController/index');
+			$config["total_rows"] = $this->Maps_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Maps_model->display_records($config["per_page"], $page);
 			$this->load->view('spatial_data', $result);
+
+
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Maps_model->display_records();
+
+			$config = array();
+			$config["base_url"] = site_url('SpatialDataController/index');
+			$config["total_rows"] = $this->Maps_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Maps_model->display_records($config["per_page"], $page);
 			$this->load->view('spatial_data', $result);
+
+
 		}
 	}
 }

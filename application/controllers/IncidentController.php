@@ -11,16 +11,32 @@ class IncidentController extends CI_Controller
 // Load url helper
 		$this->load->helper('url');
 		$this->load->model('Incident_model');
+		$this->load->library("pagination");
 	}
 
 	public function index()
 	{
-		$result['data'] = $this->Incident_model->display_records();
+
+		$config = array();
+		$config["base_url"] = site_url('IncidentController/index');
+		$config["total_rows"] = $this->Incident_model->display_records_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 3;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Incident_model->display_records($config["per_page"], $page);
 		$this->load->view('incident_list',$result);
+
 	}
 	public function incidentSearch()
 	{
 		$incident_name = $this->input->post('search_bar');
+
 		$result['data'] = $this->Incident_model->display_records_search($incident_name);
 		$result['search_key'][0]=$incident_name;
 		$this->load->view('incident_list_search',$result);
@@ -55,7 +71,19 @@ class IncidentController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record added successfully.');
 			</script>";
-			$result['data'] = $this->Incident_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('IncidentController/index');
+			$config["total_rows"] = $this->Incident_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 3;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Incident_model->display_records($config["per_page"], $page);
 			$this->load->view('incident_list',$result);
 		} else {
 			echo "<script type='text/javascript'>alert('Fail to add record.');
@@ -86,9 +114,21 @@ class IncidentController extends CI_Controller
 
 		$response = $this->Incident_model->updateRecords($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record added successfully.');
+			echo "<script type='text/javascript'>alert('Record updated successfully.');
 			</script>";
-			$result['data'] = $this->Incident_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('IncidentController/index');
+			$config["total_rows"] = $this->Incident_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 3;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Incident_model->display_records($config["per_page"], $page);
 			$this->load->view('incident_list',$result);
 		} else {
 			echo "<script type='text/javascript'>alert('Fail to add record.');
@@ -105,13 +145,37 @@ class IncidentController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Incident_model->display_records();
-			$this->load->view('incident_list', $result);
+			$config = array();
+			$config["base_url"] = site_url('IncidentController/index');
+			$config["total_rows"] = $this->Incident_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Incident_model->display_records($config["per_page"], $page);
+			$this->load->view('incident_list',$result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Incident_model->display_records();
-			$this->load->view('incident_list', $result);
+			$config = array();
+			$config["base_url"] = site_url('IncidentController/index');
+			$config["total_rows"] = $this->Incident_model->display_records_count();
+			$config["per_page"] = 1;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Incident_model->display_records($config["per_page"], $page);
+			$this->load->view('incident_list',$result);
 		}
 	}
 }

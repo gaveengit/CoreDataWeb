@@ -17,6 +17,7 @@ class FieldActivitiesController extends CI_Controller
 		$this->load->model('Mrc_model');
 		$this->load->model('Collection_model');
 		$this->load->model('Service_model');
+		$this->load->library("pagination");
 	}
 
 	public function index()
@@ -26,7 +27,21 @@ class FieldActivitiesController extends CI_Controller
 
 	public function bgLocations()
 	{
-		$result['data'] = $this->BgTrap_model->display_records();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/bgLocations/index');
+		$config["total_rows"] = $this->BgTrap_model->display_records_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->BgTrap_model->display_records($config["per_page"], $page);
 		$this->load->view('bg_locations', $result);
 	}
 
@@ -57,7 +72,22 @@ class FieldActivitiesController extends CI_Controller
 
 	public function ovLocations()
 	{
-		$result['data'] = $this->OvTrap_model->display_records();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/ovLocations/index');
+		$config["total_rows"] = $this->OvTrap_model->display_records_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+
+		$result['data'] = $this->OvTrap_model->display_records($config["per_page"], $page);
 		$this->load->view('ov_locations', $result);
 	}
 	public function oviLocationsSearch()
@@ -85,7 +115,21 @@ class FieldActivitiesController extends CI_Controller
 
 	public function mrcLocations()
 	{
-		$result['data'] = $this->Mrc_model->display_records();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
+		$config["total_rows"] = $this->Mrc_model->display_records_count();
+		$config["per_page"] = 1;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Mrc_model->display_records($config["per_page"], $page);
 		$this->load->view('mrc_locations', $result);
 	}
 	public function mrcLocationsSearch()
@@ -112,7 +156,21 @@ class FieldActivitiesController extends CI_Controller
 
 	public function bgCollections()
 	{
-		$result['data'] = $this->Collection_model->display_bg_collection();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
+		$config["total_rows"] = $this->Collection_model->display_bg_collection_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Collection_model->display_bg_collection($config["per_page"], $page);
 		$this->load->view('bg_collections', $result);
 	}
 	public function searchBgCollections()
@@ -125,7 +183,15 @@ class FieldActivitiesController extends CI_Controller
 
 	public function bgServices()
 	{
-		$result['data'] = $this->Service_model->display_bg_service();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
+		$config["total_rows"] = $this->Service_model->display_bg_service_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Service_model->display_bg_service($config["per_page"], $page);
 		$this->load->view('bg_service', $result);
 	}
 
@@ -165,7 +231,21 @@ class FieldActivitiesController extends CI_Controller
 
 	public function ovCollections()
 	{
-		$result['data'] = $this->Collection_model->display_ovi_collection();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/ovCollections/index');
+		$config["total_rows"] = $this->Collection_model->display_ovi_collection_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Collection_model->display_ovi_collection($config["per_page"], $page);
 		$this->load->view('ov_collections', $result);
 	}
 
@@ -179,7 +259,21 @@ class FieldActivitiesController extends CI_Controller
 
 	public function oviServices()
 	{
-		$result['data'] = $this->Service_model->display_ovi_service();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
+		$config["total_rows"] = $this->Service_model->display_ovi_service_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Service_model->display_ovi_service($config["per_page"], $page);
 		$this->load->view('ovi_service', $result);
 	}
 	public function searchOviServices()
@@ -216,7 +310,22 @@ class FieldActivitiesController extends CI_Controller
 
 	public function mrcReleases()
 	{
-		$result['data'] = $this->Collection_model->display_mrc_releases();
+
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/mrcReleases/index');
+		$config["total_rows"] = $this->Collection_model->display_mrc_releases_count();
+		$config["per_page"] = 1;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Collection_model->display_mrc_releases($config["per_page"], $page);
 		$this->load->view('mrc_releases', $result);
 	}
 	public function searchMrcReleases()
@@ -236,7 +345,15 @@ class FieldActivitiesController extends CI_Controller
 
 	public function mrcService()
 	{
-		$result['data'] = $this->Service_model->display_mrc_service();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/mrcService/index');
+		$config["total_rows"] = $this->Service_model->display_mrc_service_count();
+		$config["per_page"] = 1;
+		$config["uri_segment"] = 4;
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Service_model->display_mrc_service($config["per_page"], $page);
 		$this->load->view('mrc_service', $result);
 	}
 
@@ -266,7 +383,21 @@ class FieldActivitiesController extends CI_Controller
 
 	public function persons()
 	{
-		$result['data'] = $this->Persons_model->display_records();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/persons/index');
+		$config["total_rows"] = $this->Persons_model->display_records_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Persons_model->display_records($config["per_page"], $page);
 		$this->load->view('persons_list', $result);
 	}
 
@@ -277,7 +408,17 @@ class FieldActivitiesController extends CI_Controller
 
 	public function addresses()
 	{
-		$result['data'] = $this->Address_model->display_records();
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/addresses/index');
+		$config["total_rows"] = $this->Address_model->display_records_count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Address_model->display_records($config["per_page"], $page);
 		$this->load->view('address_list', $result);
 	}
 
@@ -296,7 +437,7 @@ class FieldActivitiesController extends CI_Controller
 	public function savePerson()
 	{
 		/*load registration view form*/
-		$this->load->view('add_persons');
+		//$this->load->view('add_persons');
 
 		$data['full_name'] = $this->input->post('full-name');
 		$data['Contact_number'] = $this->input->post('contact-number');
@@ -308,12 +449,31 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/persons/index');
+				$config["total_rows"] = $this->Persons_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Persons_model->display_records($config["per_page"], $page);
+				$this->load->view('persons_list', $result);
 			} else {
-				$this->session->set_flashdata('error', "Failure. Please try again.");
+				echo "<script type='text/javascript'>alert('Error in adding new person. Please try again.');
+			</script>";
+				$this->load->view('add_persons');
 			}
 		} else {
 			echo "<script type='text/javascript'>alert('Person is already existing');
 			</script>";
+			$this->load->view('add_persons');
 		}
 	}
 
@@ -337,7 +497,21 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Persons_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/persons/index');
+				$config["total_rows"] = $this->Persons_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Persons_model->display_records($config["per_page"], $page);
 				$this->load->view('persons_list', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
@@ -363,12 +537,37 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-				$result['data'] = $this->Persons_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/persons/index');
+				$config["total_rows"] = $this->Persons_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 5;
+
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(5))? $this->uri->segment(5) : 0;
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Persons_model->display_records($config["per_page"], $page);
 				$this->load->view('persons_list', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-				$result['data'] = $this->Persons_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/persons/index');
+				$config["total_rows"] = $this->Persons_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 5;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(5))? $this->uri->segment(5) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Persons_model->display_records($config["per_page"], $page);
 				$this->load->view('persons_list', $result);
 			}
 	}
@@ -388,7 +587,17 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Address_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/addresses/index');
+				$config["total_rows"] = $this->Address_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+				$result["links"] = $this->pagination->create_links();
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Address_model->display_records($config["per_page"], $page);
 				$this->load->view('address_list', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
@@ -413,12 +622,32 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Address_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/addresses/index');
+			$config["total_rows"] = $this->Address_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+			$result["links"] = $this->pagination->create_links();
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Address_model->display_records($config["per_page"], $page);
 			$this->load->view('address_list', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Address_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/addresses/index');
+			$config["total_rows"] = $this->Address_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+			$result["links"] = $this->pagination->create_links();
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Address_model->display_records($config["per_page"], $page);
 			$this->load->view('address_list', $result);
 		}
 	}
@@ -439,9 +668,18 @@ class FieldActivitiesController extends CI_Controller
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
 
-				$result['data'] = $this->Address_model->display_records();
-				$this->load->view('address_list', $result);
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/addresses/index');
+				$config["total_rows"] = $this->Address_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
 
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+				$result["links"] = $this->pagination->create_links();
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Address_model->display_records($config["per_page"], $page);
+				$this->load->view('address_list', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure. Please try again.');
 			</script>";
@@ -449,7 +687,7 @@ class FieldActivitiesController extends CI_Controller
 		} else {
 			echo "<script type='text/javascript'>alert('Address is already existing');
 			</script>";
-			$this->load->view('add_address');
+			$this->load->view('add_addresses');
 		}
 	}
 
@@ -470,7 +708,21 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
-				$result['data'] = $this->BgTrap_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/bgLocations/index');
+				$config["total_rows"] = $this->BgTrap_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 3;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->BgTrap_model->display_records($config["per_page"], $page);
 				$this->load->view('bg_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
@@ -505,9 +757,24 @@ class FieldActivitiesController extends CI_Controller
 					if ($response == true) {
 						echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
+						$config = array();
+						$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
+						$config["total_rows"] = $this->Collection_model->display_bg_collection_count();
+						$config["per_page"] = 10;
+						$config["uri_segment"] = 4;
+
+						$this->pagination->initialize($config);
+
+
+						$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+						$result["links"] = $this->pagination->create_links();
+
+						//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+						$result['data'] = $this->Collection_model->display_bg_collection($config["per_page"], $page);
+						$this->load->view('bg_collections', $result);
 					}
 				}
-				$this->load->view('bg_collections');
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -543,7 +810,16 @@ class FieldActivitiesController extends CI_Controller
 				}
 				echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
-				$this->load->view('bg_service');
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
+				$config["total_rows"] = $this->Service_model->display_bg_service_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+				$result["links"] = $this->pagination->create_links();
+				$result['data'] = $this->Service_model->display_bg_service($config["per_page"], $page);
+				$this->load->view('bg_service', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -581,7 +857,22 @@ class FieldActivitiesController extends CI_Controller
 				}
 				echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
-				$this->load->view('ov_collections');
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/ovCollections/index');
+				$config["total_rows"] = $this->Collection_model->display_ovi_collection_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Collection_model->display_ovi_collection($config["per_page"], $page);
+				$this->load->view('ov_collections', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -617,7 +908,22 @@ class FieldActivitiesController extends CI_Controller
 				}
 				echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
-				$this->load->view('ovi_service');
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
+				$config["total_rows"] = $this->Service_model->display_ovi_service_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Service_model->display_ovi_service($config["per_page"], $page);
+				$this->load->view('ovi_service', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -693,7 +999,16 @@ class FieldActivitiesController extends CI_Controller
 				}
 				echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
-				$this->load->view('mrc_service');
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/mrcServices/index');
+				$config["total_rows"] = $this->Service_model->display_mrc_service_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+				$result["links"] = $this->pagination->create_links();
+				$result['data'] = $this->Service_model->display_mrc_service($config["per_page"], $page);
+				$this->load->view('mrc_service', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -729,7 +1044,21 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->BgTrap_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/bgLocations/index');
+				$config["total_rows"] = $this->BgTrap_model->display_records_count();
+				$config["per_page"] = 1;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->BgTrap_model->display_records($config["per_page"], $page);
 				$this->load->view('bg_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in updating record. Please try again.');
@@ -758,12 +1087,40 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->BgTrap_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/bgLocations/index');
+			$config["total_rows"] = $this->BgTrap_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 5;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(5))? $this->uri->segment(5) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->BgTrap_model->display_records($config["per_page"], $page);
 			$this->load->view('bg_locations', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->BgTrap_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/bgLocations/index');
+			$config["total_rows"] = $this->BgTrap_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 5;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(5))? $this->uri->segment(5) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->BgTrap_model->display_records($config["per_page"], $page);
 			$this->load->view('bg_locations', $result);
 		}
 	}
@@ -776,12 +1133,42 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->OvTrap_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/ovLocations/index');
+			$config["total_rows"] = $this->OvTrap_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+
+			$result['data'] = $this->OvTrap_model->display_records($config["per_page"], $page);
 			$this->load->view('ov_locations', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->OvTrap_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/ovLocations/index');
+			$config["total_rows"] = $this->OvTrap_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+
+			$result['data'] = $this->OvTrap_model->display_records($config["per_page"], $page);
 			$this->load->view('ov_locations', $result);
 		}
 	}
@@ -794,12 +1181,40 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Collection_model->display_bg_collection();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
+			$config["total_rows"] = $this->Collection_model->display_bg_collection_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Collection_model->display_bg_collection($config["per_page"], $page);
 			$this->load->view('bg_collections', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Collection_model->display_bg_collection();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
+			$config["total_rows"] = $this->Collection_model->display_bg_collection_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Collection_model->display_bg_collection($config["per_page"], $page);
 			$this->load->view('bg_collections', $result);
 		}
 	}
@@ -811,19 +1226,49 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Service_model->display_bg_service();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
+			$config["total_rows"] = $this->Service_model->display_bg_service_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Service_model->display_bg_service($config["per_page"], $page);
 			$this->load->view('bg_service', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Service_model->display_bg_service();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
+			$config["total_rows"] = $this->Service_model->display_bg_service_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Service_model->display_bg_service($config["per_page"], $page);
 			$this->load->view('bg_service', $result);
 		}
 	}
 	public function searchPerson()
 	{
 		$name = $this->input->post('search_bar');
-		$result['data'] = $this->Persons_model->display_records_search($name);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/searchPerson/index');
+		$config["total_rows"] = $this->Persons_model->display_records_search_count($name);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Persons_model->display_records_search($name,$config["per_page"], $page);
 		$result['search_key'][0]=$name;
 		$this->load->view('persons_list_search', $result);
 	}
@@ -842,12 +1287,40 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Collection_model->display_ovi_collection();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/ovCollections/index');
+			$config["total_rows"] = $this->Collection_model->display_ovi_collection_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Collection_model->display_ovi_collection($config["per_page"], $page);
 			$this->load->view('ov_collections', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Collection_model->display_ovi_collection();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/ovCollections/index');
+			$config["total_rows"] = $this->Collection_model->display_ovi_collection_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Collection_model->display_ovi_collection($config["per_page"], $page);
 			$this->load->view('ov_collections', $result);
 		}
 	}
@@ -859,12 +1332,40 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Service_model->display_ovi_service();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
+			$config["total_rows"] = $this->Service_model->display_ovi_service_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Service_model->display_ovi_service($config["per_page"], $page);
 			$this->load->view('ovi_service', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Service_model->display_ovi_service();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
+			$config["total_rows"] = $this->Service_model->display_ovi_service_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Service_model->display_ovi_service($config["per_page"], $page);
 			$this->load->view('ovi_service', $result);
 		}
 	}
@@ -876,12 +1377,40 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Mrc_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
+			$config["total_rows"] = $this->Mrc_model->display_records_count();
+			$config["per_page"] = 1;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Mrc_model->display_records($config["per_page"], $page);
 			$this->load->view('mrc_locations', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Mrc_model->display_records();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
+			$config["total_rows"] = $this->Mrc_model->display_records_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Mrc_model->display_records($config["per_page"], $page);
 			$this->load->view('mrc_locations', $result);
 		}
 	}
@@ -894,12 +1423,40 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Collection_model->display_mrc_releases();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/mrcReleases/index');
+			$config["total_rows"] = $this->Collection_model->display_mrc_releases_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Collection_model->display_mrc_releases($config["per_page"], $page);
 			$this->load->view('mrc_releases', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
 			</script>";
-			$result['data'] = $this->Collection_model->display_mrc_releases();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/mrcReleases/index');
+			$config["total_rows"] = $this->Collection_model->display_mrc_releases_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+
+			$this->pagination->initialize($config);
+
+
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+			$result["links"] = $this->pagination->create_links();
+
+			//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+			$result['data'] = $this->Collection_model->display_mrc_releases($config["per_page"], $page);
 			$this->load->view('mrc_releases', $result);
 		}
 	}
@@ -911,7 +1468,15 @@ class FieldActivitiesController extends CI_Controller
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
 			</script>";
-			$result['data'] = $this->Service_model->display_mrc_service();
+			$config = array();
+			$config["base_url"] = site_url('FieldActivitiesController/mrcServices/index');
+			$config["total_rows"] = $this->Service_model->display_mrc_service_count();
+			$config["per_page"] = 10;
+			$config["uri_segment"] = 4;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+			$result["links"] = $this->pagination->create_links();
+			$result['data'] = $this->Service_model->display_mrc_service($config["per_page"], $page);
 			$this->load->view('mrc_service', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('Record not deleted successfully');
@@ -938,7 +1503,22 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
-				$result['data'] = $this->OvTrap_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/ovLocations/index');
+				$config["total_rows"] = $this->OvTrap_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+
+				$result['data'] = $this->OvTrap_model->display_records($config["per_page"], $page);
 				$this->load->view('ov_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
@@ -971,7 +1551,22 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->OvTrap_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/ovLocations/index');
+				$config["total_rows"] = $this->OvTrap_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+
+				$result['data'] = $this->OvTrap_model->display_records($config["per_page"], $page);
 				$this->load->view('ov_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in updating record. Please try again.');
@@ -1042,9 +1637,22 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Mrc_model->display_records();
-				$this->load->view('mrc_locations', $result);
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
+				$config["total_rows"] = $this->Mrc_model->display_records_count();
+				$config["per_page"] = 1;
+				$config["uri_segment"] = 4;
 
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Mrc_model->display_records($config["per_page"], $page);
+				$this->load->view('mrc_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in updating record. Please try again.');
 				</script>";
@@ -1081,7 +1689,21 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Collection_model->display_bg_collection();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
+				$config["total_rows"] = $this->Collection_model->display_bg_collection_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Collection_model->display_bg_collection($config["per_page"], $page);
 				$this->load->view('bg_collections', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
@@ -1117,7 +1739,15 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Service_model->display_bg_service();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
+				$config["total_rows"] = $this->Service_model->display_bg_service_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+				$result["links"] = $this->pagination->create_links();
+				$result['data'] = $this->Service_model->display_bg_service($config["per_page"], $page);
 				$this->load->view('bg_service', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
@@ -1154,7 +1784,21 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Collection_model->display_ovi_collection($data,$data_old);
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/ovCollections/index');
+				$config["total_rows"] = $this->Collection_model->display_ovi_collection_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Collection_model->display_ovi_collection($config["per_page"], $page);
 				$this->load->view('ov_collections', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
@@ -1190,7 +1834,21 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Service_model->display_ovi_service();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
+				$config["total_rows"] = $this->Service_model->display_ovi_service_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Service_model->display_ovi_service($config["per_page"], $page);
 				$this->load->view('ovi_service', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
@@ -1226,8 +1884,23 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Collection_model->display_mrc_releases();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/mrcReleases/index');
+				$config["total_rows"] = $this->Collection_model->display_mrc_releases_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Collection_model->display_mrc_releases($config["per_page"], $page);
 				$this->load->view('mrc_releases', $result);
+
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');
 			</script>";
@@ -1262,7 +1935,15 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
-				$result['data'] = $this->Service_model->display_mrc_service();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/mrcService/index');
+				$config["total_rows"] = $this->Service_model->display_mrc_service_count();
+				$config["per_page"] = 1;
+				$config["uri_segment"] = 4;
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+				$result["links"] = $this->pagination->create_links();
+				$result['data'] = $this->Service_model->display_mrc_service($config["per_page"], $page);
 				$this->load->view('mrc_service', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Record not updated successfully');

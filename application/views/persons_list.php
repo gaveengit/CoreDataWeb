@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</script>
 </head>
 <body>
-<div class="persons-list-main-container">
+<div class="persons-list-main-container" style="padding-bottom: 15px;">
 	<div class="home-header-main">
 		<div class="container">
 			<div class="row">
@@ -107,7 +107,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							if (($i % 2) != 0) {
 								echo "<tr class='white-background'>";
 								echo "<td>" . $row->Full_name . "</td>";
-								echo "<td>" . $row->Contact_number . "</td>";
+								echo "<td>" ."0". $row->Contact_number . "</td>";
 								echo "<td>" . $row->Person_status . "</td>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
 										site_url('FieldActivitiesController/updatePersons/') . $row->Person_id . "'" . ">" . "<span value=" . $row->Person_id . ">" . "View" . "</span></td>";
@@ -118,7 +118,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							} else {
 								echo "<tr class='grey-background'>";
 								echo "<td>" . $row->Full_name . "</td>";
-								echo "<td>" . $row->Contact_number . "</td>";
+								echo "<td>" ."0". $row->Contact_number . "</td>";
 								echo "<td>" . $row->Person_status . "</td>";
 								echo "<td class='run-name-cell' onclick=" . "location.href=" . "'" .
 										site_url('FieldActivitiesController/updatePersons/') . $row->Person_id . "'" . ">" . "<span value=" . $row->Person_id . ">" . "View" . "</span></td>";
@@ -131,6 +131,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						?>
 						</tbody>
 					</table>
+					<p class="pagination-paragraph"><?php echo $links; ?></p>
 				</div>
 			</div>
 		</div>

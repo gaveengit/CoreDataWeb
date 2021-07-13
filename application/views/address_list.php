@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</script>
 </head>
 <body>
-<div class="persons-list-main-container">
+<div class="persons-list-main-container" style="padding-bottom: 15px;">
 	<div class="home-header-main">
 		<div class="container">
 			<div class="row">
@@ -135,6 +135,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 						</tbody>
 					</table>
+					<p class="pagination-paragraph"><?php echo $links; ?></p>
 				</div>
 			</div>
 		</div>
