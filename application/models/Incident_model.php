@@ -39,8 +39,10 @@ class Incident_model extends CI_Model
 
 	function display_records_search($incident,$limit, $start){
 		try{
-			$this->db->like('member_name', $incident, 'both');
+			$this->db->group_start();
+			$this->db->or_like('member_name', $incident, 'both');
 			$this->db->or_like('full_address', $incident, 'both');
+			$this->db->group_end();
 			$array = array('incident_status !='=>'-2');
 			$this->db->where($array);
 			$this->db->limit($limit, $start);
@@ -51,7 +53,21 @@ class Incident_model extends CI_Model
 			echo $e;
 		}
 	}
-
+	function display_records_search_count($incident){
+		try{
+			$this->db->group_start();
+			$this->db->or_like('member_name', $incident, 'both');
+			$this->db->or_like('full_address', $incident, 'both');
+			$this->db->group_end();
+			$array = array('incident_status !='=>'-2');
+			$this->db->where($array);
+			$query=$this->db->get("incident");
+			return $query->num_rows();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 
 	function checkMap($data)
 	{

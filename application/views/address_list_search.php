@@ -44,7 +44,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</li>
 					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
 							Activities</a></li>
-					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController/Addresses'); ?>'">Addresses</a></li>
+					<li><a class="#"
+						   onclick="location.href='<?php echo site_url('FieldActivitiesController/Addresses'); ?>'">Addresses</a>
+					</li>
 					<li><a class="selected">Search Addresses</a></li>
 				</ul>
 			</div>
@@ -76,7 +78,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-8">
 							<div class="row">
 								<input type="text" class="form-control search-bar" name="search_bar"
-									   placeholder="Search by address, location description" value="<?php echo $search_key[0] ?>"/>
+									   placeholder="Search by address, location description"
+									   value="<?php echo $search_key[0] ?>"/>
 							</div>
 						</div>
 						<div class="col-md-2">
@@ -136,6 +139,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 						</tbody>
 					</table>
+					<p class="pagination-paragraph"><?php echo $links; ?></p>
 				</div>
 			</div>
 		</div>

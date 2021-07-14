@@ -152,6 +152,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						?>
 						</tbody>
 					</table>
+					<p class="pagination-paragraph"><?php echo $links; ?></p>
 				</div>
 			</div>
 		</div>

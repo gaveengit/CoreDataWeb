@@ -134,7 +134,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								$i++;
 							} else {
 								if (($i % 2) == 0) {
-									echo "<tr class='white-background'>";
+									echo "<tr class='grey-background'>";
 									echo "<td>" . $row->screening_id . "</td>";
 									echo "<td>" . $row->identification_id . "</td>";
 									echo "<td>" . $row->male_aedes_aegypti_result . "</td>";

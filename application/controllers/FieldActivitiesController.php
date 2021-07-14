@@ -48,7 +48,21 @@ class FieldActivitiesController extends CI_Controller
 	public function bgLocationsSearch()
 	{
 		$trap = $this->input->post('search_bar');
-		$result['data'] = $this->BgTrap_model->display_records_search($trap);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/bgLocationsSearch/index');
+		$config["total_rows"] = $this->BgTrap_model->display_records_search_count($trap);
+		$config["per_page"] = 1;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->BgTrap_model->display_records_search($trap,$config["per_page"], $page);
 		$result['search_key'][0]=$trap;
 		$this->load->view('bg_locations_search', $result);
 	}
@@ -93,7 +107,16 @@ class FieldActivitiesController extends CI_Controller
 	public function oviLocationsSearch()
 	{
 		$trap = $this->input->post('search_bar');
-		$result['data'] = $this->OvTrap_model->display_records_search($trap);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/oviLocationsSearch/index');
+		$config["total_rows"] = $this->OvTrap_model->display_records_search_count($trap);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->OvTrap_model->display_records_search($trap,$config["per_page"], $page);
 		$result['search_key'][0]=$trap;
 		$this->load->view('ov_locations_search', $result);
 	}
@@ -118,7 +141,7 @@ class FieldActivitiesController extends CI_Controller
 		$config = array();
 		$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
 		$config["total_rows"] = $this->Mrc_model->display_records_count();
-		$config["per_page"] = 1;
+		$config["per_page"] = 10;
 		$config["uri_segment"] = 4;
 
 		$this->pagination->initialize($config);
@@ -135,7 +158,16 @@ class FieldActivitiesController extends CI_Controller
 	public function mrcLocationsSearch()
 	{
 		$mrc = $this->input->post('search_bar');
-		$result['data'] = $this->Mrc_model->display_records_search($mrc);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/mrcLocationsSearch/index');
+		$config["total_rows"] = $this->Mrc_model->display_records_search_count($mrc);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Mrc_model->display_records_search($mrc,$config["per_page"], $page);
 		$result['search_key'][0]=$mrc;
 		$this->load->view('mrc_locations_search', $result);
 	}
@@ -176,7 +208,16 @@ class FieldActivitiesController extends CI_Controller
 	public function searchBgCollections()
 	{
 		$bg_collection = $this->input->post('search_bar');
-		$result['data'] = $this->Collection_model->display_bg_collection_search($bg_collection);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/searchBgCollections/index');
+		$config["total_rows"] = $this->Collection_model->display_bg_collection_search_count($bg_collection);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Collection_model->display_bg_collection_search($bg_collection,$config["per_page"], $page);
 		$result['search_key'][0]=$bg_collection;
 		$this->load->view('bg_collections_search', $result);
 	}
@@ -198,7 +239,16 @@ class FieldActivitiesController extends CI_Controller
 	public function searchBgServices()
 	{
 		$bg_service = $this->input->post('search_bar');
-		$result['data'] = $this->Service_model->display_bg_service_search($bg_service);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/searchBgServices/index');
+		$config["total_rows"] = $this->Service_model->display_bg_service_search_count($bg_service);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Service_model->display_bg_service_search($bg_service,$config["per_page"], $page);
 		$result['search_key'][0]=$bg_service;
 		$this->load->view('bg_service_search', $result);
 	}
@@ -252,7 +302,21 @@ class FieldActivitiesController extends CI_Controller
 	public function searchOviCollections()
 	{
 		$ovi_collection = $this->input->post('search_bar');
-		$result['data'] = $this->Collection_model->display_ovi_collection_search($ovi_collection);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/searchOviCollections/index');
+		$config["total_rows"] = $this->Collection_model->display_ovi_collection_search_count($ovi_collection);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Collection_model->display_ovi_collection_search($ovi_collection,$config["per_page"], $page);
 		$result['search_key'][0]=$ovi_collection;
 		$this->load->view('ov_collections_search', $result);
 	}
@@ -279,7 +343,21 @@ class FieldActivitiesController extends CI_Controller
 	public function searchOviServices()
 	{
 		$ovi_service = $this->input->post('search_bar');
-		$result['data'] = $this->Service_model->display_ovi_service_search($ovi_service);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/searchOviServices/index');
+		$config["total_rows"] = $this->Service_model->display_ovi_service_search_count($ovi_service);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+
+
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+
+		$result["links"] = $this->pagination->create_links();
+
+		//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+		$result['data'] = $this->Service_model->display_ovi_service_search($ovi_service,$config["per_page"], $page);
 		$result['search_key'][0]=$ovi_service;
 		$this->load->view('ovi_service_search', $result);
 	}
@@ -314,7 +392,7 @@ class FieldActivitiesController extends CI_Controller
 		$config = array();
 		$config["base_url"] = site_url('FieldActivitiesController/mrcReleases/index');
 		$config["total_rows"] = $this->Collection_model->display_mrc_releases_count();
-		$config["per_page"] = 1;
+		$config["per_page"] = 10;
 		$config["uri_segment"] = 4;
 
 		$this->pagination->initialize($config);
@@ -331,14 +409,32 @@ class FieldActivitiesController extends CI_Controller
 	public function searchMrcReleases()
 	{
 		$mrc_release = $this->input->post('search_bar');
-		$result['data'] = $this->Collection_model->display_mrc_releases_search($mrc_release);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/searchMrcReleases/index');
+		$config["total_rows"] = $this->Collection_model->display_mrc_releases_search_count($mrc_release);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Collection_model->display_mrc_releases_search($mrc_release,$config["per_page"], $page);
 		$result['search_key'][0]=$mrc_release;
 		$this->load->view('mrc_releases_search', $result);
 	}
 	public function searchMrcServices()
 	{
 		$mrc_service = $this->input->post('search_bar');
-		$result['data'] = $this->Service_model->display_mrc_service_search($mrc_service);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/searchMrcServices/index');
+		$config["total_rows"] = $this->Service_model->display_mrc_service_search_count($mrc_service);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Service_model->display_mrc_service_search($mrc_service,$config["per_page"], $page);
 		$result['search_key'][0]=$mrc_service;
 		$this->load->view('mrc_service_search', $result);
 	}
@@ -348,7 +444,7 @@ class FieldActivitiesController extends CI_Controller
 		$config = array();
 		$config["base_url"] = site_url('FieldActivitiesController/mrcService/index');
 		$config["total_rows"] = $this->Service_model->display_mrc_service_count();
-		$config["per_page"] = 1;
+		$config["per_page"] = 10;
 		$config["uri_segment"] = 4;
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
@@ -1275,7 +1371,16 @@ class FieldActivitiesController extends CI_Controller
 	public function searchAddress()
 	{
 		$name = $this->input->post('search_bar');
-		$result['data'] = $this->Address_model->display_records_search($name);
+		$config = array();
+		$config["base_url"] = site_url('FieldActivitiesController/searchAddress/index');
+		$config["total_rows"] = $this->Address_model->display_records_search_count($name);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Address_model->display_records_search($name,$config["per_page"], $page);
 		$result['search_key'][0]=$name;
 		$this->load->view('address_list_search', $result);
 	}
@@ -1380,7 +1485,7 @@ class FieldActivitiesController extends CI_Controller
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
 			$config["total_rows"] = $this->Mrc_model->display_records_count();
-			$config["per_page"] = 1;
+			$config["per_page"] = 10;
 			$config["uri_segment"] = 4;
 
 			$this->pagination->initialize($config);

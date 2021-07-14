@@ -45,7 +45,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<li><a class="#" onclick="location.href='<?php echo site_url('FieldActivitiesController'); ?>'">Field
 							Activities</a></li>
 					<li><a class="#"
-						   onclick="location.href='<?php echo site_url('FieldActivitiesController/searchMrcReleases'); ?>'">MRC
+						   onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcReleases'); ?>'">MRC
 							Releases</a></li>
 					<li><a class="selected">MRC Releases Search</a></li>
 				</ul>
@@ -155,6 +155,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						?>
 						</tbody>
 					</table>
+					<p class="pagination-paragraph"><?php echo $links; ?></p>
 				</div>
 			</div>
 		</div>

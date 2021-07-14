@@ -114,7 +114,7 @@ class Mrc_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_records_search($mrc)
+	function display_records_search($mrc,$limit, $start)
 	{
 		try {
 			$this->db->select('mrc.mrc_identifier as trap_id, 
@@ -130,15 +130,46 @@ class Mrc_model extends CI_Model
 			$this->db->join('person', 'mrc.person_id= person.person_id');
 			$this->db->join('address', 'mrc.address_id= address.address_id');
 			$array = array('mrc_status !=' => "-2");
-
-			$this->db->like('mrc.mrc_identifier', $mrc, 'both');
+			$this->db->group_start();
+			$this->db->or_like('mrc.mrc_identifier', $mrc, 'both');
 			$this->db->or_like('person.full_name', $mrc, 'both');
 			$this->db->or_like('address.add_line1', $mrc, 'both');
 			$this->db->or_like('address.add_line2', $mrc, 'both');
-
+			$this->db->group_end();
 			$this->db->where($array);
+			$this->db->limit($limit, $start);
 			$query=$this->db->get();
 			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_records_search_count($mrc)
+	{
+		try {
+			$this->db->select('mrc.mrc_identifier as trap_id, 
+                   mrc.mrc_status as trap_status, 
+                   mrc.coordinates as coordinates,  
+                   person.full_name as person_name,
+                   person.contact_number as contact_number,
+                   address.add_line1 as add_line1,
+                   address.add_line2 as add_line2
+                   '
+			);
+			$this->db->from('mrc');
+			$this->db->join('person', 'mrc.person_id= person.person_id');
+			$this->db->join('address', 'mrc.address_id= address.address_id');
+			$array = array('mrc_status !=' => "-2");
+			$this->db->group_start();
+			$this->db->or_like('mrc.mrc_identifier', $mrc, 'both');
+			$this->db->or_like('person.full_name', $mrc, 'both');
+			$this->db->or_like('address.add_line1', $mrc, 'both');
+			$this->db->or_like('address.add_line2', $mrc, 'both');
+			$this->db->group_end();
+			$this->db->where($array);
+			$query=$this->db->get();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;

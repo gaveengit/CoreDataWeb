@@ -36,15 +36,34 @@ class Address_model extends CI_Model
 			return false;
 		}
 	}
-	function display_records_search($address){
+	function display_records_search($address,$limit,$start){
 		try{
-			$this->db->like('add_line1', $address, 'both');
+			$this->db->group_start();
+			$this->db->or_like('add_line1', $address, 'both');
 			$this->db->or_like('add_line2', $address, 'both');
 			$this->db->or_like('location_description', $address, 'both');
+			$this->db->group_end();
+			$array = array('location_status !='=>'-2');
+			$this->db->where($array);
+			$this->db->limit($limit, $start);
+			$query=$this->db->get("address");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_records_search_count($address){
+		try{
+			$this->db->group_start();
+			$this->db->or_like('add_line1', $address, 'both');
+			$this->db->or_like('add_line2', $address, 'both');
+			$this->db->or_like('location_description', $address, 'both');
+			$this->db->group_end();
 			$array = array('location_status !='=>'-2');
 			$this->db->where($array);
 			$query=$this->db->get("address");
-			return $query->result();
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;

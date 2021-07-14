@@ -32,7 +32,16 @@ class ExportController extends CI_Controller
 	public function exportSearch()
 	{
 		$export = $this->input->post('search_bar');
-		$result['data'] = $this->Export_model->display_records_search($export);
+		$config = array();
+		$config["base_url"] = site_url('ExportController/exportSearch/index');
+		$config["total_rows"] = $this->Export_model->display_records_search_count($export);
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
+		$result["links"] = $this->pagination->create_links();
+		$result['data'] = $this->Export_model->display_records_search($export,$config["per_page"], $page);
 		$result['search_key'][0]=$export;
 		$this->load->view('export_list_search',$result);
 	}

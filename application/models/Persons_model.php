@@ -47,10 +47,12 @@ class Persons_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_records_search($person_name,$limit,$start){
+	function display_records_search($person_name,$limit, $start){
 		try{
-			$this->db->like('Full_name', $person_name, 'both');
+			$this->db->group_start();
+			$this->db->or_like('Full_name', $person_name, 'both');
 			$this->db->or_like('Contact_number', $person_name, 'both');
+			$this->db->group_end();
 			$array = array('Person_status !='=>'-2');
 			$this->db->where($array);
 			$this->db->limit($limit, $start);
@@ -63,8 +65,10 @@ class Persons_model extends CI_Model
 	}
 	function display_records_search_count($person_name){
 		try{
-			$this->db->like('Full_name', $person_name, 'both');
+			$this->db->group_start();
+			$this->db->or_like('Full_name', $person_name, 'both');
 			$this->db->or_like('Contact_number', $person_name, 'both');
+			$this->db->group_end();
 			$array = array('Person_status !='=>'-2');
 			$this->db->where($array);
 			$query=$this->db->get("person");

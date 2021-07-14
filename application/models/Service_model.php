@@ -265,15 +265,34 @@ class Service_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_mrc_service_search($mrc_search)
+	function display_mrc_service_search($mrc_search,$limit, $start)
 	{
 		try {
 			$array = array('service_status !=' => '-2');
 			$this->db->where($array);
-			$this->db->like('service_id', $mrc_search, 'both');
+			$this->db->group_start();
+			$this->db->or_like('service_id', $mrc_search, 'both');
 			$this->db->or_like('trap_id', $mrc_search, 'both');
+			$this->db->group_end();
+			$this->db->limit($limit, $start);
 			$query=$this->db->get("mrc_service");
 			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_mrc_service_search_count($mrc_search)
+	{
+		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->group_start();
+			$this->db->or_like('service_id', $mrc_search, 'both');
+			$this->db->or_like('trap_id', $mrc_search, 'both');
+			$this->db->group_end();
+			$query=$this->db->get("mrc_service");
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;
@@ -305,15 +324,34 @@ class Service_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_ovi_service_search($mrc_service)
+	function display_ovi_service_search($ovi_service,$limit, $start)
 	{
 		try {
 			$array = array('service_status !=' => '-2');
 			$this->db->where($array);
-			$this->db->like('service_id', $mrc_service, 'both');
-			$this->db->or_like('trap_id', $mrc_service, 'both');
+			$this->db->group_start();
+			$this->db->or_like('service_id', $ovi_service, 'both');
+			$this->db->or_like('trap_id', $ovi_service, 'both');
+			$this->db->group_end();
+			$this->db->limit($limit, $start);
 			$query=$this->db->get("ovi_service");
 			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+	function display_ovi_service_search_count($ovi_service)
+	{
+		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->group_start();
+			$this->db->or_like('service_id', $ovi_service, 'both');
+			$this->db->or_like('trap_id', $ovi_service, 'both');
+			$this->db->group_end();
+			$query=$this->db->get("ovi_service");
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;
@@ -344,13 +382,16 @@ class Service_model extends CI_Model
 			echo $e;
 		}
 	}
-	function display_bg_service_search($bg_service)
+	function display_bg_service_search($bg_service,$limit, $start)
 	{
 		try {
 			$array = array('service_status !=' => '-2');
 			$this->db->where($array);
-			$this->db->like('service_id', $bg_service, 'both');
+			$this->db->group_start();
+			$this->db->or_like('service_id', $bg_service, 'both');
 			$this->db->or_like('trap_id', $bg_service, 'both');
+			$this->db->group_end();
+			$this->db->limit($limit, $start);
 			$query=$this->db->get("bg_service");
 			return $query->result();
 		}
@@ -358,7 +399,22 @@ class Service_model extends CI_Model
 			echo $e;
 		}
 	}
-
+	function display_bg_service_search_count($bg_service)
+	{
+		try {
+			$array = array('service_status !=' => '-2');
+			$this->db->where($array);
+			$this->db->group_start();
+			$this->db->or_like('service_id', $bg_service, 'both');
+			$this->db->or_like('trap_id', $bg_service, 'both');
+			$this->db->group_end();
+			$query=$this->db->get("bg_service");
+			return $query->num_rows();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 
 
 	function display_records_individual_bg_service($data)
