@@ -31,17 +31,19 @@ class SpatialDataController extends CI_Controller
 
 	public function search()
 	{
-		$map_name = $this->input->post('search_bar');
+		if($this->input->post('search_bar')) {
+			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
+		}
 		$config = array();
 		$config["base_url"] = site_url('SpatialDataController/search');
-		$config["total_rows"] = $this->Maps_model->display_records_search_count($map_name);
+		$config["total_rows"] = $this->Maps_model->display_records_search_count($this->session->userdata('search_bar'));
 		$config["per_page"] = 10;
 		$config["uri_segment"] = 3;
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
 		$result["links"] = $this->pagination->create_links();
-		$result['data'] = $this->Maps_model->display_records_search($map_name,$config["per_page"], $page);
-		$result['search_key'][0]=$map_name;
+		$result['data'] = $this->Maps_model->display_records_search($this->session->userdata('search_bar'),$config["per_page"], $page);
+		$result['search_key'][0]=$this->session->userdata('search_bar');
 		$this->load->view('spatial_data_search', $result);
 	}
 

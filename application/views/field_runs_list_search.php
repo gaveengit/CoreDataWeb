@@ -73,7 +73,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-8">
 							<div class="row">
 								<input type="text" class="form-control search-bar" name="search_bar"
-									   placeholder="Search by run name, date"/>
+									   placeholder="Search by run name, date" value="<?php echo $search_key ?>"/>
 							</div>
 						</div>
 						<div class="col-md-2">

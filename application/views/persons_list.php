@@ -70,7 +70,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="search-bar-secondary-container clearfix">
-					<form method="post" action="<?php echo
+					<form method="get" action="<?php echo
 					site_url('FieldActivitiesController/searchPerson'); ?>">
 						<div class="col-md-8">
 							<div class="row">

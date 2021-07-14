@@ -20,7 +20,7 @@ class FieldPlanningController extends CI_Controller
 		$config = array();
 		$config["base_url"] = site_url('FieldPlanningController/index');
 		$config["total_rows"] = $this->Run_model->display_all_records_count();
-		$config["per_page"] = 4;
+		$config["per_page"] = 10;
 		$config["uri_segment"] = 3;
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
@@ -31,16 +31,19 @@ class FieldPlanningController extends CI_Controller
 
 	public function runsSearch()
 	{
-		$search = $this->input->post('search_bar');
+		if($this->input->post('search_bar')) {
+			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
+		}
 		$config = array();
 		$config["base_url"] = site_url('FieldPlanningController/runsSearch/index');
-		$config["per_page"] = 4;
+		$config["per_page"] = 10;
 		$config["uri_segment"] = 4;
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-		$config["total_rows"] = $this->Run_model->display_all_records_search_count($config["per_page"], $page, $search);
+		$config["total_rows"] = $this->Run_model->display_all_records_search_count($config["per_page"], $page, $this->session->userdata('search_bar'));
 		$result["links"] = $this->pagination->create_links();
-		$result['data'] = $this->Run_model->display_all_records_search($config["per_page"], $page, $search);
+		$result["search_key"]=$this->session->userdata('search_bar');
+		$result['data'] = $this->Run_model->display_all_records_search($config["per_page"], $page, $this->session->userdata('search_bar'));
 		$this->load->view('field_runs_list_search', $result);
 	}
 

@@ -131,14 +131,14 @@ class OvTrap_model extends CI_Model
 			$this->db->from('ovi_trap');
 			$this->db->join('person', 'ovi_trap.person_id= person.person_id');
 			$this->db->join('address', 'ovi_trap.address_id= address.address_id');
-			$array = array('ovi_trap.trap_status !=' => '-2');
-			$this->db->where($array);
 			$this->db->group_start();
 			$this->db->or_like('ovi_trap.trap_id', $trap, 'both');
 			$this->db->or_like('person.full_name', $trap, 'both');
 			$this->db->or_like('address.add_line1', $trap, 'both');
 			$this->db->or_like('address.add_line2', $trap, 'both');
 			$this->db->group_end();
+			$array = array('ovi_trap.trap_status !=' => '-2');
+			$this->db->where($array);
 			$this->db->limit($limit, $start);
 			$query=$this->db->get();
 			return $query->result();
@@ -164,14 +164,14 @@ class OvTrap_model extends CI_Model
 			$this->db->from('ovi_trap');
 			$this->db->join('person', 'ovi_trap.person_id= person.person_id');
 			$this->db->join('address', 'ovi_trap.address_id= address.address_id');
-			$array = array('ovi_trap.trap_status !=' => '-2');
-			$this->db->where($array);
 			$this->db->group_start();
 			$this->db->or_like('ovi_trap.trap_id', $trap, 'both');
 			$this->db->or_like('person.full_name', $trap, 'both');
 			$this->db->or_like('address.add_line1', $trap, 'both');
 			$this->db->or_like('address.add_line2', $trap, 'both');
 			$this->db->group_end();
+			$array = array('ovi_trap.trap_status !=' => '-2');
+			$this->db->where($array);
 			$query=$this->db->get();
 			return $query->num_rows();
 		}

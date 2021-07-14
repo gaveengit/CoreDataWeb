@@ -36,21 +36,22 @@ class DiagnosticsController extends CI_Controller
 	}
 	public function identificationSearch()
 	{
-		$identification = $this->input->post('search_bar');
+		if($this->input->post('search_bar')) {
+			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
+		}
 		$config = array();
 		$config["base_url"] = site_url('DiagnosticsController/identificationSearch/index');
-		$config["total_rows"] = $this->Identification_model->display_records_search_count($identification);
+		$config["total_rows"] = $this->Identification_model->display_records_search_count($this->session->userdata('search_bar'));
 		$config["per_page"] = 10;
 		$config["uri_segment"] = 4;
 
 		$this->pagination->initialize($config);
 
-
 		$page = ($this->uri->segment(4))? $this->uri->segment(4) : 0;
 
 		$result["links"] = $this->pagination->create_links();
-		$result['data'] = $this->Identification_model->display_records_search($identification,$config["per_page"], $page);
-		$result['search_key'][0]=$identification;
+		$result['data'] = $this->Identification_model->display_records_search($this->session->userdata('search_bar'),$config["per_page"], $page);
+		$result['search_key'][0]=$this->session->userdata('search_bar');
 		$this->load->view('identifications_list_search',$result);
 	}
 	public function addIdentifications()
