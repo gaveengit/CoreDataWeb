@@ -72,7 +72,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 </div>
 <script type="text/javascript">
-	var mymap = L.map('mapid').setView([6.978811162056818,79.87119047695289],10);
+	var mymap = L.map('mapid').setView([6.9342,79.8920],11);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoiZ2F2ZWVua2l0aCIsImEiOi' +
 			'Jja3BubWx0NjIwdG81MnBxcXg2dmsxcXFyIn0.O7EZAp4PvrWygKz44f8c3A', {
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -83,8 +83,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		zoomOffset: -1,
 		accessToken: 'your.mapbox.access.token'
 	}).addTo(mymap);
-	var myGeoJSON = <?php echo $data[0]->geojson_content ;?>;
-	L.geoJSON(myGeoJSON).addTo(mymap);
+	<?php foreach ($data as $cure): ?>
+	var myGeoJSON = <?php echo $cure->geojson_content;?>;
+	L.geoJSON(myGeoJSON,{
+		onEachFeature: function (feature, layer) {
+			//layer.bindPopup("ID: " + feature.type);
+			if (typeof feature.properties.ADM4_EN === 'undefined') {
+				layer.setStyle({color :'red',fillColor:'transparent'})
+			}
+			else {
+				layer.bindTooltip(feature.properties.ADM4_EN, {permanent: true, direction: 'right'}).openTooltip();
+				layer.setStyle({color :'blue',fillColor:'transparent'})
+			}
+		}
+	}).addTo(mymap);
+	<?php endforeach; ?>
 
 </script>
 </body>

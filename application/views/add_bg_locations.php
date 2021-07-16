@@ -204,6 +204,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		zoomOffset: -1,
 		accessToken: 'your.mapbox.access.token'
 	}).addTo(mymap);
+	<?php foreach ($mapdata as $map): ?>
+	var myGeoJSON = <?php echo $map->geojson_content;?>;
+	L.geoJSON(myGeoJSON,{
+		onEachFeature: function (feature, layer) {
+			//layer.bindPopup("ID: " + feature.type);
+			if (typeof feature.properties.ADM4_EN === 'undefined') {
+				layer.setStyle({color :'red',fillColor:'transparent'})
+			}
+			else {
+				layer.bindTooltip(feature.properties.ADM4_EN, {permanent: true, direction: 'right'}).openTooltip();
+				layer.setStyle({color :'blue',fillColor:'transparent'})
+			}
+		}
+	}).addTo(mymap);
+	<?php endforeach; ?>
 	var marker;
 	mymap.on('click', function(e) {
 		if(marker!=null){

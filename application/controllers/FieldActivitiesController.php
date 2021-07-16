@@ -18,6 +18,7 @@ class FieldActivitiesController extends CI_Controller
 		$this->load->model('Mrc_model');
 		$this->load->model('Collection_model');
 		$this->load->model('Service_model');
+		$this->load->model('Maps_model');
 		$this->load->library("pagination");
 	}
 
@@ -54,7 +55,7 @@ class FieldActivitiesController extends CI_Controller
 		$config = array();
 		$config["base_url"] = site_url('FieldActivitiesController/bgLocationsSearch/index');
 		$config["total_rows"] = $this->BgTrap_model->display_records_search_count($this->session->userdata('search_bar'));
-		$config["per_page"] = 1;
+		$config["per_page"] = 10;
 		$config["uri_segment"] = 4;
 
 		$this->pagination->initialize($config);
@@ -74,8 +75,8 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
+		$result['mapdata'] = $this->Maps_model->display_records_all();
 		$this->load->view('add_bg_locations', $result);
-
 	}
 
 	public function updateBgLocations($data)
@@ -83,6 +84,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->BgTrap_model->display_records_individual($data);
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
+		$result['mapdata'] = $this->Maps_model->display_records_all();
 		$this->load->view('update_bg_location', $result);
 	}
 
@@ -133,6 +135,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
+		$result['mapdata'] = $this->Maps_model->display_records_all();
 		$this->load->view('add_ov_locations', $result);
 	}
 
@@ -141,6 +144,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->OvTrap_model->display_records_individual($data);
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
+		$result['mapdata'] = $this->Maps_model->display_records_all();
 		$this->load->view('update_ov_location', $result);
 
 	}
@@ -188,6 +192,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
+		$result['mapdata'] = $this->Maps_model->display_records_all();
 		$this->load->view('add_mrc_locations', $result);
 	}
 
@@ -196,6 +201,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['data'] = $this->Mrc_model->display_records_individual($data);
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
+		$result['mapdata'] = $this->Maps_model->display_records_all();
 		$this->load->view('update_mrc_location', $result);
 	}
 

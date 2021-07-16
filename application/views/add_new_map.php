@@ -75,8 +75,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="form-group clearfix">
 							<label class="control-label col-md-2" for="email">Description:(*)</label>
 							<div class="col-md-5">
-							<textarea class="form-control map-description" id="map-description"
-									  placeholder="Enter Map Description"
+							<textarea class="form-control map-description" id="map-description" placeholder="Enter Map Description"
 									  name="map-description"></textarea>
 							</div>
 
@@ -85,9 +84,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label col-md-2" for="email">Add GeoJson Content Here:(*)</label>
 							<div class="col-md-5">
 								<textarea id="geojson-content" name="geojson-content"
-										  style="height: 300px;" class="form-control">
-
-								</textarea>
+										  style="height: 300px;" class="form-control"></textarea>
 							</div>
 
 						</div>
