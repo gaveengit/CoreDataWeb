@@ -483,11 +483,20 @@ class Service_model extends CI_Model
 
 
 
-	function loadBgTraps()
+	function loadBgTrapsCollections()
+	{
+		$sql="SELECT a.bg_trap_id from bg_run_traps a,field_run b, bg_field_run d
+			where a.bg_run_id=b.field_run_id and a.bg_run_id=d.bg_run_id and b.run_status='1' and d.bg_run_type='2' and a.bg_trap_id not in (select a.bg_trap_id
+			     from bg_run_traps a, field_run b, bg_collection c,bg_field_run d  where a.bg_run_id=b.field_run_id and a.bg_run_id=d.bg_run_id and b.run_status='1'
+			    and d.bg_run_type='2' and a.bg_trap_id=c.trap_id and a.bg_run_id=c.run_id)";
+		$query=$this->db->query($sql);
+		return $query->result();
+	}
+	function loadBgTrapsServices()
 	{
 		$sql="SELECT a.bg_trap_id from bg_run_traps a,field_run b, bg_field_run d
 			where a.bg_run_id=b.field_run_id and a.bg_run_id=d.bg_run_id and b.run_status='1' and d.bg_run_type='1' and a.bg_trap_id not in (select a.bg_trap_id
-			     from bg_run_traps a, field_run b, bg_collection c,bg_field_run d  where a.bg_run_id=b.field_run_id and a.bg_run_id=d.bg_run_id and b.run_status='1'
+			     from bg_run_traps a, field_run b, bg_service c,bg_field_run d  where a.bg_run_id=b.field_run_id and a.bg_run_id=d.bg_run_id and b.run_status='1'
 			    and d.bg_run_type='1' and a.bg_trap_id=c.trap_id and a.bg_run_id=c.run_id)";
 		$query=$this->db->query($sql);
 		return $query->result();
@@ -497,7 +506,7 @@ class Service_model extends CI_Model
 	{
 		$sql="SELECT a.ovi_trap_id from ovi_run_traps a,field_run b, ovi_field_run d
 			where a.ovi_run_id=b.field_run_id and a.ovi_run_id=d.ovi_run_id and b.run_status='1' and d.ovi_run_type='1' and a.ovi_trap_id not in (select a.ovi_trap_id
-			     from ovi_run_traps a, field_run b, ovi_collection c,ovi_field_run d  where a.ovi_run_id=b.field_run_id and a.ovi_run_id=d.ovi_run_id and b.run_status='1'
+			     from ovi_run_traps a, field_run b, ovi_service c,ovi_field_run d  where a.ovi_run_id=b.field_run_id and a.ovi_run_id=d.ovi_run_id and b.run_status='1'
 			    and d.ovi_run_type='1' and a.ovi_trap_id=c.trap_id and a.ovi_run_id=c.run_id)";
 		$query=$this->db->query($sql);
 		return $query->result();
@@ -507,8 +516,8 @@ class Service_model extends CI_Model
 	{
 		$sql="SELECT a.mrc_trap_id from mrc_run_traps a,field_run b, mrc_field_run d
 			where a.mrc_run_id=b.field_run_id and a.mrc_run_id=d.mrc_run_id and b.run_status='1' and d.mrc_run_type='1' and a.mrc_trap_id not in (select a.mrc_trap_id
-			     from mrc_run_traps a, field_run b, mrc_release c,mrc_field_run d  where a.mrc_run_id=b.field_run_id and a.mrc_run_id=d.mrc_run_id and b.run_status='1'
-			    and d.mrc_run_type='1' and a.mrc_trap_id=c.identifier and a.mrc_run_id=c.run_id)";
+			     from mrc_run_traps a, field_run b, mrc_service c,mrc_field_run d  where a.mrc_run_id=b.field_run_id and a.mrc_run_id=d.mrc_run_id and b.run_status='1'
+			    and d.mrc_run_type='1' and a.mrc_trap_id=c.trap_id and a.mrc_run_id=c.run_id)";
 		$query=$this->db->query($sql);
 		return $query->result();
 	}

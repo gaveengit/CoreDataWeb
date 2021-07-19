@@ -119,6 +119,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->trap_status == '2') {
 									echo "<td>" . "Set" . "</td>";
 								}
+								if ($row->trap_status == '3') {
+									echo "<td>" . "Excluded" . "</td>";
+								}
 								echo "<td>" . $row->person_name . "</td>";
 								echo "<td>" . $row->contact_number . "</td>";
 								echo "<td>" . $row->add_line1 . " " . $row->add_line2 . "</td>";
@@ -136,6 +139,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								}
 								if ($row->trap_status == '2') {
 									echo "<td>" . "Set" . "</td>";
+								}
+								if ($row->trap_status == '3') {
+									echo "<td>" . "Excluded" . "</td>";
 								}
 								echo "<td>" . $row->person_name . "</td>";
 								echo "<td>" . $row->contact_number . "</td>";

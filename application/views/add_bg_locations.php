@@ -225,6 +225,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			mymap.removeLayer(marker);
 		}
 		document.getElementById("coordinates").value = e.latlng.lat + "," + e.latlng.lng;
+		console.log(e.latlng);
 		marker = new L.marker(e.latlng).addTo(mymap);
 	});
 

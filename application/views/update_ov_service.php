@@ -125,48 +125,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</select>
 						</div>
 					</div>
-					<div class="element-row clearfix">
-						<div class="col-md-2">
-							<label class="control-label">Identification Results(*):</label>
-						</div>
-					</div>
-
-					<div class="table-container">
-						<table>
-							<thead>
-							<tr class="grey-background">
-								<th>Identification Id</th>
-								<th>Species</th>
-								<th>Sex</th>
-								<th>Quantity</th>
-								<th>Date</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="grey-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
 
 					<div class="button-container clearfix">
 						<div class="col-md-7">

@@ -79,6 +79,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<span class="item">Reports</span>
 							</div>
 						</div>
+						<div class="col-md-4">
+							<div class="item-container" onclick="location.href='<?php echo site_url('DashboardController/index');?>'">
+								<span class="item">Dashboards</span>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

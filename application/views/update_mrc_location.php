@@ -92,6 +92,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<option value="2" <?php if ($data[0]->mrc_status == '2'): ?> selected="selected"<?php endif; ?>>
 									Deployed
 								</option>
+								<option value="3" <?php if ($data[0]->mrc_status == '3'): ?> selected="selected"<?php endif; ?>>
+									Exclude
+								</option>
 							</select>
 						</div>
 					</div>
@@ -183,29 +186,44 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<tr class="grey-background">
 								<th>Release Id</th>
 								<th>Released Date</th>
-								<th>MRC Position</th>
-								<th>Address</th>
+								<th>Release Status</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="grey-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
+							<?php
+							if(count($collectiondata)>0) {
+								$i = 1;
+								foreach ($collectiondata as $row) {
+									if (($i % 2) != 0) {
+										echo "<tr class='white-background'>";
+										echo "<td>" . $row->release_id . "</td>";
+										echo "<td>" . $row->released_date . "</td>";
+										if ($row->released_status == '1') {
+											echo "<td>" . "Released" . "</td>";
+										}
+										if ($row->released_status == '2') {
+											echo "<td>" . "Not Released" . "</td>";
+										}
+										echo "</tr>";
+										$i++;
+									} else {
+										if (($i % 2) == 0) {
+											echo "<tr class='white-background'>";
+											echo "<td>" . $row->release_id . "</td>";
+											echo "<td>" . $row->released_date . "</td>";
+											if ($row->released_status == '1') {
+												echo "<td>" . "Released" . "</td>";
+											}
+											if ($row->released_status == '2') {
+												echo "<td>" . "Not Released" . "</td>";
+											}
+											echo "</tr>";
+											$i++;
+										}
+									}
+								}
+							}
+							?>
 							</tbody>
 						</table>
 					</div>

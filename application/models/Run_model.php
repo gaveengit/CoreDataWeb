@@ -332,7 +332,7 @@ class Run_model extends CI_Model
 
 	function display_all_records($limit,$start)
 	{
-		$sql = "select field_run.field_run_id as field_run_id,field_run.run_date as run_date,field_run.run_status as run_status,mrc_field_run.mrc_run_type as run_type from field_run inner join mrc_field_run on mrc_field_run.mrc_run_id=field_run.field_run_id union all select field_run.field_run_id as field_run_id,field_run.run_date as run_date,field_run.run_status as run_status,bg_field_run.bg_run_type as run_type from field_run inner join bg_field_run on bg_field_run.bg_run_id=field_run.field_run_id union all select field_run.field_run_id as field_run_id,field_run.run_date as run_date,field_run.run_status as run_status,ovi_field_run.ovi_run_type as run_type from field_run inner join ovi_field_run on ovi_field_run.ovi_run_id=field_run.field_run_id limit $start,$limit";
+		$sql = "select field_run.field_run_id as field_run_id,field_run.run_date as run_date,field_run.run_status as run_status,mrc_field_run.mrc_run_type as run_type,\"mrc\" as main_type from field_run inner join mrc_field_run on mrc_field_run.mrc_run_id=field_run.field_run_id union all select field_run.field_run_id as field_run_id,field_run.run_date as run_date,field_run.run_status as run_status,bg_field_run.bg_run_type as run_type,\"bg\" as main_type from field_run inner join bg_field_run on bg_field_run.bg_run_id=field_run.field_run_id union all select field_run.field_run_id as field_run_id,field_run.run_date as run_date,field_run.run_status as run_status,ovi_field_run.ovi_run_type as run_type, \"ovi\" as main_type from field_run inner join ovi_field_run on ovi_field_run.ovi_run_id=field_run.field_run_id limit $start,$limit";
 		$query = $this->db->query($sql);
 		return $query->result();
 	}

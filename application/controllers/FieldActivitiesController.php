@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class FieldActivitiesController extends CI_Controller
 {
 	var $search_data;
+
 	function __construct()
 	{
 		parent::__construct();
@@ -17,8 +18,10 @@ class FieldActivitiesController extends CI_Controller
 		$this->load->model('OvTrap_model');
 		$this->load->model('Mrc_model');
 		$this->load->model('Collection_model');
+		$this->load->model('Identification_model');
 		$this->load->model('Service_model');
 		$this->load->model('Maps_model');
+		$this->load->model('Export_model');
 		$this->load->library("pagination");
 	}
 
@@ -49,7 +52,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function bgLocationsSearch()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -85,6 +88,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
 		$result['mapdata'] = $this->Maps_model->display_records_all();
+		$result['collectiondata'] = $this->Collection_model->display_bg_collection_trap_id($data);
 		$this->load->view('update_bg_location', $result);
 	}
 
@@ -112,7 +116,7 @@ class FieldActivitiesController extends CI_Controller
 	public function oviLocationsSearch()
 	{
 
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -145,6 +149,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
 		$result['mapdata'] = $this->Maps_model->display_records_all();
+		$result['collectiondata'] = $this->Collection_model->display_ovi_collection_trap_id($data);
 		$this->load->view('update_ov_location', $result);
 
 	}
@@ -171,7 +176,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function mrcLocationsSearch()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -202,6 +207,7 @@ class FieldActivitiesController extends CI_Controller
 		$result['persondata'] = $this->Persons_model->display_records_active();
 		$result['addressdata'] = $this->Address_model->display_records_active();
 		$result['mapdata'] = $this->Maps_model->display_records_all();
+		$result['collectiondata'] = $this->Collection_model->display_mrc_releases_trap_id($data);
 		$this->load->view('update_mrc_location', $result);
 	}
 
@@ -227,7 +233,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function searchBgCollections()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -260,7 +266,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function searchBgServices()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -286,13 +292,14 @@ class FieldActivitiesController extends CI_Controller
 
 	public function addBgService()
 	{
-		$result['trap_data'] = $this->Service_model->loadBgTraps();
+		$result['trap_data'] = $this->Service_model->loadBgTrapsServices();
 		$this->load->view('add_bg_service', $result);
 	}
 
 	public function updateBgCollection($bg_collection_id)
 	{
 		$result['data'] = $this->Collection_model->display_records_individual_bg_collection($bg_collection_id);
+		$result['identificationdata'] = $this->Identification_model->display_records_bg_collection($bg_collection_id);
 		$this->load->view('update_bg_collection', $result);
 	}
 
@@ -324,7 +331,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function searchOviCollections()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -368,7 +375,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function searchOviServices()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -405,6 +412,7 @@ class FieldActivitiesController extends CI_Controller
 	public function updateOvCollection($ov_collection_id)
 	{
 		$result['data'] = $this->Collection_model->display_records_individual_ovi_collection($ov_collection_id);
+		$result['exportdata'] = $this->Export_model->display_records_ovi_collection($ov_collection_id);
 		$this->load->view('update_ov_collection', $result);
 	}
 
@@ -437,7 +445,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function searchMrcReleases()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -456,7 +464,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function searchMrcServices()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -884,9 +892,9 @@ class FieldActivitiesController extends CI_Controller
 				$response_check['check_trap_count'] = $this->Collection_model->checkRunPendingBgPoints($data['run_id']);
 				if ($response_check['check_trap_count'] == 0) {
 					$response = $this->Collection_model->updateRunStatus($data['run_id']);
-					if ($response == true) {
-						echo "<script type='text/javascript'>alert('Record added successfully');
-					</script>";
+				}
+				echo "<script type='text/javascript'>alert('Record added successfully');
+				</script>";
 						$config = array();
 						$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
 						$config["total_rows"] = $this->Collection_model->display_bg_collection_count();
@@ -904,8 +912,8 @@ class FieldActivitiesController extends CI_Controller
 						$result['data'] = $this->Collection_model->display_bg_collection($config["per_page"], $page);
 						$this->load->view('bg_collections', $result);
 					}
-				}
-			} else {
+
+			else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
 				$result['trap_data'] = $this->Collection_model->loadBgTraps();
@@ -927,7 +935,10 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_date'] = $this->input->post('service_date');
 		$data['service_time'] = $this->input->post('service_time');
 		$data['service_status'] = $this->input->post('service-status');
-
+		$data_update['trap_id'] = $this->input->post('bg-trap-id');
+		$data_update['trap_status'] = "2";
+		$old_data['trap_id_old'] = $this->input->post('bg-trap-id');
+		$old_data['trap_id_new'] = $this->input->post('bg-trap-id');
 		$response_check['check_data_count'] = $this->Service_model->checkBgServiceId($data);
 		if ($response_check['check_data_count'] == 0) {
 			$runs['run_id'] = $this->Service_model->findBgRunId($data['trap_id']);
@@ -940,6 +951,9 @@ class FieldActivitiesController extends CI_Controller
 				}
 				echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
+				if ($data['service_status'] == '1') {
+					$response = $this->BgTrap_model->updateRecords($data_update, $old_data);
+				}
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
 				$config["total_rows"] = $this->Service_model->display_bg_service_count();
@@ -953,14 +967,14 @@ class FieldActivitiesController extends CI_Controller
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
-				$result['trap_data'] = $this->Service_model->loadBgTraps();
+				$result['trap_data'] = $this->Service_model->loadBgTrapsServices();
 				$this->load->view('add_bg_service', $result);
 
 			}
 		} else {
 			echo "<script type='text/javascript'>alert('Service id is already existing. Please try again.');
 				</script>";
-			$result['trap_data'] = $this->Service_model->loadBgTraps();
+			$result['trap_data'] = $this->Service_model->loadBgTrapsServices();
 			$this->load->view('add_bg_service', $result);
 		}
 	}
@@ -1021,10 +1035,13 @@ class FieldActivitiesController extends CI_Controller
 	public function saveOviService()
 	{
 		$data['service_id'] = $this->input->post('service-id');
-		$data['trap_id'] = $this->input->post('bg-trap-id');
+		$data['trap_id'] = $this->input->post('ovi-trap-id');
 		$data['service_date'] = $this->input->post('service_date');
 		$data['service_time'] = $this->input->post('service_time');
 		$data['service_status'] = $this->input->post('service-status');
+		$data_update['trap_status'] = "2";
+		$old_data['trap_id_old'] = $this->input->post('ovi-trap-id');
+		$old_data['trap_id_new'] = $this->input->post('ovi-trap-id');
 
 		$response_check['check_data_count'] = $this->Service_model->checkOviServiceId($data);
 		if ($response_check['check_data_count'] == 0) {
@@ -1036,8 +1053,12 @@ class FieldActivitiesController extends CI_Controller
 				if ($response_check['check_trap_count'] == 0) {
 					$response = $this->Service_model->updateRunStatus($data['run_id']);
 				}
+
 				echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
+				if ($data['service_status'] == '1') {
+					$response = $this->OvTrap_model->updateRecords($data_update, $old_data);
+				}
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
 				$config["total_rows"] = $this->Service_model->display_ovi_service_count();
@@ -1087,13 +1108,21 @@ class FieldActivitiesController extends CI_Controller
 				$response_check['check_trap_count'] = $this->Collection_model->checkRunPendingMrcPoints($data['run_id']);
 				if ($response_check['check_trap_count'] == 0) {
 					$response = $this->Collection_model->updateRunStatus($data['run_id']);
-					if ($response == true) {
-						echo "<script type='text/javascript'>alert('Record added successfully');
-					</script>";
-					}
 				}
-				$result_view['data'] = $this->Collection_model->display_mrc_releases();
-				$this->load->view('mrc_releases', $result_view);
+
+				echo "<script type='text/javascript'>alert('Record added successfully');
+					</script>";
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/mrcReleases/index');
+				$config["total_rows"] = $this->Collection_model->display_mrc_releases_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+				$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+				$result["links"] = $this->pagination->create_links();
+				$result['data'] = $this->Collection_model->display_mrc_releases($config["per_page"], $page);
+				$this->load->view('mrc_releases', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
 				</script>";
@@ -1116,6 +1145,10 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_date'] = $this->input->post('service-date');
 		$data['service_time'] = $this->input->post('service-time');
 		$data['service_status'] = $this->input->post('service-status');
+		$data_update['mrc_status'] = "2";
+		//$data['mrc_identifier'] = $this->input->post('identifier');
+		$old_data['mrc_identifier_old'] = $this->input->post('identifier');
+		$old_data['mrc_identifier_new'] = $this->input->post('identifier');
 
 		$response_check['check_data_count'] = $this->Service_model->checkMrcServiceId($data);
 		if ($response_check['check_data_count'] == 0) {
@@ -1129,8 +1162,11 @@ class FieldActivitiesController extends CI_Controller
 				}
 				echo "<script type='text/javascript'>alert('Record added successfully');
 					</script>";
+				if ($data['service_status'] == '1') {
+					$response = $this->Mrc_model->updateRecords($data_update, $old_data);
+				}
 				$config = array();
-				$config["base_url"] = site_url('FieldActivitiesController/mrcServices/index');
+				$config["base_url"] = site_url('FieldActivitiesController/mrcService/index');
 				$config["total_rows"] = $this->Service_model->display_mrc_service_count();
 				$config["per_page"] = 10;
 				$config["uri_segment"] = 4;
@@ -1177,7 +1213,7 @@ class FieldActivitiesController extends CI_Controller
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/bgLocations/index');
 				$config["total_rows"] = $this->BgTrap_model->display_records_count();
-				$config["per_page"] = 1;
+				$config["per_page"] = 10;
 				$config["uri_segment"] = 4;
 
 				$this->pagination->initialize($config);
@@ -1386,7 +1422,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function searchPerson()
 	{
-		if($this->input->get('search_bar')) {
+		if ($this->input->get('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->get('search_bar'));
 		}
 		$config = array();
@@ -1406,7 +1442,7 @@ class FieldActivitiesController extends CI_Controller
 
 	public function searchAddress()
 	{
-		if($this->input->post('search_bar')) {
+		if ($this->input->post('search_bar')) {
 			$this->session->set_userdata('search_bar', $this->input->post('search_bar'));
 		}
 		$config = array();
@@ -1786,7 +1822,7 @@ class FieldActivitiesController extends CI_Controller
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
 				$config["total_rows"] = $this->Mrc_model->display_records_count();
-				$config["per_page"] = 1;
+				$config["per_page"] = 10;
 				$config["uri_segment"] = 4;
 
 				$this->pagination->initialize($config);
@@ -1878,6 +1914,8 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_time'] = $this->input->post('service_time');
 		$data['service_status'] = $this->input->post('service_status');
 		$data_old['service_id_old'] = $this->input->post('save-btn');
+		$data_update["trap_status"]='2';
+		$old_data["trap_id_old"]=$this->input->post('trap-id');
 
 		$response_check['check_data_count'] = $this->Service_model->checkUpdateBgServiceId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
@@ -1885,6 +1923,10 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
+
+				if($data['service_status']=='1'){
+					$response = $this->BgTrap_model->updateRecords($data_update, $old_data);
+				}
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
 				$config["total_rows"] = $this->Service_model->display_bg_service_count();
@@ -1973,6 +2015,8 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_time'] = $this->input->post('service_time');
 		$data['service_status'] = $this->input->post('service_status');
 		$data_old['service_id_old'] = $this->input->post('save-btn');
+		$data_update["trap_status"]='2';
+		$old_data["trap_id_old"]=$this->input->post('trap-id');;
 
 		$response_check['check_data_count'] = $this->Service_model->checkUpdateOviServiceId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
@@ -1980,6 +2024,9 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
+				if($data['service_status']=='1'){
+					$response = $this->OvTrap_model->updateRecords($data_update, $old_data);
+				}
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
 				$config["total_rows"] = $this->Service_model->display_ovi_service_count();
@@ -2074,6 +2121,8 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_time'] = $this->input->post('service_time');
 		$data['service_status'] = $this->input->post('service_status');
 		$data_old['service_id_old'] = $this->input->post('save-btn');
+		$data_update["mrc_status"]='2';
+		$old_data["mrc_identifier_old"]=$this->input->post('trap-id');;
 
 		$response_check['check_data_count'] = $this->Service_model->checkUpdateMrcServiceId($data, $data_old);
 		if ($response_check['check_data_count'] == 0) {
@@ -2081,10 +2130,13 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record updated successfully');
 			</script>";
+			if(	$data['service_status']=='1'){
+				$response = $this->Mrc_model->updateRecords($data_update, $old_data);
+			}
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/mrcService/index');
 				$config["total_rows"] = $this->Service_model->display_mrc_service_count();
-				$config["per_page"] = 1;
+				$config["per_page"] = 10;
 				$config["uri_segment"] = 4;
 				$this->pagination->initialize($config);
 				$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;

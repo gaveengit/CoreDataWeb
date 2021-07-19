@@ -85,8 +85,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">OVI Trap Id(*):</label>
 						</div>
 						<div class="col-md-6">
-							<select class="form-control" id="bg-trap-id"
-									name="bg-trap-id">
+							<select class="form-control" id="ovi-trap-id"
+									name="ovi-trap-id">
 								<option value="-1">Select From Here</option>
 								<?php
 								foreach ($trap_data as $row) {

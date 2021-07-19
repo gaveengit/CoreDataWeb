@@ -103,11 +103,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								echo "<tr class='white-background'>";
 								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
-								if ($row->run_type == '1') {
+								if ($row->run_type == '1' && $row->main_type=='ovi') {
 									echo "<td>" . "OVI Service" . "</td>";
 								}
-								if ($row->run_type == '2') {
+								if ($row->run_type == '2' && $row->main_type=='ovi') {
 									echo "<td>" . "OVI Collection" . "</td>";
+								}
+								if ($row->run_type == '1' && $row->main_type=='bg') {
+									echo "<td>" . "BG Service" . "</td>";
+								}
+								if ($row->run_type == '2' && $row->main_type=='bg') {
+									echo "<td>" . "BG Collection" . "</td>";
+								}
+								if ($row->run_type == '1' && $row->main_type=='mrc') {
+									echo "<td>" . "MRC Service" . "</td>";
+								}
+								if ($row->run_type == '2' && $row->main_type=='mrc') {
+									echo "<td>" . "MRC Release" . "</td>";
 								}
 								if ($row->run_status == '1') {
 									echo "<td>" . "Pending" . "</td>";
@@ -124,11 +136,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								echo "<tr class='grey-background'>";
 								echo "<td>" . $row->field_run_id . "</td>";
 								echo "<td>" . $row->run_date . "</td>";
-								if ($row->run_type == '1') {
+								if ($row->run_type == '1' && $row->main_type=='ovi') {
 									echo "<td>" . "OVI Service" . "</td>";
 								}
-								if ($row->run_type == '2') {
+								if ($row->run_type == '2' && $row->main_type=='ovi') {
 									echo "<td>" . "OVI Collection" . "</td>";
+								}
+								if ($row->run_type == '1' && $row->main_type=='bg') {
+									echo "<td>" . "BG Service" . "</td>";
+								}
+								if ($row->run_type == '2' && $row->main_type=='bg') {
+									echo "<td>" . "BG Collection" . "</td>";
+								}
+								if ($row->run_type == '1' && $row->main_type=='mrc') {
+									echo "<td>" . "MRC Service" . "</td>";
+								}
+								if ($row->run_type == '2' && $row->main_type=='mrc') {
+									echo "<td>" . "MRC Release" . "</td>";
 								}
 								if ($row->run_status == '1') {
 									echo "<td>" . "Pending" . "</td>";

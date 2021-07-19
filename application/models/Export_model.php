@@ -75,6 +75,18 @@ class Export_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_records_ovi_collection($ovi_collection)
+	{
+		try {
+			$array = array('export_status !=' => "-2",'ovi_collection_id'=>$ovi_collection);
+			$this->db->where($array);
+			$query=$this->db->get("biobank_export");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 	function display_records_count()
 	{
 		try {

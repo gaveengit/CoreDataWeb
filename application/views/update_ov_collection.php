@@ -135,35 +135,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<table>
 							<thead>
 							<tr class="grey-background">
-								<th>Identification Id</th>
-								<th>Species</th>
-								<th>Sex</th>
+								<th>Export Id</th>
 								<th>Quantity</th>
 								<th>Date</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="grey-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
+							<?php
+							if(count($exportdata)>0) {
+								$i = 1;
+								foreach ($exportdata as $row) {
+									if (($i % 2) != 0) {
+										echo "<tr class='white-background'>";
+										echo "<td>" . $row->export_id . "</td>";
+										echo "<td>" . $row->qty . "</td>";
+										if ($row->export_status == '1') {
+											echo "<td>" . "Eligible" . "</td>";
+										}
+										if ($row->export_status == '2') {
+											echo "<td>" . "Not Eligible" . "</td>";
+										}
+										echo "</tr>";
+										$i++;
+									} else {
+										if (($i % 2) == 0) {
+											echo "<tr class='white-background'>";
+											echo "<td>" . $row->identification_id . "</td>";
+											echo "<td>" . $row->identified_date . "</td>";
+											if ($row->export_status == '1') {
+												echo "<td>" . "Eligible" . "</td>";
+											}
+											if ($row->export_status == '2') {
+												echo "<td>" . "Not Eligible" . "</td>";
+											}
+											echo "</tr>";
+											$i++;
+										}
+									}
+								}
+							}
+							?>
 							</tbody>
 						</table>
 					</div>

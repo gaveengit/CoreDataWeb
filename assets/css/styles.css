@@ -199,8 +199,11 @@ ul.breadcrumb li a.selected:hover {
 	height: 500px;
 	margin-bottom: 50px;
 }
-
-/* end of add new map layer */
+#mapid{
+	height: 500px;
+	margin-bottom: 50px;
+}
+	/* end of add new map layer */
 
 /* start of field planning */
 .table-container {

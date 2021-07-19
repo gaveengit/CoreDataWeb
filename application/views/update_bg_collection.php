@@ -136,34 +136,45 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<thead>
 							<tr class="grey-background">
 								<th>Identification Id</th>
-								<th>Species</th>
-								<th>Sex</th>
-								<th>Quantity</th>
-								<th>Date</th>
+								<th>Identified Date</th>
+								<th>Identification Status</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="grey-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
+							<?php
+							if(count($identificationdata)>0) {
+								$i = 1;
+								foreach ($identificationdata as $row) {
+									if (($i % 2) != 0) {
+										echo "<tr class='white-background'>";
+										echo "<td>" . $row->identification_id . "</td>";
+										echo "<td>" . $row->identified_date . "</td>";
+										if ($row->status == '1') {
+											echo "<td>" . "Success" . "</td>";
+										}
+										if ($row->status == '2') {
+											echo "<td>" . "Not Success" . "</td>";
+										}
+										echo "</tr>";
+										$i++;
+									} else {
+										if (($i % 2) == 0) {
+											echo "<tr class='white-background'>";
+											echo "<td>" . $row->identification_id . "</td>";
+											echo "<td>" . $row->identified_date . "</td>";
+											if ($row->status == '1') {
+												echo "<td>" . "Success" . "</td>";
+											}
+											if ($row->status == '2') {
+												echo "<td>" . "Not Success" . "</td>";
+											}
+											echo "</tr>";
+											$i++;
+										}
+									}
+								}
+							}
+							?>
 							</tbody>
 						</table>
 					</div>

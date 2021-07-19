@@ -77,7 +77,7 @@ class FieldRunsController extends CI_Controller
 			$config = array();
 			$config["base_url"] = site_url('FieldPlanningController/index');
 			$config["total_rows"] = $this->Run_model->display_all_records_count();
-			$config["per_page"] = 4;
+			$config["per_page"] = 10;
 			$config["uri_segment"] = 3;
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
@@ -153,7 +153,7 @@ class FieldRunsController extends CI_Controller
 						//echo '<script type="text/javascript">alert("ok");</script>';
 						$data_trap['trap_id'] = $filesop3[0];
 						$ovi_run_status_response['data'] = $this->Run_model->checkOvInPendingRun($data_trap);
-						echo '<script type="text/javascript">alert("' . $ovi_run_status_response['data'] . '");</script>';
+						//echo '<script type="text/javascript">alert("' . $ovi_run_status_response['data'] . '");</script>';
 						if ($ovi_run_status_response['data'] <> 0) {
 							$ovi_run_status_invalid_errors['data'][$d - 1]['trap_id'] = $data_trap['trap_id'];
 							$ovi_run_status_invalid_errors['data'][$d - 1]['error'] = "Trap is already in a pending run";
@@ -185,8 +185,18 @@ class FieldRunsController extends CI_Controller
 								$k = $k + 1;
 							}
 							if ($response_ovi_trap_data == true) {
-								echo "<script type='text/javascript'>alert('done');
+								echo "<script type='text/javascript'>alert('Field run has been added successfully.');
 								</script>";
+								$config = array();
+								$config["base_url"] = site_url('FieldPlanningController/index');
+								$config["total_rows"] = $this->Run_model->display_all_records_count();
+								$config["per_page"] = 10;
+								$config["uri_segment"] = 3;
+								$this->pagination->initialize($config);
+								$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+								$result["links"] = $this->pagination->create_links();
+								$result['data'] = $this->Run_model->display_all_records($config["per_page"], $page);
+								$this->load->view('field_runs_list', $result);
 							}
 						}
 					}
@@ -234,7 +244,7 @@ class FieldRunsController extends CI_Controller
 						//echo '<script type="text/javascript">alert("ok");</script>';
 						$data_trap['trap_id'] = $filesop3[0];
 						$ovi_run_status_response['data'] = $this->Run_model->checkOvInPendingRun($data_trap);
-						echo '<script type="text/javascript">alert("' . $ovi_run_status_response['data'] . '");</script>';
+						//echo '<script type="text/javascript">alert("' . $ovi_run_status_response['data'] . '");</script>';
 						if ($ovi_run_status_response['data'] <> 0) {
 							$ovi_run_status_invalid_errors['data'][$d - 1]['trap_id'] = $data_trap['trap_id'];
 							$ovi_run_status_invalid_errors['data'][$d - 1]['error'] = "Trap is already in a pending run";
@@ -267,8 +277,18 @@ class FieldRunsController extends CI_Controller
 								$k = $k + 1;
 							}
 							if ($response_ovi_trap_data == true) {
-								echo "<script type='text/javascript'>alert('done');
+								echo "<script type='text/javascript'>alert('Field run has been added successfully.');
 								</script>";
+								$config = array();
+								$config["base_url"] = site_url('FieldPlanningController/index');
+								$config["total_rows"] = $this->Run_model->display_all_records_count();
+								$config["per_page"] = 10;
+								$config["uri_segment"] = 3;
+								$this->pagination->initialize($config);
+								$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+								$result["links"] = $this->pagination->create_links();
+								$result['data'] = $this->Run_model->display_all_records($config["per_page"], $page);
+								$this->load->view('field_runs_list', $result);
 							}
 						}
 					}
@@ -316,7 +336,7 @@ class FieldRunsController extends CI_Controller
 						//echo '<script type="text/javascript">alert("ok");</script>';
 						$data_trap['trap_id'] = $filesop3[0];
 						$bg_run_status_response['data'] = $this->Run_model->checkBgInPendingRun($data_trap);
-						echo '<script type="text/javascript">alert("' . $bg_run_status_response['data'] . '");</script>';
+						//echo '<script type="text/javascript">alert("' . $bg_run_status_response['data'] . '");</script>';
 						if ($bg_run_status_response['data'] <> 0) {
 							$bg_run_status_invalid_errors['data'][$d - 1]['trap_id'] = $data_trap['trap_id'];
 							$bg_run_status_invalid_errors['data'][$d - 1]['error'] = "trap is already in a pending run";
@@ -349,8 +369,18 @@ class FieldRunsController extends CI_Controller
 								$k = $k + 1;
 							}
 							if ($response_bg_trap_data == true) {
-								echo "<script type='text/javascript'>alert('done');
+								echo "<script type='text/javascript'>alert('Field run has been added successfully.');
 								</script>";
+								$config = array();
+								$config["base_url"] = site_url('FieldPlanningController/index');
+								$config["total_rows"] = $this->Run_model->display_all_records_count();
+								$config["per_page"] = 10;
+								$config["uri_segment"] = 3;
+								$this->pagination->initialize($config);
+								$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+								$result["links"] = $this->pagination->create_links();
+								$result['data'] = $this->Run_model->display_all_records($config["per_page"], $page);
+								$this->load->view('field_runs_list', $result);
 							}
 						}
 					}
@@ -397,7 +427,7 @@ class FieldRunsController extends CI_Controller
 						//echo '<script type="text/javascript">alert("ok");</script>';
 						$data_trap['trap_id'] = $filesop3[0];
 						$bg_run_status_response['data'] = $this->Run_model->checkBgInPendingRun($data_trap);
-						echo '<script type="text/javascript">alert("' . $bg_run_status_response['data'] . '");</script>';
+						//echo '<script type="text/javascript">alert("' . $bg_run_status_response['data'] . '");</script>';
 						if ($bg_run_status_response['data'] <> 0) {
 							$bg_run_status_invalid_errors['data'][$d - 1]['trap_id'] = $data_trap['trap_id'];
 							$bg_run_status_invalid_errors['data'][$d - 1]['error'] = "Trap is already in a pending run";
@@ -429,8 +459,18 @@ class FieldRunsController extends CI_Controller
 								$k = $k + 1;
 							}
 							if ($response_bg_trap_data == true) {
-								echo "<script type='text/javascript'>alert('done');
+								echo "<script type='text/javascript'>alert('Field run has been added successfully.');
 								</script>";
+								$config = array();
+								$config["base_url"] = site_url('FieldPlanningController/index');
+								$config["total_rows"] = $this->Run_model->display_all_records_count();
+								$config["per_page"] = 10;
+								$config["uri_segment"] = 3;
+								$this->pagination->initialize($config);
+								$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+								$result["links"] = $this->pagination->create_links();
+								$result['data'] = $this->Run_model->display_all_records($config["per_page"], $page);
+								$this->load->view('field_runs_list', $result);
 							}
 						}
 					}
@@ -476,7 +516,7 @@ class FieldRunsController extends CI_Controller
 						//echo '<script type="text/javascript">alert("ok");</script>';
 						$data_trap['trap_id'] = $filesop3[0];
 						$mrc_run_status_response['data'] = $this->Run_model->checkMrcInPendingRun($data_trap);
-						echo '<script type="text/javascript">alert("' . $mrc_run_status_response['data'] . '");</script>';
+						//echo '<script type="text/javascript">alert("' . $mrc_run_status_response['data'] . '");</script>';
 						if ($mrc_run_status_response['data'] <> 0) {
 							$mrc_run_status_invalid_errors['data'][$d - 1]['trap_id'] = $data_trap['trap_id'];
 							$mrc_run_status_invalid_errors['data'][$d - 1]['error'] = "Trap is already in a pending run";
@@ -508,8 +548,18 @@ class FieldRunsController extends CI_Controller
 								$k = $k + 1;
 							}
 							if ($response_mrc_trap_data == true) {
-								echo "<script type='text/javascript'>alert('done');
+								echo "<script type='text/javascript'>alert('Field run has been added successfully.');
 								</script>";
+								$config = array();
+								$config["base_url"] = site_url('FieldPlanningController/index');
+								$config["total_rows"] = $this->Run_model->display_all_records_count();
+								$config["per_page"] = 10;
+								$config["uri_segment"] = 3;
+								$this->pagination->initialize($config);
+								$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+								$result["links"] = $this->pagination->create_links();
+								$result['data'] = $this->Run_model->display_all_records($config["per_page"], $page);
+								$this->load->view('field_runs_list', $result);
 							}
 						}
 					}
@@ -556,7 +606,7 @@ class FieldRunsController extends CI_Controller
 						//echo '<script type="text/javascript">alert("ok");</script>';
 						$data_trap['trap_id'] = $filesop3[0];
 						$mrc_run_status_response['data'] = $this->Run_model->checkMrcInPendingRun($data_trap);
-						echo '<script type="text/javascript">alert("' . $mrc_run_status_response['data'] . '");</script>';
+						//echo '<script type="text/javascript">alert("' . $mrc_run_status_response['data'] . '");</script>';
 						if ($mrc_run_status_response['data'] <> 0) {
 							$mrc_run_status_invalid_errors['data'][$d - 1]['trap_id'] = $data_trap['trap_id'];
 							$mrc_run_status_invalid_errors['data'][$d - 1]['error'] = "trap is already in a pending run";
@@ -588,8 +638,19 @@ class FieldRunsController extends CI_Controller
 								$k = $k + 1;
 							}
 							if ($response_mrc_trap_data == true) {
-								echo "<script type='text/javascript'>alert('done');
+								echo "<script type='text/javascript'>alert('Field run has been added successfully.');
 								</script>";
+								$config = array();
+								$config["base_url"] = site_url('FieldPlanningController/index');
+								$config["total_rows"] = $this->Run_model->display_all_records_count();
+								$config["per_page"] = 10;
+								$config["uri_segment"] = 3;
+								$this->pagination->initialize($config);
+								$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+								$result["links"] = $this->pagination->create_links();
+								$result['data'] = $this->Run_model->display_all_records($config["per_page"], $page);
+								$this->load->view('field_runs_list', $result);
+
 							}
 						}
 					}

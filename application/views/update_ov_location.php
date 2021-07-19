@@ -92,6 +92,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<option value="2" <?php if ($data[0]->trap_status == '2'): ?> selected="selected"<?php endif; ?>>
 									Set
 								</option>
+								<option value="3" <?php if ($data[0]->trap_status == '3'): ?> selected="selected"<?php endif; ?>>
+									Exclude
+								</option>
 							</select>
 						</div>
 					</div>
@@ -180,38 +183,49 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 					</div>
 					<div class="table-container">
-						<table>
+						<table style="max-height:350px;overflow:auto;">
 							<thead>
 							<tr class="grey-background">
 								<th>Collection Id</th>
-								<th>Set Date</th>
 								<th>Collected Date</th>
-								<th>Trap Position</th>
-								<th>Address</th>
+								<th>Collection Status</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="grey-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
-							<tr class="white-background">
-								<td class="run-name-cell">BG_Run_Nug1</td>
-								<td>Proposed</td>
-								<td>Kamal Fernando</td>
-								<td>No.20, Colombo 10</td>
-								<td>No.20, Colombo 10</td>
-							</tr>
+							<?php
+							if(count($collectiondata)>0) {
+								$i = 1;
+								foreach ($collectiondata as $row) {
+									if (($i % 2) != 0) {
+										echo "<tr class='white-background'>";
+										echo "<td>" . $row->collection_id . "</td>";
+										echo "<td>" . $row->collect_date . "</td>";
+										if ($row->collect_status == '1') {
+											echo "<td>" . "Collected" . "</td>";
+										}
+										if ($row->collect_status == '2') {
+											echo "<td>" . "Not Collected" . "</td>";
+										}
+										echo "</tr>";
+										$i++;
+									} else {
+										if (($i % 2) == 0) {
+											echo "<tr class='white-background'>";
+											echo "<td>" . $row->collection_id . "</td>";
+											echo "<td>" . $row->collect_date . "</td>";
+											if ($row->collect_status == '1') {
+												echo "<td>" . "Collected" . "</td>";
+											}
+											if ($row->collect_status == '2') {
+												echo "<td>" . "Not Collected" . "</td>";
+											}
+											echo "</tr>";
+											$i++;
+										}
+									}
+								}
+							}
+							?>
 							</tbody>
 						</table>
 					</div>

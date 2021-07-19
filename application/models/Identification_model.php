@@ -77,6 +77,18 @@ class Identification_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_records_bg_collection($bg_collection)
+	{
+		try {
+			$array = array('status !=' => "-2",'collection_id'=>$bg_collection);
+			$this->db->where($array);
+			$query=$this->db->get("identification_result");
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 	function display_records_count()
 	{
 		try {

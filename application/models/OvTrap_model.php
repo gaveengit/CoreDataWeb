@@ -89,6 +89,31 @@ class OvTrap_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_records_all()
+	{
+		try {
+			$this->db->select('ovi_trap.trap_id as trap_id, 
+                   ovi_trap.trap_status as trap_status, 
+                   ovi_trap.trap_position as trap_position, 
+                   ovi_trap.coordinates as coordinates,  
+                   person.full_name as person_name,
+                   person.contact_number as contact_number,
+                   address.add_line1 as add_line1,
+                   address.add_line2 as add_line2
+                   '
+			);
+			$this->db->from('ovi_trap');
+			$this->db->join('person', 'ovi_trap.person_id= person.person_id');
+			$this->db->join('address', 'ovi_trap.address_id= address.address_id');
+			$array = array('ovi_trap.trap_status !=' => '-2');
+			$this->db->where($array);
+			$query=$this->db->get();
+			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
 	function display_records_count()
 	{
 		try {
