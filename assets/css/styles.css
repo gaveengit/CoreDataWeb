@@ -391,3 +391,19 @@ ul.breadcrumb li a.selected:hover {
 .field-activities-main-menu-section{
 	padding-bottom: 15px;
 }
+#chart_div div {
+	text-align: center;
+}
+
+#chart_div div div {
+	display: inline-block;
+}
+
+#chart_div_2 div {
+	text-align: center;
+}
+
+#chart_div_2 div div {
+	display: inline-block;
+}
+
