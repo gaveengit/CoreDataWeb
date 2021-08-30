@@ -41,7 +41,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</li>
 					<li><a href="#" onclick="location.href='<?php echo site_url('ReportController'); ?>'">Reports
 							Menu</a></li>
-					<li><a class="selected">OVI Performance Report Generation</a></li>
+					<li><a class="selected">BG Performance Report Generation</a></li>
 				</ul>
 			</div>
 		</div>
@@ -50,11 +50,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="title-container">
-					<h3 class="title" align="center">OVI Performance Report Generation</h3>
+					<h3 class="title" align="center">BG Performance Report Generation</h3>
 				</div>
 				<div class="menu-container-secondary clearfix">
 					<form role="form" method="post" action="<?php echo
-					site_url('ReportController/goOviPerformanceReportView'); ?>" onSubmit="return formValidation()">
+					site_url('ReportController/goBgPerformanceReportView'); ?>" onSubmit="return formValidation()">
 						<div class="date-container clearfix">
 							<div class="col-md-6">
 								<div class="form-group">

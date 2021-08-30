@@ -1204,6 +1204,10 @@ class FieldActivitiesController extends CI_Controller
 		$old_data['trap_id_old'] = $this->input->post('save-btn');
 		$old_data['trap_id_new'] = $this->input->post('trap-id');
 
+		if($data['trap_status']=='3'){
+			$data['exclude_date']=date('Y-m-d');;
+		}
+
 		$response_check['check_data_count'] = $this->BgTrap_model->checkUpdateBgTrap($old_data);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->BgTrap_model->updateRecords($data, $old_data);
@@ -1250,6 +1254,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$data['trap_status'] = "-2";
 		$data['trap_id'] = $trap_id;
+		$data['delete_date']=date('Y-m-d');
 		$response = $this->BgTrap_model->deleteRecords($data);
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
@@ -1296,6 +1301,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$data['trap_status'] = "-2";
 		$data['trap_id'] = $trap_id;
+		$data['delete_date']=date('Y-m-d');
 		$response = $this->OvTrap_model->deleteOviLocation($data);
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
@@ -1554,6 +1560,7 @@ class FieldActivitiesController extends CI_Controller
 	{
 		$data['mrc_status'] = "-2";
 		$data['mrc_identifier'] = $mrc_id;
+		$data['delete_date']=date('Y-m-d');
 		$response = $this->Mrc_model->deleteMrcLocation($data);
 		if ($response == true) {
 			echo "<script type='text/javascript'>alert('Record deleted successfully');
@@ -1727,6 +1734,10 @@ class FieldActivitiesController extends CI_Controller
 		$old_data['trap_id_old'] = $this->input->post('save-btn');
 		$old_data['trap_id_new'] = $this->input->post('trap-id');
 
+		if($data['trap_status']=='3'){
+			$data['exclude_date']=date('Y-m-d');;
+		}
+
 		$response_check['check_data_count'] = $this->OvTrap_model->checkUpdateOvTrap($old_data);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->OvTrap_model->updateRecords($data, $old_data);
@@ -1786,7 +1797,21 @@ class FieldActivitiesController extends CI_Controller
 			if ($response == true) {
 				echo "<script type='text/javascript'>alert('Record added successfully');
 			</script>";
-				$result['data'] = $this->Mrc_model->display_records();
+				$config = array();
+				$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
+				$config["total_rows"] = $this->Mrc_model->display_records_count();
+				$config["per_page"] = 10;
+				$config["uri_segment"] = 4;
+
+				$this->pagination->initialize($config);
+
+
+				$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+				$result["links"] = $this->pagination->create_links();
+
+				//$data['student'] = $this->StudentPagination_Model->get_students($config["per_page"], $page);
+				$result['data'] = $this->Mrc_model->display_records($config["per_page"], $page);
 				$this->load->view('mrc_locations', $result);
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
@@ -1812,6 +1837,10 @@ class FieldActivitiesController extends CI_Controller
 		$data['address_id'] = $this->input->post('address');
 		$old_data['mrc_identifier_old'] = $this->input->post('save-btn');
 		$old_data['mrc_identifier_new'] = $this->input->post('trap-id');
+
+		if($data['mrc_status']=='3'){
+			$data['exclude_date']=date('Y-m-d');
+		}
 
 		$response_check['check_data_count'] = $this->Mrc_model->checkUpdateMrc($old_data);
 		if ($response_check['check_data_count'] == 0) {

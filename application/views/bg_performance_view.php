@@ -21,7 +21,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 		function drawChart() {
 			var jsonData = $.ajax({
-				url: "<?php echo site_url('ReportController/getdata'); ?>",
+				url: "<?php echo site_url('ReportController/getBgData'); ?>",
 				dataType: "json",
 				async: false,
 			}).responseText;
@@ -36,7 +36,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 			var jsonData2 = $.ajax({
-				url: "<?php echo site_url('ReportController/getdata2'); ?>",
+				url: "<?php echo site_url('ReportController/getBgData2'); ?>",
 				dataType: "json",
 				async: false,
 			}).responseText;
@@ -93,7 +93,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</li>
 					<li><a href="#" onclick="location.href='<?php echo site_url('ReportController'); ?>'">Reports
 							Menu</a></li>
-					<li><a class="selected">OVI Performance Report </a></li>
+					<li><a class="selected">BG Performance Report</a></li>
 				</ul>
 			</div>
 		</div>
@@ -105,7 +105,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="title-container">
 						<div class="container">
 							<div class="row">
-								<h3 align="center">OVI Performance Report</h3>
+								<h3 align="center">BG Performance Report</h3>
 							</div>
 						</div>
 					</div>
@@ -124,7 +124,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="title-container">
 						<div class="container">
 							<div class="row">
-								<h4 align="center">New Ovi Trap Locations</h4>
+								<h4 align="center">New BG Trap Locations</h4>
 							</div>
 						</div>
 					</div>
@@ -159,7 +159,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="title-container">
 						<div class="container">
 							<div class="row">
-								<h4 align="center">Ovi Exclusions and Replacements</h4>
+								<h4 align="center">BG Exclusions and Replacements</h4>
 							</div>
 						</div>
 					</div>
@@ -198,13 +198,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</div>
 	<div class="container">
 		<div class="row" style="text-align: center;">
-		<button type="button" name="create_pdf" id="printer" class="btn btn-primary" onclick="printout()" style="padding-top: 15px;padding-bottom: 15px; width:20%;">Print Report
-		</button>
+			<button type="button" name="create_pdf" id="printer" class="btn btn-primary" onclick="printout()" style="padding-top: 15px;padding-bottom: 15px; width:20%;">Print Report
+			</button>
 		</div>
 	</div>
 </div>
 </body>
 </html>
+
 
 
 

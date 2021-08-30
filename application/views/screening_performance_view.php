@@ -21,7 +21,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 		function drawChart() {
 			var jsonData = $.ajax({
-				url: "<?php echo site_url('ReportController/getdata'); ?>",
+				url: "<?php echo site_url('ReportController/getScreeningData'); ?>",
 				dataType: "json",
 				async: false,
 			}).responseText;
@@ -30,13 +30,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			var data = new google.visualization.DataTable(jsonData);
 
 			// Instantiate and draw our chart, passing in some options.
-			var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-			var _chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-			_chart.draw(data, {width: 500, height: 250});
+			var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+			var _chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+			_chart.draw(data, {width: 850, height: 350});
 
 
 			var jsonData2 = $.ajax({
-				url: "<?php echo site_url('ReportController/getdata2'); ?>",
+				url: "<?php echo site_url('ReportController/getScreeningData2'); ?>",
 				dataType: "json",
 				async: false,
 			}).responseText;
@@ -47,7 +47,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			// Instantiate and draw our chart, passing in some options.
 			var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
 			var _chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
-			_chart.draw(data, {width: 500, height: 250});
+			_chart.draw(data, {width: 700, height: 300});
 
 
 		}
@@ -93,7 +93,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</li>
 					<li><a href="#" onclick="location.href='<?php echo site_url('ReportController'); ?>'">Reports
 							Menu</a></li>
-					<li><a class="selected">OVI Performance Report </a></li>
+					<li><a class="selected">Mosquito Screening Report</a></li>
 				</ul>
 			</div>
 		</div>
@@ -105,7 +105,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="title-container">
 						<div class="container">
 							<div class="row">
-								<h3 align="center">OVI Performance Report</h3>
+								<h3 align="center">Mosquito Screening Report</h3>
 							</div>
 						</div>
 					</div>
@@ -124,7 +124,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="title-container">
 						<div class="container">
 							<div class="row">
-								<h4 align="center">New Ovi Trap Locations</h4>
+								<h4 align="center">Screening Results Values Summary</h4>
 							</div>
 						</div>
 					</div>
@@ -133,22 +133,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<table style="border-collapse: collapse;width:100%;">
 								<thead>
 								<tr style="border-bottom: 1px solid ;background-color: greenyellow;">
-									<th></th>
-									<th style="padding-top: 15px;padding-bottom: 15px;">Count</th>
-									<th style="padding-top: 15px;padding-bottom: 15px;">Percentage</th>
+									<th>Mosquito Category</th>
+									<th style="padding-top: 15px;padding-bottom: 15px;">Male Results Average</th>
+									<th style="padding-top: 15px;padding-bottom: 15px;">Female Results Average</th>
 								</tr>
 								</thead>
 								<tbody>
 								<tr style="border-bottom: 0.5px solid ;background-color: lightgreen;">
-									<td style="padding-top: 15px;padding-bottom: 15px;">Proposed traps</td>
-									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->proposed_count; ?></td>
-									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->proposed_percentage; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;">Aedes Aegypti</td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->male_aedes_avg; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->female_aedes_avg; ?></td>
 								</tr>
 								<tr style="border-bottom: 0.5px solid ;background-color: lightgreen;">
-									<td style="padding-top: 15px;padding-bottom: 15px;">Set traps</td>
-									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->set_count; ?></td>
-									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->set_percentage; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;">Anopheles</td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->male_anopheles_avg; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->female_anopheles_avg; ?></td>
 								</tr>
+								<tr style="border-bottom: 0.5px solid ;background-color: lightgreen;">
+									<td style="padding-top: 15px;padding-bottom: 15px;">Culex</td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->male_culex_avg; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->female_culex_avg; ?></td>
+								</tr>
+
 								</tbody>
 							</table>
 						</div>
@@ -159,7 +165,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="title-container">
 						<div class="container">
 							<div class="row">
-								<h4 align="center">Ovi Exclusions and Replacements</h4>
+								<h4 align="center">Screening Results Status Summary</h4>
 							</div>
 						</div>
 					</div>
@@ -168,22 +174,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<table style="border-collapse: collapse;width:100%;">
 								<thead>
 								<tr style="border-bottom: 1px solid ;background-color: greenyellow;">
-									<th></th>
+									<th style="padding-top: 15px;padding-bottom: 15px;">Result Status</th>
 									<th style="padding-top: 15px;padding-bottom: 15px;">Count</th>
 									<th style="padding-top: 15px;padding-bottom: 15px;">Percentage</th>
 								</tr>
 								</thead>
 								<tbody>
 								<tr style="border-bottom: 0.5px solid ;background-color: lightgreen;">
-									<td style="padding-top: 15px;padding-bottom: 15px;">Replacements
+									<td style="padding-top: 15px;padding-bottom: 15px;">Pass
 									</td>
-									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->replace_count; ?></td>
-									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->replace_percentage; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->pass_count; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->pass_percentage; ?></td>
 								</tr>
 								<tr style="border-bottom: 0.5px solid ;background-color: lightgreen;">
-									<td style="padding-top: 15px;padding-bottom: 15px;">Exclusions</td>
-									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->exclude_count; ?></td>
-									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->exclude_percentage; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;">Fail</td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->fail_count; ?></td>
+									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->fail_percentage; ?></td>
 								</tr>
 								</tbody>
 							</table>
@@ -198,13 +204,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</div>
 	<div class="container">
 		<div class="row" style="text-align: center;">
-		<button type="button" name="create_pdf" id="printer" class="btn btn-primary" onclick="printout()" style="padding-top: 15px;padding-bottom: 15px; width:20%;">Print Report
-		</button>
+			<button type="button" name="create_pdf" id="printer" class="btn btn-primary" onclick="printout()" style="padding-top: 15px;padding-bottom: 15px; width:20%;">Print Report
+			</button>
 		</div>
 	</div>
 </div>
 </body>
 </html>
+
+
 
 
 

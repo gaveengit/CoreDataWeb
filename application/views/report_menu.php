@@ -50,16 +50,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('ReportController/goOviPerformanceReportGenerate');?>'">
 						<span class="menu-item">OVI Performance Report</span>
 					</div>
-					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/bgCollections');?>'">
+					<div class="item-container white-background" onclick="location.href='<?php echo site_url('ReportController/goBgPerformanceReportGenerate');?>'">
 						<span class="menu-item">BG Performance Report</span>
 					</div>
-					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/bgServices');?>'">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('ReportController/goMRCPerformanceReportGenerate');?>'">
 						<span class="menu-item">MRC Performance Report</span>
 					</div>
-					<div class="item-container white-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/ovLocations');?>'">
+					<div class="item-container white-background" onclick="location.href='<?php echo site_url('ReportController/goDiagnosticPerformanceReportGenerate');?>'">
 						<span class="menu-item">Mosquito Diagnostics Report</span>
 					</div>
-					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('FieldActivitiesController/ovCollections');?>'">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('ReportController/goScreeningPerformanceReportGenerate');?>'">
 						<span class="menu-item">Mosquito Screening Report</span>
 					</div>
 				</div>
