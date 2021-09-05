@@ -105,13 +105,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 						</div>
 					</div>
-					<div class="title-container">
-						<div class="container">
-							<div class="row">
-								<h4 align="center">New BG Trap Locations</h4>
-							</div>
-						</div>
-					</div>
 					<div class="date-container clearfix">
 						<div>
 							<table style="border-collapse: collapse;width:100%;">

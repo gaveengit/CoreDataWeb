@@ -94,6 +94,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 						</div>
 					</div>
+					<div class="item-record clearfix">
+						<div class="col-md-4">
+							<div class="item-container"
+								 onclick="location.href='<?php echo site_url('ExportController/index'); ?>'">
+								<span class="item">User Management</span>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

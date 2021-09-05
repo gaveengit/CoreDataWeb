@@ -73,7 +73,7 @@ class SpatialDataController extends CI_Controller
 				if ($response_check['check_data_count'] == 0) {
 					$response = $this->Maps_model->saveRecords($data);
 					if ($response == true) {
-						echo "<script type='text/javascript'>alert('Record added successfully');
+						echo "<script type='text/javascript'>alert('Map layer has been added successfully');
 								</script>";
 						$config = array();
 						$config["base_url"] = site_url('SpatialDataController/index');
@@ -144,7 +144,7 @@ class SpatialDataController extends CI_Controller
 		$data['map_id'] = $map_id;
 		$response = $this->Maps_model->deleteRecords($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('Map layer has been deleted successfully');
 			</script>";
 
 			$config = array();

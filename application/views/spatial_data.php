@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/styles.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 	<script>
-		var confirm_delete_message = "Are you sure to delete this record?";
+		var confirm_delete_message = "Are you sure to delete this map layer?";
 	</script>
 </head>
 <body>

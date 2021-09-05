@@ -545,7 +545,7 @@ class Collection_model extends CI_Model
 		}
 	}
 	function display_records_active_for_exports(){
-		$sql="select * from ovi_collection where collect_status='1' and collection_id not in (select collection_id 
+		$sql="select * from ovi_collection where collect_status='1' and collection_id not in (select ovi_collection_id 
     from biobank_export)";
 		$query=$this->db->query($sql);
 		return $query->result();

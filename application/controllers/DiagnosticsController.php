@@ -90,7 +90,7 @@ class DiagnosticsController extends CI_Controller
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Identification_model->saveRecords($data);
 			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record added successfully');
+				echo "<script type='text/javascript'>alert('Identification has been added successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('DiagnosticsController/index');

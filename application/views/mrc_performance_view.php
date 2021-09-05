@@ -140,12 +140,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								</thead>
 								<tbody>
 								<tr style="border-bottom: 0.5px solid ;background-color: lightgreen;">
-									<td style="padding-top: 15px;padding-bottom: 15px;">Proposed traps</td>
+									<td style="padding-top: 15px;padding-bottom: 15px;">Proposed locations</td>
 									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->proposed_count; ?></td>
 									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->proposed_percentage; ?></td>
 								</tr>
 								<tr style="border-bottom: 0.5px solid ;background-color: lightgreen;">
-									<td style="padding-top: 15px;padding-bottom: 15px;">Set traps</td>
+									<td style="padding-top: 15px;padding-bottom: 15px;">Set locations</td>
 									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->set_count; ?></td>
 									<td style="padding-top: 15px;padding-bottom: 15px;"><?php echo $data[0]->set_percentage; ?></td>
 								</tr>
