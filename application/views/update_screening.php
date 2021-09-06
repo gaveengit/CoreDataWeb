@@ -84,7 +84,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<select class="form-control" name="identification_id" id="identification_id">
+
 								<option value="<?php echo $data[0]->identification_id ?>"><?php echo $data[0]->identification_id ?></option>
+
 								<?php
 								foreach ($identification_data as $row) {
 									echo '

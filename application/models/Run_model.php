@@ -356,6 +356,11 @@ class Run_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->num_rows();
 	}
+	function display_bg_run_coordinates($run_id){
+		$sql="select bg_trap.trap_id as trap_id,bg_trap.trap_status as trap_status,bg_trap.coordinates as coordinates from bg_trap, bg_run_traps where bg_trap.trap_id=bg_run_traps.bg_trap_id and bg_run_traps.bg_run_id='$run_id'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 
 	function display_main_field_run_record($run_id)
 	{

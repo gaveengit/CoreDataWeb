@@ -74,16 +74,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label>Field Location Type:</label>
 							<select class="form-control" id="field_type"
 									name="field_type" onchange='this.form.submit()'>
-								<option value="1" <?php if ($field_type[0] == '1'): ?> selected="selected"<?php endif; ?>>BG Locations</option>
-								<option value="2" <?php if ($field_type[0] == '2'): ?> selected="selected"<?php endif; ?>>OVI Locations</option>
-								<option value="3" <?php if ($field_type[0] == '3'): ?> selected="selected"<?php endif; ?>>MRC Locations</option>
+								<option value="0" <?php if ($field_type[0] == '0'): ?>selected="selected"<?php endif; ?>>Select from Here</option>
+								<option value="1" <?php if ($field_type[0] == '1'): ?>selected="selected"<?php endif; ?>>BG Locations</option>
+								<option value="2" <?php if ($field_type[0] == '2'): ?>selected="selected"<?php endif; ?>>OVI Locations</option>
+								<option value="3" <?php if ($field_type[0] == '3'): ?>selected="selected"<?php endif; ?>>MRC Locations</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label>Run Name:</label>
 							<select class="form-control" id="run_name"
 									name="run_name" onchange='this.form.submit()'>
+								<?php if (isset($run_name) && $run_name!='0'){
+									echo '
+							<option value="' . $run_name . '">' . $run_name . '</option>
+							';
+								}
+								?>
+
 								<option value="0">Select from here</option>
+								<?php
+								foreach ($rundata as $row) {
+									echo '
+							<option value="' . $row->field_run_id . '">' . $row->field_run_id . '</option>
+							';
+								}
+								?>
 							</select>
 						</div>
 					</form>
