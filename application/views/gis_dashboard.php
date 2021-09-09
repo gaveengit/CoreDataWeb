@@ -67,61 +67,69 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="dashboard-secondary-container">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<form action="<?php echo
-					site_url('DashboardController/loadGisDashboard');?>" method="post">
+					site_url('DashboardController/loadGisDashboard'); ?>" method="post">
 						<div class="form-group">
 							<label>Field Location Type:</label>
 							<select class="form-control" id="field_type"
 									name="field_type" onchange='this.form.submit()'>
-								<option value="0" <?php if ($field_type == '0'): ?>selected="selected"<?php endif; ?>>Select from Here</option>
-								<option value="1" <?php if ($field_type == '1'): ?>selected="selected"<?php endif; ?>>BG Locations</option>
-								<option value="2" <?php if ($field_type == '2'): ?>selected="selected"<?php endif; ?>>OVI Locations</option>
-								<option value="3" <?php if ($field_type == '3'): ?>selected="selected"<?php endif; ?>>MRC Locations</option>
+								<option value="0" <?php if ($field_type == '0'): ?>selected="selected"<?php endif; ?>>
+									Select from Here
+								</option>
+								<option value="1" <?php if ($field_type == '1'): ?>selected="selected"<?php endif; ?>>BG
+									Locations
+								</option>
+								<option value="2" <?php if ($field_type == '2'): ?>selected="selected"<?php endif; ?>>
+									OVI Locations
+								</option>
+								<option value="3" <?php if ($field_type == '3'): ?>selected="selected"<?php endif; ?>>
+									MRC Locations
+								</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label>Field Activity Type:</label>
 							<select class="form-control" id="activity_type"
 									name="activity_type" onchange='this.form.submit()'>
-								<?php if (isset($activity_type) && $activity_type=='1' && isset($field_type) && $field_type=='1'){
+								<?php if (isset($activity_type) && $activity_type == '1' && isset($field_type) && $field_type == '1') {
 									echo '
 							<option value="' . $activity_type . '">' . 'BG Services' . '</option>
 							';
 								}
 								?>
-								<?php if (isset($activity_type) && $activity_type=='2' && isset($field_type) && $field_type=='1'){
+								<?php if (isset($activity_type) && $activity_type == '2' && isset($field_type) && $field_type == '1') {
 									echo '
 							<option value="' . $activity_type . '">' . 'BG Collections' . '</option>
 							';
 								}
 								?>
-								<?php if (isset($activity_type) && $activity_type=='1' && isset($field_type) && $field_type=='2'){
+								<?php if (isset($activity_type) && $activity_type == '1' && isset($field_type) && $field_type == '2') {
 									echo '
 							<option value="' . $activity_type . '">' . 'OVI Services' . '</option>
 							';
 								}
 								?>
-								<?php if (isset($activity_type) && $activity_type=='2' && isset($field_type) && $field_type=='2'){
+								<?php if (isset($activity_type) && $activity_type == '2' && isset($field_type) && $field_type == '2') {
 									echo '
 							<option value="' . $activity_type . '">' . 'OVI Collections' . '</option>
 							';
 								}
 								?>
-								<?php if (isset($activity_type) && $activity_type=='1' && isset($field_type) && $field_type=='3'){
+								<?php if (isset($activity_type) && $activity_type == '1' && isset($field_type) && $field_type == '3') {
 									echo '
 							<option value="' . $activity_type . '">' . 'MRC Services' . '</option>
 							';
 								}
 								?>
-								<?php if (isset($activity_type) && $activity_type=='2' && isset($field_type) && $field_type=='3'){
+								<?php if (isset($activity_type) && $activity_type == '2' && isset($field_type) && $field_type == '3') {
 									echo '
 							<option value="' . $activity_type . '">' . 'MRC Releases' . '</option>
 							';
 								}
 								?>
 								<option value="0">Select from here</option>
-								<?php if (isset($field_type) && $field_type=='1'){
+								<?php if (isset($field_type) && $field_type == '1') {
 									echo '
 							<option value="1">' . 'BG Services' . '</option>
 							';
@@ -130,7 +138,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							';
 								}
 								?>
-								<?php if (isset($field_type) && $field_type=='2'){
+								<?php if (isset($field_type) && $field_type == '2') {
 									echo '
 							<option value="1">' . 'OVI Services' . '</option>
 							';
@@ -139,7 +147,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							';
 								}
 								?>
-								<?php if (isset($field_type) && $field_type=='3'){
+								<?php if (isset($field_type) && $field_type == '3') {
 									echo '
 							<option value="1">' . 'MRC Services' . '</option>
 							';
@@ -156,7 +164,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label>Run Name:</label>
 							<select class="form-control" id="run_name"
 									name="run_name" onchange='this.form.submit()'>
-								<?php if (isset($run_name) && $run_name!='0'){
+								<?php if (isset($run_name) && $run_name != '0') {
 									echo '
 							<option value="' . $run_name . '">' . $run_name . '</option>
 							';
@@ -174,8 +182,47 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</select>
 						</div>
 					</form>
+					<div class="map-legend-container-main">
+						<div class="title-container">
+							<h3 class="title">Map Legend</h3>
+						</div>
+						<div class="map-legend-secondary clearfix">
+							<div class="legend-item clearfix" style="margin-bottom: 5px;">
+								<div class="col-md-2">
+									<div style="width: 30px;height: 30px;border-radius: 100%;background-color: dodgerblue"></div>
+								</div>
+								<div class="col-md-10">
+									<div style="font-size: 15px;">Pending</div>
+								</div>
+							</div>
+							<div class="legend-item clearfix" style="margin-bottom: 5px;">
+								<div class="col-md-2">
+									<div style="width: 30px;height: 30px;border-radius: 100%;background-color: #FFBF00"></div>
+								</div>
+								<div class="col-md-10">
+									<div style="font-size: 15px;">Proposed/Serviced/Collected/Released</div>
+								</div>
+							</div>
+							<div class="legend-item clearfix" style="margin-bottom: 5px;">
+								<div class="col-md-2">
+									<div style="width: 30px;height: 30px;border-radius: 100%;background-color: green"></div>
+								</div>
+								<div class="col-md-10">
+									<div style="font-size: 15px;">Set/ Not Serviced/ Not Collected/ Not Released</div>
+								</div>
+							</div>
+							<div class="legend-item clearfix" style="margin-bottom: 5px;">
+								<div class="col-md-2">
+									<div style="width: 30px;height: 30px;border-radius: 100%;background-color: red"></div>
+								</div>
+								<div class="col-md-10">
+									<div style="font-size: 15px;">Excluded</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<div class="map-container">
 						<div id="mapid"></div>
 					</div>
@@ -185,7 +232,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</div>
 </div>
 <script type="text/javascript">
-	var mymap = L.map('mapid').setView([6.9291, 79.9828], 12);
+	var mymap = L.map('mapid').setView([6.9186, 79.8470], 12);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoiZ2F2ZWVua2l0aCIsImEiOi' +
 			'Jja3BubWx0NjIwdG81MnBxcXg2dmsxcXFyIn0.O7EZAp4PvrWygKz44f8c3A', {
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
