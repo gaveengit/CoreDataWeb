@@ -74,12 +74,84 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label>Field Location Type:</label>
 							<select class="form-control" id="field_type"
 									name="field_type" onchange='this.form.submit()'>
-								<option value="0" <?php if ($field_type[0] == '0'): ?>selected="selected"<?php endif; ?>>Select from Here</option>
-								<option value="1" <?php if ($field_type[0] == '1'): ?>selected="selected"<?php endif; ?>>BG Locations</option>
-								<option value="2" <?php if ($field_type[0] == '2'): ?>selected="selected"<?php endif; ?>>OVI Locations</option>
-								<option value="3" <?php if ($field_type[0] == '3'): ?>selected="selected"<?php endif; ?>>MRC Locations</option>
+								<option value="0" <?php if ($field_type == '0'): ?>selected="selected"<?php endif; ?>>Select from Here</option>
+								<option value="1" <?php if ($field_type == '1'): ?>selected="selected"<?php endif; ?>>BG Locations</option>
+								<option value="2" <?php if ($field_type == '2'): ?>selected="selected"<?php endif; ?>>OVI Locations</option>
+								<option value="3" <?php if ($field_type == '3'): ?>selected="selected"<?php endif; ?>>MRC Locations</option>
 							</select>
 						</div>
+						<div class="form-group">
+							<label>Field Activity Type:</label>
+							<select class="form-control" id="activity_type"
+									name="activity_type" onchange='this.form.submit()'>
+								<?php if (isset($activity_type) && $activity_type=='1' && isset($field_type) && $field_type=='1'){
+									echo '
+							<option value="' . $activity_type . '">' . 'BG Services' . '</option>
+							';
+								}
+								?>
+								<?php if (isset($activity_type) && $activity_type=='2' && isset($field_type) && $field_type=='1'){
+									echo '
+							<option value="' . $activity_type . '">' . 'BG Collections' . '</option>
+							';
+								}
+								?>
+								<?php if (isset($activity_type) && $activity_type=='1' && isset($field_type) && $field_type=='2'){
+									echo '
+							<option value="' . $activity_type . '">' . 'OVI Services' . '</option>
+							';
+								}
+								?>
+								<?php if (isset($activity_type) && $activity_type=='2' && isset($field_type) && $field_type=='2'){
+									echo '
+							<option value="' . $activity_type . '">' . 'OVI Collections' . '</option>
+							';
+								}
+								?>
+								<?php if (isset($activity_type) && $activity_type=='1' && isset($field_type) && $field_type=='3'){
+									echo '
+							<option value="' . $activity_type . '">' . 'MRC Services' . '</option>
+							';
+								}
+								?>
+								<?php if (isset($activity_type) && $activity_type=='2' && isset($field_type) && $field_type=='3'){
+									echo '
+							<option value="' . $activity_type . '">' . 'MRC Releases' . '</option>
+							';
+								}
+								?>
+								<option value="0">Select from here</option>
+								<?php if (isset($field_type) && $field_type=='1'){
+									echo '
+							<option value="1">' . 'BG Services' . '</option>
+							';
+									echo '
+							<option value="2">' . 'BG Collections' . '</option>
+							';
+								}
+								?>
+								<?php if (isset($field_type) && $field_type=='2'){
+									echo '
+							<option value="1">' . 'OVI Services' . '</option>
+							';
+									echo '
+							<option value="2">' . 'OVI Collections' . '</option>
+							';
+								}
+								?>
+								<?php if (isset($field_type) && $field_type=='3'){
+									echo '
+							<option value="1">' . 'MRC Services' . '</option>
+							';
+									echo '
+							<option value="2">' . 'MRC Releases' . '</option>
+							';
+								}
+								?>
+
+							</select>
+						</div>
+
 						<div class="form-group">
 							<label>Run Name:</label>
 							<select class="form-control" id="run_name"
@@ -130,7 +202,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		onEachFeature: function (feature, layer) {
 			//layer.bindPopup("ID: " + feature.type);
 			if (typeof feature.properties.ADM4_EN === 'undefined') {
-				layer.setStyle({color: 'pink', fillColor: 'transparent'})
+				layer.setStyle({color: 'red', fillColor: 'transparent'})
 			} else {
 				layer.bindTooltip(feature.properties.ADM4_EN, {permanent: true, direction: 'right'}).openTooltip();
 				layer.setStyle({color: 'blue', fillColor: 'transparent'})
@@ -142,6 +214,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<?php foreach ($markerdata as $marker): ?>
 	var greenIcon = new L.Icon({
 		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var blueIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
 		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
 		iconSize: [25, 41],
 		iconAnchor: [12, 41],
@@ -165,6 +245,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		shadowSize: [41, 41]
 	});
 	var trap_status = "<?php echo $marker->trap_status;?>";
+	if (trap_status == "0") {
+		var marker_id = "<?php echo $marker->trap_id;?>";
+		var marker = new L.marker([<?php echo $marker->coordinates;?>], {icon: blueIcon}).bindTooltip(marker_id,
+				{
+					permanent: true,
+					direction: 'right'
+				}).addTo(mymap);
+	}
 	if (trap_status == "1") {
 		var marker_id = "<?php echo $marker->trap_id;?>";
 		var marker = new L.marker([<?php echo $marker->coordinates;?>], {icon: yellowIcon}).bindTooltip(marker_id,

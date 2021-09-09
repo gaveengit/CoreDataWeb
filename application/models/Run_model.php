@@ -361,6 +361,67 @@ class Run_model extends CI_Model
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
+	function display_bg_service_run_coordinates($run_id){
+		$sql = "select bg_run_traps.bg_trap_id as trap_id, ifnull(bg_service.service_status,'0') as trap_status, bg_trap.coordinates as coordinates
+				from bg_run_traps
+				left outer join bg_service on bg_run_traps.bg_trap_id = bg_service.trap_id and
+				bg_run_traps.bg_run_id=bg_service.run_id
+				left outer join bg_trap on bg_run_traps.bg_trap_id=bg_trap.trap_id
+				where bg_run_traps.bg_run_id='$run_id'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_bg_collection_run_coordinates($run_id){
+		$sql = "select bg_run_traps.bg_trap_id as trap_id, ifnull(bg_collection.collect_status,'0') as trap_status,
+				bg_trap.coordinates as coordinates from bg_run_traps 
+				left outer join bg_collection on bg_run_traps.bg_trap_id = bg_collection.trap_id and 
+				bg_run_traps.bg_run_id=bg_collection.run_id 
+				left outer join bg_trap on bg_run_traps.bg_trap_id=bg_trap.trap_id 
+				where bg_run_traps.bg_run_id='$run_id'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_ovi_service_run_coordinates($run_id){
+		$sql = "select ovi_run_traps.ovi_trap_id as trap_id, ifnull(ovi_service.service_status,'0') as trap_status, ovi_trap.coordinates as coordinates
+				from ovi_run_traps
+				left outer join ovi_service on ovi_run_traps.ovi_trap_id = ovi_service.trap_id and
+				ovi_run_traps.ovi_run_id=ovi_service.run_id
+				left outer join ovi_trap on ovi_run_traps.ovi_trap_id=ovi_trap.trap_id
+				where ovi_run_traps.ovi_run_id='$run_id'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_ovi_collection_run_coordinates($run_id){
+		$sql = "select ovi_run_traps.ovi_trap_id as trap_id, ifnull(ovi_collection.collect_status,'0') as trap_status, ovi_trap.coordinates as coordinates
+				from ovi_run_traps
+				left outer join ovi_collection on ovi_run_traps.ovi_trap_id = ovi_collection.trap_id and
+				ovi_run_traps.ovi_run_id=ovi_collection.run_id
+				left outer join ovi_trap on ovi_run_traps.ovi_trap_id=ovi_trap.trap_id
+				where ovi_run_traps.ovi_run_id='$run_id'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+
+	function display_mrc_service_run_coordinates($run_id){
+		$sql = "select mrc_run_traps.mrc_trap_id as trap_id, ifnull(mrc_service.service_status,'0') as trap_status, mrc.coordinates as coordinates
+				from mrc_run_traps
+				left outer join mrc_service on mrc_run_traps.mrc_trap_id = mrc_service.trap_id and
+				mrc_run_traps.mrc_run_id=mrc_service.run_id
+				left outer join mrc on mrc_run_traps.mrc_trap_id=mrc.mrc_identifier
+				where mrc_run_traps.mrc_run_id='$run_id'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_mrc_release_run_coordinates($run_id){
+		$sql = "select mrc_run_traps.mrc_trap_id as trap_id, ifnull(mrc_release.released_status,'0') as trap_status, mrc.coordinates as coordinates
+				from mrc_run_traps
+				left outer join mrc_release on mrc_run_traps.mrc_trap_id = mrc_release.identifier and
+				mrc_run_traps.mrc_run_id=mrc_release.run_id
+				left outer join mrc on mrc_run_traps.mrc_trap_id=mrc.mrc_identifier
+				where mrc_run_traps.mrc_run_id='$run_id'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
 
 	function display_main_field_run_record($run_id)
 	{
@@ -457,5 +518,36 @@ class Run_model extends CI_Model
 			echo $e;
 		}
 	}
+	function display_all_bg_service_runs(){
+		$sql = "select bg_run_id as field_run_id from bg_field_run where bg_run_type='1'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_all_bg_collection_runs(){
+		$sql = "select bg_run_id as field_run_id from bg_field_run where bg_run_type='2'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_all_ovi_service_runs(){
+		$sql = "select ovi_run_id as field_run_id from ovi_field_run where ovi_run_type='1'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_all_ovi_collection_runs(){
+		$sql = "select ovi_run_id as field_run_id from ovi_field_run where ovi_run_type='2'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_all_mrc_service_runs(){
+		$sql = "select mrc_run_id as field_run_id from mrc_field_run where mrc_run_type='1'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+	function display_all_mrc_release_runs(){
+		$sql = "select mrc_run_id as field_run_id from mrc_field_run where mrc_run_type='2'";
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+
 }
 

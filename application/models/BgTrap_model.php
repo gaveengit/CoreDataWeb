@@ -268,5 +268,6 @@ class BgTrap_model extends CI_Model
 		}
 	}
 
+
 }
 
