@@ -17,12 +17,17 @@ class DashboardController extends CI_Controller
 		$this->load->model('OvTrap_model');
 		$this->load->model('Mrc_model');
 		$this->load->model('Run_model');
+		$this->load->model('Dashboard_model');
 		$this->load->library("pagination");
 	}
 
 	public function index()
 	{
 		$this->load->view('dashboards_menu');
+	}
+	public function goStatDashboard(){
+		$result['data'] = $this->Dashboard_model->displayDashboardData();
+		$this->load->view('stat_dashboard',$result);
 	}
 	public function gisDashboard(){
 		$result['mapdata'] = $this->Maps_model->display_records_all();
@@ -345,88 +350,271 @@ class DashboardController extends CI_Controller
 				}
 			}
 		}
-		/*
-		if($data['activity_type']=='0' && $data['field_type']!='0'){
-			if($data['field_type']=='1'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				$result['markerdata'] = $this->BgTrap_model->display_records_all();
-				//$result['rundata'] = $this->Run_model->display_records_bg();
-				$result['field_type']='1';
-				//$result['run_name'] = $data['run_name'];
-				$this->load->view('gis_dashboard',$result);
-			}
-			if($data['field_type']=='2'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				$result['markerdata'] = $this->OvTrap_model->display_records_all();
-				//$result['rundata'] = $this->Run_model->display_records_ovi();
-				$result['field_type']='2';
-				$this->load->view('gis_dashboard',$result);
-			}
-			if($data['field_type']=='3'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				$result['markerdata'] = $this->Mrc_model->display_records_all();
-				//$result['rundata'] = $this->Run_model->display_records_mrc();
-				$result['field_type']='3';
-				$this->load->view('gis_dashboard',$result);
-			}
 
-		}
-		*/
-		/*
-		if($data['activity_type']!='0' && $data['field_type']!='0' && $data['run_name']=='0'){
-			if($data['field_type']=='1' && $data['activity_type']=='1'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				//$result['markerdata'] = $this->Run_model->display_bg_run_coordinates($data['run_name']);
-				//$result['rundata'] = $this->Run_model->display_records_bg();
-				$result['field_type']='1';
-				$result['activity_type']='1';
-				$this->load->view('gis_dashboard',$result);
-			}
-			if($data['field_type']=='1' && $data['activity_type']=='2'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				//$result['markerdata'] = $this->Run_model->display_bg_run_coordinates($data['run_name']);
-				//$result['rundata'] = $this->Run_model->display_records_bg();
-				$result['field_type']='1';
-				$result['activity_type']='2';
-				$this->load->view('gis_dashboard',$result);
-			}
-			if($data['field_type']=='2' && $data['activity_type']=='1'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				//$result['markerdata'] = $this->Run_model->display_bg_run_coordinates($data['run_name']);
-				//$result['rundata'] = $this->Run_model->display_records_bg();
-				$result['field_type']='2';
-				$result['activity_type']='1';
-				$this->load->view('gis_dashboard',$result);
-			}
-			if($data['field_type']=='2' && $data['activity_type']=='2'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				//$result['markerdata'] = $this->Run_model->display_bg_run_coordinates($data['run_name']);
-				//$result['rundata'] = $this->Run_model->display_records_bg();
-				$result['field_type']='2';
-				$result['activity_type']='2';
-				$this->load->view('gis_dashboard',$result);
-			}
-			if($data['field_type']=='3' && $data['activity_type']=='1'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				//$result['markerdata'] = $this->Run_model->display_bg_run_coordinates($data['run_name']);
-				//$result['rundata'] = $this->Run_model->display_records_bg();
-				$result['field_type']='3';
-				$result['activity_type']='1';
-				$this->load->view('gis_dashboard',$result);
-			}
-			if($data['field_type']=='3' && $data['activity_type']=='2'){
-				$result['mapdata'] = $this->Maps_model->display_records_all();
-				//$result['markerdata'] = $this->Run_model->display_bg_run_coordinates($data['run_name']);
-				//$result['rundata'] = $this->Run_model->display_records_bg();
-				$result['field_type']='3';
-				$result['activity_type']='2';
-				$this->load->view('gis_dashboard',$result);
-			}
-
-
-		}
-		*/
 	}
+	function getOviData()
+	{
+
+		$result['data'] = $this->Dashboard_model->displayDashboardData();
+
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Topping",
+			"pattern" => "",
+			"type" => "string"
+		);
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Total",
+			"pattern" => "",
+			"type" => "number"
+		);
+
+
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "pending collections",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->ovi_pending_percentage,
+				"f" => null
+			)
+		);
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "completed collections",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->ovi_complete_percentage,
+				"f" => null
+			)
+		);
+
+		echo json_encode($responce);
+
+	}
+	function getBgData()
+	{
+
+		$result['data'] = $this->Dashboard_model->displayDashboardData();
+
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Topping",
+			"pattern" => "",
+			"type" => "string"
+		);
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Total",
+			"pattern" => "",
+			"type" => "number"
+		);
+
+
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "pending collections",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->bg_pending_percentage,
+				"f" => null
+			)
+		);
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "completed collections",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->bg_complete_percentage,
+				"f" => null
+			)
+		);
+
+		echo json_encode($responce);
+
+	}
+
+	function getMrcData()
+	{
+
+		$result['data'] = $this->Dashboard_model->displayDashboardData();
+
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Topping",
+			"pattern" => "",
+			"type" => "string"
+		);
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Total",
+			"pattern" => "",
+			"type" => "number"
+		);
+
+
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "pending Releases",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->mrc_pending_percentage,
+				"f" => null
+			)
+		);
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "completed Releases",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->mrc_complete_percentage,
+				"f" => null
+			)
+		);
+
+		echo json_encode($responce);
+
+	}
+
+	function getDiagnosticData()
+	{
+
+		$result['data'] = $this->Dashboard_model->displayDashboardData();
+
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Topping",
+			"pattern" => "",
+			"type" => "string"
+		);
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Total",
+			"pattern" => "",
+			"type" => "number"
+		);
+
+
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "pending Diagnostics",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->diagnostic_pending_percentage,
+				"f" => null
+			)
+		);
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "completed Diagnostics",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->diagnostic_complete_percentage,
+				"f" => null
+			)
+		);
+
+		echo json_encode($responce);
+
+	}
+
+	function getScreeningData()
+	{
+
+		$result['data'] = $this->Dashboard_model->displayDashboardData();
+
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Topping",
+			"pattern" => "",
+			"type" => "string"
+		);
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Total",
+			"pattern" => "",
+			"type" => "number"
+		);
+
+
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "pending Screenings",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->screening_pending_percentage,
+				"f" => null
+			)
+		);
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "completed Screenings",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->screening_complete_percentage,
+				"f" => null
+			)
+		);
+
+		echo json_encode($responce);
+
+	}
+
+	function getIncidentData()
+	{
+
+		$result['data'] = $this->Dashboard_model->displayDashboardData();
+
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Topping",
+			"pattern" => "",
+			"type" => "string"
+		);
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Total",
+			"pattern" => "",
+			"type" => "number"
+		);
+
+
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "pending incidents",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->incident_pending_percentage,
+				"f" => null
+			)
+		);
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => "completed incidents",
+				"f" => null
+			) ,
+			array(
+				"v" => (float)$result['data'][0]->incident_complete_percentage,
+				"f" => null
+			)
+		);
+
+		echo json_encode($responce);
+
+	}
+
 
 }
 

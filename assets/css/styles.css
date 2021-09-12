@@ -394,7 +394,6 @@ ul.breadcrumb li a.selected:hover {
 #chart_div div {
 	text-align: center;
 }
-
 #chart_div div div {
 	display: inline-block;
 }
@@ -406,4 +405,52 @@ ul.breadcrumb li a.selected:hover {
 #chart_div_2 div div {
 	display: inline-block;
 }
+
+
+#ovi_div div {
+	text-align: center;
+}
+#ovi_div div div {
+	display: inline-block;
+}
+
+
+#bg_div div {
+	text-align: center;
+}
+#bg_div div div {
+	display: inline-block;
+}
+
+
+#mrc_div div {
+	text-align: center;
+}
+#mrc_div div div {
+	display: inline-block;
+}
+
+#diagnostic_div div {
+	text-align: center;
+}
+#diagnostic_div div div {
+	display: inline-block;
+}
+
+#screening_div div {
+	text-align: center;
+}
+#screening_div div div {
+	display: inline-block;
+}
+
+#incident_div div {
+	text-align: center;
+}
+#incident_div div div {
+	display: inline-block;
+}
+
+
+
 

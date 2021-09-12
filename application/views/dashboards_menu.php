@@ -47,7 +47,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<div class="menu-container-secondary">
-					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('DashboardController/statisticalDashboard');?>'">
+					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('DashboardController/goStatDashboard');?>'">
 						<span class="menu-item">Statistical Dashboard</span>
 					</div>
 					<div class="item-container white-background" onclick="location.href='<?php echo site_url('DashboardController/gisDashboard');?>'">
