@@ -69,14 +69,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<form method="post" action="<?php echo
-				site_url('FieldActivitiesController/saveBgService'); ?>">
+				site_url('FieldActivitiesController/saveBgService'); ?>" onSubmit="return formValidation()">
 					<div class="element-row clearfix">
 						<div class="col-md-2">
 							<label class="control-label">Service Id(*):</label>
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="service-id" placeholder="Enter Service Id"
-								   name="service-id">
+								   name="service-id" required>
 						</div>
 					</div>
 
@@ -87,7 +87,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-6">
 							<select class="form-control" id="bg-trap-id"
 									name="bg-trap-id">
-								<option value="-1">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<?php
 								foreach ($trap_data as $row) {
 									echo '
@@ -95,16 +95,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							';
 								}
 								?>
-
 							</select>
+							<div id="trap-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Servuce Date(*):</label>
+							<label class="control-label">Service Date(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="date" id="service_date" name="service_date" class="form-control">
+							<input type="date" id="service_date" name="service_date" class="form-control" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -112,7 +112,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Service Time(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="time" id="service_time" name="service_time" class="form-control">
+							<input type="time" id="service_time" name="service_time" class="form-control" required>
 						</div>
 					</div>
 
@@ -123,9 +123,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-6">
 							<select class="form-control" id="service-status"
 									name="service-status">
+								<option value="0" selected disabled>Select From Here</option>
 								<option value="1">Serviced</option>
 								<option value="2">Not Serviced</option>
 							</select>
+							<div id="status-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 
@@ -137,11 +139,44 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 						</div>
 					</div>
-
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function formValidation() {
+
+		var trap_id = document.getElementById("bg-trap-id").value;
+		var status = document.getElementById("service-status").value;
+
+		document.getElementById("trap-error-container").style.display = 'none';
+		document.getElementById("status-error-container").style.display = 'none';
+		document.getElementById("bg-trap-id").style.borderColor="#ccc";
+		document.getElementById("service-status").style.borderColor="#ccc";
+
+		var error_flag = 0;
+		if(trap_id==false){
+			error_flag=1;
+			document.getElementById("bg-trap-id").style.borderColor="red";
+			document.getElementById("trap-error-container").style.display = 'block';
+			document.getElementById("trap-error-container").innerHTML = "Please select a trap id.";
+		}
+
+		if(status==false){
+			error_flag=1;
+			document.getElementById("service-status").style.borderColor="red";
+			document.getElementById("status-error-container").style.display = 'block';
+			document.getElementById("status-error-container").innerHTML = "Please select a status.";
+		}
+
+
+		if (error_flag==0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+</script>
 </body>
 </html>
 

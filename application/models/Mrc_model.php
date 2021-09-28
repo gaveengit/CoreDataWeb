@@ -4,12 +4,11 @@ class Mrc_model extends CI_Model
 	function saveRecords($data)
 	{
 		try {
-			$this->db->insert('mrc', $data);
-			return true;
+			return $this->db->insert('mrc', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function updateRecords($data,$old_data)

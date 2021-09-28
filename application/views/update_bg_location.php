@@ -76,7 +76,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-								   name="trap-id" value="<?php echo $data[0]->trap_id ?>">
+								   name="trap-id" value="<?php echo $data[0]->trap_id ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -104,7 +104,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="position" placeholder="Enter trap position"
-								   name="position" value="<?php echo $data[0]->trap_position ?>">
+								   name="position" value="<?php echo $data[0]->trap_position ?>" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -121,7 +121,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="coordinates" placeholder="Enter coordinates"
-								   name="coordinates" value="<?php echo $data[0]->coordinates ?>">
+								   name="coordinates" value="<?php echo $data[0]->coordinates ?>" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -166,20 +166,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Date(*):</label>
+							<label class="control-label">Date:</label>
 						</div>
 						<div class="col-md-6">
 							<input type="date" class="form-control" id="bg-date" placeholder="Enter Date"
-								   name="bg-date" value="<?php echo $data[0]->bg_date ?>">
+								   name="bg-date" value="<?php echo $data[0]->bg_date ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Time(*):</label>
+							<label class="control-label">Time:</label>
 						</div>
 						<div class="col-md-6">
 							<input type="time" class="form-control" id="bg-time" placeholder="Enter Time"
-								   name="bg-time" value="<?php echo $data[0]->bg_time ?>">
+								   name="bg-time" value="<?php echo $data[0]->bg_time ?>" readonly>
 						</div>
 					</div>
 					<div class="table-container">
@@ -301,6 +301,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		var address = document.getElementById("address").value;
 		var bg_date = document.getElementById("bg-date").value;
 		var bg_time = document.getElementById("bg-time").value;
+
+
+
 		if (trap_id.length == 0 || status == '0' || position.length == 0 || coordinates.length == 0 ||
 				person_name == '0' || address == '0' || bg_date.length == 0 || bg_time.length == 0) {
 			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";

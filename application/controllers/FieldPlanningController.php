@@ -62,7 +62,7 @@ class FieldPlanningController extends CI_Controller
 			if ($result['ovi_main_data'][0]->ovi_run_type == '1') {
 				$result['run_type'][0]['type'] = "OVI Service";
 			} else {
-				$result['run_type'][0]['type'] = "OVI Release";
+				$result['run_type'][0]['type'] = "OVI Collection";
 			}
 		}
 
@@ -73,7 +73,7 @@ class FieldPlanningController extends CI_Controller
 			if ($result['bg_main_data'][0]->bg_run_type == '1') {
 				$result['run_type'][0]['type'] = "BG Service";
 			} else {
-				$result['run_type'][0]['type'] = "BG Release";
+				$result['run_type'][0]['type'] = "BG Collection";
 			}
 		}
 

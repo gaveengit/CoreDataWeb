@@ -4,23 +4,22 @@ class Collection_model extends CI_Model
 	function saveRecordsBgCollection($data)
 	{
 		try {
-			$this->db->insert('bg_collection', $data);
-			return true;
+			return $this->db->insert('bg_collection', $data);
+
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function saveRecordsOviCollection($data)
 	{
 		try {
-			$this->db->insert('ovi_collection', $data);
-			return true;
+			return $this->db->insert('ovi_collection', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function saveRecordsMrcRelease($data)

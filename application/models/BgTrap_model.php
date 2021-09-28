@@ -4,24 +4,22 @@ class BgTrap_model extends CI_Model
 	function saveRecords($data)
 	{
 		try {
-			$this->db->insert('bg_trap', $data);
-			return true;
+			return $this->db->insert('bg_trap', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function updateRecords($data,$old_data)
 	{
 		try {
 			$this->db->where('trap_id', $old_data['trap_id_old']);
-			$this->db->update('bg_trap', $data);
-			return true;
+			return $this->db->update('bg_trap', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function deleteRecords($data)

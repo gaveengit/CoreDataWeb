@@ -73,7 +73,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control" id="add-line1" placeholder="Enter Address Line1"
-							   name="add-line1">
+							   name="add-line1" required>
 					</div>
 				</div>
 				<div class="element-row clearfix">
@@ -82,16 +82,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control" id="add-line2" placeholder="Enter Address Line2"
-							   name="add-line2">
+							   name="add-line2" required>
 					</div>
 				</div>
 				<div class="element-row clearfix">
 					<div class="col-md-2">
-						<label class="control-label">Location Description:</label>
+						<label class="control-label">Location Description (*):</label>
 					</div>
 					<div class="col-md-6">
 						<input type="text" class="form-control" id="location-description" placeholder="Location Description"
-							   name="location-description">
+							   name="location-description" required>
 					</div>
 				</div>
 				<div class="element-row clearfix">

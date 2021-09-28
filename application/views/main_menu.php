@@ -16,12 +16,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="logout-container-main clearfix">
 						<div class="logout-container-secondary">
 							<div class="user-name-container">
-								<span>Gaveen Kith</span>
+								<span><?php echo $this -> session -> userdata('logged_user_username') ?></span>
 							</div>
 							<div class="seperator-container">
 								<span>┃</span>
 							</div>
-							<div class="logout-text-container">
+							<div class="logout-text-container"  onclick="location.href='<?php echo site_url('UserController/signOut'); ?>'">
 								<span>Sign Out</span>
 							</div>
 						</div>
@@ -97,7 +97,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="item-record clearfix">
 						<div class="col-md-4">
 							<div class="item-container"
-								 onclick="location.href='<?php echo site_url('ExportController/index'); ?>'">
+								 onclick="location.href='<?php echo site_url('UserController/index'); ?>'">
 								<span class="item">User Management</span>
 							</div>
 						</div>

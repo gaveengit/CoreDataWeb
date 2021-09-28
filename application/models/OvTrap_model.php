@@ -4,12 +4,11 @@ class OvTrap_model extends CI_Model
 	function saveRecords($data)
 	{
 		try {
-			$this->db->insert('ovi_trap', $data);
-			return true;
+			return $this->db->insert('ovi_trap', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function updateRecords($data,$old_data)

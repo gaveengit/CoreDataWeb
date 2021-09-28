@@ -69,14 +69,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<form method="post" action="<?php echo
-				site_url('FieldActivitiesController/saveBg');?>" onSubmit="return formValidation()">
+				site_url('FieldActivitiesController/saveBg'); ?>" onSubmit="return formValidation()">
 					<div class="element-row clearfix">
 						<div class="col-md-2">
 							<label class="control-label">BG Trap Id (*):</label>
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-								   name="trap-id">
+								   name="trap-id" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -85,11 +85,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<select class="form-control" id="status"
-									name="status">
-								<option value="0">Select From Here</option>
+									name="status" required>
+								<option value="0" selected disabled>Select From Here</option>
 								<option value="1">Proposed</option>
 								<option value="2">Set</option>
 							</select>
+							<div class="status-error-container" style="display: none;color: red;" id="status-error-container"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -98,7 +99,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="position" placeholder="Enter Trap Position"
-								   name="position">
+								   name="position" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -115,7 +116,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="coordinates" placeholder="Enter coordinates"
-								   name="coordinates">
+								   name="coordinates" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -125,7 +126,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-6">
 							<select class="form-control" id="person-name"
 									name="person-name" autocomplete="on">
-								<option value="0">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<?php
 								foreach ($persondata as $row) {
 									echo '
@@ -134,6 +135,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								}
 								?>
 							</select>
+							<div class="person-error-container" style="display: none;color: red;" id="person-error-container"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -143,7 +145,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-6">
 							<select class="form-control" id="address"
 									name="address" autocomplete="on">
-								<option value="0">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<?php
 								foreach ($addressdata as $row) {
 									echo '
@@ -152,6 +154,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								}
 								?>
 							</select>
+							<div class="address-error-container" style="display: none;color: red;" id="address-error-container"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -160,7 +163,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" class="form-control" id="bg-date" placeholder="Enter Date"
-								   name="bg-date">
+								   name="bg-date" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -169,14 +172,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="time" class="form-control" id="bg-time" placeholder="Enter Time"
-								   name="bg-time">
-						</div>
-					</div>
-					<div class="element-row clearfix">
-						<div class="col-md-2">
-						</div>
-						<div class="col-md-6">
-							<div class="error-msg" id="error-msg"></div>
+								   name="bg-time" required>
 						</div>
 					</div>
 					<div class="button-container clearfix">
@@ -193,7 +189,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</div>
 </div>
 <script type="text/javascript">
-	var mymap = L.map('mapid').setView([6.9122,79.8829], 12);
+	var mymap = L.map('mapid').setView([6.9122, 79.8829], 12);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=sk.eyJ1IjoiZ2F2ZWVua2l0aCIsImEiOi' +
 			'Jja3BubWx0NjIwdG81MnBxcXg2dmsxcXFyIn0.O7EZAp4PvrWygKz44f8c3A', {
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
@@ -206,22 +202,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	}).addTo(mymap);
 	<?php foreach ($mapdata as $map): ?>
 	var myGeoJSON = <?php echo $map->geojson_content;?>;
-	L.geoJSON(myGeoJSON,{
+	L.geoJSON(myGeoJSON, {
 		onEachFeature: function (feature, layer) {
 			//layer.bindPopup("ID: " + feature.type);
 			if (typeof feature.properties.ADM4_EN === 'undefined') {
-				layer.setStyle({color :'red',fillColor:'transparent'})
-			}
-			else {
+				layer.setStyle({color: 'red', fillColor: 'transparent'})
+			} else {
 				layer.bindTooltip(feature.properties.ADM4_EN, {permanent: true, direction: 'right'}).openTooltip();
-				layer.setStyle({color :'blue',fillColor:'transparent'})
+				layer.setStyle({color: 'blue', fillColor: 'transparent'})
 			}
 		}
 	}).addTo(mymap);
 	<?php endforeach; ?>
 	var marker;
-	mymap.on('click', function(e) {
-		if(marker!=null){
+	mymap.on('click', function (e) {
+		if (marker != null) {
 			mymap.removeLayer(marker);
 		}
 		document.getElementById("coordinates").value = e.latlng.lat + "," + e.latlng.lng;
@@ -232,7 +227,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	document.getElementById("error-msg").innerHTML = "";
 
 	function formValidation() {
-		document.getElementById("error-msg").innerHTML = "";
+
 		var trap_id = document.getElementById("trap-id").value;
 		var status = document.getElementById("status").value;
 		var position = document.getElementById("position").value;
@@ -241,13 +236,40 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		var address = document.getElementById("address").value;
 		var bg_date = document.getElementById("bg-date").value;
 		var bg_time = document.getElementById("bg-time").value;
-		if (trap_id.length == 0 || status == '0' || position.length==0 || coordinates.length==0 ||
-				person_name == '0' || address=='0' || bg_date.length==0 || bg_time.length==0) {
-			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
-			return false;
-		} else {
-			document.getElementById("error-msg").classList.add("error-msg-invisible");
+
+
+		document.getElementById("status-error-container").style.display = 'none';
+		document.getElementById("address-error-container").style.display = 'none';
+		document.getElementById("person-error-container").style.display = 'none';
+		document.getElementById("status").style.borderColor="#ccc";
+		document.getElementById("address").style.borderColor="#ccc";
+		document.getElementById("person-name").style.borderColor="#ccc";
+
+		var error_flag = 0;
+
+		if(status==false){
+			error_flag=1;
+			document.getElementById("status").style.borderColor="red";
+			document.getElementById("status-error-container").style.display = 'block';
+			document.getElementById("status-error-container").innerHTML = "Please select a status.";
+		}
+		if(address==false){
+			error_flag=1;
+			document.getElementById("address").style.borderColor="red";
+			document.getElementById("address-error-container").style.display = 'block';
+			document.getElementById("address-error-container").innerHTML = "Please select a address.";
+		}
+		if(person_name==false){
+			error_flag=1;
+			document.getElementById("person-name").style.borderColor="red";
+			document.getElementById("person-error-container").style.display = 'block';
+			document.getElementById("person-error-container").innerHTML = "Please select a person.";
+		}
+
+		if (error_flag==0) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 </script>

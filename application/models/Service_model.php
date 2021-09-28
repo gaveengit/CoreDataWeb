@@ -4,45 +4,41 @@ class Service_model extends CI_Model
 	function saveRecordsBgService($data)
 	{
 		try {
-			$this->db->insert('bg_service', $data);
-			return true;
+			return $this->db->insert('bg_service', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function saveRecordsOviService($data)
 	{
 		try {
-			$this->db->insert('ovi_service', $data);
-			return true;
+			return $this->db->insert('ovi_service', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function saveRecordsMrcRelease($data)
 	{
 		try {
-			$this->db->insert('mrc_release', $data);
-			return true;
+			return $this->db->insert('mrc_release', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function saveRecordsMrcService($data)
 	{
 		try {
-			$this->db->insert('mrc_service', $data);
-			return true;
+			return $this->db->insert('mrc_service', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 

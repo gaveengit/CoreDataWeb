@@ -72,11 +72,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				site_url('FieldActivitiesController/saveUpdateOv'); ?>" onSubmit="return formValidation()">
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">OVI Trap Id (*):</label>
+							<label class="control-label">OVI Trap Id:</label>
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-								   name="trap-id" value="<?php echo $data[0]->trap_id ?>">
+								   name="trap-id" value="<?php echo $data[0]->trap_id ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -104,7 +104,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="position" placeholder="Enter coordinates"
-								   name="position" value="<?php echo $data[0]->trap_position ?>">
+								   name="position" value="<?php echo $data[0]->trap_position ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -121,7 +121,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="coordinates" placeholder="Enter coordinates"
-								   name="coordinates" value="<?php echo $data[0]->coordinates ?>">
+								   name="coordinates" value="<?php echo $data[0]->coordinates ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -166,20 +166,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Date(*):</label>
+							<label class="control-label">Date:</label>
 						</div>
 						<div class="col-md-6">
 							<input type="date" class="form-control" id="ov-date" placeholder="Enter Date"
-								   name="ov-date" value="<?php echo $data[0]->ovi_date ?>">
+								   name="ov-date" value="<?php echo $data[0]->ovi_date ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Time(*):</label>
+							<label class="control-label">Time:</label>
 						</div>
 						<div class="col-md-6">
 							<input type="time" class="form-control" id="ov-time" placeholder="Enter Time"
-								   name="ov-time" value="<?php echo $data[0]->ovi_time ?>">
+								   name="ov-time" value="<?php echo $data[0]->ovi_time ?>" readonly>
 						</div>
 					</div>
 					<div class="table-container">

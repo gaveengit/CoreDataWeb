@@ -75,7 +75,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="add-line1" placeholder="Enter Full Name"
-								   name="add-line1" value="<?php echo $data[0]->add_line1 ?>">
+								   name="add-line1" required value="<?php echo $data[0]->add_line1 ?>">
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -84,24 +84,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="add-line2" placeholder="Enter Contact Number"
-								   name="add-line2" value="<?php echo $data[0]->add_line2 ?>">
+								   name="add-line2" required value="<?php echo $data[0]->add_line2 ?>">
 						</div>
 					</div>
 
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Location Description:</label>
+							<label class="control-label">Location Description (*):</label>
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="location-description"
 								   placeholder="Enter Contact Number"
-								   name="location-description" value="<?php echo $data[0]->location_description ?>">
+								   name="location-description" required value="<?php echo $data[0]->location_description ?>">
 						</div>
 					</div>
 
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Status:</label>
+							<label class="control-label">Status (*):</label>
 						</div>
 						<div class="col-md-6">
 							<select class="form-control" id="location-status" name="location-status">
@@ -112,132 +112,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									Inactive
 								</option>
 							</select>
-						</div>
-					</div>
-
-					<div class="mrc-details-container">
-						<div class="title-container">
-							<h4>MRC Details</h4>
-						</div>
-						<div class="table-container">
-							<table>
-								<thead>
-								<tr class="grey-background">
-									<th>Collection Id</th>
-									<th>Set Date</th>
-									<th>Collected Date</th>
-									<th>Trap Position</th>
-									<th>Person</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr class="white-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								<tr class="grey-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								<tr class="white-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-
-					<div class="bg-details-container">
-						<div class="title-container">
-							<h4>BG Details</h4>
-						</div>
-						<div class="table-container">
-							<table>
-								<thead>
-								<tr class="grey-background">
-									<th>Collection Id</th>
-									<th>Set Date</th>
-									<th>Collected Date</th>
-									<th>Trap Position</th>
-									<th>Person</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr class="white-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								<tr class="grey-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								<tr class="white-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-
-					<div class="mrc-details-container">
-						<div class="title-container">
-							<h4>OVI Details</h4>
-						</div>
-						<div class="table-container">
-							<table>
-								<thead>
-								<tr class="grey-background">
-									<th>Collection Id</th>
-									<th>Set Date</th>
-									<th>Collected Date</th>
-									<th>Trap Position</th>
-									<th>Person</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr class="white-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								<tr class="grey-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								<tr class="white-background">
-									<td class="run-name-cell">BG_Run_Nug1</td>
-									<td>Proposed</td>
-									<td>Kamal Fernando</td>
-									<td>No.20, Colombo 10</td>
-									<td>No.20, Colombo 10</td>
-								</tr>
-								</tbody>
-							</table>
 						</div>
 					</div>
 					<div class="element-row clearfix">

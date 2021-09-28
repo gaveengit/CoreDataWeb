@@ -76,7 +76,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="trap-id" placeholder="Enter Trap Id"
-								   name="trap-id">
+								   name="trap-id" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -86,10 +86,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-6">
 							<select class="form-control" id="status"
 									name="status">
-								<option value="0">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<option value="1">Proposed</option>
 								<option value="2">Set</option>
 							</select>
+							<div class="status-error-container" style="display: none;color: red;" id="status-error-container"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -98,7 +99,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="position" placeholder="Enter Trap Position"
-								   name="position">
+								   name="position" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -115,7 +116,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="coordinates" placeholder="Enter coordinates"
-								   name="coordinates">
+								   name="coordinates" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -125,7 +126,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-6">
 							<select class="form-control" id="person-name"
 									name="person-name" autocomplete="on">
-								<option value="0">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<?php
 								foreach ($persondata as $row) {
 									echo '
@@ -134,6 +135,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								}
 								?>
 							</select>
+							<div class="person-error-container" style="display: none;color: red;" id="person-error-container"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -143,7 +145,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-6">
 							<select class="form-control" id="address"
 									name="address" autocomplete="on">
-								<option value="0">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<?php
 								foreach ($addressdata as $row) {
 									echo '
@@ -152,6 +154,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								}
 								?>
 							</select>
+							<div class="address-error-container" style="display: none;color: red;" id="address-error-container"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -160,7 +163,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" class="form-control" id="ov-date" placeholder="Enter Date"
-								   name="ov-date">
+								   name="ov-date" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -169,7 +172,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="time" class="form-control" id="ov-time" placeholder="Enter Time"
-								   name="ov-time">
+								   name="ov-time" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -232,22 +235,47 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	document.getElementById("error-msg").innerHTML = "";
 
 	function formValidation() {
-		document.getElementById("error-msg").innerHTML = "";
 		var trap_id = document.getElementById("trap-id").value;
 		var status = document.getElementById("status").value;
 		var position = document.getElementById("position").value;
 		var coordinates = document.getElementById("coordinates").value;
 		var person_name = document.getElementById("person-name").value;
 		var address = document.getElementById("address").value;
-		var bg_date = document.getElementById("ov-date").value;
-		var bg_time = document.getElementById("ov-time").value;
-		if (trap_id.length == 0 || status == '0' || position.length == 0 || coordinates.length == 0 ||
-				person_name == '0' || address == '0' || bg_date.length == 0 || bg_time.length == 0) {
-			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
-			return false;
-		} else {
-			document.getElementById("error-msg").classList.add("error-msg-invisible");
+		var ovi_date = document.getElementById("ov-date").value;
+		var ovi_time = document.getElementById("ov-time").value;
+
+		document.getElementById("status-error-container").style.display = 'none';
+		document.getElementById("address-error-container").style.display = 'none';
+		document.getElementById("person-error-container").style.display = 'none';
+		document.getElementById("status").style.borderColor="#ccc";
+		document.getElementById("address").style.borderColor="#ccc";
+		document.getElementById("person-name").style.borderColor="#ccc";
+
+		var error_flag = 0;
+
+		if(status==false){
+			error_flag=1;
+			document.getElementById("status").style.borderColor="red";
+			document.getElementById("status-error-container").style.display = 'block';
+			document.getElementById("status-error-container").innerHTML = "Please select a status.";
+		}
+		if(address==false){
+			error_flag=1;
+			document.getElementById("address").style.borderColor="red";
+			document.getElementById("address-error-container").style.display = 'block';
+			document.getElementById("address-error-container").innerHTML = "Please select a address.";
+		}
+		if(person_name==false){
+			error_flag=1;
+			document.getElementById("person-name").style.borderColor="red";
+			document.getElementById("person-error-container").style.display = 'block';
+			document.getElementById("person-error-container").innerHTML = "Please select a person.";
+		}
+
+		if (error_flag==0) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 </script>
