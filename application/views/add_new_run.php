@@ -19,13 +19,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="logout-container-main clearfix">
 						<div class="logout-container-secondary">
 							<div class="user-name-container">
-								<span>Gaveen Kith</span>
+								<span style="cursor:default;"><?php echo $this -> session -> userdata('logged_user_username') ?></span>
 							</div>
 							<div class="seperator-container">
 								<span>┃</span>
 							</div>
-							<div class="logout-text-container">
-								<span>Sign Out</span>
+							<div class="user-name-container" onclick="location.href='<?php echo site_url('UserController/updateUsers/').$this -> session -> userdata('logged_user_id') ?>'">
+								<span>View Profile</span>
+							</div>
+							<div class="seperator-container">
+								<span>┃</span>
+							</div>
+							<div class="logout-text-container"  onclick="location.href='<?php echo site_url('UserController/signOut'); ?>'">
+								<span> Sign Out</span>
 							</div>
 						</div>
 					</div>

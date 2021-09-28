@@ -95,7 +95,8 @@ class UserController extends CI_Controller
 		unset($_SESSION["logged_user_last_name"]);
 		unset($_SESSION["logged_user_username"]);
 		unset($_SESSION["logged_user_usertype"]);
-		$this->load->view('login_screen');
+		//$this->load->view('login_screen');
+		$this->goLoginScreen();
 	}
 
 	public function deleteUser($user_id)

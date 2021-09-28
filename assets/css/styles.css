@@ -109,7 +109,7 @@ ul.breadcrumb li a.selected:hover {
 	cursor: pointer;
 }
 
-.main-menu-main-section .menu-item-main .menu-item-secondary .item-record .item-container {
+.main-menu-main-section .menu-item-main .menu-item-secondary .item-container {
 	border: 2px solid grey;
 	padding: 30px 45px;
 	text-align: center;
