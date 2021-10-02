@@ -26,6 +26,11 @@ class ReportController extends CI_Controller
 	{
 		$this->load->view('bg_performance_generate');
 	}
+	public function goIncidentReportGenerate()
+	{
+		$this->load->view('incident_performance_generate');
+	}
+
 	public function goMrcPerformanceReportGenerate()
 	{
 		$this->load->view('mrc_performance_generate');
@@ -49,6 +54,17 @@ class ReportController extends CI_Controller
 		$result['to_date']=$this->input->post('to-date');
 		$result['data'] = $this->Report_model->displayOviPerformanceReport($data);
 		$this->load->view('ovi_performance_view',$result);
+	}
+	public function goIncidentsReportView()
+	{
+		$data['from_date']=$this->input->post('from-date');
+		$data['to_date']=$this->input->post('to-date');
+		$this -> session -> set_userdata("incident_from_date",$data['from_date']);
+		$this -> session -> set_userdata("incident_to_date",$data['to_date']);
+		$result['from_date']=$this->input->post('from-date');
+		$result['to_date']=$this->input->post('to-date');
+		$result['data'] = $this->Report_model->displayIncidentReport($data);
+		$this->load->view('incident_report_view',$result);
 	}
 	public function goBgPerformanceReportView()
 	{
@@ -240,6 +256,49 @@ class ReportController extends CI_Controller
 			) ,
 			array(
 				"v" => (float)$result['data'][0]->set_percentage,
+				"f" => null
+			)
+		);
+
+		echo json_encode($responce);
+
+	}
+	function getIncidentData()
+	{
+		$data['from_date']=$this -> session -> userdata('incident_from_date');
+		$data['to_date']=$this -> session -> userdata('incident_to_date');
+		$result['data'] = $this->Report_model->displayIncidentReport($data);
+
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Topping",
+			"pattern" => "",
+			"type" => "string"
+		);
+		$responce->cols[] = array(
+			"id" => "",
+			"label" => "Total",
+			"pattern" => "",
+			"type" => "number"
+		);
+
+			$responce->rows[]["c"] = array(
+				array(
+					"v" => '',
+					"f" => null
+				),
+				array(
+					"v" => (float)$result['data'][0]->incident_count,
+					"f" => null
+				)
+			);
+		$responce->rows[]["c"] = array(
+			array(
+				"v" => '',
+				"f" => null
+			),
+			array(
+				"v" => (float)$result['data'][1]->incident_count,
 				"f" => null
 			)
 		);

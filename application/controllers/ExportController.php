@@ -113,7 +113,7 @@ class ExportController extends CI_Controller
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Export_model->updateRecords($data,$data_old);
 			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record updated successfully');
+				echo "<script type='text/javascript'>alert('Bio-bank export has been updated successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('ExportController/index');
@@ -144,7 +144,7 @@ class ExportController extends CI_Controller
 		$data['export_id'] = $export_id;
 		$response = $this->Export_model->deleteRecords($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('Bio-bankexport has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('ExportController/index');
@@ -158,7 +158,7 @@ class ExportController extends CI_Controller
 			$result['data'] = $this->Export_model->display_records($config["per_page"], $page);
 			$this->load->view('export_list', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('Bio-bankexport has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('ExportController/index');

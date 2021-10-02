@@ -43,8 +43,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<ul class="breadcrumb">
-					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController');?>'">Home</a></li>
-					<li><a class="selected" >Reports Menu</a></li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('MainMenuController'); ?>'">Home</a>
+					</li>
+					<li><a href="#" onclick="location.href='<?php echo site_url('ReportController'); ?>'">Reports
+							Menu</a></li>
+					<li><a class="selected">Mosquito Diagnostic Report Generation</a></li>
 				</ul>
 			</div>
 		</div>
@@ -52,25 +55,32 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<div class="menu-container-main">
 		<div class="container">
 			<div class="row">
-				<div class="menu-container-secondary">
-					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('ReportController/goOviPerformanceReportGenerate');?>'">
-						<span class="menu-item">OVI Performance Report</span>
-					</div>
-					<div class="item-container white-background" onclick="location.href='<?php echo site_url('ReportController/goBgPerformanceReportGenerate');?>'">
-						<span class="menu-item">BG Performance Report</span>
-					</div>
-					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('ReportController/goMRCPerformanceReportGenerate');?>'">
-						<span class="menu-item">MRC Performance Report</span>
-					</div>
-					<div class="item-container white-background" onclick="location.href='<?php echo site_url('ReportController/goDiagnosticPerformanceReportGenerate');?>'">
-						<span class="menu-item">Mosquito Diagnostics Report</span>
-					</div>
-					<div class="item-container grey-background" onclick="location.href='<?php echo site_url('ReportController/goScreeningPerformanceReportGenerate');?>'">
-						<span class="menu-item">Mosquito Screening Report</span>
-					</div>
-					<div class="item-container white-background" onclick="location.href='<?php echo site_url('ReportController/goIncidentReportGenerate');?>'">
-						<span class="menu-item">Incident Report</span>
-					</div>
+				<div class="title-container">
+					<h3 class="title" align="center">Incident Report Generation</h3>
+				</div>
+				<div class="menu-container-secondary clearfix">
+					<form role="form" method="post" action="<?php echo
+					site_url('ReportController/goIncidentsReportView'); ?>" onSubmit="return formValidation()">
+						<div class="date-container clearfix">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="email">Date From:</label>
+									<input type="date" id="collect-date" name="from-date" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="email">Date To:</label>
+									<input type="date" id="collect-date" name="to-date" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="button-container" style="text-align: center;padding-top: 30px;">
+							<button type="submit" class="btn btn-success" name="generate-btn"
+									style="width: 50%;">Generate Report
+							</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -78,4 +88,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 </body>
 </html>
+
+
+
 

@@ -4,36 +4,33 @@ class Incident_model extends CI_Model
 	function saveRecords($data)
 	{
 		try {
-			$this->db->insert('incident', $data);
-			return true;
+			return $this->db->insert('incident', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function updateRecords($data)
 	{
 		try {
 			$this->db->where('incident_id', $data['incident_id']);
-			$this->db->update('incident', $data);
-			return true;
+			return $this->db->update('incident', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function deleteRecords($data)
 	{
 		try {
 			$this->db->where('incident_id', $data['incident_id']);
-			$this->db->update('incident', $data);
-			return true;
+			return $this->db->update('incident', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 

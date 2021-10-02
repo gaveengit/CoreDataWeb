@@ -23,18 +23,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="logout-container-main clearfix">
 						<div class="logout-container-secondary">
 							<div class="user-name-container">
-								<span style="cursor:default;"><?php echo $this -> session -> userdata('logged_user_username') ?></span>
+								<span style="cursor:default;"><?php echo $this->session->userdata('logged_user_username') ?></span>
 							</div>
 							<div class="seperator-container">
 								<span>┃</span>
 							</div>
-							<div class="user-name-container" onclick="location.href='<?php echo site_url('UserController/updateUsers/').$this -> session -> userdata('logged_user_id') ?>'">
+							<div class="user-name-container"
+								 onclick="location.href='<?php echo site_url('UserController/updateUsers/') . $this->session->userdata('logged_user_id') ?>'">
 								<span>View Profile</span>
 							</div>
 							<div class="seperator-container">
 								<span>┃</span>
 							</div>
-							<div class="logout-text-container"  onclick="location.href='<?php echo site_url('UserController/signOut'); ?>'">
+							<div class="logout-text-container"
+								 onclick="location.href='<?php echo site_url('UserController/signOut'); ?>'">
 								<span> Sign Out</span>
 							</div>
 						</div>
@@ -72,14 +74,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<form method="post" action="<?php echo
-				site_url('ExportController/saveUpdateExport'); ?>">
+				site_url('ExportController/saveUpdateExport'); ?>" onsubmit="return formvalidation()">
 					<div class="element-row clearfix">
 						<div class="col-md-2">
 							<label class="control-label">Export Id(*):</label>
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="export_id" placeholder="Enter Export Id"
-								   name="export_id" value="<?php echo $data[0]->export_id ?>">
+								   name="export_id" value="<?php echo $data[0]->export_id ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -107,7 +109,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="number" id="qty" name="qty" class="form-control" placeholder="Enter Quantity"
-							value="<?php echo $data[0]->qty ?>">
+								   value="<?php echo $data[0]->qty ?>" required>
+							<div id="quantity-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -116,7 +119,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" id="export_date" name="export_date" class="form-control"
-							value="<?php echo $data[0]->export_date ?>">
+								   value="<?php echo $data[0]->export_date ?>" max="<?php echo date("Y-m-d"); ?>"
+								   required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -125,7 +129,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="time" id="export_time" name="export_time" class="form-control"
-							value="<?php echo $data[0]->export_time ?>">
+								   value="<?php echo $data[0]->export_time ?>" required>
 						</div>
 					</div>
 
@@ -149,7 +153,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-7">
 							<div class="footer-button-container">
 								<button class="btn btn-success save-btn" type="submit" name="save-btn"
-								value="<?php echo $data[0]->export_id ?>">Save</button>
+										value="<?php echo $data[0]->export_id ?>">Save
+								</button>
 								<button class="btn btn-primary cancel-btn" type="reset">Cancel</button>
 							</div>
 						</div>
@@ -159,6 +164,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function formvalidation() {
+		var error_flag = 0;
+		var qty = document.getElementById("qty").value;
+		document.getElementById("quantity-error-container").style.display = 'none';
+		document.getElementById("qty").style.borderColor = "#ccc";
+		if (qty < 0) {
+			error_flag = 1;
+			document.getElementById("qty").style.borderColor = "red";
+			document.getElementById("quantity-error-container").style.display = 'block';
+			document.getElementById("quantity-error-container").innerHTML = "Quantity should not be a negative value.";
+		}
+		if (error_flag == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+</script>
 </body>
 </html>
 

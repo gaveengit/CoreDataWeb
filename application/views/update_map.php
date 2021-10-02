@@ -72,7 +72,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label col-md-2" for="email">Name:(*)</label>
 							<div class="col-md-5">
 								<input type="text" class="form-control" id="map-name" placeholder="Enter Map Name"
-									   name="map-name" value="<?php echo $data[0]->name ?>">
+									   name="map-name" value="<?php echo $data[0]->name ?>" required>
 							</div>
 
 						</div>
@@ -82,7 +82,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<div class="col-md-5">
 							<textarea class="form-control map-description" id="map-description"
 									  placeholder="Enter Map Description"
-									  name="map-description"><?php echo $data[0]->description ?></textarea>
+									  name="map-description" required><?php echo $data[0]->description ?></textarea>
 							</div>
 
 						</div>
@@ -91,14 +91,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<div class="col-md-5">
 						<textarea class="form-control map-description" id="geojson-content"
 								  placeholder="Enter Map Description"
-								  name="geojson-content"><?php echo $data[0]->geojson_content ?></textarea>
+								  name="geojson-content" required><?php echo $data[0]->geojson_content ?></textarea>
 							</div>
 						</div>
 						<div class="element-row clearfix">
 							<div class="col-md-2">
 								<label class="control-label">Status:(*)</label>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-5">
 								<select class="form-control" id="map-status" name="map-status">
 									<option <?php if ($data[0]->map_status == 'Active'): ?> selected="selected"<?php endif; ?>>
 										Active

@@ -68,7 +68,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="form-container">
 					<form method="post" action="<?php echo
-					site_url('FieldRunsController/saveRunLocations');?>" onSubmit="return formValidation()"
+					site_url('FieldRunsController/saveRunLocations');?>"
 						  enctype="multipart/form-data">
 						<div class="element-row clearfix">
 							<div class="col-md-3">
@@ -76,7 +76,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 							<div class="col-md-6">
 								<input type="text" class="form-control" id="run-name" placeholder="Enter Run Name"
-									   name="run-name">
+									   name="run-name" required>
 							</div>
 						</div>
 
@@ -100,7 +100,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<label class="control-label" for="email">Upload .csv File Here(*):</label>
 							</div>
 							<div class="col-md-6">
-								<input type="file" class="form-control" name="file" id="file">
+								<input type="file" class="form-control" name="file" id="file" accept=".csv" required>
 							</div>
 						</div>
 						<div class="element-row clearfix">
@@ -109,7 +109,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 							<div class="col-md-6">
 							<textarea class="form-control" id="run_description" name="description" style="height:200px;"
-									  placeholder="Run Description"></textarea>
+									  placeholder="Run Description" required></textarea>
 							</div>
 						</div>
 						<div class="element-row clearfix">
@@ -118,7 +118,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 							<div class="col-md-6">
 								<input type="date" class="form-control" id="run-date" placeholder="Enter Date"
-									   name="run-date">
+									   name="run-date" max="<?php echo date("Y-m-d"); ?>" required>
+								<div id="error-date-container" style="color: red;display: none;"></div>
 							</div>
 						</div>
 						<div class="element-row clearfix">
@@ -127,14 +128,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</div>
 							<div class="col-md-6">
 								<input type="time" class="form-control" id="run-time" placeholder="Enter Time"
-									   name="run-time">
-							</div>
-						</div>
-						<div class="element-row clearfix">
-							<div class="col-md-2">
-							</div>
-							<div class="col-md-6">
-								<div class="error-msg" id="error-msg"></div>
+									   name="run-time" required>
 							</div>
 						</div>
 
@@ -154,21 +148,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </div>
 <script type="text/javascript">
 	function formValidation() {
-		document.getElementById("error-msg").innerHTML = "";
 		var run_name = document.getElementById("run-name").value;
-		var file_upload = document.getElementById("file-upload").value;
+		var file_upload = document.getElementById("file").value;
 		var run_description = document.getElementById("run_description").value;
 		var run_date = document.getElementById("run-date").value;
 		var run_time = document.getElementById("run-time").value;
-
-		if (run_name.length == 0 || file_upload.length == '0' || run_description.length == 0 || run_date.length == 0 ||
-				run_time.length == 0) {
-			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
+		document.getElementById("error-date-container").style.display='none';
+		document.getElementById("error-date-container").style.borderColor="#ccc";
+		var now = new Date();
+		/*
+		if(new Date(run_date)>now){
+			document.getElementById("error-date-container").style.display='block';
+			document.getElementById("error-date-container").innerHTML="Future dates are not accepted. Please enter a present or past date.";
 			return false;
-		} else {
-			document.getElementById("error-msg").classList.add("error-msg-invisible");
+		}
+		else{
 			return true;
 		}
+
+		 */
 	}
 </script>
 </body>

@@ -27,6 +27,7 @@ class UserController extends CI_Controller
 
 		$this->load->view('add_new_user');
 	}
+
 	public function goLoginScreen()
 	{
 
@@ -43,6 +44,9 @@ class UserController extends CI_Controller
 		$data['password'] = hash("sha256", $data['password']);
 		$data['user_type'] = $this->input->post('user_type');
 		$data['STATUS'] = "1";
+		$data['added_date'] = date("Y-m-d");
+		$data['added_time'] = date('h:i:s');
+
 		$response_check['check_data_count'] = $this->User_model->checkUsername($data);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->User_model->saveRecords($data);
@@ -69,27 +73,28 @@ class UserController extends CI_Controller
 		$this->load->view('update_user', $result);
 	}
 
-	public function checkLogin(){
+	public function checkLogin()
+	{
 		$data['username'] = $this->input->post('username');
 		$data['password'] = $this->input->post('password');
 		$data['password'] = hash("sha256", $data['password']);
 		$result['data'] = $this->User_model->checkLogin($data);
-		if(count($result['data'])>0){
-			$this -> session -> set_userdata("logged_user_id",$result['data'][0]->user_id);
-			$this -> session -> set_userdata("logged_user_first_name",$result['data'][0]->first_name);
-			$this -> session -> set_userdata("logged_user_last_name",$result['data'][0]->last_name);
-			$this -> session -> set_userdata("logged_user_username",$result['data'][0]->username);
-			$this -> session -> set_userdata("logged_user_usertype",$result['data'][0]->user_type);
+		if (count($result['data']) > 0) {
+			$this->session->set_userdata("logged_user_id", $result['data'][0]->user_id);
+			$this->session->set_userdata("logged_user_first_name", $result['data'][0]->first_name);
+			$this->session->set_userdata("logged_user_last_name", $result['data'][0]->last_name);
+			$this->session->set_userdata("logged_user_username", $result['data'][0]->username);
+			$this->session->set_userdata("logged_user_usertype", $result['data'][0]->user_type);
 			$this->load->view('main_menu');
-		}
-		else{
+		} else {
 			echo "<script type='text/javascript'>alert('Invalid credentials. Please try again.');
 			</script>";
 			$this->load->view('login_screen');
 		}
 	}
 
-	public function signOut(){
+	public function signOut()
+	{
 		unset($_SESSION["logged_user_id"]);
 		unset($_SESSION["logged_user_first_name"]);
 		unset($_SESSION["logged_user_last_name"]);
@@ -124,19 +129,58 @@ class UserController extends CI_Controller
 
 		$data['first_name'] = $this->input->post('first_name');
 		$data['last_name'] = $this->input->post('last_name');
-		$data['password'] = $this->input->post('password');
 		$data['user_type'] = $this->input->post('user_type');
 		$data['STATUS'] = $this->input->post('user_status');
 		$data['user_id'] = $this->input->post('save-btn');
 
 		$response = $this->User_model->updateRecords($data);
-		if ($response>0) {
+		if ($response > 0) {
 			echo "<script type='text/javascript'>alert('User has been updated successfully');
 			</script>";
 			$result['data'] = $this->User_model->display_records();
 			$this->load->view('users_list', $result);
 		} else {
 			echo "<script type='text/javascript'>alert('User has not been updated successfully');
+			</script>";
+			$result['data'] = $this->User_model->display_records_individual($data['user_id']);
+			$this->load->view('update_user', $result);
+
+		}
+
+	}
+
+	public function saveUpdatePassword()
+	{
+		/*load registration view form*/
+
+		$data_old['password'] = $this->input->post('current_password');
+		$data_old['password'] = hash("sha256", $data_old['password']);
+		$data_old['user_id'] = $this->input->post('save-btn');
+		$data['password'] = $this->input->post('password');
+		$data['password'] = hash("sha256", $data['password']);
+		$data['user_id'] = $this->input->post('save-btn');
+
+		$response = $this->User_model->checkCurrentPassword($data_old);
+		if ($response > 0) {
+			$response_update = $this->User_model->updateRecords($data);
+			if ($response_update > 0) {
+				echo "<script type='text/javascript'>alert('Password has been updated successfully.');
+			</script>";
+				unset($_SESSION["logged_user_id"]);
+				unset($_SESSION["logged_user_first_name"]);
+				unset($_SESSION["logged_user_last_name"]);
+				unset($_SESSION["logged_user_username"]);
+				unset($_SESSION["logged_user_usertype"]);
+				//$this->load->view('login_screen');
+				$this->goLoginScreen();
+			} else {
+				echo "<script type='text/javascript'>alert('Error in updating password. Please try again.');
+			</script>";
+				$result['data'] = $this->User_model->display_records_individual($data['user_id']);
+				$this->load->view('update_user', $result);
+			}
+		} else {
+			echo "<script type='text/javascript'>alert('Current password is invalid. Please try again.');
 			</script>";
 			$result['data'] = $this->User_model->display_records_individual($data['user_id']);
 			$this->load->view('update_user', $result);

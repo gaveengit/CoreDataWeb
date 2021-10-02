@@ -176,7 +176,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" class="form-control" id="bg-date" placeholder="Enter Date"
-								   name="bg-date" value="<?php echo $data[0]->bg_date ?>" readonly>
+								   name="bg-date" value="<?php echo $data[0]->bg_date ?>" max="<?php echo date("Y-m-d"); ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">

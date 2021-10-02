@@ -108,10 +108,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Servuce Date(*):</label>
+							<label class="control-label">Service Date(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="date" id="service_date" name="service_date" class="form-control" required>
+							<input type="date" id="service_date" name="service_date" class="form-control" max="<?php echo date("Y-m-d"); ?>" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">

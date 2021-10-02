@@ -4,24 +4,22 @@ class Maps_model extends CI_Model
 	function saveRecords($data)
 	{
 		try {
-			$this->db->insert('map_layer', $data);
-			return true;
+			return $this->db->insert('map_layer', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function updateRecords($data)
 	{
 		try {
 			$this->db->where('map_id', $data['map_id']);
-			$this->db->update('map_layer', $data);
-			return true;
+			return $this->db->update('map_layer', $data);
 		}
 		catch(Exception $e)
 		{
-			return false;
+			return 0;
 		}
 	}
 	function deleteRecords($data)

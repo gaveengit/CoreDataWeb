@@ -23,18 +23,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="logout-container-main clearfix">
 						<div class="logout-container-secondary">
 							<div class="user-name-container">
-								<span style="cursor:default;"><?php echo $this -> session -> userdata('logged_user_username') ?></span>
+								<span style="cursor:default;"><?php echo $this->session->userdata('logged_user_username') ?></span>
 							</div>
 							<div class="seperator-container">
 								<span>┃</span>
 							</div>
-							<div class="user-name-container" onclick="location.href='<?php echo site_url('UserController/updateUsers/').$this -> session -> userdata('logged_user_id') ?>'">
+							<div class="user-name-container"
+								 onclick="location.href='<?php echo site_url('UserController/updateUsers/') . $this->session->userdata('logged_user_id') ?>'">
 								<span>View Profile</span>
 							</div>
 							<div class="seperator-container">
 								<span>┃</span>
 							</div>
-							<div class="logout-text-container"  onclick="location.href='<?php echo site_url('UserController/signOut'); ?>'">
+							<div class="logout-text-container"
+								 onclick="location.href='<?php echo site_url('UserController/signOut'); ?>'">
 								<span> Sign Out</span>
 							</div>
 						</div>
@@ -71,7 +73,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<form method="post" action="<?php echo
-				site_url('UserController/saveUser'); ?>">
+				site_url('UserController/saveUser'); ?>" onsubmit="return formValidation()">
 					<div class="element-row clearfix">
 						<div class="col-md-2">
 							<label class="control-label">First Name(*):</label>
@@ -96,7 +98,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="username" placeholder="Enter Username"
-								   name="username" required>
+								   name="username" maxlength="15" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -105,7 +107,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="password" class="form-control" id="password" placeholder="Enter Password"
-								   name="password" required>
+								   name="password" maxlength="15" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -113,8 +115,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Confirm Password(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="password" class="form-control" id="confirm_password" placeholder="Enter Confirm Password"
-								   name="confirm_password" required>
+							<input type="password" class="form-control" id="confirm_password"
+								   placeholder="Enter Confirm Password"
+								   name="confirm_password" maxlength="15" required>
+							<div id="password-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 
@@ -130,7 +134,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<option value="4">Field Coordinator</option>
 								<option value="5">Entomology Officer</option>
 								<option value="6">Molecular Biologist</option>
+								<option value="7">Field Assistant</option>
 							</select>
+							<div id="usertype-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 
@@ -147,6 +153,54 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function formValidation() {
+		var error_flag = 0;
+		var username = document.getElementById("username").value;
+		var password = document.getElementById("password").value;
+		var type = document.getElementById("user_type").value;
+		var confirm_password = document.getElementById("confirm_password").value;
+		document.getElementById("password-error-container").style.display = 'none';
+		document.getElementById("usertype-error-container").style.display = 'none';
+		document.getElementById("confirm_password").style.borderColor = "#ccc";
+		document.getElementById("user_type").style.borderColor = "#ccc";
+
+		if (password != confirm_password) {
+			error_flag = 1;
+			document.getElementById("confirm_password").style.borderColor = "red";
+			document.getElementById("password-error-container").style.display = 'block';
+			document.getElementById("password-error-container").innerHTML = "Confirm password is not matched with password.";
+		}
+		if(type==false){
+			error_flag = 1;
+			document.getElementById("user_type").style.borderColor="red";
+			document.getElementById("usertype-error-container").style.display = 'block';
+			document.getElementById("usertype-error-container").innerHTML = "Please select a user type.";
+		}
+		if (error_flag == 1) {
+			return false;
+		} else {
+			return true;
+		}
+		/* password regex for 8 characters */
+		/*
+		var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+		regex.test(val);
+		(?=.*\d)          // should contain at least one digit
+		(?=.*[a-z])       // should contain at least one lower case
+		(?=.*[A-Z])       // should contain at least one upper case
+		[a-zA-Z0-9]{8,}   // should contain at least 8 from the mentioned characters
+		*/
+		/*regex for white spaces */
+		/*
+		var inValid = /\s/;
+		var value = "test space";
+		var k = inValid.test(value);
+		alert(k);
+		*/
+
+	}
+</script>
 </body>
 </html>
 

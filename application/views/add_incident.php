@@ -79,7 +79,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="member-name" placeholder="Enter Full Name"
-								   name="member-name">
+								   name="member-name" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -87,8 +87,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Email:</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="email" placeholder="Enter Contact Number"
+							<input type="email" class="form-control" id="email" placeholder="Enter Email"
 								   name="email">
+							<div id="email-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -96,8 +97,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Phone(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="number" class="form-control" id="phone" placeholder="Enter Contact Number"
-								   name="phone">
+							<input type="tel" class="form-control" id="phone" placeholder="Enter Contact Number"
+								   name="phone" maxlength="10" pattern="[0-9]{10}" required>
+							<div id="phone-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -106,11 +108,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<select class="form-control" id="incident_type" name="incident_type">
-								<option value="0">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<option value="1">Community Complaint</option>
 								<option value="2">Community Enquiry</option>
 								<option value="3">Operational Incident</option>
 							</select>
+							<div id="incident_type_error_container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 
@@ -120,11 +123,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<select class="form-control" id="incident_priority" name="incident_priority">
-								<option value="0">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<option value="1">High</option>
 								<option value="2">Medium</option>
 								<option value="3">Low</option>
 							</select>
+							<div id="incident_priority_error_container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -133,7 +137,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 						<textarea class="form-control" style="height:100px;"
-								  id="description" name="description"></textarea>
+								  id="description" name="description" required></textarea>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -141,7 +145,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Date of Incident(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="date" class="form-control" id="incident-date" name="incident-date">
+							<input type="date" class="form-control" id="incident-date" name="incident-date" max="<?php echo date("Y-m-d"); ?>"required>
+							<div id="date_error_container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -149,7 +154,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Time of Incident(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="time" class="form-control" id="incident-time" name="incident-time">
+							<input type="time" class="form-control" id="incident-time" name="incident-time" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -165,7 +170,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Location Coordinates:</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="coordinates" name="coordinates">
+							<input type="text" class="form-control" id="coordinates" name="coordinates" placeholder="Enter Coordinates">
 						</div>
 					</div>
 
@@ -174,7 +179,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Full Address(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="full-address" name="full-address">
+							<input type="text" class="form-control" id="full-address" name="full-address" placeholder="Enter Full Address" required>
 						</div>
 					</div>
 
@@ -184,7 +189,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="location-description"
-								   name="location-description">
+								   name="location-description" placeholder="Enter Location Description">
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -192,7 +197,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Grama Niladhari Division:</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="gnd" name="gnd">
+							<input type="text" class="form-control" id="gnd" name="gnd" placeholder="Enter GND">
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -200,7 +205,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Trap Code:</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="trap-code" name="trap-code">
+							<input type="text" class="form-control" id="trap-code" name="trap-code" placeholder="Enter Trapcode">
 						</div>
 					</div>
 			</div>
@@ -247,19 +252,59 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	});
 
 	function formValidation() {
+		var error_flag=0;
+		var incident_priority = document.getElementById("incident_priority").value;
+		var incident_type = document.getElementById("incident_type").value;
+		var incident_date = document.getElementById("incident-date").value;
+		var email = document.getElementById("email").value;
 
-		document.getElementById("error-msg").innerHTML = "";
-		if (document.getElementById("member-name").value.length == 0 || document.getElementById("phone").value.length == 0
-				|| document.getElementById("description").value.length == 0 || document.getElementById("incident-date").value.length == 0 || document.getElementById("incident-time").value.length == 0 ||
-				document.getElementById("full-address").value.length == 0 || document.getElementById("incident_type").value
-		== '0' || document.getElementById("incident_priority").value=='0') {
-			//alert("Please fill all required fields first");
-			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
-			return false;
-		} else {
-			document.getElementById("error-msg").innerHTML = "";
+		document.getElementById("incident_priority_error_container").style.display = 'none';
+		document.getElementById("incident_type_error_container").style.display = 'none';
+		document.getElementById("date_error_container").style.display = 'none';
+		document.getElementById("email-error-container").style.display = 'none';
+		document.getElementById("incident_priority").style.borderColor = "#ccc";
+		document.getElementById("incident_priority").style.borderColor = "#ccc";
+		document.getElementById("email").style.borderColor = "#ccc";
+		document.getElementById("incident-date").style.borderColor = "#ccc";
+
+		if(incident_priority==false){
+			document.getElementById("incident_priority").style.borderColor = "red";
+			document.getElementById("incident_priority_error_container").style.display = 'block';
+			document.getElementById("incident_priority_error_container").innerHTML="Please select a incident priority.";
+			error_flag=1;
+		}
+		if(incident_type==false){
+			document.getElementById("incident_type").style.borderColor = "red";
+			document.getElementById("incident_type_error_container").style.display = 'block';
+			document.getElementById("incident_type_error_container").innerHTML="Please select a incident priority.";
+			error_flag=1;
+		}
+		if(email.length>0){
+			const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			var email_validation = re.test(email);
+			if(email_validation==false){
+				error_flag=1;
+				document.getElementById("email").style.borderColor = "red";
+				document.getElementById("email-error-container").style.display = 'block';
+				document.getElementById("email-error-container").innerHTML="Please enter a email with correct format.";
+			}
+		}
+		/*
+		var now = new Date();
+		if(incident_date>Date.now()){
+			document.getElementById("incident-date").style.borderColor = "red";
+			document.getElementById("date_error_container").style.display='block';
+			document.getElementById("date_error_container").innerHTML="Future dates are not accepted. Please enter a present or past date.";
+			error_flag=1;
+		}
+		 */
+		if(error_flag==0){
 			return true;
 		}
+		else{
+			return false;
+		}
+
 	}
 
 </script>

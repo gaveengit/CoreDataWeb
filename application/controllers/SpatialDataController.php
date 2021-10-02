@@ -72,7 +72,7 @@ class SpatialDataController extends CI_Controller
 				$response_check['check_data_count'] = $this->Maps_model->checkMap($data);
 				if ($response_check['check_data_count'] == 0) {
 					$response = $this->Maps_model->saveRecords($data);
-					if ($response == true) {
+					if ($response>0) {
 						echo "<script type='text/javascript'>alert('Map layer has been added successfully');
 								</script>";
 						$config = array();
@@ -86,7 +86,9 @@ class SpatialDataController extends CI_Controller
 						$result['data'] = $this->Maps_model->display_records($config["per_page"], $page);
 						$this->load->view('spatial_data', $result);
 					} else {
-						$this->session->set_flashdata('error', "Failure. Please try again.");
+						echo "<script type='text/javascript'>alert('Error in adding new map layer. Please try again.');
+							</script>";
+						$this->load->view('add_new_map');
 					}
 				} else {
 					echo "<script type='text/javascript'>alert('Map name is already existing');
@@ -109,8 +111,8 @@ class SpatialDataController extends CI_Controller
 		$response_check['check_data_count'] = $this->Maps_model->checkUpdateMap($data);
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Maps_model->updateRecords($data);
-			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record updated successfully');
+			if ($response >0) {
+				echo "<script type='text/javascript'>alert('Map layer has been updated successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('SpatialDataController/index');
@@ -123,13 +125,13 @@ class SpatialDataController extends CI_Controller
 				$result['data'] = $this->Maps_model->display_records($config["per_page"], $page);
 				$this->load->view('spatial_data', $result);
 			} else {
-				echo "<script type='text/javascript'>alert('Record not updated successfully');
+				echo "<script type='text/javascript'>alert('Map layer has not been updated successfully');
 			</script>";
 				$result['data'] = $this->Maps_model->display_records_individual($data['map_id']);
 				$this->load->view('update_map', $result);
 			}
 		} else {
-			echo "<script type='text/javascript'>alert('another person with same contact number is already ' +
+			echo "<script type='text/javascript'>alert('Map layer name is already ' +
  				'existing');
 			</script>";
 			$result['data'] = $this->Maps_model->display_records_individual($data['map_id']);
@@ -160,7 +162,7 @@ class SpatialDataController extends CI_Controller
 
 
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('Map layer has not deleted successfully');
 			</script>";
 
 			$config = array();

@@ -72,7 +72,7 @@ class FieldRunsController extends CI_Controller
 		$data['description'] = $this->input->post('description');
 		$response = $this->Run_model->updateRecords($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record updated successfully');
+			echo "<script type='text/javascript'>alert('Field run has been updated successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldPlanningController/index');

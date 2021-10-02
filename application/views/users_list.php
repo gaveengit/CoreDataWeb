@@ -111,6 +111,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								if ($row->user_type == '6') {
 									echo "<td>" . "Molecular Biologist" . "</td>";
 								}
+								if ($row->user_type == '7') {
+									echo "<td>" . "Field Assistant" . "</td>";
+								}
 
 								if ($row->STATUS == '1') {
 									echo "<td>" . "Active" . "</td>";
@@ -146,6 +149,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								}
 								if ($row->user_type == '6') {
 									echo "<td>" . "Molecular Biologist" . "</td>";
+								}
+								if ($row->user_type == '7') {
+									echo "<td>" . "Field Assistant" . "</td>";
 								}
 
 								if ($row->STATUS == '1') {

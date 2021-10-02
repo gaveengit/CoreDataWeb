@@ -142,7 +142,7 @@ class ScreeningController extends CI_Controller
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Screening_model->updateRecords($data, $data_old);
 			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record updated successfully');
+				echo "<script type='text/javascript'>alert('Screening has been updated successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('ScreeningController/index');
@@ -178,7 +178,7 @@ class ScreeningController extends CI_Controller
 		$data['screening_id'] = $screening_id;
 		$response = $this->Screening_model->deleteRecord($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('Screening has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('ScreeningController/index');
@@ -197,7 +197,7 @@ class ScreeningController extends CI_Controller
 			$result['data'] = $this->Screening_model->display_records($config["per_page"], $page);
 			$this->load->view('screening_list', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('Screening has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('ScreeningController/index');

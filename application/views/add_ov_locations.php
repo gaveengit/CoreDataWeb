@@ -169,7 +169,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" class="form-control" id="ov-date" placeholder="Enter Date"
-								   name="ov-date" required>
+								   name="ov-date" max="<?php echo date("Y-m-d"); ?>" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">

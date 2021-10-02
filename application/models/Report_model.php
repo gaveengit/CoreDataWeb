@@ -16,6 +16,21 @@ class Report_model extends CI_Model
 			echo $e;
 		}
 	}
+	function displayIncidentReport($data)
+	{
+		try {
+			$incident_stored_proc = "CALL completedIncidentsReport(?, ?)";
+			$data = array('from_date' => $data["from_date"], 'to_date' => $data["to_date"]);
+			$result = $this->db->query($incident_stored_proc, $data);
+			return $result->result();
+		}
+		catch(Exception $e)
+		{
+			echo $e;
+		}
+	}
+
+
 	function displayBgPerformanceReport($data)
 	{
 		try {

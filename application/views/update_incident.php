@@ -79,7 +79,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="member-name" placeholder="Enter Full Name"
-								   name="member-name" value="<?php echo $data[0]->member_name ?>">
+								   name="member-name" value="<?php echo $data[0]->member_name ?>" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -87,8 +87,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Email:</label>
 						</div>
 						<div class="col-md-6">
-							<input type="text" class="form-control" id="email" placeholder="Enter Contact Number"
+							<?php if($data[0]->email=='null'){$data[0]->email='';} ?>
+							<input type="email" class="form-control" id="email" placeholder="Enter Email"
 								   name="email" value="<?php echo $data[0]->email ?>">
+							<div id="email-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -96,8 +98,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Phone(*):</label>
 						</div>
 						<div class="col-md-6">
+							<?php $zero=0; ?>
 							<input type="text" class="form-control" id="phone" placeholder="Enter Contact Number"
-								   name="phone" value="<?php echo $data[0]->phone ?>">
+								   name="phone" maxlength="10" pattern="[0-9]{10}" value="<?php echo $zero.$data[0]->phone ?>" required>
+							<div id="phone-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -144,7 +148,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 						<textarea class="form-control" style="height:100px;"
-								  id="description" name="description"><?php echo $data[0]->description ?></textarea>
+								  id="description" name="description" required><?php echo $data[0]->description ?></textarea>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -153,7 +157,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" class="form-control" id="incident-date" name="incident-date"
-								   value="<?php echo $data[0]->incident_date ?>">
+								   value="<?php echo $data[0]->incident_date ?>" max="<?php echo date("Y-m-d"); ?>" required>
+							<div id="date_incident_error_container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -162,7 +167,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="time" class="form-control" id="incident-time" name="incident-time"
-								   value="<?php echo $data[0]->incident_time ?>">
+								   value="<?php echo $data[0]->incident_time ?>" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -178,6 +183,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Location Coordinates:</label>
 						</div>
 						<div class="col-md-6">
+							<?php if($data[0]->coordinates=='null'){$data[0]->coordinates='';} ?>
 							<input type="text" class="form-control" id="coordinates" name="coordinates"
 								   value="<?php echo $data[0]->coordinates ?>">
 						</div>
@@ -189,7 +195,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="full-address" name="full-address"
-								   value="<?php echo $data[0]->full_address ?>">
+								   value="<?php echo $data[0]->full_address ?>" required>
 						</div>
 					</div>
 
@@ -198,6 +204,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Location Description:</label>
 						</div>
 						<div class="col-md-6">
+							<?php if($data[0]->location_description=='NULL'){$data[0]->location_description='';} ?>
 							<input type="text" class="form-control" id="location-description"
 								   name="location-description"
 								   value="<?php echo $data[0]->location_description ?>">
@@ -208,6 +215,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Grama Niladhari Division:</label>
 						</div>
 						<div class="col-md-6">
+							<?php if($data[0]->gnd=='null'){$data[0]->gnd='';} ?>
 							<input type="text" class="form-control" id="gnd" name="gnd"
 								   value="<?php echo $data[0]->gnd ?>">
 						</div>
@@ -217,6 +225,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Trap Code:</label>
 						</div>
 						<div class="col-md-6">
+							<?php if($data[0]->trap_code=='null'){$data[0]->trap_code='';} ?>
 							<input type="text" class="form-control" id="trap-code" name="trap-code"
 								   value="<?php echo $data[0]->trap_code ?>">
 						</div>
@@ -232,16 +241,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Date of Action(*):</label>
+							<label class="control-label">Date of Action:</label>
 						</div>
 						<div class="col-md-6">
 							<input type="date" class="form-control" id="action-date" name="action-date"
-								   value="<?php echo $data[0]->action_date ?>">
+								   value="<?php echo $data[0]->action_date ?>" max="<?php echo date("Y-m-d"); ?>">
+							<div id="date_action_error_container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
 						<div class="col-md-2">
-							<label class="control-label">Time of Action(*):</label>
+							<label class="control-label">Time of Action:</label>
 						</div>
 						<div class="col-md-6">
 							<input type="time" class="form-control" id="action-time" name="action-time"
@@ -315,18 +325,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	});
 
 	function formValidation() {
-		document.getElementById("error-msg").innerHTML = "";
-		if (document.getElementById("member-name").value.length == 0 || document.getElementById("phone").value.length == 0
-				|| document.getElementById("description").value.length == 0 || document.getElementById("incident-date").value.length == 0 || document.getElementById("incident-time").value.length == 0 ||
-				document.getElementById("full-address").value.length == 0 || document.getElementById("incident_type").value
-				== '0' || document.getElementById("incident_priority").value == '0') {
-			//alert("Please fill all required fields first");
-			document.getElementById("error-msg").innerHTML = "Please fill all required fields.";
+		var error_flag=0;
+		var incident_date = document.getElementById("incident-date").value;
+		var action_date = document.getElementById("action-date").value;
+		var email = document.getElementById("email").value;
+
+		document.getElementById("date_action_error_container").style.display = 'none';
+		document.getElementById("date_incident_error_container").style.display = 'none';
+		document.getElementById("email-error-container").style.display = 'none';
+		document.getElementById("email").style.borderColor = "#ccc";
+		document.getElementById("incident-date").style.borderColor = "#ccc";
+		document.getElementById("action-date").style.borderColor = "#ccc";
+
+		if(email.length>0){
+			const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			var email_validation = re.test(email);
+			if(email_validation==false){
+				error_flag=1;
+				document.getElementById("email").style.borderColor = "red";
+				document.getElementById("email-error-container").style.display = 'block';
+				document.getElementById("email-error-container").innerHTML="Please enter a email with correct format.";
+			}
+		}
+
+		var now = new Date();
+		if(new Date(incident_date)>now){
+			document.getElementById("incident-date").style.borderColor = "red";
+			document.getElementById("date_incident_error_container").style.display='block';
+			document.getElementById("date_incident_error_container").innerHTML="Future dates are not accepted. Please enter a present or past date.";
+			error_flag=1;
+		}
+		if(new Date(action_date)>now){
+			document.getElementById("action-date").style.borderColor = "red";
+			document.getElementById("date_action_error_container").style.display='block';
+			document.getElementById("date_action_error_container").innerHTML="Future dates are not accepted. Please enter a present or past date.";
+			error_flag=1;
+		}
+		if(error_flag==1){
 			return false;
-		} else {
-			document.getElementById("error-msg").innerHTML = "";
+		}
+		else
+		{
 			return true;
 		}
+
+
 	}
 
 </script>

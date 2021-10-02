@@ -39,10 +39,23 @@ class User_model extends CI_Model
 	function checkLogin($data)
 	{
 		try {
-			$array = array('username' => $data["username"],'password'=>$data["password"],'STATUS'=>'1');
+			$array = array('username' => $data["username"],'password'=>$data["password"],'STATUS'=>'1','user_type !='=>7);
 			$this->db->where($array);
 			$query = $this->db->get('login');
 			return $query->result();
+		}
+		catch(Exception $e){
+			echo $e;
+		}
+	}
+
+	function checkCurrentPassword($data)
+	{
+		try {
+			$array = array('password'=>$data["password"],'STATUS !='=>'-2','user_id'=>$data["user_id"]);
+			$this->db->where($array);
+			$query = $this->db->get('login');
+			return $query->num_rows();
 		}
 		catch(Exception $e){
 			echo $e;

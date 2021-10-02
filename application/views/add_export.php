@@ -23,18 +23,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="logout-container-main clearfix">
 						<div class="logout-container-secondary">
 							<div class="user-name-container">
-								<span style="cursor:default;"><?php echo $this -> session -> userdata('logged_user_username') ?></span>
+								<span style="cursor:default;"><?php echo $this->session->userdata('logged_user_username') ?></span>
 							</div>
 							<div class="seperator-container">
 								<span>┃</span>
 							</div>
-							<div class="user-name-container" onclick="location.href='<?php echo site_url('UserController/updateUsers/').$this -> session -> userdata('logged_user_id') ?>'">
+							<div class="user-name-container"
+								 onclick="location.href='<?php echo site_url('UserController/updateUsers/') . $this->session->userdata('logged_user_id') ?>'">
 								<span>View Profile</span>
 							</div>
 							<div class="seperator-container">
 								<span>┃</span>
 							</div>
-							<div class="logout-text-container"  onclick="location.href='<?php echo site_url('UserController/signOut'); ?>'">
+							<div class="logout-text-container"
+								 onclick="location.href='<?php echo site_url('UserController/signOut'); ?>'">
 								<span> Sign Out</span>
 							</div>
 						</div>
@@ -72,14 +74,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="container">
 			<div class="row">
 				<form method="post" action="<?php echo
-				site_url('ExportController/saveExport'); ?>">
+				site_url('ExportController/saveExport'); ?>" onsubmit="return formvalidation()">
 					<div class="element-row clearfix">
 						<div class="col-md-2">
 							<label class="control-label">Export Id(*):</label>
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="export_id" placeholder="Enter Export Id"
-								   name="export_id">
+								   name="export_id" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -89,7 +91,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-6">
 							<select class="form-control" id="ovi_collection_id"
 									name="ovi_collection_id">
-								<option value="-1">Select From Here</option>
+								<option value="0" selected disabled>Select From Here</option>
 								<?php
 								foreach ($data as $row) {
 									echo '
@@ -97,8 +99,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							';
 								}
 								?>
-
 							</select>
+							<div id="collection-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -106,7 +108,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Quantity(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="number" id="qty" name="qty" class="form-control" placeholder="Enter Quantity">
+							<input type="number" id="qty" name="qty" class="form-control" placeholder="Enter Quantity"
+								   required>
+							<div id="quantity-error-container" style="display: none;color: red;"></div>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -114,7 +118,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Export Date(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="date" id="export_date" name="export_date" class="form-control">
+							<input type="date" id="export_date" name="export_date" class="form-control"
+								   max="<?php echo date("Y-m-d"); ?>" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -122,7 +127,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Export Time(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="time" id="export_time" name="export_time" class="form-control">
+							<input type="time" id="export_time" name="export_time" class="form-control" required>
 						</div>
 					</div>
 
@@ -139,6 +144,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function formvalidation() {
+		var error_flag = 0;
+		var collection_id = document.getElementById("ovi_collection_id").value;
+		var qty = document.getElementById("qty").value;
+
+		document.getElementById("collection-error-container").style.display = 'none';
+		document.getElementById("quantity-error-container").style.display = 'none';
+
+		document.getElementById("ovi_collection_id").style.borderColor = "#ccc";
+		document.getElementById("qty").style.borderColor = "#ccc";
+
+		if (collection_id == false) {
+			error_flag = 1;
+			document.getElementById("ovi_collection_id").style.borderColor = "red";
+			document.getElementById("collection-error-container").style.display = 'block';
+			document.getElementById("collection-error-container").innerHTML = "Please select a collection id.";
+		}
+		if (qty < 0) {
+			error_flag = 1;
+			document.getElementById("qty").style.borderColor = "red";
+			document.getElementById("quantity-error-container").style.display = 'block';
+			document.getElementById("quantity-error-container").innerHTML = "Quantity should not be a negative value.";
+		}
+		if (error_flag == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+</script>
 </body>
 </html>
 

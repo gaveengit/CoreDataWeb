@@ -146,7 +146,7 @@ class DiagnosticsController extends CI_Controller
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Identification_model->updateRecords($data,$data_old);
 			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record updated successfully');
+				echo "<script type='text/javascript'>alert('Identification has been updated successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('DiagnosticsController/index');
@@ -181,7 +181,7 @@ class DiagnosticsController extends CI_Controller
 		$data['identification_id'] = $identification_id;
 		$response = $this->Identification_model->deleteRecords($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('Identification has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('DiagnosticsController/index');
@@ -199,7 +199,7 @@ class DiagnosticsController extends CI_Controller
 			$result['data'] = $this->Identification_model->display_records($config["per_page"], $page);
 			$this->load->view('identifications_list',$result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('Identification has not been deleted successfully. Please try again.');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('DiagnosticsController/index');

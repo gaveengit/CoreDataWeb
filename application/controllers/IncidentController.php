@@ -77,8 +77,8 @@ class IncidentController extends CI_Controller
 		$data['trap_code'] = $this->input->post('trap-code');
 		$data['incident_status'] = "Pending";
 		$response = $this->Incident_model->saveRecords($data);
-		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record added successfully.');
+		if ($response >0) {
+			echo "<script type='text/javascript'>alert('New Incident has been added successfully.');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('IncidentController/index');
@@ -95,7 +95,7 @@ class IncidentController extends CI_Controller
 			$result['data'] = $this->Incident_model->display_records($config["per_page"], $page);
 			$this->load->view('incident_list',$result);
 		} else {
-			echo "<script type='text/javascript'>alert('Fail to add record.');
+			echo "<script type='text/javascript'>alert('Fail to add incident. Please try again.');
 			</script>";
 		}
 	}
@@ -122,8 +122,8 @@ class IncidentController extends CI_Controller
 		$data['incident_id'] = $this->input->post('save-btn');
 
 		$response = $this->Incident_model->updateRecords($data);
-		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record updated successfully.');
+		if ($response > 0) {
+			echo "<script type='text/javascript'>alert('Incident has been updated successfully.');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('IncidentController/index');
@@ -140,7 +140,7 @@ class IncidentController extends CI_Controller
 			$result['data'] = $this->Incident_model->display_records($config["per_page"], $page);
 			$this->load->view('incident_list',$result);
 		} else {
-			echo "<script type='text/javascript'>alert('Fail to add record.');
+			echo "<script type='text/javascript'>alert('Fail to update incident. Please try again.');
 			</script>";
 			$result['data'] = $this->Incident_model->display_records_individual($data['incident_id']);
 			$this->load->view('update_incident',$result);
@@ -151,8 +151,8 @@ class IncidentController extends CI_Controller
 		$data['incident_status'] = "-2";
 		$data['incident_id'] = $incident_id;
 		$response = $this->Incident_model->deleteRecords($data);
-		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+		if ($response > 0) {
+			echo "<script type='text/javascript'>alert('Incident has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('IncidentController/index');
@@ -169,7 +169,7 @@ class IncidentController extends CI_Controller
 			$result['data'] = $this->Incident_model->display_records($config["per_page"], $page);
 			$this->load->view('incident_list',$result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('Incident has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('IncidentController/index');

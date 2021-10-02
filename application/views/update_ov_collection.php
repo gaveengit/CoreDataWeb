@@ -54,7 +54,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<li><a class="#"
 						   onclick="location.href='<?php echo site_url('FieldActivitiesController/ovCollections'); ?>'">OVI
 							Collections</a></li>
-					<li><a class="selected">Update OVI Collection</a></li>
+					<li><a class="selected">View OVI Collection</a></li>
 				</ul>
 			</div>
 		</div>
@@ -65,7 +65,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Update OVI Collection</h3>
+						<h3 class="title">View OVI Collection</h3>
 					</div>
 				</div>
 			</div>
@@ -82,7 +82,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="collection-id" placeholder="Enter Trap Id"
-								   name="collection-id" value="<?php echo $data[0]->collection_id ?>">
+								   name="collection-id" value="<?php echo $data[0]->collection_id ?>" readonly>
 						</div>
 					</div>
 
@@ -102,7 +102,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" id="collect_date" name="collect_date" class="form-control"
-								   value="<?php echo $data[0]->collect_date ?>">
+								   value="<?php echo $data[0]->collect_date ?>" max="<?php echo date("Y-m-d"); ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -111,7 +111,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="time" id="collect_time" name="collect_time" class="form-control"
-								   value="<?php echo $data[0]->collect_time ?>">
+								   value="<?php echo $data[0]->collect_time ?>" readonly>
 						</div>
 					</div>
 
@@ -121,7 +121,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<select class="form-control" id="collect_status"
-									name="collect_status">
+									name="collect_status" disabled>
 								<option value="1" <?php if ($data[0]->collect_status == '1'): ?> selected="selected"<?php endif; ?>>
 									Collected
 								</option>
@@ -184,18 +184,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							</tbody>
 						</table>
 					</div>
-
-					<div class="button-container clearfix">
-						<div class="col-md-7">
-							<div class="footer-button-container">
-								<button class="btn btn-success save-btn" value="<?php echo $data[0]->collection_id ?>"
-										type="submit" name="save-btn">Save
-								</button>
-								<button class="btn btn-primary cancel-btn">Cancel</button>
-							</div>
-						</div>
-					</div>
-
 				</form>
 			</div>
 		</div>

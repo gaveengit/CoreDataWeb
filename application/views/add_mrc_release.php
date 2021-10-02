@@ -110,7 +110,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<label class="control-label">Released Date(*):</label>
 						</div>
 						<div class="col-md-6">
-							<input type="date" id="released-date" name="released-date" class="form-control" required>
+							<input type="date" id="released-date" name="released-date" class="form-control" max="<?php echo date("Y-m-d"); ?>" required>
 						</div>
 					</div>
 					<div class="element-row clearfix">

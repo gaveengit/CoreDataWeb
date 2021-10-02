@@ -54,7 +54,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<li><a class="#"
 						   onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcService'); ?>'">MRC
 							Services</a></li>
-					<li><a class="selected">Update MRC Service</a></li>
+					<li><a class="selected">View MRC Service</a></li>
 				</ul>
 			</div>
 		</div>
@@ -65,7 +65,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Update MRC Service</h3>
+						<h3 class="title">View MRC Service</h3>
 					</div>
 				</div>
 			</div>
@@ -82,7 +82,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="service-id" placeholder="Enter service Id"
-								   name="service-id" value="<?php echo $data[0]->service_id ?>">
+								   name="service-id" value="<?php echo $data[0]->service_id ?>" readonly>
 						</div>
 					</div>
 
@@ -102,7 +102,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" id="service_date" name="service_date" class="form-control"
-								   value="<?php echo $data[0]->service_date ?>">
+								   value="<?php echo $data[0]->service_date ?>" max="<?php echo date("Y-m-d"); ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -111,7 +111,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="time" id="service_time" name="service_time" class="form-control"
-								   value="<?php echo $data[0]->service_time ?>">
+								   value="<?php echo $data[0]->service_time ?>" readonly>
 						</div>
 					</div>
 
@@ -121,7 +121,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<select class="form-control" id="service_status"
-									name="service_status">
+									name="service_status" disabled>
 								<option value="1" <?php if ($data[0]->service_status == '1'): ?> selected="selected"<?php endif; ?>>
 									Serviced
 								</option>
@@ -129,17 +129,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									Not Serviced
 								</option>
 							</select>
-						</div>
-					</div>
-
-					<div class="button-container clearfix">
-						<div class="col-md-7">
-							<div class="footer-button-container">
-								<button class="btn btn-success save-btn" value="<?php echo $data[0]->service_id ?>"
-										name="save-btn">Save
-								</button>
-								<button class="btn btn-primary cancel-btn">Cancel</button>
-							</div>
 						</div>
 					</div>
 				</form>

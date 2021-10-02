@@ -1264,7 +1264,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['delete_date'] = date('Y-m-d');
 		$response = $this->BgTrap_model->deleteRecords($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('BG location has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/bgLocations/index');
@@ -1283,7 +1283,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->BgTrap_model->display_records($config["per_page"], $page);
 			$this->load->view('bg_locations', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('BG location has been not deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/bgLocations/index');
@@ -1311,7 +1311,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['delete_date'] = date('Y-m-d');
 		$response = $this->OvTrap_model->deleteOviLocation($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('OVI location has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/ovLocations/index');
@@ -1331,7 +1331,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->OvTrap_model->display_records($config["per_page"], $page);
 			$this->load->view('ov_locations', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('OVI location has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/ovLocations/index');
@@ -1359,7 +1359,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['collection_id'] = $collection_id;
 		$response = $this->Collection_model->deleteBgCollection($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('BG collection has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
@@ -1378,7 +1378,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->Collection_model->display_bg_collection($config["per_page"], $page);
 			$this->load->view('bg_collections', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('BG collection has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
@@ -1405,7 +1405,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_id'] = $service_id;
 		$response = $this->Service_model->deleteBgService($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('BG service has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
@@ -1418,7 +1418,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->Service_model->display_bg_service($config["per_page"], $page);
 			$this->load->view('bg_service', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('BG service has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/bgServices/index');
@@ -1477,7 +1477,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['collection_id'] = $collection_id;
 		$response = $this->Collection_model->deleteOviCollection($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('OVI collection has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/ovCollections/index');
@@ -1496,7 +1496,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->Collection_model->display_ovi_collection($config["per_page"], $page);
 			$this->load->view('ov_collections', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('OVI collection has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/ovCollections/index');
@@ -1523,7 +1523,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_id'] = $service_id;
 		$response = $this->Service_model->deleteOvService($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('OVI service has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
@@ -1542,7 +1542,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->Service_model->display_ovi_service($config["per_page"], $page);
 			$this->load->view('ovi_service', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('OVI service has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
@@ -1570,7 +1570,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['delete_date'] = date('Y-m-d');
 		$response = $this->Mrc_model->deleteMrcLocation($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('MRC location has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
@@ -1589,7 +1589,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->Mrc_model->display_records($config["per_page"], $page);
 			$this->load->view('mrc_locations', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('MRC location has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
@@ -1616,7 +1616,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['release_id'] = $release_id;
 		$response = $this->Collection_model->deleteMrcRelease($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('MRC release has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/mrcReleases/index');
@@ -1635,7 +1635,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->Collection_model->display_mrc_releases($config["per_page"], $page);
 			$this->load->view('mrc_releases', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('MRC release has not been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/mrcReleases/index');
@@ -1662,7 +1662,7 @@ class FieldActivitiesController extends CI_Controller
 		$data['service_id'] = $service_id;
 		$response = $this->Service_model->deleteMrcService($data);
 		if ($response == true) {
-			echo "<script type='text/javascript'>alert('Record deleted successfully');
+			echo "<script type='text/javascript'>alert('MRC service has been deleted successfully');
 			</script>";
 			$config = array();
 			$config["base_url"] = site_url('FieldActivitiesController/mrcServices/index');
@@ -1675,7 +1675,7 @@ class FieldActivitiesController extends CI_Controller
 			$result['data'] = $this->Service_model->display_mrc_service($config["per_page"], $page);
 			$this->load->view('mrc_service', $result);
 		} else {
-			echo "<script type='text/javascript'>alert('Record not deleted successfully');
+			echo "<script type='text/javascript'>alert('MRC service has not been deleted successfully');
 			</script>";
 			$result['data'] = $this->Service_model->display_mrc_service();
 			$this->load->view('mrc_service', $result);
@@ -1719,12 +1719,18 @@ class FieldActivitiesController extends CI_Controller
 			} else {
 				echo "<script type='text/javascript'>alert('Failure in adding OVI trap. Please try again.');
 				</script>";
-				$this->load->view('add_ov_locations');
+				$result['persondata'] = $this->Persons_model->display_records_active();
+				$result['addressdata'] = $this->Address_model->display_records_active();
+				$result['mapdata'] = $this->Maps_model->display_records_all();
+				$this->load->view('add_ov_locations', $result);
 			}
 		} else {
 			echo "<script type='text/javascript'>alert('OV trap id is already existing. Please try again.');
 				</script>";
-			$this->load->view('add_ov_locations');
+			$result['persondata'] = $this->Persons_model->display_records_active();
+			$result['addressdata'] = $this->Address_model->display_records_active();
+			$result['mapdata'] = $this->Maps_model->display_records_all();
+			$this->load->view('add_ov_locations', $result);
 		}
 	}
 
@@ -1802,7 +1808,7 @@ class FieldActivitiesController extends CI_Controller
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Mrc_model->saveRecords($data);
 			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record added successfully');
+				echo "<script type='text/javascript'>alert('MRC has been added successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/mrcLocations/index');
@@ -1821,14 +1827,20 @@ class FieldActivitiesController extends CI_Controller
 				$result['data'] = $this->Mrc_model->display_records($config["per_page"], $page);
 				$this->load->view('mrc_locations', $result);
 			} else {
-				echo "<script type='text/javascript'>alert('Failure in adding record. Please try again.');
+				echo "<script type='text/javascript'>alert('Failure in adding MRC. Please try again.');
 				</script>";
-				$this->load->view('add_mrc_locations');
+				$result['persondata'] = $this->Persons_model->display_records_active();
+				$result['addressdata'] = $this->Address_model->display_records_active();
+				$result['mapdata'] = $this->Maps_model->display_records_all();
+				$this->load->view('add_mrc_locations', $result);
 			}
 		} else {
 			echo "<script type='text/javascript'>alert('Mrc is already existing. Please try again.');
 				</script>";
-			$this->load->view('add_mrc_locations');
+			$result['persondata'] = $this->Persons_model->display_records_active();
+			$result['addressdata'] = $this->Address_model->display_records_active();
+			$result['mapdata'] = $this->Maps_model->display_records_all();
+			$this->load->view('add_mrc_locations', $result);
 		}
 
 	}
@@ -1905,7 +1917,7 @@ class FieldActivitiesController extends CI_Controller
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Collection_model->updateRecordsBgCollection($data, $data_old);
 			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record updated successfully');
+				echo "<script type='text/javascript'>alert('BG collection has been updated successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/bgCollections/index');
@@ -1924,7 +1936,7 @@ class FieldActivitiesController extends CI_Controller
 				$result['data'] = $this->Collection_model->display_bg_collection($config["per_page"], $page);
 				$this->load->view('bg_collections', $result);
 			} else {
-				echo "<script type='text/javascript'>alert('Record not updated successfully');
+				echo "<script type='text/javascript'>alert('BG collection has not been updated successfully');
 			</script>";
 				$result['data'] = $this->Collection_model->display_records_individual_bg_collection($data['collection_id']);
 				$this->load->view('update_bg_collection', $result);
@@ -1957,7 +1969,7 @@ class FieldActivitiesController extends CI_Controller
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Service_model->updateRecordsBgService($data);
 			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record updated successfully');
+				echo "<script type='text/javascript'>alert('BG service has been updated successfully');
 			</script>";
 
 				if ($data['service_status'] == '1') {
@@ -1974,7 +1986,7 @@ class FieldActivitiesController extends CI_Controller
 				$result['data'] = $this->Service_model->display_bg_service($config["per_page"], $page);
 				$this->load->view('bg_service', $result);
 			} else {
-				echo "<script type='text/javascript'>alert('Record not updated successfully');
+				echo "<script type='text/javascript'>alert('BG service has not been updated successfully');
 			</script>";
 				$result['data'] = $this->Service_model->display_records_individual_bg_service($data['service_id']);
 				$this->load->view('update_bg_service', $result);
@@ -2006,7 +2018,7 @@ class FieldActivitiesController extends CI_Controller
 		if ($response_check['check_data_count'] == 0) {
 			$response = $this->Collection_model->updateRecordsOviCollection($data, $data_old);
 			if ($response == true) {
-				echo "<script type='text/javascript'>alert('Record updated successfully');
+				echo "<script type='text/javascript'>alert('OVI collection has been updated successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/ovCollections/index');
@@ -2025,7 +2037,7 @@ class FieldActivitiesController extends CI_Controller
 				$result['data'] = $this->Collection_model->display_ovi_collection($config["per_page"], $page);
 				$this->load->view('ov_collections', $result);
 			} else {
-				echo "<script type='text/javascript'>alert('Record not updated successfully');
+				echo "<script type='text/javascript'>alert('OVI collection has not been updated successfully');
 			</script>";
 				$result['data'] = $this->Collection_model->display_records_individual_ovi_collection($data['collection_id']);
 				$this->load->view('update_ov_collection', $result);
@@ -2061,7 +2073,7 @@ class FieldActivitiesController extends CI_Controller
 				if ($data['service_status'] == '1') {
 					$response = $this->OvTrap_model->updateRecords($data_update, $old_data);
 				}
-				echo "<script type='text/javascript'>alert('Record updated successfully');
+				echo "<script type='text/javascript'>alert('OVI service has been updated successfully');
 			</script>";
 				$config = array();
 				$config["base_url"] = site_url('FieldActivitiesController/oviServices/index');
@@ -2080,7 +2092,7 @@ class FieldActivitiesController extends CI_Controller
 				$result['data'] = $this->Service_model->display_ovi_service($config["per_page"], $page);
 				$this->load->view('ovi_service', $result);
 			} else {
-				echo "<script type='text/javascript'>alert('Record not updated successfully');
+				echo "<script type='text/javascript'>alert('OVI service has not been updated successfully');
 			</script>";
 				$result['data'] = $this->Service_model->display_records_individual_ovi_service($data['service_id']);
 				$this->load->view('update_ov_service', $result);

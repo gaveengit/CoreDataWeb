@@ -92,10 +92,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								</div>
 
 								<div class="form-group clearfix">
-									<label class="control-label col-md-4" for="email">Run Description:</label>
+									<label class="control-label col-md-4" for="email">Run Description (*):</label>
 									<div class="col-md-8">
 							<textarea class="form-control" id="run_description" style="height:200px;" name="description"
-							><?php echo $main_data[0]->description ?></textarea>
+							required><?php echo $main_data[0]->description ?></textarea>
 									</div>
 
 								</div>

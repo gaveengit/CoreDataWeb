@@ -54,7 +54,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<li><a class="#"
 						   onclick="location.href='<?php echo site_url('FieldActivitiesController/mrcReleases'); ?>'">MRC
 							Releases</a></li>
-					<li><a class="selected">Update MRC Releases</a></li>
+					<li><a class="selected">View MRC Releases</a></li>
 				</ul>
 			</div>
 		</div>
@@ -65,7 +65,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="row">
 				<div class="title-button-secondary-container clearfix">
 					<div class="title-container">
-						<h3 class="title">Update MRC Release</h3>
+						<h3 class="title">View MRC Release</h3>
 					</div>
 				</div>
 			</div>
@@ -82,7 +82,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="text" class="form-control" id="release-id" placeholder="Enter Trap Id"
-								   name="release-id" value="<?php echo $data[0]->release_id ?>">
+								   name="release-id" value="<?php echo $data[0]->release_id ?>" readonly>
 						</div>
 					</div>
 
@@ -101,7 +101,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="date" id="release_date" name="release_date" class="form-control"
-								   value="<?php echo $data[0]->released_date ?>">
+								   value="<?php echo $data[0]->released_date ?>" max="<?php echo date("Y-m-d"); ?>" readonly>
 						</div>
 					</div>
 					<div class="element-row clearfix">
@@ -110,7 +110,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<input type="time" id="release_time" name="release_time" class="form-control"
-								   value="<?php echo $data[0]->released_time ?>">
+								   value="<?php echo $data[0]->released_time ?>" readonly>
 						</div>
 					</div>
 
@@ -120,7 +120,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						</div>
 						<div class="col-md-6">
 							<select class="form-control" id="release_status"
-									name="release_status">
+									name="release_status" disabled>
 								<option value="1" <?php if ($data[0]->released_status == '1'): ?> selected="selected"<?php endif; ?>>
 									Released
 								</option>
@@ -128,16 +128,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									Not Released
 								</option>
 							</select>
-						</div>
-					</div>
-
-					<div class="button-container clearfix">
-						<div class="col-md-7">
-							<div class="footer-button-container">
-								<button class="btn btn-success save-btn" type="submit" name="save-btn"
-								value="<?php echo $data[0]->release_id ?>">Save</button>
-								<button class="btn btn-primary cancel-btn">Cancel</button>
-							</div>
 						</div>
 					</div>
 				</form>
